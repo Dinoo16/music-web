@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign in</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="login-container">
+        <h2 class="login-title">Welcome Back</h2>
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Your email address"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Your password"
+              required
+            />
+          </div>
+          <button type="submit" class="btn-signin">Sign In</button>
+        </form>
+        <p class="register-text">
+          Don't have an account? <a href="#" class="register-link">Register</a>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

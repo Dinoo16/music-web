@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar</title>
+  </head>
+  <body>
+    <div class="sidebar" th:fragment="sidebarFragment">
+      <!-- Menu -->
+      <nav class="sidebar__nav">
+        <!-- Home (Active) -->
+        <div class="sidebar__box">
+          <a href="/" class="active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          </a>
+        </div>
+
+        <!-- Discover -->
+
+        <div class="sidebar__box">
+          <a href="#">
+            <i class="fa-solid fa-compass text-lg"></i>
+            <span>Discover</span>
+          </a>
+        </div>
+
+        <!-- Top Charts -->
+        <div class="sidebar__box">
+          <a href="#">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+            <span>Top Charts</span>
+          </a>
+        </div>
+
+        <!-- Divider -->
+        <p class="sidebar__divider">Library</p>
+
+        <!-- Songs -->
+        <div class="sidebar__box">
+          <a href="#">
+            <i class="fa-solid fa-music text-lg"></i>
+            <span>Songs</span>
+          </a>
+        </div>
+
+        <!-- Artists -->
+        <div class="sidebar__box">
+          <a href="#">
+            <i class="fa-solid fa-user text-lg"></i>
+            <span>Artists</span>
+          </a>
+        </div>
+
+        <!-- Albums -->
+        <div class="sidebar__box">
+          <a href="#">
+            <i class="fa-solid fa-image text-lg"></i>
+            <span>Albums</span>
+          </a>
+        </div>
+
+        <!-- Genres -->
+        <div class="sidebar__box">
+          <a href="#">
+            <i class="fa-solid fa-layer-group text-lg"></i>
+            <span>Genres</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </body>
+</html>

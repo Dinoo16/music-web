@@ -1,0 +1,79 @@
+
+/* Login Container */
+.login-container {
+    background-color: #111827;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 350px;
+ 
+}
+
+/* Title */
+.login-title {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Form Group */
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: #9CA3AF;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #374151;
+    color: #D1D5DB;
+    font-size: 14px;
+}
+
+.form-group input::placeholder {
+    color: #9CA3AF;
+}
+
+/* Sign In Button */
+.btn-signin {
+    width: 100%;
+    padding: 12px;
+    background-color: #9333EA;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-signin:hover {
+    background-color: #7c2ee6;
+}
+
+/* Register */
+.register-text {
+    color: #9CA3AF;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.register-link {
+    color: #9333EA;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}

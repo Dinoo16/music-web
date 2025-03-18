@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header</title>
+  </head>
+  <body>
+    <div class="header" th:fragment="headerFragment">
+      <div class="header__inner">
+        <h1 class="header__logo">MUSIC</h1>
+        <div class="header__search">
+          <button class="header__search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input
+            placeholder="Search for songs, artists, or albums..."
+            spellcheck="{false}"
+          />
+        </div>
+        <div class="header__login">
+          <a th:href="@{/signin}" class="header__action">
+            <i class="fa-solid fa-arrow-right-to-bracket header__login-btn"></i>
+            Login
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

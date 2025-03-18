@@ -1,0 +1,47 @@
+:root {
+    --primary: #9333EA;
+    --background: #1F2937;
+    --black: #000;
+    --white: #fff;
+    /* --text-color: #333; */
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+body {
+    font-family:"Inter", sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    background-color: var(--background);
+}
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+a {
+    text-decoration: none;
+}
+
+.box {
+    width: 100%;
+    display: flex;
+}
+.main {
+    background-clip: content-box;
+    background-color: #111827;
+    width: 100%;
+    padding: 0 55px;
+}
+
+
+
+
