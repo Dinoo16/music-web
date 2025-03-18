@@ -1,10 +1,10 @@
-.login-wrapper {
+.signup-wrapper {
     display: flex;
     justify-content: center;
      
   }
 /* Login Container */
-.login-container {
+.signup-container {
     background-color: #1F2937;
     padding: 30px;
     border-radius: 8px;
@@ -15,7 +15,7 @@
 }
 
 /* Title */
-.login-title {
+.signup-title {
     color: white;
     font-size: 24px;
     margin-bottom: 20px;
@@ -49,7 +49,7 @@
 }
 
 /* Sign In Button */
-.btn-signin {
+.btn-signup {
     width: 100%;
     padding: 12px;
     background-color: #9333EA;
@@ -61,20 +61,20 @@
     margin-top: 10px;
 }
 
-.btn-signin:hover {
+.btn-signup:hover {
     background-color: #7c2ee6;
 }
 
-.register-text {
+.login-text {
     color: #9CA3AF;
     font-size: 14px;
     margin-top: 15px;
 }
 
-.register-link {
+.login-link {
     color: #C084FC;
 }
 
-.register-link:hover {
+.login-link:hover {
     text-decoration: underline;
 }

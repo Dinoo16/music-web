@@ -13,8 +13,18 @@ public class HomeController {
     }
 
     @GetMapping("/signin")
-    public String sign() {
+    public String signin() {
         return "pages/signin";
+    }
+    
+    @GetMapping("/signup")
+    public String signup() {
+        return "pages/signup";
+    }
+
+    @GetMapping("/song")
+    public String getSong() {
+        return "pages/song";
     }
 
 }

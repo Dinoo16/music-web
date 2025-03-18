@@ -36,9 +36,10 @@ a {
     display: flex;
 }
 .main {
+    width: 100%;
+    min-height: 100vh;
     background-clip: content-box;
     background-color: #111827;
-    width: 100%;
     padding: 0 55px;
 }
 

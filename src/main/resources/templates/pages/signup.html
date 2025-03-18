@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="signup-wrapper">
+        <div class="signup-container">
+          <!-- <div> -->
+          <h2 class="signup-title">Create Account</h2>
+          <form action="#" method="POST">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="username"
+                id="username "
+                placeholder="Choose a username"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Your email address"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Your password"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Confirm Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Confirm password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn-signup">Sign Up</button>
+          </form>
+          <p class="login-text">
+            Already have an account?
+            <a href="/signin" class="login-link">Sign in</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

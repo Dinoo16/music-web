@@ -7,32 +7,36 @@
   </head>
   <body>
     <div th:fragment="content">
-      <div class="login-container">
-        <h2 class="login-title">Welcome Back</h2>
-        <form action="#" method="POST">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Your email address"
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Your password"
-              required
-            />
-          </div>
-          <button type="submit" class="btn-signin">Sign In</button>
-        </form>
-        <p class="register-text">
-          Don't have an account? <a href="#" class="register-link">Register</a>
-        </p>
+      <div class="login-wrapper">
+        <div class="login-container">
+          <!-- <div> -->
+          <h2 class="login-title">Welcome Back</h2>
+          <form action="#" method="POST">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Your email address"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Your password"
+                required
+              />
+            </div>
+            <button type="submit" class="btn-signin">Sign In</button>
+          </form>
+          <p class="register-text">
+            Don't have an account?
+            <a href="/signup" class="register-link">Register</a>
+          </p>
+        </div>
       </div>
     </div>
   </body>
