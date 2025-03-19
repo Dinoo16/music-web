@@ -34,11 +34,12 @@ a {
 .box {
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 .main {
     width: 100%;
     min-height: 100vh;
-    background-clip: content-box;
+    /* background-clip: content-box; */
     background-color: #111827;
     padding: 0 55px;
 }
