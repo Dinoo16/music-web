@@ -1,0 +1,111 @@
+.setting-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 32px;
+}
+.setting-container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.setting-profile-background {
+    width: 100%; 
+    height: 184px;
+    background-color: #1F2937;
+    margin: 32px 0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+
+}
+.setting-profile-info {
+    display: flex;
+}
+.setting-profile-avatar {
+    width: 72px;
+    height: 72px;
+    margin-right: 24px;
+    border-radius: 50%;
+    background-color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.setting-profile-namefields { 
+    
+}
+.setting-profile-name {
+    color: #fff;
+}
+.setting-profile-username {
+    color: var(--spanColor)
+}
+.avatar-icon {
+    font-size: 32px;
+}
+.setting-profile-change-avatar {
+    margin-top: 24px;
+    width: 180px;
+    height: 40px;
+    background-color: var(--primary);
+    border-radius: 8px;
+    cursor: pointer;
+}
+.setting-profile-change-avatar:hover {
+    opacity: 0.8;
+}
+.setting-profile-change-avatar span {
+    color: #fff;
+}
+
+.setting-profile-fields {
+    width: 100%; 
+    height: 376px;
+    background-color: #1F2937; 
+    padding: 24px;
+}
+
+
+.setting-profile-fields-form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.setting-profile-fields-form-group label {
+    display: block;
+    color: #9CA3AF;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.setting-profile-fields-form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #374151;
+    color: #D1D5DB;
+    font-size: 14px;
+}
+
+.setting-profile-fields-form-group input::placeholder {
+    color: #9CA3AF;
+}
+
+.setting-profile-fields-btn-change {
+    width: 100%;
+    padding: 12px;
+    background-color: #9333EA;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.setting-profile-fields-btn-change:hover {
+    opacity: 0.8;
+}
+
+

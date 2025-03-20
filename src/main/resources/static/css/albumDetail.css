@@ -53,6 +53,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    cursor: pointer;
 }
 .album-detail-play-btn span {
     color: #FFF;
@@ -72,6 +73,7 @@
     height: 50px;
     border-radius: 50%;
     background-color: #1F2937;
+    cursor: pointer;
 }
 .album-detail-heart-btn i {
     color: #fff;
@@ -85,6 +87,7 @@
     height: 50px;
     border-radius: 50%;
     background-color: #1F2937;
+    cursor: pointer;
 }
 .album-detail-share-btn i {
     color: #fff;

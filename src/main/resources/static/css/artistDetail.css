@@ -123,6 +123,84 @@
     font-weight: 600;
 }
 
+.artist-popular-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 50px;
+}
+
+.artist-popular-card {
+    height: 365px;
+    background: #1F2937;
+    border-radius: 10px;
+    overflow: hidden; 
+    position: relative;
+}
+.artist-popular-card:hover .artist-popular-overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+
+.artist-popular-card img {
+    width: 100%;
+    height: 67%;
+    display: block;
+}
+
+.artist-popular-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 67%; 
+    background: rgba(0, 0, 0, 0.4); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.artist-popular-play {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #9333EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.artist-popular-play-btn {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+.artist-popular-play-btn button {
+    background-color: transparent;
+}
+.artist-popular-info {
+    padding: 6px 16px 6px 16px;
+    
+}
+
+.artist-popular-name {
+    color:#fff;
+    font-weight: 600;
+}
+
+.artist-popular-artist {
+    color: #9CA3AF;
+    font-size: 14px;
+}
+.artist-popular-meta {
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    color: #9CA3AF;
+}
+.artist-popular-duration {
+    font-size: 14px;
+}
+.artist-popular-actions i{
+    padding-left: 10px;
+}
 
 
 

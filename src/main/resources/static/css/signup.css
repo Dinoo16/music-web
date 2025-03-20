@@ -62,7 +62,7 @@
 }
 
 .btn-signup:hover {
-    background-color: #7c2ee6;
+    opacity: 0.8;
 }
 
 .login-text {

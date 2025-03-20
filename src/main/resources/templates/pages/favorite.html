@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favorites</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <!-- title and filter -->
+      <div class="favorites-header">
+        <h2 class="favorites-title">Favorites</h2>
+        <div class="favorites-filter">
+          <i class="fa-solid fa-filter"></i>
+
+          <select
+            id="genreSelect"
+            class="favorites-genres"
+            onchange="filterfavoritessByGenre()"
+          >
+            <option value="all">All Genres</option>
+            <option value="pop">Pop</option>
+            <option value="rock">Rock</option>
+            <option value="hiphop">Hip-Hop</option>
+            <option value="jazz">Jazz</option>
+            <option value="classical">Classical</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- list of favoritess -->
+      <div class="favoritess-grid">
+        <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
+
+        <div class="favorites-card">
+          <img src="/images/song_img1.png" atl="favorites image" />
+          <div class="favorites-overlay">
+            <a href="/song/detail">
+              <div class="favorites-play">
+                <i class="fa-solid fa-play favorites-play-btn"></i>
+              </div>
+            </a>
+          </div>
+          <div class="favorites-info">
+            <h3 class="favorites-name">Title</h3>
+            <p class="favorites-artist">Artist</p>
+            <div class="favorites-meta">
+              <span class="favorites-duration">3:20</span>
+              <div class="favorites-actions">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="favorites-card">
+          <img src="/images/song_img1.png" atl="favorites image" />
+          <div class="favorites-overlay">
+            <a href="/song/detail">
+              <div class="favorites-play">
+                <i class="fa-solid fa-play favorites-play-btn"></i>
+              </div>
+            </a>
+          </div>
+          <div class="favorites-info">
+            <h3 class="favorites-name">Title</h3>
+            <p class="favorites-artist">Artist</p>
+            <div class="favorites-meta">
+              <span class="favorites-duration">3:20</span>
+              <div class="favorites-actions">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="favorites-card">
+          <img src="/images/song_img1.png" atl="favorites image" />
+          <div class="favorites-overlay">
+            <a href="/song/detail">
+              <div class="favorites-play">
+                <i class="fa-solid fa-play favorites-play-btn"></i>
+              </div>
+            </a>
+          </div>
+          <div class="favorites-info">
+            <h3 class="favorites-name">Title</h3>
+            <p class="favorites-artist">Artist</p>
+            <div class="favorites-meta">
+              <span class="favorites-duration">3:20</span>
+              <div class="favorites-actions">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="favorites-card">
+          <img src="/images/song_img1.png" atl="favorites image" />
+          <div class="favorites-overlay">
+            <a href="/song/detail">
+              <div class="favorites-play">
+                <i class="fa-solid fa-play favorites-play-btn"></i>
+              </div>
+            </a>
+          </div>
+          <div class="favorites-info">
+            <h3 class="favorites-name">Title</h3>
+            <p class="favorites-artist">Artist</p>
+            <div class="favorites-meta">
+              <span class="favorites-duration">3:20</span>
+              <div class="favorites-actions">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

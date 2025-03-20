@@ -27,14 +27,12 @@
     color: #D1D5DB;
 }
 
-/* Active state */
 .sidebar__box a.active {
     background-color: #9333EA; 
-    color: var(--white);
-    /* font-weight: 500; */
+    color: var(--white);    
+    font-weight: 500;
 }
 
-/* Active icon color */
 .sidebar__box a.active i {
     color: white;
 }

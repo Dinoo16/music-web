@@ -61,4 +61,35 @@ public class HomeController {
     public String getSongDetail() {
         return "pages/songDetail";
     }
+
+    @GetMapping("/favorite")
+    public String getFavorite() {
+        return "pages/favorite";
+    }
+
+    @GetMapping("/setting")
+    public String getSetting() {
+        return "pages/setting";
+    }
+
+    @GetMapping("/admin/songlist")
+    public String getSongList() {
+        return "pages/songList";
+    }
+
+    @GetMapping("/admin/userlist")
+    public String getUserList() {
+        return "pages/userList";
+    }
+
+    @GetMapping("/admin/comment")
+    public String getUserComment() {
+        return "pages/userComment";
+    }
+
+    @GetMapping("/admin/playlist")
+    public String getUserPlaylist() {
+        return "pages/userPlaylist";
+    }
+
 }
