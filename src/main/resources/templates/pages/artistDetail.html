@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artists</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <!-- artist backgroud -->
+      <div class="artist-detail-background">
+        <img src="/images/artist-background.jpg" alt="artist backgroud" />
+        <div class="artist-detail-infor">
+          <h1 class="artist-detail-name">Ed Sheeran</h1>
+          <div class="listeners-followers">
+            <div class="listener-count">
+              <i class="fa-solid fa-user-group"></i>
+              <span>75.8M monthly listeners</span>
+            </div>
+            <div class="follower-count">
+              <span>45.6M followers</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- artist nav -->
+      <div class="artist-navigation">
+        <a href="#" class="nav-item active">Overview</a>
+        <a href="#" class="nav-item">Songs</a>
+        <a href="#" class="nav-item">Albums</a>
+        <a href="#" class="nav-item">Tours</a>
+      </div>
+
+      <!-- artist actions -->
+      <div class="artist-detail-acions">
+        <!-- artist play button -->
+        <div class="artist-detail-play">
+          <div class="artist-detail-play-btn">
+            <i class="fa-solid fa-play"></i><span>Play</span>
+          </div>
+        </div>
+        <!-- artist follow button -->
+        <div class="artist-detail-follow">
+          <div class="artist-detail-follow-btn">
+            <span>Follow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- artist popular songs -->
+      <div class="artist-popular-songs">
+        <h2>Popular Songs</h2>
+
+        <div class="songs-grid">
+          <div class="song-card">
+            <img src="/images/song_img1.png" atl="song image" />
+            <div class="song-overlay">
+              <div class="song-play">
+                <i class="fa-solid fa-play song-play-btn"></i>
+              </div>
+            </div>
+            <div class="song-info">
+              <h3 class="song-name">Title</h3>
+              <p class="song-artist">Artist</p>
+              <div class="song-meta">
+                <span class="song-duration">3:20</span>
+                <div class="song-actions">
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- player -->
+
+    </div>
+  </body>
+</html>

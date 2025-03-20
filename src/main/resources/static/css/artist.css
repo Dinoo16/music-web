@@ -1,0 +1,128 @@
+.artist-wrapper {
+    width: 100;
+    background-color: #111827;
+}
+.artist-title {
+    color: var(--white);
+    font-size: 25px;
+
+}
+.artist-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: #9CA3AF;
+    padding: 22px 0;
+}
+
+.artist-search {
+    position: relative;
+    height: 46px;
+    padding-left: 16px;
+    background-color: #374151;
+    border-radius: 92px;
+    display: flex;
+    border: 1.5px solid transparent;
+}
+.artist-search-btn {
+    background-color: transparent;
+    height: 100%;
+    font-size: 1.8rem;
+    color: #9CA3AF;
+    padding-right: 10px;
+    cursor: pointer;
+}
+.artist-search input {
+    height: 100%;
+    width: 260px;
+    color: var(--white);
+    font-size: 1.6rem;
+    background-color: #374151;
+    flex: 1;
+    border-radius: 92px;
+}
+
+.artist-search i {
+    background-color: transparent;
+}
+
+.artists {
+    margin-top: 20px;
+}
+
+.artists-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 50px;
+}
+
+.artist-card {
+    height: 365px;
+    background: #1F2937;
+    border-radius: 10px;
+    overflow: hidden; 
+    position: relative;
+}
+.artist-card:hover .artist-overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+
+.artist-card img {
+    width: 100%;
+    height: 67%;
+
+    display: block;
+}
+
+
+.artist-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 67%; /* Match image height */
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.artist-detail {
+    width: 120px;
+    height: 50px;
+    border-radius: 9999px;
+    background-color: #9333EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.artist-detail span {
+    color: #fff;
+}
+
+.artist-play-btn {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+
+.artist-info {
+    padding: 24px 16px;
+}
+
+.artist-name {
+    color:#fff;
+    font-weight: 600;
+}
+
+.artist-genres {
+    color: #9CA3AF;
+    font-size: 14px;
+}
+.artist-view {
+    color: #9CA3AF;
+    font-size: 12px;
+    font-weight: 250;
+}
+

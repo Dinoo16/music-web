@@ -23,6 +23,9 @@
     border-radius: 12px;
     transition: background-color 0.3s, color 0.3s;
 }
+.sidebar__box span {
+    color: #D1D5DB;
+}
 
 /* Active state */
 .sidebar__box a.active {

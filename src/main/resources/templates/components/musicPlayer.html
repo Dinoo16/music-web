@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fixed Bottom Music player</title>
+  </head>
+  <body>
+    <div class="music-player" th:fragment="playerFragment">
+      <div class="music-player-info">
+        <img src="/images/song_img1.png" alt="Song Cover" class="music-cover" />
+        <div class="music-text">
+          <h4 class="music-title">Blinding Lights</h4>
+          <p class="music-artist">The Weeknd</p>
+        </div>
+        <div class="music-actions">
+          <i class="fa-regular fa-heart"></i>
+          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+        </div>
+      </div>
+
+      <div class="music-player-controls">
+        <div class="controls">
+          <i class="fa-solid fa-backward-step"></i>
+          <div class="play-pause-btn">
+            <i class="fa-solid fa-pause"></i>
+          </div>
+          <i class="fa-solid fa-forward-step"></i>
+        </div>
+        <div class="progress-bar">
+          <span class="current-time">1:12</span>
+          <input type="range" class="seek-bar" min="0" max="100" value="30" />
+          <span class="total-duration">3:20</span>
+        </div>
+      </div>
+
+      <div class="music-player-volume-control">
+        <i class="fa-solid fa-volume-low"></i>
+        <input type="range" class="volume-bar" min="0" max="100" value="50" />
+      </div>
+    </div>
+  </body>
+</html>

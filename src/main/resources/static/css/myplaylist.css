@@ -1,63 +1,63 @@
-.song-wrapper {
+.myplaylist-wrapper {
     width: 100;
     background-color: #111827;
 }
-.song-title {
+.myplaylist-title {
     color: var(--white);
     font-size: 25px;
 
 }
-.song-header {
+.myplaylist-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     color: #9CA3AF;
     padding: 22px 0;
 }
-.song-filter {
+.myplaylist-create {
+    width: 160px;
+    height: 40px;
+    border-radius: 9999px;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
+    background-color: var(--primary);
+    cursor: pointer;
 }
-.song-genres {
-    width: 100%;
-    background-color: #374151;
-    color: #fff;
-    padding: 8px;
-    border-radius: 10px;
-}
-.song-filter select {
-    border: none;
+.myplaylist-create-plus-btn {
+    color:#FFF;
 }
 
-.songs {
+
+.myplaylists {
     margin-top: 20px;
 }
 
-.songs-grid {
+.myplaylists-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 50px;
 }
 
-.song-card {
+.myplaylist-card {
     height: 365px;
     background: #1F2937;
     border-radius: 10px;
     overflow: hidden; 
     position: relative;
 }
-.song-card:hover .song-overlay {
+.myplaylist-card:hover .myplaylist-overlay {
     opacity: 1; /* Show overlay on hover */
 }
 
-.song-card img {
+.myplaylist-card img {
     width: 100%;
     height: 67%;
     display: block;
 }
 
-.song-overlay {
+.myplaylist-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -68,7 +68,7 @@
     align-items: center;
     justify-content: center;
 }
-.song-play {
+.myplaylist-play {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -78,38 +78,34 @@
     justify-content: center;
 }
 
-.song-play-btn {
+.myplaylist-play-btn {
     font-size: 24px;
     color: white;
     cursor: pointer;
 }
-.song-play-btn button {
+.myplaylist-play-btn button {
     background-color: transparent;
 }
-.song-info {
-    padding: 6px 16px 6px 16px;
-    
+.myplaylist-info {
+    padding: 16px;
 }
 
-.song-name {
+.myplaylist-name {
     color:#fff;
     font-weight: 600;
 }
 
-.song-artist {
+.myplaylist-song-count {
     color: #9CA3AF;
     font-size: 14px;
 }
 
-.song-meta {
+.myplaylist-meta {
     padding-top: 16px;
     display: flex;
     justify-content: space-between;
     color: #9CA3AF;
 }
-.song-duration {
+.myplaylist-createdby {
     font-size: 14px;
-}
-.song-actions i{
-    padding-left: 10px;
 }

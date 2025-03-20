@@ -16,7 +16,7 @@ public class HomeController {
     public String signin() {
         return "pages/signin";
     }
-    
+
     @GetMapping("/signup")
     public String signup() {
         return "pages/signup";
@@ -27,4 +27,38 @@ public class HomeController {
         return "pages/song";
     }
 
+    @GetMapping("/artist")
+    public String getArtist() {
+        return "pages/artist";
+    }
+
+    @GetMapping("/artist/detail")
+    public String getArtistDetail() {
+        return "pages/artistDetail";
+    }
+
+    @GetMapping("/album")
+    public String getAlbum() {
+        return "pages/album";
+    }
+
+    @GetMapping("/album/detail")
+    public String getAlbumDetail() {
+        return "pages/albumDetail";
+    }
+
+    @GetMapping("/myplaylist")
+    public String getMyPlaylist() {
+        return "pages/myplaylist";
+    }
+
+    @GetMapping("/myplaylist/detail")
+    public String getMyPlaylistDetail() {
+        return "pages/myplaylistDetail";
+    }
+
+    @GetMapping("/song/detail")
+    public String getSongDetail() {
+        return "pages/songDetail";
+    }
 }

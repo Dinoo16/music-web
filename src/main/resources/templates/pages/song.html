@@ -12,10 +12,19 @@
         <h2 class="song-title">Songs</h2>
         <div class="song-filter">
           <i class="fa-solid fa-filter"></i>
-          <div class="song-genres">
-            All Genres
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
+          
+          <select
+            id="genreSelect"
+            class="song-genres"
+            onchange="filterSongsByGenre()"
+          >
+            <option value="all">All Genres</option>
+            <option value="pop">Pop</option>
+            <option value="rock">Rock</option>
+            <option value="hiphop">Hip-Hop</option>
+            <option value="jazz">Jazz</option>
+            <option value="classical">Classical</option>
+          </select>
         </div>
       </div>
 

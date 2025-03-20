@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artists</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <!-- title and filter -->
+      <div class="artist-header">
+        <h2 class="artist-title">Artists</h2>
+        <!-- search artists -->
+        <div class="artist-search">
+          <button class="artist-search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <input placeholder="Search artist..." spellcheck="{false}" />
+        </div>
+      </div>
+
+      <!-- list of artists -->
+      <div class="artists-grid">
+        <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
+
+        <div class="artist-card">
+          <img src="/images/artist1.png" atl="artist image" />
+          <div class="artist-overlay">
+            <div class="artist-detail">
+              <a href="/artist/detail"><span>View Artist</span></a>
+            </div>
+          </div>
+          <div class="artist-info">
+            <h3 class="artist-name">Ed Sheeran</h3>
+            <p class="artist-genres">Genres</p>
+            <p class="artist-view">85.0M monthly listeners</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

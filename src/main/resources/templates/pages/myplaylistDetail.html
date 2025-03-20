@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>my playlist detail</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="myplaylist-detail-header">
+        <a href="/myplaylist" class="myplaylist-detail-back">
+          <i class="fa-solid fa-arrow-left myplaylist-detail-back-btn"></i>
+          <h4 class="myplaylist-detail-back-btn">Back to Playlists</h4>
+        </a>
+      </div>
+      <!-- myplaylist detail backgroud -->
+      <div class="myplaylist-detail-background">
+        <img
+          class="myplaylist-detail-background-img"
+          src="/images/playlist_bg.png"
+          alt="myplaylist backgroud"
+        />
+
+        <!-- myplaylist infor detail -->
+        <div class="myplaylist-detail-infor">
+          <h1 class="myplaylist-detail-name">Chill Vibes</h1>
+
+          <h4 class="myplaylist-detail-infor-desc">
+            Perfect playlist for relaxing after a long day.
+          </h4>
+          <span class="myplaylist-detail-infor-createdby">Created by ABC</span>
+          <span class="myplaylist-detail-infor-song-count">25 songs</span>
+          <div class="myplaylist-detail-actions">
+            <!-- play button -->
+            <div class="myplaylist-detail-play-btn">
+              <i class="fa-solid fa-play"></i>
+              <span>Play All</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- myplaylist song list -->
+      <div class="myplaylist-detail-song-list">
+        <!-- myplaylist song list item -->
+        <div class="myplaylist-detail-song-item">
+          <img
+            src="/images/song_img1.png"
+            alt="Take My Breath"
+            class="myplaylist-detail-song-img"
+          />
+          <div class="myplaylist-detail-song-overlay">
+            <div class="myplaylist-detail-song-play">
+              <i class="fa-solid fa-pause"></i>
+            </div>
+          </div>
+          <a href="/song/detail" class="myplaylist-detail-song-info">
+            <div>
+              <h3>Take My Breath</h3>
+              <p class="myplaylist-detail-song-info-artist">The Weeknd</p>
+            </div>
+          </a>
+          <div class="myplaylist-detail-song-actions">
+            <span class="myplaylist-detail-song-duration">4:10</span>
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+        </div>
+        <!-- myplaylist song list item -->
+        <div class="myplaylist-detail-song-item">
+          <img
+            src="/images/artist1.png"
+            alt="Take My Breath"
+            class="myplaylist-detail-song-img"
+          />
+          <div class="myplaylist-detail-song-overlay">
+            <div class="myplaylist-detail-song-play">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </div>
+          <a href="/song/detail" class="myplaylist-detail-song-info">
+            <div>
+              <h3>Take My Breath</h3>
+              <p class="myplaylist-detail-song-info-artist">The Weeknd</p>
+            </div>
+          </a>
+          <div class="myplaylist-detail-song-actions">
+            <span class="myplaylist-detail-song-duration">4:10</span>
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+        </div>
+        <!-- myplaylist song list item -->
+        <div class="myplaylist-detail-song-item">
+          <img
+            src="/images/playlist_bg.png"
+            alt="Take My Breath"
+            class="myplaylist-detail-song-img"
+          />
+          <div class="myplaylist-detail-song-overlay">
+            <div class="myplaylist-detail-song-play">
+              <i class="fa-solid fa-play"></i>
+            </div>
+          </div>
+          <a href="/song/detail" class="myplaylist-detail-song-info">
+            <div>
+              <h3>Take My Breath</h3>
+              <p class="myplaylist-detail-song-info-artist">The Weeknd</p>
+            </div>
+          </a>
+          <div class="myplaylist-detail-song-actions">
+            <span class="myplaylist-detail-song-duration">4:10</span>
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-solid fa-plus"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

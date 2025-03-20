@@ -1,0 +1,129 @@
+.artist-detail-background {
+    margin-top: 24px;
+    width: 100%;
+    height: 320px;
+    position: relative;
+}
+.artist-detail-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+.artist-detail-infor {
+    position: absolute;
+    bottom: 20px;
+    left: 20px; 
+    color: white; 
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+.artist-detail-name {
+    font-size: 38px;
+}
+.listeners-followers {
+    display: flex;
+
+}
+.listener-count,
+.follower-count {
+    font-weight: 300;
+}
+.listener-count {
+    padding-right: 14px;
+}
+
+.artist-navigation {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; 
+    background-color: transparent;
+    padding: 24px 0 5px 0;
+    border-bottom: 2px solid #1F2937; /* Viền dưới */
+}
+
+.nav-item {
+    color: #9CA3AF;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 40px 10px 20px;
+    transition: color 0.3s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #fff; 
+    font-weight: bold;
+}
+
+.artist-detail-acions {
+    display: flex;
+    padding-top: 32px;
+}
+
+.artist-detail-play {
+    width: 130px;
+    height: 50px;
+    margin-right: 20px;
+    background-color: #9333EA;
+    border-radius: 9999px;
+    position: relative;
+    cursor: pointer;
+}
+.artist-detail-play-btn {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.artist-detail-play-btn span {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500;
+}
+.artist-detail-play-btn i {
+    font-size: 22px;
+    color: #FFF;
+}
+
+.artist-detail-follow {
+    width: 130px;
+    height: 50px;
+    background-color: transparent;
+    border-radius: 9999px;
+    border: 1px solid #fff;
+    position: relative;
+    cursor: pointer;
+}
+.artist-detail-follow-btn {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.artist-detail-follow-btn span {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500; 
+}
+
+.artist-popular-songs {
+    padding-top: 20px;
+}
+.artist-popular-songs h2 {
+    padding: 18px 0;
+    color: #fff;
+    font-weight: 600;
+}
+
+
+
+
+

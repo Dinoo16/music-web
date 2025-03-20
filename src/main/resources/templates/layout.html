@@ -26,6 +26,14 @@
     <link rel="stylesheet" th:href="@{/css/signin.css}" />
     <link rel="stylesheet" th:href="@{/css/signup.css}" />
     <link rel="stylesheet" th:href="@{/css/song.css}" />
+    <link rel="stylesheet" th:href="@{/css/artist.css}" />
+    <link rel="stylesheet" th:href="@{/css/artistDetail.css}" />
+    <link rel="stylesheet" th:href="@{/css/musicPlayer.css}" />
+    <link rel="stylesheet" th:href="@{/css/album.css}" />
+    <link rel="stylesheet" th:href="@{/css/albumDetail.css}" />
+    <link rel="stylesheet" th:href="@{/css/myplaylist.css}" />
+    <link rel="stylesheet" th:href="@{/css/myplaylistDetail.css}" />
+    <link rel="stylesheet" th:href="@{/css/songDetail.css}" />
   </head>
   <body>
     <!-- Header -->
@@ -36,9 +44,12 @@
       <div th:replace="components/sidebar :: sidebarFragment"></div>
 
       <!-- Children (dynamic content) -->
-      <main class="main">
+      <main class="main" th:classappend="${customMainClass}">
         <div th:insert="~{::content}"></div>
       </main>
     </div>
+
+    <!-- Fixed Bottom Music player -->
+    <div th:replace="components/musicPlayer :: playerFragment"></div>
   </body>
 </html>

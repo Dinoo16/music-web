@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="layout :: layout(customMainClass='album-detail-page')"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Album detail</title>
+
+    <!-- custom backgroud -->
+    <style>
+      .main {
+        background-color: #121212;
+      }
+    </style>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <!-- album detail backgroud -->
+      <div class="album-detail-background">
+        <img
+          class="album-detail-background-img"
+          src="/images/artist1.png"
+          alt="album backgroud"
+        />
+
+        <!-- album infor detail -->
+        <div class="album-detail-infor">
+          <p>Album</p>
+          <h1 class="album-detail-name">After Hours</h1>
+          <div class="album-detail-meta">
+            <img
+              class="album-detail-meta-bg"
+              src="/images/artist1.png"
+              alt="album backgroud"
+            />
+            <h4>The Weeknd</h4>
+            <span class="dot">•</span>
+            <span class="album-detail-year">2020</span>
+            <span class="dot">•</span>
+            <span class="album-detail-song-count">1 song</span>
+          </div>
+          <div class="album-detail-actions">
+            <!-- play button -->
+            <div class="album-detail-play-btn">
+              <i class="fa-solid fa-play"></i>
+              <span>Play</span>
+            </div>
+            <!-- heart button -->
+            <div class="album-detail-heart-btn">
+              <i class="fa-regular fa-heart"></i>
+            </div>
+            <!-- share button -->
+            <div class="album-detail-share-btn">
+              <i class="fa-solid fa-arrow-up-from-bracket"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- album track list -->
+      <div class="album-detail-tracklist">
+        <!-- album track list title-->
+        <div class="album-detail-tracklist-header">
+          <div class="album-detail-tracklist-header-title">
+            <span>#</span>
+            <span>Title</span>
+          </div>
+          <span class="album-detail-tracklist-time"
+            ><i class="fa-regular fa-clock"></i
+          ></span>
+        </div>
+        <!-- album track list-->
+        <div class="album-detail-tracklist-item">
+          <span class="album-detail-track-number">1</span>
+          <div class="album-detail-track-info">
+            <span class="album-detail-track-title">Blinding Lights</span>
+            <span class="album-detail-track-plays">8.2M plays</span>
+          </div>
+          <span class="album-detail-track-duration">3:20</span>
+        </div>
+        <div class="album-detail-tracklist-item">
+            <span class="album-detail-track-number">1</span>
+            <div class="album-detail-track-info">
+              <span class="album-detail-track-title">Blinding Lights</span>
+              <span class="album-detail-track-plays">8.2M plays</span>
+            </div>
+            <span class="album-detail-track-duration">3:20</span>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

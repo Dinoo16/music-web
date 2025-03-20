@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="layout :: layout(customMainClass='song-detail-page')"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Song detail</title>
+
+    <!-- custom backgroud -->
+    <style>
+      .main {
+        background-color: #121212;
+      }
+    </style>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="song-detail-wrapper">
+        <div class="song-detail-main">
+          <!-- song detail backgroud -->
+          <div class="song-detail-background">
+            <img
+              class="song-detail-background-img"
+              src="/images/artist1.png"
+              alt="song backgroud"
+            />
+            <!-- song infor detail -->
+            <div class="song-detail-infor">
+              <h1 class="song-detail-name">Blinding Lights</h1>
+              <p>The Weeknd</p>
+              <!-- song meta detail -->
+              <div class="song-detail-meta">
+                <h4 class="song-detail-meta-album-name">Album: After Hours</h4>
+                <span class="dot">•</span>
+                <span class="song-detail-duration">3:20</span>
+                <span class="dot">•</span>
+                <span class="song-detail-song-genres">Pop</span>
+              </div>
+              <div class="song-detail-meta2">
+                <i class="fa-regular fa-star"></i>
+                <h4 class="song-detail-meta2-rate">4.8 (1234 views)</h4>
+                <span class="dot">•</span>
+                <span class="song-detail-play-count">8.2M plays</span>
+              </div>
+              <div class="song-detail-actions">
+                <!-- play button -->
+                <div class="song-detail-play-btn">
+                  <i class="fa-solid fa-play"></i>
+                  <span>Play Now</span>
+                </div>
+                <!-- heart button -->
+                <div class="song-detail-heart-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </div>
+                <!-- share button -->
+                <div class="song-detail-share-btn">
+                  <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                </div>
+                <!-- option button -->
+                <div class="song-detail-option-btn">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- song detail lyric -->
+          <div class="song-detail-lyrics">
+            <h2 class="song-detail-lyrics-title">Lyrics</h2>
+            
+              <div class="song-detail-lyrics-box">
+                <p>Yeah</p>
+                <p>I've been tryin' to call</p>
+                <p>I've been on my own for long enough...</p>
+              </div>
+            
+          </div>
+          <!-- song detail comments -->
+          <div class="song-detail-comments">
+            <div class="song-detail-comments-header">
+              <h2 class="song-detail-comments-title">Comments</h2>
+              <span class="song-detail-comments-toggle">Hide Comments</span>
+            </div>
+
+            <div class="song-detail-comments-box">
+              <img
+                src="/images/artist1.png"
+                alt="User Avatar"
+                class="song-detail-comments-avatar"
+              />
+              <textarea
+                class="song-detail-comments-input"
+                placeholder="Add a comment..."
+              ></textarea>
+            </div>
+            <div class="song-detail-comments-button">
+              <button class="song-detail-comments-button">Post Comment</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- related songs -->
+        <div class="song-detail-related">
+          <h2 class="song-detail-related-header">Related Songs</h2>
+          <div class="song-detail-related-item">
+            <img
+              src="/images/artist1.png"
+              alt="Save Your Tears"
+              class="song-detail-related-image"
+            />
+            <div class="song-detail-related-info">
+              <h3 class="song-detail-related-title">Save Your Tears</h3>
+              <p class="song-detail-related-artist">The Weeknd</p>
+            </div>
+            <span class="song-detail-related-duration">3:15</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
