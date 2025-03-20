@@ -79,17 +79,17 @@ public class HomeController {
 
     @GetMapping("/admin/userlist")
     public String getUserList() {
-        return "pages/userList";
+        return "pages/adminPage/userList";
     }
 
     @GetMapping("/admin/comment")
     public String getUserComment() {
-        return "pages/userComment";
+        return "pages/adminPage/userComment";
     }
 
     @GetMapping("/admin/playlist")
     public String getUserPlaylist() {
-        return "pages/userPlaylist";
+        return "pages/adminPage/playlist";
     }
 
 }
