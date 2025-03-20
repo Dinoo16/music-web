@@ -9,72 +9,72 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
 
-        return "pages/home";
+        return "pages/userPage/home";
     }
 
     @GetMapping("/signin")
     public String signin() {
-        return "pages/signin";
+        return "pages/userPage/signin";
     }
 
     @GetMapping("/signup")
     public String signup() {
-        return "pages/signup";
+        return "pages/userPage/signup";
     }
 
     @GetMapping("/song")
     public String getSong() {
-        return "pages/song";
+        return "pages/userPage/song";
     }
 
     @GetMapping("/artist")
     public String getArtist() {
-        return "pages/artist";
+        return "pages/userPage/artist";
     }
 
     @GetMapping("/artist/detail")
     public String getArtistDetail() {
-        return "pages/artistDetail";
+        return "pages/userPage/artistDetail";
     }
 
     @GetMapping("/album")
     public String getAlbum() {
-        return "pages/album";
+        return "pages/userPage/album";
     }
 
     @GetMapping("/album/detail")
     public String getAlbumDetail() {
-        return "pages/albumDetail";
+        return "pages/userPage/albumDetail";
     }
 
     @GetMapping("/myplaylist")
     public String getMyPlaylist() {
-        return "pages/myplaylist";
+        return "pages/userPage/myplaylist";
     }
 
     @GetMapping("/myplaylist/detail")
     public String getMyPlaylistDetail() {
-        return "pages/myplaylistDetail";
+        return "pages/userPage/myplaylistDetail";
     }
 
     @GetMapping("/song/detail")
     public String getSongDetail() {
-        return "pages/songDetail";
+        return "pages/userPage/songDetail";
     }
 
     @GetMapping("/favorite")
     public String getFavorite() {
-        return "pages/favorite";
+        return "pages/userPage/favorite";
     }
 
     @GetMapping("/setting")
     public String getSetting() {
-        return "pages/setting";
+        return "pages/userPage/setting";
     }
 
     @GetMapping("/admin/songlist")
     public String getSongList() {
-        return "pages/songList";
+        return "pages/adminPage/songList";
     }
 
     @GetMapping("/admin/userlist")
