@@ -56,6 +56,27 @@ document.addEventListener("DOMContentLoaded", function () {
       link.classList.add("active");
       isActiveSet = true;
     }
+    if (
+      path.startsWith("/admin/songlist") &&
+      link.getAttribute("href") === "/admin/songlist"
+    ) {
+      link.classList.add("active");
+      isActiveSet = true;
+    }
+    if (
+      path.startsWith("/admin/userlist") &&
+      link.getAttribute("href") === "/admin/userlist"
+    ) {
+      link.classList.add("active");
+      isActiveSet = true;
+    }
+    if (
+      path.startsWith("/admin/playlist") &&
+      link.getAttribute("href") === "/admin/playlist"
+    ) {
+      link.classList.add("active");
+      isActiveSet = true;
+    }
   });
 
   // If no active link was set, default to Home

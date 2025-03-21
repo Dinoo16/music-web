@@ -55,6 +55,9 @@
     gap: 10px;
     cursor: pointer;
 }
+.album-detail-play-btn:hover {
+    opacity: 0.8;
+}
 .album-detail-play-btn span {
     color: #FFF;
     font-size: 18px;
@@ -75,6 +78,9 @@
     background-color: #1F2937;
     cursor: pointer;
 }
+.album-detail-heart-btn:hover {
+    opacity: 0.8;
+}
 .album-detail-heart-btn i {
     color: #fff;
     font-size: 22px;
@@ -88,6 +94,9 @@
     border-radius: 50%;
     background-color: #1F2937;
     cursor: pointer;
+}
+.album-detail-share-btn:hover {
+    opacity: 0.8;
 }
 .album-detail-share-btn i {
     color: #fff;

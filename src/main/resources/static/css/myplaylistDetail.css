@@ -2,7 +2,8 @@
     display: flex;
     gap: 5px;
     align-items: center;
-    padding-top: 20px;
+    margin-top: 20px;
+   
 }
 .myplaylist-detail-back-btn {
     color: #C084FC !important;
@@ -57,6 +58,9 @@
     justify-content: center;
     gap: 15px;
     cursor: pointer;
+}
+.myplaylist-detail-play-btn:hover{
+  opacity: 0.8;
 }
 .myplaylist-detail-play-btn span {
     color: #FFF;

@@ -29,15 +29,19 @@
       </div>
 
       <!-- list of songs -->
+      <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
       <div class="songs-grid">
-        <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
-
+        <!--Song item-->
         <div class="song-card">
-          <img src="/images/song_img1.png" atl="song image" />
+          <div class="song-card-img">
+            <img src="/images/song_img1.png" atl="song image" />
+          </div>
           <div class="song-overlay">
-            <a href="/song/detail">
+            <a href="/song/detail" class="song-overlay-btn">
               <div class="song-play">
-                <i class="fa-solid fa-play song-play-btn"></i>
+                <button class="song-play-btn" onclick="playSong(event)">
+                  <i class="fa-solid fa-play song-play-btn-icon"></i>
+                </button>
               </div>
             </a>
           </div>
@@ -53,75 +57,17 @@
             </div>
           </div>
         </div>
+        <!--Song item-->
         <div class="song-card">
-          <img src="/images/song_img1.png" atl="song image" />
+          <div class="song-card-img">
+            <img src="/images/song_img1.png" atl="song image" />
+          </div>
           <div class="song-overlay">
-            <a href="/song/detail">
+            <a href="/song/detail" class="song-overlay-btn">
               <div class="song-play">
-                <i class="fa-solid fa-play song-play-btn"></i>
-              </div>
-            </a>
-          </div>
-          <div class="song-info">
-            <h3 class="song-name">Title</h3>
-            <p class="song-artist">Artist</p>
-            <div class="song-meta">
-              <span class="song-duration">3:20</span>
-              <div class="song-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="song-card">
-          <img src="/images/song_img1.png" atl="song image" />
-          <div class="song-overlay">
-            <a href="/song/detail">
-              <div class="song-play">
-                <i class="fa-solid fa-play song-play-btn"></i>
-              </div>
-            </a>
-          </div>
-          <div class="song-info">
-            <h3 class="song-name">Title</h3>
-            <p class="song-artist">Artist</p>
-            <div class="song-meta">
-              <span class="song-duration">3:20</span>
-              <div class="song-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="song-card">
-          <img src="/images/song_img1.png" atl="song image" />
-          <div class="song-overlay">
-            <a href="/song/detail">
-              <div class="song-play">
-                <i class="fa-solid fa-play song-play-btn"></i>
-              </div>
-            </a>
-          </div>
-          <div class="song-info">
-            <h3 class="song-name">Title</h3>
-            <p class="song-artist">Artist</p>
-            <div class="song-meta">
-              <span class="song-duration">3:20</span>
-              <div class="song-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="song-card">
-          <img src="/images/song_img1.png" atl="song image" />
-          <div class="song-overlay">
-            <a href="/song/detail">
-              <div class="song-play">
-                <i class="fa-solid fa-play song-play-btn"></i>
+                <button class="song-play-btn" onclick="playSong(event)">
+                  <i class="fa-solid fa-play song-play-btn-icon"></i>
+                </button>
               </div>
             </a>
           </div>

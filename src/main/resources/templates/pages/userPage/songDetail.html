@@ -46,22 +46,22 @@
               </div>
               <div class="song-detail-actions">
                 <!-- play button -->
-                <div class="song-detail-play-btn">
+                <button class="song-detail-play-btn" onclick="playSong(event)">
                   <i class="fa-solid fa-play"></i>
                   <span>Play Now</span>
-                </div>
+                </button>
                 <!-- heart button -->
-                <div class="song-detail-heart-btn">
+                <button class="song-detail-heart-btn">
                   <i class="fa-regular fa-heart"></i>
-                </div>
+                </button>
                 <!-- share button -->
-                <div class="song-detail-share-btn">
+                <button class="song-detail-share-btn">
                   <i class="fa-solid fa-arrow-up-from-bracket"></i>
-                </div>
+                </button>
                 <!-- option button -->
-                <div class="song-detail-option-btn">
+                <button class="song-detail-option-btn">
                   <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
+                </button>
               </div>
             </div>
           </div>
@@ -69,19 +69,20 @@
           <!-- song detail lyric -->
           <div class="song-detail-lyrics">
             <h2 class="song-detail-lyrics-title">Lyrics</h2>
-            
-              <div class="song-detail-lyrics-box">
-                <p>Yeah</p>
-                <p>I've been tryin' to call</p>
-                <p>I've been on my own for long enough...</p>
-              </div>
-            
+
+            <div class="song-detail-lyrics-box">
+              <p>Yeah</p>
+              <p>I've been tryin' to call</p>
+              <p>I've been on my own for long enough...</p>
+            </div>
           </div>
           <!-- song detail comments -->
           <div class="song-detail-comments">
             <div class="song-detail-comments-header">
               <h2 class="song-detail-comments-title">Comments</h2>
-              <span class="song-detail-comments-toggle">Hide Comments</span>
+              <button class="song-detail-comments-btn">
+                <span class="song-detail-comments-toggle">Hide Comments</span>
+              </button>
             </div>
 
             <div class="song-detail-comments-box">
@@ -104,18 +105,50 @@
         <!-- related songs -->
         <div class="song-detail-related">
           <h2 class="song-detail-related-header">Related Songs</h2>
-          <div class="song-detail-related-item">
-            <img
-              src="/images/artist1.png"
-              alt="Save Your Tears"
-              class="song-detail-related-image"
-            />
-            <div class="song-detail-related-info">
-              <h3 class="song-detail-related-title">Save Your Tears</h3>
-              <p class="song-detail-related-artist">The Weeknd</p>
+          <!-- song item (add song id)-->
+          <a href="/song/detail">
+            <div class="song-detail-related-item">
+              <img
+                src="/images/artist1.png"
+                alt="Save Your Tears"
+                class="song-detail-related-image"
+              />
+              <div class="song-detail-related-info">
+                <h3 class="song-detail-related-title">Save Your Tears</h3>
+                <p class="song-detail-related-artist">The Weeknd</p>
+              </div>
+              <span class="song-detail-related-duration">3:15</span>
             </div>
-            <span class="song-detail-related-duration">3:15</span>
-          </div>
+          </a>
+
+          <a href="/song/detail">
+            <div class="song-detail-related-item">
+              <img
+                src="/images/artist1.png"
+                alt="Save Your Tears"
+                class="song-detail-related-image"
+              />
+              <div class="song-detail-related-info">
+                <h3 class="song-detail-related-title">Save Your Tears</h3>
+                <p class="song-detail-related-artist">The Weeknd</p>
+              </div>
+              <span class="song-detail-related-duration">3:15</span>
+            </div>
+          </a>
+          <a href="/song/detail">
+            <div class="song-detail-related-item">
+              <img
+                src="/images/artist1.png"
+                alt="Save Your Tears"
+                class="song-detail-related-image"
+              />
+              <div class="song-detail-related-info">
+                <h3 class="song-detail-related-title">Save Your Tears</h3>
+                <p class="song-detail-related-artist">The Weeknd</p>
+              </div>
+              <span class="song-detail-related-duration">3:15</span>
+            </div>
+          </a>
         </div>
       </div>
     </div>

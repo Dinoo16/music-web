@@ -36,78 +36,110 @@
     margin-top: 20px;
 }
 
-.myplaylists-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 50px;
+/* List of song in my playlist */
+
+    .myplaylists-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 50px;
+    }
+
+    .myplaylist-card {
+        height: 365px;
+        background: #1F2937;
+        border-radius: 10px;
+        overflow: hidden; 
+        position: relative;
+    }
+    .myplaylist-card:hover .myplaylist-overlay {
+        background: rgba(0, 0, 0, 0.4); 
+    }
+
+    .myplaylist-card-img{
+        width: 100%;
+        height: 67%;
+        overflow: hidden; 
+        position: relative;
+    }
+    .myplaylist-card-img img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        transition: transform 0.3s ease-in-out;
+    }
+    .myplaylist-card:hover .myplaylist-card-img img {
+        transform: scale(1.2);
+    }
+
+    .myplaylist-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 67%; 
+        /* background: rgba(0, 0, 0, 0.4);  */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .myplaylist-overlay-btn {
+        padding: 98px 98px;
+        display: none; 
+    }
+    /* Show play button when hovering over image */
+.myplaylist-card-img:hover + .myplaylist-overlay .myplaylist-overlay-btn,
+.myplaylist-overlay:hover .myplaylist-overlay-btn {
+  display: block; 
 }
 
-.myplaylist-card {
-    height: 365px;
-    background: #1F2937;
-    border-radius: 10px;
-    overflow: hidden; 
-    position: relative;
-}
-.myplaylist-card:hover .myplaylist-overlay {
-    opacity: 1; /* Show overlay on hover */
-}
+    .myplaylist-play {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #9333EA;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .myplaylist-play:hover {
+        background-color: #a84cff;
+    }
+    .myplaylist-play-btn {
+        background-color: transparent;
+        border-radius: 50%;
+    }
+    .myplaylist-play-btn-icon {
+        font-size: 24px;
+        color: white;
+        cursor: pointer;
+        padding: 13px 15px;
+    
+    }
 
-.myplaylist-card img {
-    width: 100%;
-    height: 67%;
-    display: block;
-}
+    .myplaylist-play-btn button {
+        background-color: transparent;
+    }
 
-.myplaylist-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 67%; 
-    background: rgba(0, 0, 0, 0.4); 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.myplaylist-play {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #9333EA;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .myplaylist-info {
+        padding: 16px;
+    }
 
-.myplaylist-play-btn {
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-}
-.myplaylist-play-btn button {
-    background-color: transparent;
-}
-.myplaylist-info {
-    padding: 16px;
-}
+    .myplaylist-name {
+        color:#fff;
+        font-weight: 600;
+    }
 
-.myplaylist-name {
-    color:#fff;
-    font-weight: 600;
-}
+    .myplaylist-song-count {
+        color: #9CA3AF;
+        font-size: 14px;
+    }
 
-.myplaylist-song-count {
-    color: #9CA3AF;
-    font-size: 14px;
-}
-
-.myplaylist-meta {
-    padding-top: 16px;
-    display: flex;
-    justify-content: space-between;
-    color: #9CA3AF;
-}
-.myplaylist-createdby {
-    font-size: 14px;
-}
+    .myplaylist-meta {
+        padding-top: 16px;
+        display: flex;
+        justify-content: space-between;
+        color: #9CA3AF;
+    }
+    .myplaylist-createdby {
+        font-size: 14px;
+    }

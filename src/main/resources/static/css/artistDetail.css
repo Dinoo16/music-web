@@ -71,6 +71,9 @@
     position: relative;
     cursor: pointer;
 }
+.artist-detail-play:hover {
+    opacity: 0.8;
+}
 .artist-detail-play-btn {
     height: 100%;
     width: 100%;
@@ -99,6 +102,9 @@
     position: relative;
     cursor: pointer;
 }
+.artist-detail-follow:hover {
+    opacity: 0.8;
+}
 .artist-detail-follow-btn {
     height: 100%;
     width: 100%;
@@ -114,6 +120,8 @@
     font-weight: 500; 
 }
 
+
+/*Artist popular song list */
 .artist-popular-songs {
     padding-top: 20px;
 }
@@ -133,17 +141,30 @@
     height: 365px;
     background: #1F2937;
     border-radius: 10px;
+    position: relative;
+    overflow: hidden; 
+}
+
+.artist-popular-card:hover .artist-popular-overlay:hover {
+    background: rgba(0, 0, 0, 0.4); 
+}
+
+.artist-popular-card-img {
+    width: 100%;
+    height: 67%;
     overflow: hidden; 
     position: relative;
 }
-.artist-popular-card:hover .artist-popular-overlay {
-    opacity: 1; /* Show overlay on hover */
+.artist-popular-card-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.3s ease-in-out;
 }
 
-.artist-popular-card img {
-    width: 100%;
-    height: 67%;
-    display: block;
+.artist-popular-card:hover .artist-popular-card-img img {
+    transform: scale(1.2);
+    
 }
 
 .artist-popular-overlay {
@@ -152,11 +173,21 @@
     left: 0;
     width: 100%;
     height: 67%; 
-    background: rgba(0, 0, 0, 0.4); 
+    /* background: rgba(0, 0, 0, 0.4);  */
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.artist-popular-overlay-btn {
+    padding: 98px 98px;
+    display: none;
+}
+/* Show play button when hovering over image */
+.artist-popular-card-img:hover + .artist-popular-overlay .artist-popular-overlay-btn,
+.artist-popular-overlay:hover .artist-popular-overlay-btn {
+  display: block; 
+}
+
 .artist-popular-play {
     width: 50px;
     height: 50px;
@@ -166,11 +197,20 @@
     align-items: center;
     justify-content: center;
 }
-
+.artist-popular-play:hover {
+    background-color: #a84cff;
+}
 .artist-popular-play-btn {
+    background-color: transparent;
+    border-radius: 50%;
+    
+}
+.artist-popular-play-btn-icon {
     font-size: 24px;
     color: white;
     cursor: pointer;
+    padding: 13px 15px;
+
 }
 .artist-popular-play-btn button {
     background-color: transparent;
@@ -189,6 +229,7 @@
     color: #9CA3AF;
     font-size: 14px;
 }
+
 .artist-popular-meta {
     padding-top: 16px;
     display: flex;
@@ -201,7 +242,3 @@
 .artist-popular-actions i{
     padding-left: 10px;
 }
-
-
-
-

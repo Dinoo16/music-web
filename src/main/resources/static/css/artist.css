@@ -96,6 +96,9 @@
     justify-content: center;
     
 }
+.artist-detail:hover {
+    background-color: #8128d4;
+}
 .artist-detail span {
     color: #fff;
 }

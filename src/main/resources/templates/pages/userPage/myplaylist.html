@@ -19,13 +19,17 @@
       <!-- list of myplaylists -->
       <div class="myplaylists-grid">
         <!-- Dùng Thymeleaf để lặp qua playlists -->
-
+        <!--Playlist item-->
         <div class="myplaylist-card">
-          <img src="/images/playlist_bg.png" atl="myplaylist image" />
+          <div class="myplaylist-card-img">
+            <img src="/images/playlist_bg.png" atl="myplaylist image" />
+          </div>
           <div class="myplaylist-overlay">
-            <a href="/myplaylist/detail">
+            <a href="/myplaylist/detail" class="myplaylist-overlay-btn">
               <div class="myplaylist-play">
-                <i class="fa-solid fa-play myplaylist-play-btn"></i>
+                <button class="song-play-btn" onclick="playSong(event)">
+                  <i class="fa-solid fa-play myplaylist-play-btn-icon"></i>
+                </button>
               </div>
             </a>
           </div>

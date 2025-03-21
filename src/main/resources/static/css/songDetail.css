@@ -78,6 +78,9 @@
     gap: 10px;
     cursor: pointer;
 }
+.song-detail-play-btn:hover {
+  opacity: 0.8;
+}
 .song-detail-play-btn span {
     color: #FFF;
     font-size: 18px;
@@ -153,6 +156,9 @@
     padding: 10px;
     border-radius: 8px;
     width: 400px;
+  }
+  .song-detail-related-item:hover {
+    background-color: #1F2937;
   }
   
   .song-detail-related-image {
@@ -280,6 +286,14 @@
   .song-detail-comments-button button:hover {
     background-color: #4B5563;
     opacity: 0.8;
+  }
+  .song-detail-comments-btn {
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .song-detail-comments-btn:hover {
+    text-decoration: underline;
+    color: #9CA3AF;
   }
   
   

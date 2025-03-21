@@ -7,7 +7,44 @@
   </head>
   <body>
     <div th:fragment="content">
-      <h2>Home page</h2>
+      <!-- title and view all -->
+      <div class="home-header">
+        <h2 class="home-title">Featured Songs</h2>
+        <div class="home-more">
+          <a href="#">View All</a>
+        </div>
+      </div>
+
+      <!-- list of homes -->
+      <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
+      <div class="homes-grid">
+        <!--home item-->
+        <div class="home-card">
+          <div class="home-card-img">
+            <img src="/images/artist1.png" atl="home image" />
+          </div>
+          <div class="home-overlay">
+            <a href="/home/detail" class="home-overlay-btn">
+              <div class="home-play">
+                <button class="home-play-btn" onclick="playhome(event)">
+                  <i class="fa-solid fa-play home-play-btn-icon"></i>
+                </button>
+              </div>
+            </a>
+          </div>
+          <div class="home-info">
+            <h3 class="home-name">Title</h3>
+            <p class="home-artist">Artist</p>
+            <div class="home-meta">
+              <span class="home-duration">3:20</span>
+              <div class="home-actions">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -34,30 +34,40 @@
       <!-- artist actions -->
       <div class="artist-detail-acions">
         <!-- artist play button -->
-        <div class="artist-detail-play">
+        <button class="artist-detail-play">
           <div class="artist-detail-play-btn">
             <i class="fa-solid fa-play"></i><span>Play</span>
           </div>
-        </div>
+        </button>
         <!-- artist follow button -->
-        <div class="artist-detail-follow">
+        <button class="artist-detail-follow">
           <div class="artist-detail-follow-btn">
             <span>Follow</span>
           </div>
-        </div>
+        </button>
       </div>
 
       <!-- artist popular songs -->
       <div class="artist-popular-songs">
         <h2>Popular Songs</h2>
-
+        <!--Song list grid-->
         <div class="artist-popular-grid">
+          <!--Song item-->
           <div class="artist-popular-card">
-            <img src="/images/song_img1.png" atl="artist-popular image" />
+            <div class="artist-popular-card-img">
+              <img src="/images/song_img1.png" atl="artist-popular image" />
+            </div>
             <div class="artist-popular-overlay">
-              <a href="/song/detail">
+              <a href="/song/detail" class="artist-popular-overlay-btn">
                 <div class="artist-popular-play">
-                  <i class="fa-solid fa-play artist-popular-play-btn"></i>
+                  <button
+                    class="artist-popular-play-btn"
+                    onclick="playSong(event)"
+                  >
+                    <i
+                      class="fa-solid fa-play artist-popular-play-btn-icon"
+                    ></i>
+                  </button>
                 </div>
               </a>
             </div>

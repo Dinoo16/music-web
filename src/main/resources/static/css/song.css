@@ -44,17 +44,29 @@
     height: 365px;
     background: #1F2937;
     border-radius: 10px;
+    position: relative;
+    overflow: hidden; 
+}
+
+.song-card:hover .song-overlay:hover {
+    background: rgba(0, 0, 0, 0.4); 
+}
+
+.song-card-img {
+    width: 100%;
+    height: 67%;
     overflow: hidden; 
     position: relative;
 }
-.song-card:hover .song-overlay {
-    opacity: 1; /* Show overlay on hover */
+.song-card-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.3s ease-in-out;
 }
 
-.song-card img {
-    width: 100%;
-    height: 67%;
-    display: block;
+.song-card:hover .song-card-img img {
+    transform: scale(1.2);
 }
 
 .song-overlay {
@@ -63,11 +75,21 @@
     left: 0;
     width: 100%;
     height: 67%; 
-    background: rgba(0, 0, 0, 0.4); 
+    /* background: rgba(0, 0, 0, 0.4);  */
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.song-overlay-btn {
+    padding: 98px 98px;
+    display: none;
+}
+/* Show play button when hovering over image */
+.song-card-img:hover + .song-overlay .song-overlay-btn,
+.song-overlay:hover .song-overlay-btn {
+  display: block; 
+}
+
 .song-play {
     width: 50px;
     height: 50px;
@@ -77,11 +99,20 @@
     align-items: center;
     justify-content: center;
 }
-
+.song-play:hover {
+    background-color: #a84cff;
+}
 .song-play-btn {
+    background-color: transparent;
+    border-radius: 50%;
+    
+}
+.song-play-btn-icon {
     font-size: 24px;
     color: white;
     cursor: pointer;
+    padding: 13px 15px;
+
 }
 .song-play-btn button {
     background-color: transparent;
@@ -113,3 +144,10 @@
 .song-actions i{
     padding-left: 10px;
 }
+
+
+
+
+
+
+
