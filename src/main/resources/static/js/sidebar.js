@@ -4,8 +4,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   sidebarLinks.forEach((link) => {
     const path = window.location.pathname;
-
-    if (path.startsWith("/album") && link.getAttribute("href") === "/album") {
+    if (
+      path.startsWith("/discover") &&
+      link.getAttribute("href") === "/discover"
+    ) {
+      link.classList.add("active");
+      isActiveSet = true;
+    }
+    if (
+      path.startsWith("/topchart") &&
+      link.getAttribute("href") === "/topchart"
+    ) {
       link.classList.add("active");
       isActiveSet = true;
     }
@@ -17,20 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
       link.classList.add("active");
       isActiveSet = true;
     }
-    if (
-      path.startsWith("/discover") &&
-      link.getAttribute("href") === "/discovertop"
-    ) {
+    if (path.startsWith("/album") && link.getAttribute("href") === "/album") {
       link.classList.add("active");
       isActiveSet = true;
     }
-    if (
-      path.startsWith("/topchat") &&
-      link.getAttribute("href") === "/topchat"
-    ) {
-      link.classList.add("active");
-      isActiveSet = true;
-    }
+
     if (path.startsWith("/genre") && link.getAttribute("href") === "/genre") {
       link.classList.add("active");
       isActiveSet = true;

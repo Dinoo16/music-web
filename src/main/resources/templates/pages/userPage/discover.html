@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Discover</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <!-- Discover header -->
+      <div class="discover-navigation">
+        <a href="#" class="discover-nav-item active">All</a>
+        <a href="#" class="discover-nav-item">New Releases</a>
+        <a href="#" class="discover-nav-item">Recommended</a>
+        <a href="#" class="discover-nav-item">Mood</a>
+      </div>
+
+      <!-- Discover weekly -->
+      <div class="discover-weekly-wrapper">
+        <div class="discover-weekly-featured">
+          <img class="discover-weekly-icon" src="/images/sparkles_icon.png" />
+          <span>Featured</span>
+        </div>
+        <h1>Discover Weekly</h1>
+        <p class="discover-weekly-desc">
+          Your personal mixtape of fresh and exciting music, carefully curated
+          to bring you a perfect blend of new discoveries and hidden gems. Sit
+          back, relax, and immerse yourself in a musical journey tailored just
+          for you.
+        </p>
+        <button class="discover-weekly-btn">Listen Now</button>
+      </div>
+
+      <!-- New Releases -->
+
+      <div class="discover-new-releases-header">
+        <h2 class="discover-new-releases-title">New Releases</h2>
+      </div>
+      <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
+      <div class="discover-new-releases-grid">
+        <!--New Releases items-->
+        <div class="discover-new-release-card">
+          <div class="discover-new-release-card-img">
+            <img src="/images/artist1.png" atl="discover-new-release image" />
+          </div>
+          <div class="discover-new-release-overlay">
+            <a href="/song/detail" class="discover-new-release-overlay-btn">
+              <div class="discover-new-release-play">
+                <button
+                  class="discover-new-release-play-btn"
+                  onclick="playSong(event)"
+                >
+                  <i
+                    class="fa-solid fa-play discover-new-release-play-btn-icon"
+                  ></i>
+                </button>
+              </div>
+            </a>
+          </div>
+          <div class="discover-new-release-info">
+            <h3 class="discover-new-release-name">Title</h3>
+            <p class="discover-new-release-artist">Artist</p>
+            <div class="discover-new-release-meta">
+              <span class="discover-new-release-duration">3:20</span>
+              <div class="discover-new-release-actions">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Browse by Mood -->
+
+      <div class="discover-new-releases-header">
+        <h2 class="discover-new-releases-title">Browse by Mood</h2>
+      </div>
+      <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
+      <div class="discover-new-releases-grid">
+        <!--Browse by Mood item-->
+        <div class="discover-new-release-card">
+          <div class="discover-new-release-card-img">
+            <img src="/images/artist1.png" atl="discover-new-release image" />
+          </div>
+          <div class="discover-new-release-overlay">
+            <a href="/song/detail" class="discover-new-release-overlay-btn">
+              <div class="discover-new-release-play">
+                <button
+                  class="discover-new-release-play-btn"
+                  onclick="playSong(event)"
+                >
+                  <i
+                    class="fa-solid fa-play discover-new-release-play-btn-icon"
+                  ></i>
+                </button>
+              </div>
+            </a>
+          </div>
+          <div class="discover-new-release-info">
+            <h3 class="discover-new-release-name">Title</h3>
+            <p class="discover-new-release-artist">Artist</p>
+            <div class="discover-new-release-meta">
+              <span class="discover-new-release-duration">3:20</span>
+              <div class="discover-new-release-actions">
+                <i class="fa-regular fa-heart"></i>
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

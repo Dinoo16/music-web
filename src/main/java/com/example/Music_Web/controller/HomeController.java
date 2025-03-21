@@ -7,9 +7,18 @@ import org.springframework.ui.Model;
 @Controller
 public class HomeController {
     @GetMapping("/")
-    public String home(Model model) {
-
+    public String getHome(Model model) {
         return "pages/userPage/home";
+    }
+
+    @GetMapping("/discover")
+    public String getDiscover(Model model) {
+        return "pages/userPage/discover";
+    }
+
+    @GetMapping("/topchart")
+    public String getTopchart(Model model) {
+        return "pages/userPage/topchart";
     }
 
     @GetMapping("/signin")

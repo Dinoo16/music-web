@@ -1,0 +1,193 @@
+.discover-navigation {
+    margin-bottom: 32px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; 
+    background-color: transparent;
+    padding: 24px 0 5px 0;
+    border-bottom: 2px solid #1F2937; 
+}
+
+.discover-nav-item {
+    color: #9CA3AF;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 40px 10px 20px;
+    transition: color 0.3s ease;
+}
+
+.discover-nav-item:hover,
+.discover-nav-item.active {
+    color: #fff; 
+    font-weight: bold;
+}
+
+/* Discover weekly */
+.discover-weekly-wrapper {
+    width: 100%;
+    height: 280px;
+    margin-bottom: 32px;
+    background: linear-gradient(to right, #9333EA 0%, #2563EB 100%);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 32px 140px 32px 32px;
+    gap: 12px;
+}
+.discover-weekly-featured {
+    display: flex;
+   align-items: center;
+   gap: 8px;
+}
+.discover-weekly-featured span {
+    color: #FACC15;
+    
+}
+.discover-weekly-icon {
+    width: 24px;
+    height: 24px;
+}
+.discover-weekly-desc {
+    color: #E5E7EB;
+    font-weight: 300;
+}
+.discover-weekly-btn {
+    width: 150px;
+    height: 50px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.discover-weekly-btn:hover {
+
+}
+
+/* New Releases */
+.discover-new-releases-title {
+    color:#fff;
+    padding-bottom: 24px;
+}
+.discover-new-releases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 50px;
+    margin-bottom: 32px;
+}
+
+.discover-new-release-card {
+    height: 365px;
+    background: #1F2937;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden; 
+}
+
+.discover-new-release-card:hover .discover-new-release-overlay:hover {
+    background: rgba(0, 0, 0, 0.4); 
+}
+
+.discover-new-release-card-img {
+    width: 100%;
+    height: 67%;
+    overflow: hidden; 
+    position: relative;
+}
+.discover-new-release-card-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.discover-new-release-card:hover .discover-new-release-card-img img {
+    transform: scale(1.2);
+}
+
+.discover-new-release-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 67%; 
+    /* background: rgba(0, 0, 0, 0.4);  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.discover-new-release-overlay-btn {
+    padding: 98px 98px;
+    display: none;
+}
+/* Show play button when hovering over image */
+.discover-new-release-card-img:hover + .discover-new-release-overlay .discover-new-release-overlay-btn,
+.discover-new-release-overlay:hover .discover-new-release-overlay-btn {
+  display: block; 
+}
+
+.discover-new-release-play {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #9333EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.discover-new-release-play:hover {
+    background-color: #a84cff;
+}
+.discover-new-release-play-btn {
+    background-color: transparent;
+    border-radius: 50%;
+    
+}
+.discover-new-release-play-btn-icon {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    padding: 13px 15px;
+
+}
+.discover-new-release-play-btn button {
+    background-color: transparent;
+}
+.discover-new-release-info {
+    padding: 6px 16px 6px 16px;
+    
+}
+
+.discover-new-release-name {
+    color:#fff;
+    font-weight: 600;
+}
+
+.discover-new-release-artist {
+    color: #9CA3AF;
+    font-size: 14px;
+}
+
+.discover-new-release-meta {
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    color: #9CA3AF;
+}
+.discover-new-release-duration {
+    font-size: 14px;
+}
+.discover-new-release-actions i{
+    padding-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+

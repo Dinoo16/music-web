@@ -11,7 +11,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    color: #9CA3AF;
     padding: 22px 0;
 }
 /* View all text button */
@@ -19,6 +18,13 @@
     display: flex;
     align-items: center;
 }
+.home-more a {
+    color: #C084FC;
+}
+.home-more:hover, .home-more a:hover{
+    color: var(--primary);
+}
+
 .home-genres {
     width: 100%;
     background-color: #374151;
@@ -30,17 +36,16 @@
     border: none;
 }
 
-.homes {
-    margin-top: 20px;
-}
 
-.homes-grid {
+/* List of featured songs */
+.home-song-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 50px;
+    margin-bottom: 18px;
 }
 
-.home-card {
+.home-song-card {
     height: 365px;
     background: #1F2937;
     border-radius: 10px;
@@ -48,28 +53,28 @@
     overflow: hidden; 
 }
 
-.home-card:hover .home-overlay:hover {
+.home-song-card:hover .home-song-overlay:hover {
     background: rgba(0, 0, 0, 0.4); 
 }
 
-.home-card-img {
+.home-song-card-img {
     width: 100%;
     height: 67%;
     overflow: hidden; 
     position: relative;
 }
-.home-card-img img {
+.home-song-card-img img {
     width: 100%;
     height: 100%;
     display: block;
     transition: transform 0.3s ease-in-out;
 }
 
-.home-card:hover .home-card-img img {
+.home-song-card:hover .home-song-card-img img {
     transform: scale(1.2);
 }
 
-.home-overlay {
+.home-song-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -80,17 +85,17 @@
     align-items: center;
     justify-content: center;
 }
-.home-overlay-btn {
+.home-song-overlay-btn {
     padding: 98px 98px;
     display: none;
 }
 /* Show play button when hovering over image */
-.home-card-img:hover + .home-overlay .home-overlay-btn,
-.home-overlay:hover .home-overlay-btn {
+.home-song-card-img:hover + .home-song-overlay .home-song-overlay-btn,
+.home-song-overlay:hover .home-song-overlay-btn {
   display: block; 
 }
 
-.home-play {
+.home-song-play {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -99,51 +104,256 @@
     align-items: center;
     justify-content: center;
 }
-.home-play:hover {
+.home-song-play:hover {
     background-color: #a84cff;
 }
-.home-play-btn {
+.home-song-play-btn {
     background-color: transparent;
     border-radius: 50%;
     
 }
-.home-play-btn-icon {
+.home-song-play-btn-icon {
     font-size: 24px;
     color: white;
     cursor: pointer;
     padding: 13px 15px;
 
 }
-.home-play-btn button {
+.home-song-play-btn button {
     background-color: transparent;
 }
-.home-info {
+.home-song-info {
     padding: 6px 16px 6px 16px;
     
 }
 
-.home-name {
+.home-song-name {
     color:#fff;
     font-weight: 600;
 }
 
-.home-artist {
+.home-song-artist {
     color: #9CA3AF;
     font-size: 14px;
 }
 
-.home-meta {
+.home-song-meta {
     padding-top: 16px;
     display: flex;
     justify-content: space-between;
     color: #9CA3AF;
 }
-.home-duration {
+.home-song-duration {
     font-size: 14px;
 }
-.home-actions i{
+.home-song-actions i{
     padding-left: 10px;
 }
+
+/* List of recommended playlist */
+.home-playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 50px;
+    margin-bottom: 18px;
+}
+
+.home-playlist-card {
+    height: 365px;
+    background: #1F2937;
+    border-radius: 10px;
+    overflow: hidden; 
+    position: relative;
+}
+.home-playlist-card:hover .home-playlist-overlay {
+    background: rgba(0, 0, 0, 0.4); 
+}
+
+.home-playlist-card-img{
+    width: 100%;
+    height: 67%;
+    overflow: hidden; 
+    position: relative;
+}
+.home-playlist-card-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+.home-playlist-card:hover .home-playlist-card-img img {
+    transform: scale(1.2);
+}
+
+.home-playlist-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 67%; 
+    /* background: rgba(0, 0, 0, 0.4);  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home-playlist-overlay-btn {
+    padding: 98px 98px;
+    display: none; 
+}
+/* Show play button when hovering over image */
+.home-playlist-card-img:hover + .home-playlist-overlay .home-playlist-overlay-btn,
+.home-playlist-overlay:hover .home-playlist-overlay-btn {
+display: block; 
+}
+
+.home-playlist-play {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #9333EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home-playlist-play:hover {
+    background-color: #a84cff;
+}
+.home-playlist-play-btn {
+    background-color: transparent;
+    border-radius: 50%;
+}
+.home-playlist-play-btn-icon {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    padding: 13px 15px;
+
+}
+
+.home-playlist-play-btn button {
+    background-color: transparent;
+}
+
+.home-playlist-info {
+    padding: 16px;
+}
+
+.home-playlist-name {
+    color:#fff;
+    font-weight: 600;
+}
+
+.home-playlist-song-count {
+    color: #9CA3AF;
+    font-size: 14px;
+}
+
+.home-playlist-meta {
+    padding-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    color: #9CA3AF;
+}
+.home-playlist-createdby {
+    font-size: 14px;
+}
+
+
+/* Recently played songs list */
+.home-recently-played-song-list {
+    background-color: #1F2937;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    /* margin-top: 24px; */
+  }
+  
+  .home-recently-played-song-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  
+  .home-recently-played-song-item:hover {
+    background-color: #111827;
+  }
+  
+  .home-recently-played-song-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+
+  .home-recently-played-song-card:hover .home-recently-played-song-overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+.home-recently-played-song-overlay {
+  position: absolute;
+  
+  width: 50px;
+  height: 50px; 
+  background: rgba(0, 0, 0, 0.4); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-recently-played-song-info-link {
+  display: flex;
+  justify-content: flex-start;
+}
+  
+  .home-recently-played-song-info {
+    flex-grow: 1;
+    margin-left: 15px;
+  }
+  
+  .home-recently-played-song-info h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .home-recently-played-song-info-artist {
+    color: var(--spanColor);
+    font-size: 14px;
+  }
+ 
+  .home-recently-played-song-duration {
+    color: #b0b3bb;
+    font-size: 14px;
+  }
+  
+  .fa-regular,
+  .fa-solid {
+    color: #b0b3bb;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .fa-regular:hover,
+  .fa-solid:hover {
+    color: #ffffff;
+  }
+
+.home-recently-played-song-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}  
+
+.home-recently-played-song-actions-heart-btn, .home-recently-played-song-actions-plus-btn {
+    background-color: transparent;
+}
+
+
+
 
 
 
