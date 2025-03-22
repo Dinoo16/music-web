@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="layout :: layout(customMainClass='song-detail-page')"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top Charts</title>
+    <!-- custom backgroud -->
+    <style>
+      .main {
+        background-color: #121212;
+      }
+    </style>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <!-- Topchart header and button  -->
+      <div class="topchart-header">
+        <h2 class="home-title">Top Charts</h2>
+        <div class="home-more">
+          <!-- Today button -->
+          <button class="topchart-today">
+            <div class="topchart-today-btn">
+              <i class="fa-regular fa-clock"></i><span>Today</span>
+            </div>
+          </button>
+          <!-- Week button -->
+          <button class="topchart-week">
+            <div class="topchart-week-btn">
+              <i class="fa-solid fa-calendar-week"></i><span>This Week</span>
+            </div>
+          </button>
+          <!-- Month button -->
+          <button class="topchart-month">
+            <div class="topchart-month-btn">
+              <i class="fa-solid fa-arrow-trend-up"></i><span>This Month</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="topchart-wrapper">
+        <!-- Top songs -->
+        <div class="topchart-topsong">
+          <!-- Top songs -->
+          <div class="topchart-header">
+            <h2 class="topchart-title">Top Songs</h2>
+          </div>
+          <!-- Top songs list -->
+          <div class="topchart-song-list">
+            <!-- Top song list item -->
+            <div class="topchart-song-item">
+              <img
+                src="/images/song_img1.png"
+                alt="Take My Breath"
+                class="topchart-song-img"
+              />
+              <div class="topchart-song-overlay">
+                <div class="topchart-song-played">
+                  <i class="fa-solid fa-pause"></i>
+                </div>
+              </div>
+              <a href="/song/detail" class="topchart-song-info">
+                <div>
+                  <h3>Take My Breath</h3>
+                  <p class="topchart-song-info-artist">The Weeknd</p>
+                </div>
+              </a>
+              <div class="topchart-song-actions">
+                <span class="topchart-song-duration">4:10</span>
+                <button class="topchart-song-actions-heart-btn">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="topchart-song-actions-plus-btn">
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trend artist and popular playlist -->
+        <div class="topchart-trend-popular">
+          <!-- Trend artist header-->
+          <div class="topchart-header">
+            <h2 class="topchart-title">Trending Artists</h2>
+          </div>
+          <!-- Top chart trend artist-->
+          <div class="topchart-trend">
+            <!-- Trending artist item-->
+            <div class="topchart-trend-artist">
+              <img
+                src="/images/artist1.png"
+                alt="The Weeknd"
+                class="topchart-trend-artist-img"
+              />
+              <div class="topchart-trend-artist-info">
+                <h3 class="topchart-trend-artist-name">The Weeknd</h3>
+                <p class="topchart-trend-artist-genre">Pop / R&B</p>
+                <p class="topchart-trend-artist-listeners">
+                  45.6M monthly listeners
+                </p>
+              </div>
+            </div>
+
+            <button class="topchart-trend-more-btn">
+              <i class="fa-solid fa-user-group"></i> View More Artists
+            </button>
+          </div>
+
+          <!-- Popular playlist header-->
+          <div class="topchart-header">
+            <h2 class="topchart-title">Popular Playlists</h2>
+          </div>
+          <!-- Top chart popular playlists content-->
+          <!-- Top songs list -->
+          <div class="topchart-song-list">
+            <!-- Top song list item -->
+            <div class="topchart-song-item">
+              <img
+                src="/images/song_img1.png"
+                alt="Take My Breath"
+                class="topchart-song-img"
+              />
+              <div class="topchart-song-overlay">
+                <div class="topchart-song-played">
+                  <i class="fa-solid fa-pause"></i>
+                </div>
+              </div>
+              <a href="/myplaylist/detail" class="topchart-song-info">
+                <div>
+                  <h3>Take My Breath</h3>
+                  <p class="topchart-song-info-artist">The Weeknd</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

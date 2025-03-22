@@ -1,0 +1,236 @@
+.topchart-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 0;
+}
+.topchart-title {
+    color: var(--white);
+    font-size: 18px;
+}
+/* View all text button */
+.topchart-more {
+    display: flex;
+    align-items: center;
+}
+.topchart-more a {
+    color: #C084FC;
+}
+.topchart-more:hover, .topchart-more a:hover{
+    color: var(--primary);
+}
+
+/* */
+.topchart-today, .topchart-week, .topchart-month {
+    width: 150px;
+    height: 46px;
+    margin-right: 20px;
+    background-color: #9333EA;
+    border-radius: 9999px;
+    position: relative;
+    cursor: pointer;
+}
+.topchart-today:hover,.topchart-week:hover , .topchart-month:hover  {
+    opacity: 0.8;
+}
+.topchart-today-btn, .topchart-week-btn, .topchart-month-btn {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.topchart-today-btn span, .topchart-week-btn span, .topchart-month-btn span {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+}
+.topchart-today-btn i, .topchart-week-btn i, .topchart-month-btn i {
+    font-size: 22px;
+    color: #FFF;
+}
+
+.topchart-wrapper {
+    width: 100%;
+    display: flex;
+    gap: 24px;
+    
+}
+
+/* Topchart top songs */
+.topchart-topsong {
+    flex: 2;
+}
+.topchart-song-list {
+    background-color: #111827;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    /* margin-top: 24px; */
+  }
+  
+  .topchart-song-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  
+  .topchart-song-item:hover {
+    background-color: #1F2937;
+  }
+  
+  .topchart-song-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+
+  .topchart-song-card:hover .topchart-song-overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+.topchart-song-overlay {
+  position: absolute;
+  
+  width: 50px;
+  height: 50px; 
+  background: rgba(0, 0, 0, 0.4); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.topchart-song-info-link {
+  display: flex;
+  justify-content: flex-start;
+}
+  
+  .topchart-song-info {
+    flex-grow: 1;
+    margin-left: 15px;
+  }
+  
+  .topchart-song-info h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .topchart-song-info-artist {
+    color: var(--spanColor);
+    font-size: 14px;
+  }
+ 
+  .topchart-song-duration {
+    color: #b0b3bb;
+    font-size: 14px;
+  }
+  
+  .fa-regular,
+  .fa-solid {
+    color: #b0b3bb;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .fa-regular:hover,
+  .fa-solid:hover {
+    color: #ffffff;
+  }
+
+.topchart-song-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}  
+
+.topchart-song-actions-heart-btn, .topchart-song-actions-plus-btn {
+    background-color: transparent;
+}
+
+
+/*Trend artist and popular playlist */
+.topchart-trend-popular {
+    flex: 1;
+    min-height: 500px;
+}
+
+/*Top chart trending artist */
+.topchart-trend {
+    background-color: #111827;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.topchart-trend-artist {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+}
+
+.topchart-trend-artist-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #0ea5e9;
+    object-fit: cover;
+}
+
+.topchart-trend-artist-info {
+    color: #ffffff;
+}
+
+.topchart-trend-artist-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.topchart-trend-artist-genre {
+    font-size: 14px;
+    color: #9CA3AF;
+    margin: 2px 0;
+}
+
+.topchart-trend-artist-listeners {
+    font-size: 12px;
+    color: #9CA3AF;
+}
+
+.topchart-trend-more-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #1F2937;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.topchart-trend-more-btn:hover {
+    background-color: #374151;
+}
+
+
+
+
+
+
+
+
+

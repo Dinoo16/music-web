@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
       link.classList.add("active");
       isActiveSet = true;
     }
+    if (path.startsWith("/genres") && link.getAttribute("href") === "/genres") {
+      link.classList.add("active");
+      isActiveSet = true;
+    }
     if (path.startsWith("/song") && link.getAttribute("href") === "/song") {
       link.classList.add("active");
       isActiveSet = true;

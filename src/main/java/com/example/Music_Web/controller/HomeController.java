@@ -21,6 +21,11 @@ public class HomeController {
         return "pages/userPage/topchart";
     }
 
+    @GetMapping("/genres")
+    public String getGenres(Model model) {
+        return "pages/userPage/genres";
+    }
+
     @GetMapping("/signin")
     public String signin() {
         return "pages/userPage/signin";
