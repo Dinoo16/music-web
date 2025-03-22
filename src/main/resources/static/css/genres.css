@@ -6,6 +6,7 @@
     color: #fff;
     padding: 32px 0 12px 0;
 }
+
   
   .genres-grid {
     display: grid;
@@ -69,8 +70,8 @@
     justify-content: center;
     display: none;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
   }
   .genres-item:hover .genres-play-btn {
     display: flex;
@@ -107,3 +108,105 @@
       grid-template-columns: repeat(1, 1fr);
     }
   }
+
+
+/* Featured Genre playlist Grid */
+
+.featured-genre-playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 50px;
+    margin-bottom: 18px;
+}
+
+.featured-genre-playlist-card {
+    height: 320px;
+    
+    background: #1F2937;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden; 
+}
+
+.featured-genre-playlist-card:hover .featured-genre-playlist-overlay:hover {
+    background: rgba(0, 0, 0, 0.4); 
+}
+
+.featured-genre-playlist-card-img {
+    width: 100%;
+    height: 67%;
+    overflow: hidden; 
+    position: relative;
+}
+.featured-genre-playlist-card-img img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.featured-genre-playlist-card:hover .featured-genre-playlist-card-img img {
+    transform: scale(1.2);
+}
+
+.featured-genre-playlist-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 67%; 
+    /* background: rgba(0, 0, 0, 0.4);  */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.featured-genre-playlist-overlay-btn {
+    padding: 98px 98px;
+    display: none;
+}
+/* Show play button when hovering over image */
+.featured-genre-playlist-card-img:hover + .featured-genre-playlist-overlay .featured-genre-playlist-overlay-btn,
+.featured-genre-playlist-overlay:hover .featured-genre-playlist-overlay-btn {
+  display: block; 
+}
+
+.featured-genre-playlist-play {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #9333EA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.featured-genre-playlist-play:hover {
+    background-color: #a84cff;
+}
+.featured-genre-playlist-play-btn {
+    background-color: transparent;
+    border-radius: 50%;
+    
+}
+.featured-genre-playlist-play-btn-icon {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    padding: 13px 15px;
+
+}
+.featured-genre-playlist-play-btn button {
+    background-color: transparent;
+}
+.featured-genre-playlist-info {
+    padding: 16px;
+}
+
+.featured-genre-playlist-name {
+    color:#fff;
+    font-weight: 600;
+}
+
+.featured-genre-playlist-songs {
+    color: #9CA3AF;
+    font-size: 14px;
+}

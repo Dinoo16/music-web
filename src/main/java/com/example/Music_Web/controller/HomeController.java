@@ -26,6 +26,11 @@ public class HomeController {
         return "pages/userPage/genres";
     }
 
+    @GetMapping("/genres/detail")
+    public String getGenresDetail(Model model) {
+        return "pages/userPage/genresDetail";
+    }
+
     @GetMapping("/signin")
     public String signin() {
         return "pages/userPage/signin";
