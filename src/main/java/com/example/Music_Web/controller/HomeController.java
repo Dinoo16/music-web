@@ -33,12 +33,12 @@ public class HomeController {
 
     @GetMapping("/signin")
     public String signin() {
-        return "pages/userPage/signin";
+        return "/auth/signin";
     }
 
     @GetMapping("/signup")
     public String signup() {
-        return "pages/userPage/signup";
+        return "/auth/signup";
     }
 
     @GetMapping("/song")
@@ -96,6 +96,16 @@ public class HomeController {
         return "pages/adminPage/songList";
     }
 
+    @GetMapping("/admin/songlist/edit")
+    public String getSonglistEdit() {
+        return "pages/adminPage/editSonglist";
+    }
+
+    @GetMapping("/admin/songlist/addsong")
+    public String addSong() {
+        return "pages/adminPage/addSong";
+    }
+
     @GetMapping("/admin/userlist")
     public String getUserList() {
         return "pages/adminPage/userList";
@@ -111,4 +121,8 @@ public class HomeController {
         return "pages/adminPage/playlist";
     }
 
+    @GetMapping("/admin/static")
+    public String getStatic() {
+        return "pages/adminPage/static";
+    }
 }

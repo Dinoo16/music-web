@@ -41,6 +41,10 @@
     height: 40px;
     border-radius: 5px;
 }
+.songlist-table-actions {
+    display: flex;
+    gap: 10px;
+}
 .songlist-edit, .songlist-remove {
     padding: 5px 10px;
     border: none;

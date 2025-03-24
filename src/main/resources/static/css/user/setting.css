@@ -32,9 +32,7 @@
     align-items: center;
     justify-content: center;
 }
-.setting-profile-namefields { 
-    
-}
+
 .setting-profile-name {
     color: #fff;
 }
@@ -64,6 +62,7 @@
     height: 420px;
     background-color: #1F2937; 
     padding: 24px;
+    border-radius: 10px;
 }
 
 

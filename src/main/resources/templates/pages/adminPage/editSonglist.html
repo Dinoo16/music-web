@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Songlist</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="edit-songlist-wrapper">
+        <div class="edit-songlist-container">
+          <h1 class="edit-songlist-header">Edit Song</h1>
+          <div class="edit-songlist-fields">
+            <label class="edit-songlist-label">Song name</label>
+            <input
+              type="text"
+              class="edit-songlist-input"
+              placeholder="Enter song name"
+            />
+            <label class="edit-songlist-label">Album</label>
+            <div class="edit-songlist-album">
+              <select class="edit-songlist-select">
+                <option value="abc">abc</option>
+              </select>
+              <button class="edit-songlist-add-btn">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+            <label class="edit-songlist-label">Artist</label>
+            <input
+              type="text"
+              class="edit-songlist-input"
+              placeholder="Enter artist name"
+            />
+            <div class="edit-songlist-upload">
+              <label for="imageUpload" class="edit-songlist-upload-box">
+                <span class="edit-songlist-upload-icon">+</span>
+                <p class="edit-songlist-upload-text">Insert picture</p>
+              </label>
+              <input
+                type="file"
+                id="imageUpload"
+                class="edit-songlist-upload-input"
+                accept="image/*"
+              />
+            </div>
+
+            <form action="">
+              <button class="edit-songlist-upload-btn">Save Song</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

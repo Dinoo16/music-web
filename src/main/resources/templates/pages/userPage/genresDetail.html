@@ -3,298 +3,118 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
+    <title>Genres Detail</title>
   </head>
   <body>
     <div th:fragment="content">
-      <!-- Featured Songs and view all -->
-      <div class="home-header">
-        <h2 class="home-title">Featured Songs</h2>
-        <div class="home-more">
-          <a href="#">View All</a>
+      <!-- genres-detail backgroud -->
+      <div class="genres-detail-background">
+        <img src="/images/artist-background.jpg" alt="genres backgroud" />
+        <div class="genres-detail-infor">
+          <h1 class="genres-detail-name">Pop</h1>
+          <p class="genres-detail-desc">
+            Popular music with mass appeal, characterized by catchy melodies and
+            contemporary production.
+          </p>
+          <div class="genres-detail-listeners">
+            <div class="genres-detail-listener-count">
+              <span>1M+ monthly listeners</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- list of featured songs -->
-      <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
-      <div class="home-song-grid">
-        <!--home list songs item-->
-        <div class="home-song-card">
-          <div class="home-song-card-img">
-            <img src="/images/artist1.png" atl="home-song image" />
-          </div>
-          <div class="home-song-overlay">
-            <a href="/song/detail" class="home-song-overlay-btn">
-              <div class="home-song-play">
-                <button class="home-song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-song-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-song-info">
-            <h3 class="home-song-name">Title</h3>
-            <p class="home-song-artist">Artist</p>
-            <div class="home-song-meta">
-              <span class="home-song-duration">3:20</span>
-              <div class="home-song-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
+      <!-- genres actions -->
+      <div class="genres-detail-acions">
+        <div>
+          <!-- genres play button -->
+          <button class="genres-detail-play">
+            <div class="genres-detail-play-btn">
+              <i class="fa-solid fa-play"></i><span>Play All</span>
             </div>
-          </div>
-        </div>
-        <!--home list songs item-->
-        <div class="home-song-card">
-          <div class="home-song-card-img">
-            <img src="/images/artist1.png" atl="home-song image" />
-          </div>
-          <div class="home-song-overlay">
-            <a href="/song/detail" class="home-song-overlay-btn">
-              <div class="home-song-play">
-                <button class="home-song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-song-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-song-info">
-            <h3 class="home-song-name">Title</h3>
-            <p class="home-song-artist">Artist</p>
-            <div class="home-song-meta">
-              <span class="home-song-duration">3:20</span>
-              <div class="home-song-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
+          </button>
+          <!-- genres follow button -->
+          <button class="genres-detail-follow">
+            <div class="genres-detail-follow-btn">
+              <span>All Time</span>
+              <i class="fa-solid fa-chevron-down"></i>
             </div>
-          </div>
+          </button>
         </div>
-        <!--home list songs item-->
-        <div class="home-song-card">
-          <div class="home-song-card-img">
-            <img src="/images/artist1.png" atl="home-song image" />
-          </div>
-          <div class="home-song-overlay">
-            <a href="/song/detail" class="home-song-overlay-btn">
-              <div class="home-song-play">
-                <button class="home-song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-song-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-song-info">
-            <h3 class="home-song-name">Title</h3>
-            <p class="home-song-artist">Artist</p>
-            <div class="home-song-meta">
-              <span class="home-song-duration">3:20</span>
-              <div class="home-song-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
+
+        <!-- genres view button -->
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridViewBtn">
+            <i class="fa-solid fa-th"></i>
+          </button>
+          <button class="view-btn" id="listViewBtn">
+            <i class="fa-solid fa-list"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- genres-detail top songs -->
+      <div class="genres-detail-top-songs">
+        <h2 class="genres-detail-header">Top Songs</h2>
+        <!--Song list grid-->
+        <div class="genres-detail-top-grid">
+          <!--Song item-->
+          <div class="genres-detail-top-card">
+            <div class="genres-detail-top-card-img">
+              <img src="/images/song_img1.png" atl="genres-detail-top image" />
             </div>
-          </div>
-        </div>
-        <!--home list songs item-->
-        <div class="home-song-card">
-          <div class="home-song-card-img">
-            <img src="/images/artist1.png" atl="home-song image" />
-          </div>
-          <div class="home-song-overlay">
-            <a href="/song/detail" class="home-song-overlay-btn">
-              <div class="home-song-play">
-                <button class="home-song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-song-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-song-info">
-            <h3 class="home-song-name">Title</h3>
-            <p class="home-song-artist">Artist</p>
-            <div class="home-song-meta">
-              <span class="home-song-duration">3:20</span>
-              <div class="home-song-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
+            <div class="genres-detail-top-overlay">
+              <a href="/song/detail" class="genres-detail-top-overlay-btn">
+                <div class="genres-detail-top-play">
+                  <button
+                    class="genres-detail-top-play-btn"
+                    onclick="playSong(event)"
+                  >
+                    <i
+                      class="fa-solid fa-play genres-detail-top-play-btn-icon"
+                    ></i>
+                  </button>
+                </div>
+              </a>
+            </div>
+            <div class="genres-detail-top-info">
+              <h3 class="genres-detail-top-name">Title</h3>
+              <p class="genres-detail-top-genres-detail">Artist</p>
+              <div class="genres-detail-top-meta">
+                <span class="genres-detail-top-duration">3:20</span>
+                <div class="genres-detail-top-actions">
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-solid fa-plus"></i>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Recommended playlist and view all -->
-      <div class="home-header">
-        <h2 class="home-title">Recommended Playlists</h2>
-        <div class="home-more">
-          <a href="#">View All</a>
-        </div>
-      </div>
-
-      <!-- list of Recommended playlists -->
-      <div class="home-playlist-grid">
-        <!-- Dùng Thymeleaf để lặp qua playlists -->
-        <!--Playlist item-->
-        <div class="home-playlist-card">
-          <div class="home-playlist-card-img">
-            <img src="/images/playlist_bg.png" atl="home-playlist image" />
+      <!-- genres popular artist -->
+      <h2 class="genres-detail-header">Popular Artist</h2>
+      <div class="genres-detail-popular-artist-grid">
+        <!-- Artist Item -->
+        <div class="genres-detail-popular-artist">
+          <div class="genres-detail-popular-artist-img-wrapper">
+            <img
+              src="/images/artist1.png"
+              alt="The Weeknd"
+              class="genres-detail-popular-artist-img"
+            />
           </div>
-          <div class="home-playlist-overlay">
-            <a href="/myplaylist/detail" class="home-playlist-overlay-btn">
-              <div class="home-playlist-play">
-                <button class="song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-playlist-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-playlist-info">
-            <h3 class="home-playlist-name">Chill Vibes</h3>
-            <p class="home-playlist-song-count">25 songs</p>
-            <div class="home-playlist-meta">
-              <span class="home-playlist-createdby">Created by ABC</span>
-            </div>
-          </div>
-        </div>
-        <!--Playlist item-->
-        <div class="home-playlist-card">
-          <div class="home-playlist-card-img">
-            <img src="/images/playlist_bg.png" atl="home-playlist image" />
-          </div>
-          <div class="home-playlist-overlay">
-            <a href="/myplaylist/detail" class="home-playlist-overlay-btn">
-              <div class="home-playlist-play">
-                <button class="song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-playlist-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-playlist-info">
-            <h3 class="home-playlist-name">Chill Vibes</h3>
-            <p class="home-playlist-song-count">25 songs</p>
-            <div class="home-playlist-meta">
-              <span class="home-playlist-createdby">Created by ABC</span>
-            </div>
-          </div>
-        </div>
-        <!--Playlist item-->
-        <div class="home-playlist-card">
-          <div class="home-playlist-card-img">
-            <img src="/images/playlist_bg.png" atl="home-playlist image" />
-          </div>
-          <div class="home-playlist-overlay">
-            <a href="/myplaylist/detail" class="home-playlist-overlay-btn">
-              <div class="home-playlist-play">
-                <button class="song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-playlist-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-playlist-info">
-            <h3 class="home-playlist-name">Chill Vibes</h3>
-            <p class="home-playlist-song-count">25 songs</p>
-            <div class="home-playlist-meta">
-              <span class="home-playlist-createdby">Created by ABC</span>
-            </div>
+          <div class="genres-detail-popular-artist-info">
+            <h3 class="genres-detail-popular-artist-name">The Weeknd</h3>
+            <p class="genres-detail-popular-artist-followers">
+              45.6M followers
+            </p>
           </div>
         </div>
       </div>
 
-      <!-- Recently played -->
-      <div class="home-header">
-        <h2 class="home-title">Recently Played</h2>
-      </div>
-
-      <!-- Recently played songs list -->
-      <div class="home-recently-played-song-list">
-        <!-- playlist song list item -->
-        <div class="home-recently-played-song-item">
-          <img
-            src="/images/song_img1.png"
-            alt="Take My Breath"
-            class="home-recently-played-song-img"
-          />
-          <div class="home-recently-played-song-overlay">
-            <div class="home-recently-played-song-played">
-              <i class="fa-solid fa-pause"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="home-recently-played-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="home-recently-played-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="home-recently-played-song-actions">
-            <span class="home-recently-played-song-duration">4:10</span>
-            <button class="home-recently-played-song-actions-heart-btn">
-              <i class="fa-regular fa-heart"></i>
-            </button>
-            <button class="home-recently-played-song-actions-plus-btn">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-        </div>
-        <!-- playlist song list item -->
-        <div class="home-recently-played-song-item">
-          <img
-            src="/images/song_img1.png"
-            alt="Take My Breath"
-            class="home-recently-played-song-img"
-          />
-          <div class="home-recently-played-song-overlay">
-            <div class="home-recently-played-song-played">
-              <i class="fa-solid fa-pause"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="home-recently-played-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="home-recently-played-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="home-recently-played-song-actions">
-            <span class="home-recently-played-song-duration">4:10</span>
-            <button class="home-recently-played-song-actions-heart-btn">
-              <i class="fa-regular fa-heart"></i>
-            </button>
-            <button class="home-recently-played-song-actions-plus-btn">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-        </div>
-        <!-- playlist song list item -->
-        <div class="home-recently-played-song-item">
-          <img
-            src="/images/song_img1.png"
-            alt="Take My Breath"
-            class="home-recently-played-song-img"
-          />
-          <div class="home-recently-played-song-overlay">
-            <div class="home-recently-played-song-played">
-              <i class="fa-solid fa-pause"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="home-recently-played-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="home-recently-played-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="home-recently-played-song-actions">
-            <span class="home-recently-played-song-duration">4:10</span>
-            <button class="home-recently-played-song-actions-heart-btn">
-              <i class="fa-regular fa-heart"></i>
-            </button>
-            <button class="home-recently-played-song-actions-plus-btn">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+      <!-- genres featured albums -->
+      <h2 class="genres-detail-header">Featured Album</h2>
     </div>
   </body>
 </html>

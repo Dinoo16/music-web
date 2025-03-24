@@ -1,0 +1,27 @@
+
+.static-header {
+    padding: 22px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.static-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.static-table th {
+    width: 20%;
+    
+}
+.static-table th, .static-table td {
+    padding: 10px;
+    text-align: left;
+    color: #D1D5DB;
+}
+
+.static-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}

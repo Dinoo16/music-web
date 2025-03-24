@@ -3,33 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Songs List Management</title>
+    <title>Static</title>
   </head>
   <body>
     <div th:fragment="content">
       <!--Songs list wrapper-->
-      <div class="songlist-wrapper">
+      <div class="static-wrapper">
         <!--Songs list header-->
-        <div class="songlist-header">
+        <div class="static-header">
           <h1>All Songs</h1>
-          <div class="songlist-header-add-btn">
-            <a
-              class="songlist-header-add-btn-link"
-              href="/admin/songlist/addsong"
-              ><i class="fa-solid fa-plus"></i
-            ></a>
-          </div>
+          
         </div>
 
         <!--Songs list item-->
-        <table class="songlist-table">
-          <thead class="songlist-table-title">
+        <table class="static-table">
+          <thead class="static-table-title">
             <tr>
               <th>Image</th>
               <th>Name</th>
-              <th>Album</th>
+              <th>Plays</th>
               <th>Artist</th>
-              <th>Option</th>
             </tr>
           </thead>
           <tbody>
@@ -38,20 +31,12 @@
                 <img
                   src="/images/song_img1.png"
                   alt="Save Your Tears"
-                  class="songlist-image"
+                  class="static-image"
                 />
               </td>
               <td>Save Your Tears</td>
-              <td>Chill Vibes</td>
+              <td>1.23M</td>
               <td>The Weeknd</td>
-              <td class="songlist-table-actions">
-                <a href="/admin/songlist/edit"
-                  ><button class="songlist-edit">Edit</button></a
-                >
-                <form action="">
-                  <button class="songlist-remove">Remove</button>
-                </form>
-              </td>
             </tr>
           </tbody>
         </table>
