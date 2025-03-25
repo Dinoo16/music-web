@@ -111,6 +111,11 @@ public class HomeController {
         return "pages/adminPage/userList";
     }
 
+    @GetMapping("/admin/userlist/view")
+    public String getUserListDetail() {
+        return "pages/adminPage/userDetail";
+    }
+
     @GetMapping("/admin/comment")
     public String getUserComment() {
         return "pages/adminPage/userComment";
@@ -119,6 +124,11 @@ public class HomeController {
     @GetMapping("/admin/playlist")
     public String getUserPlaylist() {
         return "pages/adminPage/playlist";
+    }
+
+    @GetMapping("/admin/playlist/edit")
+    public String getPlaylistEdit() {
+        return "pages/adminPage/editPlaylist";
     }
 
     @GetMapping("/admin/static")

@@ -1,0 +1,134 @@
+.user-detail-content {
+    margin-top: 24px;;
+    background-color: #1F2937;
+    border-radius: 10px;
+    padding: 32px;
+}
+.user-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+  
+  .user-detail-avatar {
+    width: 72px;
+    height: 72px;
+    background-color: #555;
+    border-radius: 50%;
+  }
+  
+  .user-detail-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-detail-name {
+    color: #fff;
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  .user-detail-email {
+    font-size: 14px;
+    color: #9CA3AF;
+  }
+  
+  .user-detail-fields {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+  }
+  .user-detail-field {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    border-bottom: 1px solid #9CA3AF;
+    padding-top: 24px;
+  }
+
+  
+  .user-detail-label {
+    display: block;
+    font-size: 16px;
+    color:#fff;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .user-detail-field h3 {
+    color: #9CA3AF;
+    font-weight: 300;
+    font-size: 16px;
+  }
+  
+  .user-detail-value {
+    font-size: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #444;
+    margin-bottom: 12px;
+  }
+  
+  .user-detail-block {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 32px 0;
+  }
+  .user-detail-block-field {
+    width: 85%;
+    display: flex;
+    justify-content: space-between ;
+  }
+  
+  .user-detail-block-input {
+    background-color: #2a2e3e;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    color: #ddd;
+  }
+  
+  .user-detail-block-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-detail-actions-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .user-detail-actions {
+    width: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .user-detail-return-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .user-detail-return-btn:hover,.user-detail-block-btn:hover,.user-detail-delete-btn:hover  {
+    opacity: 0.8;
+  }
+  .user-detail-delete-btn {
+    background-color: #FF1A1E;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+
+  

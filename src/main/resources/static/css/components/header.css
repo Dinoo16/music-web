@@ -50,16 +50,29 @@ input::placeholder {
     cursor: pointer;
     background-color: transparent;
 }
-.header__login {
 
-    background-color: transparent;
+.header__actions {
+    display: flex;
+    gap: 24px;
 }
+
+
+/* Disable when not signin */
+.header__profile {
+    /* display: none; */
+}
+
+
 .header__action{
     background-color: transparent;
     color: var(--white);
     font-size: 18px;
     cursor: pointer;
 }
-.header__login-btn {
+.header__login-btn, .header__profile-btn {
     margin-right: 6px;
+}
+
+.header__profile-btn, .header__login-btn {
+    color: #FFF !important;
 }

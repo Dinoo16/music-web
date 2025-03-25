@@ -5,5 +5,6 @@ function playSong(event) {
   alert("Playing song...");
 }
 
-//
+// Signin and dislay user sidebar with profile header
 
+// Signin and dislay admin sidebar

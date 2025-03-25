@@ -42,3 +42,12 @@
     font-size: 20px;
     margin: 10px 0;
 }
+
+/*User sidebar display when user logged in */
+.sidebar__user__mode {
+    /* display: none; */
+}
+/*Admin sidebar display when admin logged in */
+.sidebar__admin__mode {
+    /* display: none; */
+}

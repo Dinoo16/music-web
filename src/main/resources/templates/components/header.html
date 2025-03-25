@@ -18,11 +18,24 @@
             spellcheck="{false}"
           />
         </div>
-        <div class="header__login">
-          <a th:href="@{/signin}" class="header__action">
-            <i class="fa-solid fa-arrow-right-to-bracket header__login-btn"></i>
-            Login
-          </a>
+        <!-- Profile and login button -->
+        <div class="header__actions">
+          <!-- Profile display when user login -->
+          <div class="header__profile">
+            <a th:href="@{/setting}" class="header__action">
+              <i class="fa-regular fa-user header__profile-btn"></i>
+              Profile
+            </a>
+          </div>
+          <!-- Login button -->
+          <div class="header__login">
+            <a th:href="@{/signin}" class="header__action">
+              <i
+                class="fa-solid fa-arrow-right-to-bracket header__login-btn"
+              ></i>
+              Login
+            </a>
+          </div>
         </div>
       </div>
     </div>

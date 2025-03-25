@@ -1,45 +1,48 @@
 
-.songlist-header {
+.playlist-header {
     padding: 22px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.songlist-table {
+.playlist-table {
     width: 100%;
     border-collapse: collapse;
 }
-.songlist-table th {
+.playlist-table th {
     width: 20%;
     
 }
-.songlist-table th, .songlist-table td {
+.playlist-table th, .playlist-table td {
     padding: 10px;
     text-align: left;
     color: #D1D5DB;
 }
 
-.songlist-image {
+.playlist-image {
     width: 40px;
     height: 40px;
     border-radius: 5px;
 }
-.songlist-table-actions {
+.playlist-table-actions {
     display: flex;
     gap: 10px;
 }
-.songlist-edit, .songlist-remove {
+.playlist-edit, .playlist-remove {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
-.songlist-edit {
-    background-color: #7d5bbe;
+.playlist-edit {
+    background-color: var(--primary);
     color: white;
 }
-.songlist-remove {
-    background-color: #9169d1;
+.playlist-remove {
+    background-color:  var(--primary);
     color: white;
+}
+.playlist-edit:hover, .playlist-remove:hover {
+    opacity: 0.8;
 }

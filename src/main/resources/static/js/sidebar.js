@@ -81,6 +81,13 @@ document.addEventListener("DOMContentLoaded", function () {
       link.classList.add("active");
       isActiveSet = true;
     }
+    if (
+      path.startsWith("/admin/static") &&
+      link.getAttribute("href") === "/admin/static"
+    ) {
+      link.classList.add("active");
+      isActiveSet = true;
+    }
   });
 
   // If no active link was set, default to Home

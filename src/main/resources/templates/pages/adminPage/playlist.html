@@ -3,22 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Songs List Management</title>
+    <title>Playlist</title>
   </head>
   <body>
     <div th:fragment="content">
       <!--Songs list wrapper-->
-      <div class="songlist-wrapper">
+      <div class="playlist-wrapper">
         <!--Songs list header-->
-        <div class="songlist-header">
-          <h1>All Songs</h1>
-          
+        <div class="playlist-header">
+          <h1>All Playlists</h1>
         </div>
 
         <!--Songs list item-->
-        <table class="songlist-table">
-          <thead class="songlist-table-title">
-            <!--Sons item-->
+        <table class="playlist-table">
+          <thead class="playlist-table-title">
             <tr>
               <th>Image</th>
               <th>Name</th>
@@ -33,15 +31,19 @@
                 <img
                   src="/images/song_img1.png"
                   alt="Save Your Tears"
-                  class="songlist-image"
+                  class="playlist-image"
                 />
               </td>
               <td>Save Your Tears</td>
               <td>10</td>
-                
-              <td>
-                <button class="songlist-edit">Edit</button>
-                <button class="songlist-remove">Remove</button>
+
+              <td class="playlist-table-actions">
+                <a href="/admin/playlist/edit"
+                  ><button class="playlist-edit">Edit</button></a
+                >
+                <form action="">
+                  <button class="playlist-remove">Remove</button>
+                </form>
               </td>
             </tr>
           </tbody>

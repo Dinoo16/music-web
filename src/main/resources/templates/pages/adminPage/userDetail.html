@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Detail</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="setting-wrapper">
+        <div class="setting-container">
+          <h1>User Detail</h1>
+
+          <!--User Detail Container-->
+          <div class="user-detail-content">
+            <!--User Detail Header-->
+            <div class="user-detail-header">
+              <div class="user-detail-avatar"></div>
+              <div class="user-detail-info">
+                <h2 class="user-detail-name">justAGuy</h2>
+                <p class="user-detail-email">Something12@mail.com</p>
+              </div>
+            </div>
+            <!--User Detail Fields-->
+            <div class="user-detail-fields">
+              <!--Name Fields-->
+              <div class="user-detail-field">
+                <label class="user-detail-label">Name</label>
+                <h3>justAGuy</h3>
+              </div>
+              <!--Email Fields-->
+              <div class="user-detail-field">
+                <label class="user-detail-label">Email</label>
+                <h3>Something12@mail.com</h3>
+              </div>
+              <!--Song Fields-->
+              <div class="user-detail-field">
+                <label class="user-detail-label">Song in library</label>
+                <h3>10</h3>
+              </div>
+            </div>
+            <!--User Block Fields-->
+            <div class="user-detail-block">
+              <div class="user-detail-block-field">
+                <input
+                  type="text"
+                  class="user-detail-block-input"
+                  placeholder="Block for ... days"
+                />
+                <form action="">
+                  <button class="user-detail-block-btn">Block</button>
+                </form>
+              </div>
+            </div>
+            <!--User actions Fields-->
+            <div class="user-detail-actions-wrapper">
+              <div class="user-detail-actions">
+                <button class="user-detail-return-btn">Return</button>
+                <form action="">
+                  <button class="user-detail-delete-btn">Delete user</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+
+  
+  .userlist-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  
+  .userlist-table th,
+  .userlist-table td {
+    color: #D1D5DB;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .userlist-table th {
+    font-weight: bold;
+  }
+
+  
+  .userlist-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #555;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .userlist-view-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .userlist-view-btn:hover {
+   opacity: 0.8;
+  }
+  

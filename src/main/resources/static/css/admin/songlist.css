@@ -14,13 +14,10 @@
     justify-content: center;
     border-radius: 8px;
     cursor: pointer;
-}
-.songlist-header-add-btn-link {
-    padding: 8px 12px;
-}
+}   
 
-.songlist-table-title {
-    
+.songlist-header-add-btn-link i {
+    padding: 12px;
 }
 .songlist-table {
     width: 100%;
@@ -52,10 +49,13 @@
     cursor: pointer;
 }
 .songlist-edit {
-    background-color: #7d5bbe;
+    background-color: var(--primary);
     color: white;
 }
 .songlist-remove {
-    background-color: #9169d1;
+    background-color: var(--primary);
     color: white;
+}
+.songlist-edit:hover, .songlist-remove:hover  {
+    opacity: 0.8;
 }
