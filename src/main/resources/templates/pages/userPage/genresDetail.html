@@ -9,7 +9,7 @@
     <div th:fragment="content">
       <!-- genres-detail backgroud -->
       <div class="genres-detail-background">
-        <img src="/images/artist-background.jpg" alt="genres backgroud" />
+        <img src="/images/rock.jpg" alt="genres backgroud" />
         <div class="genres-detail-infor">
           <h1 class="genres-detail-name">Pop</h1>
           <p class="genres-detail-desc">
@@ -25,10 +25,10 @@
       </div>
 
       <!-- genres actions -->
-      <div class="genres-detail-acions">
+      <div class="genres-detail-actions">
         <div>
           <!-- genres play button -->
-          <button class="genres-detail-play">
+          <button class="genres-detail-play" onclick="playSong(event)">
             <div class="genres-detail-play-btn">
               <i class="fa-solid fa-play"></i><span>Play All</span>
             </div>
@@ -93,22 +93,71 @@
       </div>
 
       <!-- genres popular artist -->
-      <h2 class="genres-detail-header">Popular Artist</h2>
+      <h2 class="genres-detail-header">Popular Artists</h2>
+      <!--Artist popular grid-->
       <div class="genres-detail-popular-artist-grid">
-        <!-- Artist Item -->
-        <div class="genres-detail-popular-artist">
-          <div class="genres-detail-popular-artist-img-wrapper">
-            <img
-              src="/images/artist1.png"
-              alt="The Weeknd"
-              class="genres-detail-popular-artist-img"
-            />
+        <!--artist popular item-->
+        <div class="genres-detail-popular-artist-card">
+          <div class="genres-detail-popular-artist-card-circle">
+            <div class="genres-detail-popular-artist-card-img">
+              <img
+                src="/images/artist1.png"
+                atl="genres-detail-popular-artist image"
+              />
+            </div>
+            <div class="genres-detail-popular-artist-overlay">
+              <a
+                href="/artist/detail"
+                class="genres-detail-popular-artist-overlay-btn"
+              >
+                <div class="genres-detail-popular-artist-play">
+                  <button
+                    class="genres-detail-popular-artist-play-btn"
+                    onclick="playSong(event)"
+                  >
+                    <i
+                      class="fa-solid fa-play genres-detail-popular-artist-play-btn-icon"
+                    ></i>
+                  </button>
+                </div>
+              </a>
+            </div>
           </div>
           <div class="genres-detail-popular-artist-info">
             <h3 class="genres-detail-popular-artist-name">The Weeknd</h3>
-            <p class="genres-detail-popular-artist-followers">
-              45.6M followers
-            </p>
+            <p class="genres-detail-popular-artist-follower">45.6M followers</p>
+          </div>
+        </div>
+        <!--artist popular item-->
+        <div class="genres-detail-popular-artist-card">
+          <div class="genres-detail-popular-artist-card-circle">
+            <div class="genres-detail-popular-artist-card-img">
+              <img
+                src="/images/artist1.png"
+                atl="genres-detail-popular-artist image"
+              />
+            </div>
+            <div class="genres-detail-popular-artist-overlay">
+              <a
+                href="/artist/detail"
+                class="genres-detail-popular-artist-overlay-btn"
+              >
+                <div class="genres-detail-popular-artist-play">
+                  <button
+                    class="genres-detail-popular-artist-play-btn"
+                    onclick="playSong(event)"
+                  >
+                    <i
+                      class="fa-solid fa-play genres-detail-popular-artist-play-btn-icon"
+                    ></i>
+                  </button>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="genres-detail-popular-artist-info">
+            <h3 class="genres-detail-popular-artist-name">The Weeknd</h3>
+            <p class="genres-detail-popular-artist-follower">45.6M followers</p>
           </div>
         </div>
       </div>
