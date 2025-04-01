@@ -1,40 +1,39 @@
-.song-card-grid {
+/* List of song in my playlist */
+
+.playlists-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 50px;
-    margin-bottom: 18px;
 }
 
-.song-card {
+.playlist-card {
     height: 365px;
     background: #1F2937;
     border-radius: 10px;
-    position: relative;
     overflow: hidden; 
+    position: relative;
 }
-
-.song-card:hover .song-card-overlay:hover {
+.playlist-card:hover .playlist-overlay {
     background: rgba(0, 0, 0, 0.4); 
 }
 
-.song-card-img {
+.playlist-card-img{
     width: 100%;
     height: 67%;
     overflow: hidden; 
     position: relative;
 }
-.song-card-img img {
+.playlist-card-img img {
     width: 100%;
     height: 100%;
     display: block;
     transition: transform 0.3s ease-in-out;
 }
-
-.song-card:hover .song-card-img img {
+.playlist-card:hover .playlist-card-img img {
     transform: scale(1.2);
 }
 
-.song-card-overlay {
+.playlist-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,17 +44,17 @@
     align-items: center;
     justify-content: center;
 }
-.song-card-overlay-btn {
+.playlist-overlay-btn {
     padding: 98px 98px;
-    display: none;
+    display: none; 
 }
 /* Show play button when hovering over image */
-.song-card-img:hover + .song-card-overlay .song-card-overlay-btn,
-.song-card-overlay:hover .song-card-overlay-btn {
-  display: block; 
+.playlist-card-img:hover + .playlist-overlay .playlist-overlay-btn,
+.playlist-overlay:hover .playlist-overlay-btn {
+display: block; 
 }
 
-.song-card-play {
+.playlist-play {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -64,47 +63,50 @@
     align-items: center;
     justify-content: center;
 }
-.song-card-play:hover {
+.playlist-play:hover {
     background-color: #a84cff;
 }
-.song-card-play-btn {
+.playlist-play-btn {
     background-color: transparent;
     border-radius: 50%;
-    
 }
-.song-card-play-btn-icon {
+.playlist-play-btn-icon {
     font-size: 22px;
     color: white;
     cursor: pointer;
     padding: 13px 15px;
-}
-.song-card-play-btn button {
-    background-color: transparent;
-}
-.song-card-info {
-    padding: 6px 16px 6px 16px;
-    
+
 }
 
-.song-card-name {
+.playlist-play-btn button {
+    background-color: transparent;
+}
+
+.playlist-info {
+    padding: 16px;
+}
+
+.playlist-name {
     color:#fff;
     font-weight: 600;
 }
 
-.song-card-artist {
+.playlist-song-count {
     color: #9CA3AF;
     font-size: 14px;
 }
 
-.song-card-meta {
+.playlist-meta {
     padding-top: 16px;
     display: flex;
     justify-content: space-between;
     color: #9CA3AF;
 }
-.song-card-duration {
+.playlist-createdby {
     font-size: 14px;
 }
-.song-card-actions i{
-    padding-left: 10px;
-}
+
+
+
+
+

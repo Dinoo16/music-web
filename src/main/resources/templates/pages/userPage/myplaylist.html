@@ -18,31 +18,7 @@
       </div>
 
       <!-- list of myplaylists -->
-      <div class="myplaylists-grid">
-        <!-- Dùng Thymeleaf để lặp qua playlists -->
-        <!--Playlist item-->
-        <div class="myplaylist-card">
-          <div class="myplaylist-card-img">
-            <img src="/images/playlist_bg.png" atl="myplaylist image" />
-          </div>
-          <div class="myplaylist-overlay">
-            <a href="/myplaylist/detail" class="myplaylist-overlay-btn">
-              <div class="myplaylist-play">
-                <button class="song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play myplaylist-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="myplaylist-info">
-            <h3 class="myplaylist-name">Chill Vibes</h3>
-            <p class="myplaylist-song-count">25 songs</p>
-            <div class="myplaylist-meta">
-              <span class="myplaylist-createdby">Created by ABC</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div th:replace="components/playlistCard :: playlistCard()"></div>
 
       <div
         th:replace="components/popup :: popup('Create playlist', 'Enter playlist name', 'Add an optional description', 'saveCreatePlaylist()')"

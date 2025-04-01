@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Song card</title>
+  </head>
+  <body>
+    <!-- Định nghĩa fragment -->
+
+    <div class="playlists-grid" th:fragment="playlistCard()">
+      <!-- Dùng Thymeleaf để lặp qua playlists -->
+      <!--Playlist item-->
+      <div class="playlist-card">
+        <div class="playlist-card-img">
+          <img src="/images/playlist_bg.png" atl="playlist image" />
+        </div>
+        <div class="playlist-overlay">
+          <a href="/myplaylist/detail" class="playlist-overlay-btn">
+            <div class="playlist-play">
+              <button class="playlist-play-btn" onclick="playSong(event)">
+                <i class="fa-solid fa-play playlist-play-btn-icon"></i>
+              </button>
+            </div>
+          </a>
+        </div>
+        <div class="playlist-info">
+          <h3 class="playlist-name">Chill Vibes</h3>
+          <p class="playlist-song-count">25 songs</p>
+          <div class="playlist-meta">
+            <span class="playlist-createdby">Created by ABC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

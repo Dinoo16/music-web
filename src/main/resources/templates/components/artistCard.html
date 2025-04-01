@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artist card</title>
+  </head>
+  <body>
+    <div class="artists-grid" th:fragment="artistCard()">
+      <!-- Dùng Thymeleaf để lặp qua artists -->
+      <!--artist item-->
+      <div class="artist-card">
+        <div class="artist-card-img">
+          <img src="/images/artist1.png" atl="artist image" />
+        </div>
+        <div class="artist-overlay">
+          <a href="/artist/detail" class="artist-overlay-btn">
+            <div class="artist-play">
+              <button class="artist-play-btn" onclick="playSong(event)">
+                <i class="fa-solid fa-play artist-play-btn-icon"></i>
+              </button>
+            </div>
+          </a>
+        </div>
+        <div class="artist-info">
+          <h3 class="artist-name">The Weeknd</h3>
+          <p class="artist-song-count">25 songs</p>
+          <div class="artist-meta">
+            <span class="artist-listen-count">45.6M monthly listeners</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

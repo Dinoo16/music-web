@@ -20,25 +20,7 @@
       </div>
 
       <!-- list of artists -->
-      <div class="artists-grid">
-        <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
-
-        <div class="artist-card">
-          <img src="/images/artist1.png" atl="artist image" />
-          <div class="artist-overlay">
-            <a href="/artist/detail">
-              <div class="artist-detail">
-                <span>View Artist</span>
-              </div>
-            </a>
-          </div>
-          <div class="artist-info">
-            <h3 class="artist-name">Ed Sheeran</h3>
-            <p class="artist-genres">Genres</p>
-            <p class="artist-view">85.0M monthly listeners</p>
-          </div>
-        </div>
-      </div>
+      <div th:replace="components/artistCard :: artistCard()"></div>
     </div>
   </body>
 </html>

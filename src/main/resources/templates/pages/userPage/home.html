@@ -15,8 +15,7 @@
         </div>
       </div>
 
-      <!-- list of featured songs -->
-      <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
+      <!-- LIST OF FEATURED SONGS -->
       <div th:replace="/components/songCard :: songCard()"></div>
 
       <!-- Recommended playlist and view all -->
@@ -27,76 +26,8 @@
         </div>
       </div>
 
-      <!-- list of Recommended playlists -->
-      <div class="home-playlist-grid">
-        <!-- Dùng Thymeleaf để lặp qua playlists -->
-        <!--Playlist item-->
-        <div class="home-playlist-card">
-          <div class="home-playlist-card-img">
-            <img src="/images/playlist_bg.png" atl="home-playlist image" />
-          </div>
-          <div class="home-playlist-overlay">
-            <a href="/myplaylist/detail" class="home-playlist-overlay-btn">
-              <div class="home-playlist-play">
-                <button class="song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-playlist-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-playlist-info">
-            <h3 class="home-playlist-name">Chill Vibes</h3>
-            <p class="home-playlist-song-count">25 songs</p>
-            <div class="home-playlist-meta">
-              <span class="home-playlist-createdby">Created by ABC</span>
-            </div>
-          </div>
-        </div>
-        <!--Playlist item-->
-        <div class="home-playlist-card">
-          <div class="home-playlist-card-img">
-            <img src="/images/playlist_bg.png" atl="home-playlist image" />
-          </div>
-          <div class="home-playlist-overlay">
-            <a href="/myplaylist/detail" class="home-playlist-overlay-btn">
-              <div class="home-playlist-play">
-                <button class="song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-playlist-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-playlist-info">
-            <h3 class="home-playlist-name">Chill Vibes</h3>
-            <p class="home-playlist-song-count">25 songs</p>
-            <div class="home-playlist-meta">
-              <span class="home-playlist-createdby">Created by ABC</span>
-            </div>
-          </div>
-        </div>
-        <!--Playlist item-->
-        <div class="home-playlist-card">
-          <div class="home-playlist-card-img">
-            <img src="/images/playlist_bg.png" atl="home-playlist image" />
-          </div>
-          <div class="home-playlist-overlay">
-            <a href="/myplaylist/detail" class="home-playlist-overlay-btn">
-              <div class="home-playlist-play">
-                <button class="song-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play home-playlist-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="home-playlist-info">
-            <h3 class="home-playlist-name">Chill Vibes</h3>
-            <p class="home-playlist-song-count">25 songs</p>
-            <div class="home-playlist-meta">
-              <span class="home-playlist-createdby">Created by ABC</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- list of Recommended artist -->
+      <div th:replace="/components/artistCard :: artistCard()"></div>
 
       <!-- Recently played -->
       <div class="home-header">
@@ -105,62 +36,6 @@
 
       <!-- Recently played songs list -->
       <div class="home-recently-played-song-list">
-        <!-- playlist song list item -->
-        <div class="home-recently-played-song-item">
-          <img
-            src="/images/song_img1.png"
-            alt="Take My Breath"
-            class="home-recently-played-song-img"
-          />
-          <div class="home-recently-played-song-overlay">
-            <div class="home-recently-played-song-played">
-              <i class="fa-solid fa-pause"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="home-recently-played-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="home-recently-played-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="home-recently-played-song-actions">
-            <span class="home-recently-played-song-duration">4:10</span>
-            <button class="home-recently-played-song-actions-heart-btn">
-              <i class="fa-regular fa-heart"></i>
-            </button>
-            <button class="home-recently-played-song-actions-plus-btn">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-        </div>
-        <!-- playlist song list item -->
-        <div class="home-recently-played-song-item">
-          <img
-            src="/images/song_img1.png"
-            alt="Take My Breath"
-            class="home-recently-played-song-img"
-          />
-          <div class="home-recently-played-song-overlay">
-            <div class="home-recently-played-song-played">
-              <i class="fa-solid fa-pause"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="home-recently-played-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="home-recently-played-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="home-recently-played-song-actions">
-            <span class="home-recently-played-song-duration">4:10</span>
-            <button class="home-recently-played-song-actions-heart-btn">
-              <i class="fa-regular fa-heart"></i>
-            </button>
-            <button class="home-recently-played-song-actions-plus-btn">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-        </div>
         <!-- playlist song list item -->
         <div class="home-recently-played-song-item">
           <img
