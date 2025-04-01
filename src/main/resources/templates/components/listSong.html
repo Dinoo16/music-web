@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List of songs</title>
+  </head>
+  <body>
+    <!-- Định nghĩa fragment button -->
+    <div th:fragment="listOfSong(icon,onclick)">
+      <div class="listOfSong-list">
+        <!-- myplaylist song list item -->
+        <div class="listOfSong-item">
+          <img
+            src="/images/song_img1.png"
+            alt="Take My Breath"
+            class="listOfSong-img"
+          />
+          <div class="listOfSong-overlay">
+            <div class="listOfSong-play">
+              <button
+                class="listOfSong-play-pause-btn"
+                onclick="togglePlayPause(this)"
+              >
+                <i class="fa-solid fa-pause listOfSong-pause-btn"></i>
+                <i class="fa-solid fa-play listOfSong-play-btn"></i>
+              </button>
+            </div>
+          </div>
+          <a href="/song/detail" class="listOfSong-info">
+            <div>
+              <h3>Take My Breath</h3>
+              <p class="listOfSong-info-artist">The Weeknd</p>
+            </div>
+          </a>
+          <div class="listOfSong-actions">
+            <span class="listOfSong-duration">4:10</span>
+            <button class="listOfSong-add-btn">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+            <button
+              class="listOfSong-remove-btn"
+              th:data-action="${actionFunction}"
+              th:attr="onclick=${onclick} + '()'"
+            >
+              <!--CUSTOM ICON-->
+              <i th:class="'fa-solid fa-' + ${icon}"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

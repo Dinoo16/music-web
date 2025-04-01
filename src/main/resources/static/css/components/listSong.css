@@ -1,0 +1,113 @@
+/* Song list items */
+.listOfSong-list {
+    background-color: #1F2937;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 24px;
+  }
+  
+  .listOfSong-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  
+  .listOfSong-item:hover {
+    background-color: #111827;
+  }
+  
+  .listOfSong-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+  }
+
+
+  .listOfSong-card:hover .listOfSong-overlay {
+    opacity: 1; 
+}
+.listOfSong-overlay {
+  position: absolute;
+  width: 50px;
+  height: 50px; 
+  background: rgba(0, 0, 0, 0.4); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.listOfSong-play {
+  line-height: 0;
+}
+.listOfSong-play-pause-btn {
+  height: 24px;
+  width: 24px;
+  background-color: transparent;
+  position: relative;
+}
+.listOfSong-play-pause-btn i {
+  position: absolute;
+  font-size: 16px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease-in-out;
+}
+.listOfSong-pause-btn {
+  display: none;
+}
+
+
+.listOfSong-info-link {
+  display: flex;
+  justify-content: flex-start;
+}
+  
+  .listOfSong-info {
+    flex-grow: 1;
+    margin-left: 15px;
+  }
+  
+  .listOfSong-info h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  
+  .listOfSong-info-artist {
+    color: var(--spanColor);
+    font-size: 14px;
+  }
+ 
+  .listOfSong-duration {
+    color: #b0b3bb;
+    font-size: 14px;
+  }
+  
+  .fa-regular,
+  .fa-solid {
+    color: #b0b3bb;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .fa-regular:hover,
+  .fa-solid:hover {
+    color: #ffffff;
+  }
+
+.listOfSong-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}  
+.listOfSong-actions button {
+  background-color: transparent;
+}

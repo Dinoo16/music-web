@@ -7,12 +7,8 @@
   </head>
   <body>
     <div th:fragment="content">
-      <div class="myplaylist-detail-header">
-        <a href="/myplaylist" class="myplaylist-detail-back">
-          <i class="fa-solid fa-arrow-left myplaylist-detail-back-btn"></i>
-          <h4 class="myplaylist-detail-back-btn">Back to Playlists</h4>
-        </a>
-      </div>
+      <div th:replace="components/popupOverlay :: popupOverlay"></div>
+
       <!-- myplaylist detail backgroud -->
       <div class="myplaylist-detail-background">
         <img
@@ -31,93 +27,38 @@
           <span class="myplaylist-detail-infor-createdby">Created by ABC</span>
           <span class="myplaylist-detail-infor-song-count">25 songs</span>
           <div class="myplaylist-detail-actions">
-            <!-- play button -->
-            <button
-              class="myplaylist-detail-play-btn"
-              onclick="playSong(event)"
+            <!--ROUNDED BUTTON CUSTOM (PLAY ALL)-->
+            <div
+              th:replace="components/roundedButton :: roundedButton('fa-solid fa-play', '18px', 'Play All', '150px', '50px', null, 'playSong(event)')"
+            ></div>
+
+            <div
+              th:replace="components/optionButton :: optionButton('50px', '50px', 'auto')"
             >
-              <i class="fa-solid fa-play"></i>
-              <span>Play All</span>
-            </button>
+              <button
+                th:style="'width:' + ${width} + '; height:' + ${height} + '; right:' + ${right}"
+              ></button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- myplaylist song list -->
-      <div class="myplaylist-detail-song-list">
-        <!-- myplaylist song list item -->
-        <div class="myplaylist-detail-song-item">
-          <img
-            src="/images/song_img1.png"
-            alt="Take My Breath"
-            class="myplaylist-detail-song-img"
-          />
-          <div class="myplaylist-detail-song-overlay">
-            <div class="myplaylist-detail-song-play">
-              <i class="fa-solid fa-pause"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="myplaylist-detail-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="myplaylist-detail-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="myplaylist-detail-song-actions">
-            <span class="myplaylist-detail-song-duration">4:10</span>
-            <i class="fa-regular fa-heart"></i>
-            <i class="fa-solid fa-plus"></i>
-          </div>
-        </div>
-        <!-- myplaylist song list item -->
-        <div class="myplaylist-detail-song-item">
-          <img
-            src="/images/artist1.png"
-            alt="Take My Breath"
-            class="myplaylist-detail-song-img"
-          />
-          <div class="myplaylist-detail-song-overlay">
-            <div class="myplaylist-detail-song-play">
-              <i class="fa-solid fa-play"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="myplaylist-detail-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="myplaylist-detail-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="myplaylist-detail-song-actions">
-            <span class="myplaylist-detail-song-duration">4:10</span>
-            <i class="fa-regular fa-heart"></i>
-            <i class="fa-solid fa-plus"></i>
-          </div>
-        </div>
-        <!-- myplaylist song list item -->
-        <div class="myplaylist-detail-song-item">
-          <img
-            src="/images/playlist_bg.png"
-            alt="Take My Breath"
-            class="myplaylist-detail-song-img"
-          />
-          <div class="myplaylist-detail-song-overlay">
-            <div class="myplaylist-detail-song-play">
-              <i class="fa-solid fa-play"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="myplaylist-detail-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="myplaylist-detail-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="myplaylist-detail-song-actions">
-            <span class="myplaylist-detail-song-duration">4:10</span>
-            <i class="fa-regular fa-heart"></i>
-            <i class="fa-solid fa-plus"></i>
-          </div>
-        </div>
-      </div>
+      <h2 class="myplaylist-song-header">All songs</h2>
+      <div
+        th:replace="components/listSong :: listOfSong('minus', 'removeSong')"
+      ></div>
+
+      <!-- myplaylist RECOMMENDED song list -->
+      <h2 class="myplaylist-song-header">Recommended songs</h2>
+      <div
+        th:replace="components/listSong :: listOfSong('plus', 'addSong')"
+      ></div>
+
+      <!--Edit playlist Popup-->
+      <div
+        th:replace="components/popup :: popup('Edit playlist', 'Enter playlist name', 'Modify description','saveEditPlaylist()')"
+      ></div>
     </div>
   </body>
 </html>

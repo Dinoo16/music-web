@@ -24,6 +24,7 @@ body {
 
 button,
 input,
+textarea,
 [tabindex] {
     outline: none;
     border: none;

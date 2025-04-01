@@ -7,13 +7,14 @@
   </head>
   <body>
     <div th:fragment="content">
+      <div th:replace="components/popupOverlay :: popupOverlay"></div>
       <!-- title and filter -->
       <div class="myplaylist-header">
         <h2 class="myplaylist-title">Playlists</h2>
-        <button class="myplaylist-create">
-          <i class="fa-solid fa-plus myplaylist-create-plus-btn"></i>
-          <span class="myplaylist-create-plus-btn">Create Playlist</span>
-        </button>
+        <!--ROUNDED BUTTON CUSTOM (CREATE PLAYLIST)-->
+        <div
+          th:replace="components/roundedButton :: roundedButton('fa-solid fa-plus','', 'Create Playlist', '160px','50px', null, 'showPopup()')"
+        ></div>
       </div>
 
       <!-- list of myplaylists -->
@@ -42,6 +43,10 @@
           </div>
         </div>
       </div>
+
+      <div
+        th:replace="components/popup :: popup('Create playlist', 'Enter playlist name', 'Add an optional description', 'saveCreatePlaylist()')"
+      ></div>
     </div>
   </body>
 </html>

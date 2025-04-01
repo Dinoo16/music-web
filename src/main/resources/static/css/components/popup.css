@@ -1,0 +1,99 @@
+ /* create playlist pop up */
+
+.popup {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 99999;
+}
+.popup-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 580px;
+    border-radius: 10px;
+    justify-content: center;
+    padding: 24px 32px;
+    background-color: #1F2937;
+}
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 18px;
+    color: #FFF;
+}
+.popup-header-close-btn {
+    font-size: 24px;
+    background-color: transparent;
+}
+
+.popup-fields {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+
+}
+.popup-field-img {
+    width: 201px;
+    height: 201px;
+    /* background-color: rgba(217, 217, 217, 0.2); */
+}
+.popup-field-upload-box {
+    width: 100%;
+    height: 201px;
+    background-color: rgba(217, 217, 217, 0.2);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;    
+    color: #CCCCCC;
+  }
+  
+  .popup-field-upload-icon {
+    font-size: 24px;
+    color: #CCCCCC;
+  }
+  
+  .popup-field-upload-input {
+    display: none;
+  }
+
+.popup-input-name-desc-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.popup-name {
+    height: 40px;
+    width: 283px;
+    background-color: #374151;
+    color: #fff;
+    border-radius: 10px;
+    padding: 0 12px;
+}
+.popup-desc {
+    height: 129px;
+    width: 283px;
+    background-color: #374151;
+    border-radius: 10px;
+    padding: 6px 12px;
+    color: white;
+    resize: none;
+}
+.popup-desc::placeholder, .popup-name::placeholder {
+    color: #CCCCCC;;
+    font-weight: 300;
+}
+
+.popup-save {
+    display: flex;
+    justify-content: flex-end;
+   
+}
+

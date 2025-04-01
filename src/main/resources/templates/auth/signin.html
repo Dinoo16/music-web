@@ -33,7 +33,13 @@
                 required
               />
             </div>
-            <button type="submit" class="btn-signin">Sign In</button>
+            <!-- <button type="submit" class="btn-signin">Sign In</button> -->
+            <!--ROUNDED BUTTON CUSTOM (Submit Login)-->
+            <div class="signin-btn-wrapper">
+              <div
+                th:replace="components/roundedButton :: roundedButton('', '', 'Sign in', '100%', '', '6px', 'handleSignIn()')"
+              ></div>
+            </div>
           </form>
           <!-- Errors Login-->
           <p id="loginMessage" style="color: red; display: none"></p>

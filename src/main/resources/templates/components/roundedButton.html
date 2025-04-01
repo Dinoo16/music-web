@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rounded Button</title>
+  </head>
+  <body>
+    <!-- Định nghĩa fragment button -->
+    <div
+      th:fragment="roundedButton(icon, iconSize,title,width,height,borderRadius, onclick)"
+    >
+      <button
+        class="roundedButton"
+        th:style="'width:' + ${width} + '; height:' + ${height} + '; border-radius:' + (${borderRadius} ?: '9999px')"
+        th:attr="onclick=${onclick}"
+      >
+        <i
+          th:style="'font-size:' + (${iconSize} ?: '16px')"
+          th:if="${icon != null and icon != ''}"
+          th:class="${icon}"
+          th:classappend="'roundedButton-btn'"
+        ></i>
+        <span
+          th:if="${title != null}"
+          th:text="${title}"
+          class="roundedButton-title"
+        ></span>
+      </button>
+    </div>
+  </body>
+</html>

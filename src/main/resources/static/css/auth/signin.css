@@ -48,23 +48,9 @@
     color: #9CA3AF;
 }
 
-/* Sign In Button */
-.btn-signin {
-    width: 100%;
-    padding: 12px;
-    background-color: #9333EA;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
+.signin-btn-wrapper {
+    margin-top: 30px;
 }
-
-.btn-signin:hover {
-    background-color: #7c2ee6;
-}
-
 .register-text {
     color: #9CA3AF;
     font-size: 14px;

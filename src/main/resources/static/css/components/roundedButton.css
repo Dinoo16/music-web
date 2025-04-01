@@ -1,0 +1,24 @@
+.roundedButton {
+    /* width: 160px; */
+    height: 40px;
+    border-radius: 9999px; /* default border-radius*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--primary);
+    cursor: pointer;
+    opacity: 0.8;
+}
+.roundedButton:hover {
+    opacity: 1;
+}
+.roundedButton-title {
+    font-size: 16px;
+    color: #fff ;
+    font-weight: 500 !important;
+}
+.roundedButton-btn {
+    font-size: 16px;
+    color:#FFF !important;
+}

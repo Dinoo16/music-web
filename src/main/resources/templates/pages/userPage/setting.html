@@ -21,9 +21,13 @@
                 <p class="setting-profile-username">abc@example.com</p>
               </div>
             </div>
-            <button class="setting-profile-change-avatar">
-              <span>Change Profile Picture</span>
-            </button>
+
+            <div class="setting-profile-change-avatar">
+              <!--CUSTOM ROUNDED BUTTON (Change Profile Picture)-->
+              <div
+                th:replace="components/roundedButton :: roundedButton('','', 'Change Profile Picture', '200px','', '10px','handleChangeProfilePicture()')"
+              ></div>
+            </div>
           </div>
           <!--Setting profile fields-->
           <div class="setting-profile-fields">
@@ -64,9 +68,12 @@
                   required
                 />
               </div>
-              <button type="submit" class="setting-profile-fields-btn-change">
-                Save Changes
-              </button>
+              <!--CUSTOM ROUNDED BUTTON (Change Profile Picture)-->
+              <div class="setting-profile-fields-btn-change">
+                <div
+                  th:replace="components/roundedButton :: roundedButton('','', 'Save changes', '100%','', '10px','handleSaveChangeProfile()')"
+                ></div>
+              </div>
             </form>
           </div>
         </div>

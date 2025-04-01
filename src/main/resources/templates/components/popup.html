@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popup Edit</title>
+  </head>
+  <body>
+    <!-- Định nghĩa fragment button -->
+    <div th:fragment="popup(title, namePlaceholder, descPlaceholder, onclick)">
+      <div class="popup">
+        <div class="popup-wrapper">
+          <div class="popup-header">
+            <h2 th:text="${title}"></h2>
+            <button onclick="closePopup()" class="popup-header-close-btn">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <div class="popup-fields">
+            <div class="popup-field-img">
+              <label for="imageUpload" class="popup-field-upload-box">
+                <span class="popup-field-upload-icon">+</span>
+                <p>Insert picture</p>
+              </label>
+              <input
+                type="file"
+                id="imageUpload"
+                class="popup-field-upload-input"
+                accept="image/*"
+              />
+            </div>
+            <div class="popup-input-name-desc-field">
+              <input
+                type="text"
+                th:attr="placeholder=${namePlaceholder}"
+                class="popup-name"
+              />
+              <textarea
+                class="popup-desc"
+                th:attr="placeholder=${descPlaceholder}"
+              ></textarea>
+            </div>
+          </div>
+          <div class="popup-save">
+            <div
+              th:replace="components/roundedButton :: roundedButton('','', 'Save', '158px','', '10px',${onclick})"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

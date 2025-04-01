@@ -17,6 +17,7 @@
     padding: 24px;
     display: flex;
     flex-direction: column;
+    border-radius: 10px;
 
 }
 .setting-profile-info {
@@ -31,6 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .setting-profile-name {
@@ -44,15 +46,8 @@
 }
 .setting-profile-change-avatar {
     margin-top: 24px;
-    width: 180px;
-    height: 40px;
-    background-color: var(--primary);
-    border-radius: 8px;
-    cursor: pointer;
 }
-.setting-profile-change-avatar:hover {
-    opacity: 0.8;
-}
+
 .setting-profile-change-avatar span {
     color: #fff;
 }
@@ -91,20 +86,9 @@
     color: #9CA3AF;
 }
 
-.setting-profile-fields-btn-change {
-    width: 100%;
-    padding: 12px;
-    background-color: #9333EA;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
+.setting-profile-fields-btn-change {  
+    margin-top: 24px;
 }
 
-.setting-profile-fields-btn-change:hover {
-    opacity: 0.8;
-}
 
 

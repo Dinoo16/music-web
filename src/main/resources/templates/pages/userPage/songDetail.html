@@ -45,11 +45,10 @@
                 <span class="song-detail-play-count">8.2M plays</span>
               </div>
               <div class="song-detail-actions">
-                <!-- play button -->
-                <button class="song-detail-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play"></i>
-                  <span>Play Now</span>
-                </button>
+                <!-- CUSTOM ROUNDED BUTTON (PLay now) -->
+                <div
+                  th:replace="components/roundedButton :: roundedButton('fa-solid fa-play','22px', 'Play now', '160px','50px', null, 'playSong(event)')"
+                ></div>
                 <!-- heart button -->
                 <button class="song-detail-heart-btn">
                   <i class="fa-regular fa-heart"></i>
