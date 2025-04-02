@@ -7,20 +7,27 @@
   </head>
   <body>
     <!-- Định nghĩa fragment button -->
-    <div th:fragment="optionButton(width, height, right)">
-      <div class="myplaylist-detail-option-container">
+    <div
+      th:fragment="iconButton(icon,iconSize, width, height, right, backgroundColor,isOptionButton, onclickFunction)"
+    >
+      <div class="iconButton-container">
         <button
-          class="myplaylist-detail-option-btn"
-          th:with="btnWidth=${width ?: 'auto'}, btnHeight=${height ?: 'auto'}"
-          th:style="'width:' + ${btnWidth} + '; height:' + ${btnHeight}"
-          onclick="toggleOptionMenu(event)"
+          class="iconButton-btn"
+          th:with="btnWidth=${width ?: 'auto'}, btnHeight=${height ?: 'auto'}, btnBackground=${backgroundColor ?: '#1F2937'} "
+          th:style="'width:' + ${btnWidth} + '; height:' + ${btnHeight} + '; background-color:' + ${btnBackground}"
+          th:attr="onclick=${onclickFunction}"
         >
-          <i class="fa-solid fa-ellipsis-vertical"></i>
+          <i
+            th:class="${icon}"
+            th:with="size=${iconSize ?: '22px'}"
+            th:style="'font-size:' + ${size}"
+          ></i>
         </button>
         <div
           class="option-menu"
           id="optionMenu"
           th:style="'right:' + (${right} ?: 'auto')"
+          th:if="${isOptionButton}"
         >
           <button onclick="editPlaylist()">
             <i class="fa-solid fa-pen"></i>Edit playlist

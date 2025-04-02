@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sidebar</title>
+  </head>
+  <body>
+    <div
+      id="playlistSidebar"
+      class="playlistSidebar-wrapper"
+      th:fragment="playlistSidebar()"
+    >
+      <div class="playlistSidebar-header">
+        <span>Queue</span>
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+
+      <!--Now playing-->
+      <div class="playlistSidebar-now-playing-wrapper">
+        <span>Now Playing</span>
+        <!--List Song component-->
+        <div class="playlistSidebar-now-playing-content">
+          <div
+            th:replace="components/listSong :: listOfSongItem('', 'plus', 'addSongToPlaylist()')"
+          ></div>
+        </div>
+      </div>
+      <!--Next up-->
+      <div class="playlistSidebar-next-up-wrapper">
+        <span>Next up</span>
+        <span>Component list song</span>
+      </div>
+    </div>
+  </body>
+</html>

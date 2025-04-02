@@ -27,13 +27,13 @@
           <span class="myplaylist-detail-infor-createdby">Created by ABC</span>
           <span class="myplaylist-detail-infor-song-count">25 songs</span>
           <div class="myplaylist-detail-actions">
-            <!--ROUNDED BUTTON CUSTOM (PLAY ALL)-->
+            <!--ROUNDED BUTTON (PLAY ALL)-->
             <div
               th:replace="components/roundedButton :: roundedButton('fa-solid fa-play', '18px', 'Play All', '150px', '50px', null, 'playSong(event)')"
             ></div>
-
+            <!--ICON BUTTON - OPTION BUTTON -->
             <div
-              th:replace="components/optionButton :: optionButton('50px', '50px', 'auto')"
+              th:replace="components/iconButton :: iconButton('fa-solid fa-ellipsis-vertical', '22px', '50px', '50px', 'auto', '', true, 'toggleOptionMenu(event)')"
             >
               <button
                 th:style="'width:' + ${width} + '; height:' + ${height} + '; right:' + ${right}"
@@ -46,13 +46,13 @@
       <!-- myplaylist song list -->
       <h2 class="myplaylist-song-header">All songs</h2>
       <div
-        th:replace="components/listSong :: listOfSong('minus', 'removeSong')"
+        th:replace="components/listSong :: listOfSong('','minus', 'removeSong()')"
       ></div>
 
       <!-- myplaylist RECOMMENDED song list -->
       <h2 class="myplaylist-song-header">Recommended songs</h2>
       <div
-        th:replace="components/listSong :: listOfSong('plus', 'addSong')"
+        th:replace="components/listSong :: listOfSong('','plus', 'addSong()')"
       ></div>
 
       <!--Edit playlist Popup-->

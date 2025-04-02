@@ -12,6 +12,10 @@
     justify-content: space-between;
     padding: 22px 0;
 }
+.home-header-recently-played {
+  padding-top: 18px;
+}
+
 /* View all text button */
 .home-more {
     display: flex;

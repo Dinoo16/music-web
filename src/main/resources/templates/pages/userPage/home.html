@@ -30,41 +30,17 @@
       <div th:replace="/components/artistCard :: artistCard()"></div>
 
       <!-- Recently played -->
-      <div class="home-header">
+      <div class="home-header-recently-played">
         <h2 class="home-title">Recently Played</h2>
       </div>
 
       <!-- Recently played songs list -->
-      <div class="home-recently-played-song-list">
-        <!-- playlist song list item -->
-        <div class="home-recently-played-song-item">
-          <img
-            src="/images/song_img1.png"
-            alt="Take My Breath"
-            class="home-recently-played-song-img"
-          />
-          <div class="home-recently-played-song-overlay">
-            <div class="home-recently-played-song-played">
-              <i class="fa-solid fa-pause"></i>
-            </div>
-          </div>
-          <a href="/song/detail" class="home-recently-played-song-info">
-            <div>
-              <h3>Take My Breath</h3>
-              <p class="home-recently-played-song-info-artist">The Weeknd</p>
-            </div>
-          </a>
-          <div class="home-recently-played-song-actions">
-            <span class="home-recently-played-song-duration">4:10</span>
-            <button class="home-recently-played-song-actions-heart-btn">
-              <i class="fa-regular fa-heart"></i>
-            </button>
-            <button class="home-recently-played-song-actions-plus-btn">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
-        </div>
-      </div>
+      <div
+        th:replace="components/listSong :: listOfSong(songNumber='1',
+        icon='plus',
+        onclickFunction='addToPlaylist()'
+        )"
+      ></div>
     </div>
   </body>
 </html>

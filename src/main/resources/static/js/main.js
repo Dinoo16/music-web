@@ -20,9 +20,11 @@ function togglePlayPause(button) {
 
   // Toggle visibility
   if (playIcon.style.display === "none") {
+    alert("Pause music");
     playIcon.style.display = "block";
     pauseIcon.style.display = "none";
   } else {
+    alert("Play music");
     playIcon.style.display = "none";
     pauseIcon.style.display = "block";
   }

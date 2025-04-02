@@ -1,25 +1,27 @@
-/*Option button */
-.myplaylist-detail-option-container {
+/*Icon button */
+.iconButton-container {
     position: relative;
     display: inline-block;
   }
   
-  .myplaylist-detail-option-btn {
+  .iconButton-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background-color: #1F2937;
+    background-color: #1F2937; /* Default background color*/
     cursor: pointer;
     opacity: 0.8;
   }
-  .myplaylist-detail-option-btn:hover {
+  .iconButton-btn:hover {
     opacity: 1;
   }
-  .myplaylist-detail-option-btn i {
-    font-size: 22px;
+  .iconButton-btn i {
+    font-size: 22px; /* Default Fontsize icon*/
     color: #FFF;
   }
+
+  /*Option button */
   
   .option-menu {
     display: none;

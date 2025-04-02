@@ -14,28 +14,43 @@
     padding: 10px;
     border-radius: 8px;
     transition: background 0.3s;
-    position: relative;
   }
-  
+
   .listOfSong-item:hover {
     background-color: #111827;
   }
-  
-  .listOfSong-img {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    object-fit: cover;
+
+  .listOfSong-number {
+    color: var(--spanColor);
+    font-size: 16px;
+    font-weight: bold;
+    left: 0;
+    margin-right: 12px;
   }
 
+  .listOfSong-img-container {
+    position: relative;
+    width: 50px;       
+    height: 50px;      
+    display: inline-block;
+  }
+  
+  .listOfSong-img {
+    width: 100%;     
+    height: 100%;  
+    object-fit: cover;
+  }
 
   .listOfSong-card:hover .listOfSong-overlay {
     opacity: 1; 
 }
 .listOfSong-overlay {
   position: absolute;
-  width: 50px;
-  height: 50px; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;     
+  height: 100%;
   background: rgba(0, 0, 0, 0.4); 
   display: flex;
   align-items: center;
@@ -103,11 +118,17 @@
   }
 
 .listOfSong-actions {
-    display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
+    display: none;
+
 }  
 .listOfSong-actions button {
   background-color: transparent;
 }
+
+.listOfSong-item:hover .listOfSong-actions {
+  display: flex;
+}
+

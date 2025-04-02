@@ -1,0 +1,35 @@
+.playlistSidebar-wrapper {
+    width: 320px;
+    height: 100%;
+    background-color: #111621;
+    position: absolute;
+    right: 0;
+    padding: 16px;
+    z-index: 999;
+}
+.playlistSidebar-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+.playlistSidebar-now-playing-wrapper span, .playlistSidebar-next-up-wrapper span, .playlistSidebar-header span, .playlistSidebar-header i {
+    color: #fff;
+    font-weight: bold;
+}
+
+.playlistSidebar-now-playing-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 12px 0;
+}
+
+
+.playlistSidebar-next-up-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/*Hover custom */
+.playlistSidebar-now-playing-content .listOfSong-item:hover {
+    background-color: #1F2937;
+}

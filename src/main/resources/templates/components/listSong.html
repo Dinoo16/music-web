@@ -6,25 +6,34 @@
     <title>List of songs</title>
   </head>
   <body>
-    <!-- Định nghĩa fragment button -->
-    <div th:fragment="listOfSong(icon,onclick)">
+    <div th:fragment="listOfSong(songNumber,icon,onclickFunction)">
       <div class="listOfSong-list">
         <!-- myplaylist song list item -->
-        <div class="listOfSong-item">
-          <img
-            src="/images/song_img1.png"
-            alt="Take My Breath"
-            class="listOfSong-img"
-          />
-          <div class="listOfSong-overlay">
-            <div class="listOfSong-play">
-              <button
-                class="listOfSong-play-pause-btn"
-                onclick="togglePlayPause(this)"
-              >
-                <i class="fa-solid fa-pause listOfSong-pause-btn"></i>
-                <i class="fa-solid fa-play listOfSong-play-btn"></i>
-              </button>
+        <div
+          class="listOfSong-item"
+          th:fragment="listOfSongItem(songNumber,icon,onclickFunction)"
+        >
+          <span
+            class="listOfSong-number"
+            th:if="${songNumber != null and songNumber != ''}"
+            th:text="${songNumber}"
+          ></span>
+          <div class="listOfSong-img-container">
+            <img
+              src="/images/song_img1.png"
+              alt="Take My Breath"
+              class="listOfSong-img"
+            />
+            <div class="listOfSong-overlay">
+              <div class="listOfSong-play">
+                <button
+                  class="listOfSong-play-pause-btn"
+                  onclick="togglePlayPause(this)"
+                >
+                  <i class="fa-solid fa-pause listOfSong-pause-btn"></i>
+                  <i class="fa-solid fa-play listOfSong-play-btn"></i>
+                </button>
+              </div>
             </div>
           </div>
           <a href="/song/detail" class="listOfSong-info">
@@ -35,17 +44,36 @@
           </a>
           <div class="listOfSong-actions">
             <span class="listOfSong-duration">4:10</span>
-            <button class="listOfSong-add-btn">
-              <i class="fa-regular fa-heart"></i>
-            </button>
-            <button
-              class="listOfSong-remove-btn"
-              th:data-action="${actionFunction}"
-              th:attr="onclick=${onclick} + '()'"
+            <!--Add to favorite button-->
+
+            <div
+              th:replace="components/iconButton :: iconButton('fa-regular fa-heart','13px','', '', 'auto','transparent', false, 'addToFavorite()')"
             >
-              <!--CUSTOM ICON-->
-              <i th:class="'fa-solid fa-' + ${icon}"></i>
-            </button>
+              <button
+                th:style="'width:' + ${width} + '; height:' + ${height}"
+                class="listOfSong-heart-btn"
+              ></button>
+            </div>
+
+            <!-- Dynamic Add/remove to playlist button-->
+            <div
+              th:replace="components/iconButton :: iconButton(
+                ${icon == 'minus' ? 'fa-solid fa-minus' : 'fa-solid fa-plus'},
+                '13px',
+                '',
+                '',
+                'auto',
+                'transparent',
+                false,
+                ${onclickFunction}
+                )"
+            >
+              <button
+                th:style="'width:' + ${width} + '; height:' + ${height} + '; right:' + ${right}"
+                class="listOfSong-add-remove-btn"
+                th:attr="onclick=${onclickFunction}"
+              ></button>
+            </div>
           </div>
         </div>
       </div>

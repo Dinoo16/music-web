@@ -10,6 +10,7 @@
     padding: 0 55px;
     color: white;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 99999;
 }
 
 .music-player-info {
@@ -99,9 +100,35 @@
     align-items: center;
     justify-content: flex-end;
     gap: 8px;
+    padding-right: 18px;
 }
 
 .volume-bar {
     width: 100px;
     cursor: pointer;
+}
+.music-player-playlist-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    padding-left: 18px;
+    position: relative;
+    
+}
+.music-player-playlist-wrapper::before {
+    content: "";
+    position: absolute;
+    left: 0; 
+    height: 40%; 
+    width: 1px;
+    background-color: #9CA3AF;
+}
+.music-player-playlist-btn {
+    background-color: transparent;
+    cursor: pointer;
+}
+.playlist-icon {
+    width: 24px;
+    height: 24px;
 }

@@ -1,3 +1,10 @@
+.discoverCustomRoundedButton .roundedButton{
+    background-color: #FFF;
+}
+.discoverCustomRoundedButton .roundedButton-title {
+    color: #111827;
+}
+
 .discover-navigation {
     margin-bottom: 32px;
     width: 100%;
