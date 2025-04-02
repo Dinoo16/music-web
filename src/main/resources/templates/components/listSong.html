@@ -6,12 +6,12 @@
     <title>List of songs</title>
   </head>
   <body>
-    <div th:fragment="listOfSong(songNumber,icon,onclickFunction)">
+    <div th:fragment="listOfSong(songNumber,icon,duration,onclickFunction)">
       <div class="listOfSong-list">
         <!-- myplaylist song list item -->
         <div
           class="listOfSong-item"
-          th:fragment="listOfSongItem(songNumber,icon,onclickFunction)"
+          th:fragment="listOfSongItem(songNumber,icon,duration,onclickFunction)"
         >
           <span
             class="listOfSong-number"
@@ -38,42 +38,29 @@
           </div>
           <a href="/song/detail" class="listOfSong-info">
             <div>
-              <h3>Take My Breath</h3>
+              <h3>Take My Breath Take My</h3>
               <p class="listOfSong-info-artist">The Weeknd</p>
             </div>
           </a>
           <div class="listOfSong-actions">
-            <span class="listOfSong-duration">4:10</span>
-            <!--Add to favorite button-->
-
-            <div
-              th:replace="components/iconButton :: iconButton('fa-regular fa-heart','13px','', '', 'auto','transparent', false, 'addToFavorite()')"
+            <span
+              class="listOfSong-duration"
+              th:if="${duration != null and  duration != ''}"
+              th:text="${duration}"
+              >4:10</span
             >
-              <button
-                th:style="'width:' + ${width} + '; height:' + ${height}"
-                class="listOfSong-heart-btn"
-              ></button>
-            </div>
-
+            <!--Add to favorite button-->
+            <div
+              th:replace="~{/components/tooltip :: toolTip('Add to favorites', 'fa-regular fa-heart', 'addSongToFavorite()')}"
+            ></div>
             <!-- Dynamic Add/remove to playlist button-->
             <div
-              th:replace="components/iconButton :: iconButton(
-                ${icon == 'minus' ? 'fa-solid fa-minus' : 'fa-solid fa-plus'},
-                '13px',
-                '',
-                '',
-                'auto',
-                'transparent',
-                false,
-                ${onclickFunction}
-                )"
-            >
-              <button
-                th:style="'width:' + ${width} + '; height:' + ${height} + '; right:' + ${right}"
-                class="listOfSong-add-remove-btn"
-                th:attr="onclick=${onclickFunction}"
-              ></button>
-            </div>
+              th:replace="~{components/tooltip :: toolTip(
+              ${icon == 'minus' ? 'Remove from playlist' : 'Add to playlist'},
+              ${icon == 'minus' ? 'fa-solid fa-minus' : 'fa-solid fa-plus'},
+              ${onclickFunction}
+          )}"
+            ></div>
           </div>
         </div>
       </div>

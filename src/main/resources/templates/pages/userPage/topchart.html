@@ -49,35 +49,11 @@
             <h2 class="topchart-title">Top Songs</h2>
           </div>
           <!-- Top songs list -->
-          <div class="topchart-song-list">
-            <!-- Top song list item -->
-            <div class="topchart-song-item">
-              <img
-                src="/images/song_img1.png"
-                alt="Take My Breath"
-                class="topchart-song-img"
-              />
-              <div class="topchart-song-overlay">
-                <div class="topchart-song-played">
-                  <i class="fa-solid fa-pause"></i>
-                </div>
-              </div>
-              <a href="/song/detail" class="topchart-song-info">
-                <div>
-                  <h3>Take My Breath</h3>
-                  <p class="topchart-song-info-artist">The Weeknd</p>
-                </div>
-              </a>
-              <div class="topchart-song-actions">
-                <span class="topchart-song-duration">4:10</span>
-                <button class="topchart-song-actions-heart-btn">
-                  <i class="fa-regular fa-heart"></i>
-                </button>
-                <button class="topchart-song-actions-plus-btn">
-                  <i class="fa-solid fa-plus"></i>
-                </button>
-              </div>
-            </div>
+
+          <div class="topchart-song-list-custom">
+            <div
+              th:replace="components/listSong :: listOfSong('1', 'plus','4:30', 'addSongToPlaylist()')"
+            ></div>
           </div>
         </div>
 

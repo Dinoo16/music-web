@@ -8,17 +8,17 @@
   <body>
     <!-- Định nghĩa fragment button -->
     <div
-      th:fragment="iconButton(icon,iconSize, width, height, right, backgroundColor,isOptionButton, onclickFunction)"
+      th:fragment="optionButton(iconSize, width, height, right, backgroundColor, onclickFunction)"
     >
-      <div class="iconButton-container">
+      <div class="optionButton-container">
         <button
-          class="iconButton-btn"
+          class="optionButton-btn"
           th:with="btnWidth=${width ?: 'auto'}, btnHeight=${height ?: 'auto'}, btnBackground=${backgroundColor ?: '#1F2937'} "
           th:style="'width:' + ${btnWidth} + '; height:' + ${btnHeight} + '; background-color:' + ${btnBackground}"
           th:attr="onclick=${onclickFunction}"
         >
           <i
-            th:class="${icon}"
+            class="fa-solid fa-ellipsis-vertical"
             th:with="size=${iconSize ?: '22px'}"
             th:style="'font-size:' + ${size}"
           ></i>
@@ -27,7 +27,6 @@
           class="option-menu"
           id="optionMenu"
           th:style="'right:' + (${right} ?: 'auto')"
-          th:if="${isOptionButton}"
         >
           <button onclick="editPlaylist()">
             <i class="fa-solid fa-pen"></i>Edit playlist

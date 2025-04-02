@@ -22,14 +22,28 @@
         <!--List Song component-->
         <div class="playlistSidebar-now-playing-content">
           <div
-            th:replace="components/listSong :: listOfSongItem('', 'plus', 'addSongToPlaylist()')"
+            th:replace="components/listSong :: listOfSongItem('', 'plus','', 'addSongToPlaylist()')"
           ></div>
         </div>
       </div>
       <!--Next up-->
       <div class="playlistSidebar-next-up-wrapper">
         <span>Next up</span>
-        <span>Component list song</span>
+        <div class="playlistSidebar-now-playing-content">
+          <div
+            th:replace="components/listSong :: listOfSongItem('', 'plus','', 'addSongToPlaylist()')"
+          ></div>
+        </div>
+        <div class="playlistSidebar-now-playing-content">
+          <div
+            th:replace="components/listSong :: listOfSongItem('', 'plus','', 'addSongToPlaylist()')"
+          ></div>
+        </div>
+        <div class="playlistSidebar-now-playing-content">
+          <div
+            th:replace="components/listSong :: listOfSongItem('', 'plus','', 'addSongToPlaylist()')"
+          ></div>
+        </div>
       </div>
     </div>
   </body>

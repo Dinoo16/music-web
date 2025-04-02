@@ -1,10 +1,10 @@
 /*Icon button */
-.iconButton-container {
+.optionButton-container {
     position: relative;
     display: inline-block;
   }
   
-  .iconButton-btn {
+  .optionButton-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,10 +13,10 @@
     cursor: pointer;
     opacity: 0.8;
   }
-  .iconButton-btn:hover {
+  .optionButton-btn:hover {
     opacity: 1;
   }
-  .iconButton-btn i {
+  .optionButton-btn i {
     font-size: 22px; /* Default Fontsize icon*/
     color: #FFF;
   }

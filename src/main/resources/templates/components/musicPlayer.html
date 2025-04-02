@@ -14,18 +14,27 @@
           <p class="music-artist">The Weeknd</p>
         </div>
         <div class="music-actions">
-          <i class="fa-regular fa-heart"></i>
-          <i class="fa-solid fa-arrow-up-from-bracket"></i>
+          <div
+            th:replace="components/tooltip :: toolTip('Add to favorite', 'fa-regular fa-heart', 'addSongToFavorite()')"
+          ></div>
+          <div
+            th:replace="components/tooltip :: toolTip('Add to Playlist', 'fa-solid fa-plus', 'addSongToPlaylist()')"
+          ></div>
         </div>
       </div>
 
       <div class="music-player-controls">
         <div class="controls">
-          <i class="fa-solid fa-backward-step"></i>
+          <div
+            th:replace="components/tooltip :: toolTip('Backward', 'fa-solid fa-backward-step', 'backWardSong()')"
+          ></div>
+
           <div class="play-pause-btn">
             <i class="fa-solid fa-pause"></i>
           </div>
-          <i class="fa-solid fa-forward-step"></i>
+          <div
+            th:replace="components/tooltip :: toolTip('Next song', 'fa-solid fa-forward-step', 'nextSong()')"
+          ></div>
         </div>
         <div class="progress-bar">
           <span class="current-time">1:12</span>
@@ -35,20 +44,24 @@
       </div>
 
       <div class="music-player-volume-control">
-        <i class="fa-solid fa-volume-low"></i>
+        <div
+          th:replace="components/tooltip :: toolTip('Mute', 'fa-solid fa-volume-low', 'muteVolume()')"
+        ></div>
         <input type="range" class="volume-bar" min="0" max="100" value="50" />
       </div>
       <br />
       <div class="music-player-playlist-wrapper">
-        <button class="music-player-playlist-btn" onclick="openPlaylist()">
-          <img
-            src="/images/playlist.png"
-            alt="playlist icon"
-            class="playlist-icon"
-          />
-        </button>
+        <div class="tooltip">
+          <button class="music-player-playlist-btn" onclick="openPlaylist()">
+            <img
+              src="/images/playlist.png"
+              alt="playlist icon"
+              class="playlist-icon"
+            />
+          </button>
+          <span class="tooltip-text">Queue</span>
+        </div>
       </div>
-      
     </div>
   </body>
 </html>

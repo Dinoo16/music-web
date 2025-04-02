@@ -33,12 +33,13 @@
             ></div>
             <!--ICON BUTTON - OPTION BUTTON -->
             <div
-              th:replace="components/iconButton :: iconButton('fa-solid fa-ellipsis-vertical', '22px', '50px', '50px', 'auto', '', true, 'toggleOptionMenu(event)')"
+              th:replace="components/optionButton :: optionButton('22px', '50px', '50px', 'auto', '', 'toggleOptionMenu(event)')"
             >
               <button
                 th:style="'width:' + ${width} + '; height:' + ${height} + '; right:' + ${right}"
               ></button>
             </div>
+            
           </div>
         </div>
       </div>
@@ -46,13 +47,13 @@
       <!-- myplaylist song list -->
       <h2 class="myplaylist-song-header">All songs</h2>
       <div
-        th:replace="components/listSong :: listOfSong('','minus', 'removeSong()')"
+        th:replace="components/listSong :: listOfSong('','minus','4:30', 'removeSong()')"
       ></div>
 
       <!-- myplaylist RECOMMENDED song list -->
       <h2 class="myplaylist-song-header">Recommended songs</h2>
       <div
-        th:replace="components/listSong :: listOfSong('','plus', 'addSong()')"
+        th:replace="components/listSong :: listOfSong('','plus','4:30', 'addSong()')"
       ></div>
 
       <!--Edit playlist Popup-->

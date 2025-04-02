@@ -5,6 +5,7 @@
 .home-title {
     color: var(--white);
     font-size: 25px;
+
 }
 .home-header {
     width: 100%;
@@ -13,7 +14,7 @@
     padding: 22px 0;
 }
 .home-header-recently-played {
-  padding-top: 18px;
+  padding: 18px 0;
 }
 
 /* View all text button */

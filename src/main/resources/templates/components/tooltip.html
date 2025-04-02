@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tooltip Component</title>
+  </head>
+  <body>
+    <div th:fragment="toolTip(tooltipText, icon, onclickFunction)">
+      <div class="tooltip">
+        <button th:attr="onclick=${onclickFunction}">
+          <i th:class="${icon}"></i>
+        </button>
+        <span class="tooltip-text" th:text="${tooltipText}"></span>
+      </div>
+    </div>
+  </body>
+</html>

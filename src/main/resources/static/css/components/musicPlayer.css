@@ -40,7 +40,10 @@
     font-size: 12px;
     color: #9CA3AF;
 }
-
+.music-actions {
+    display: flex;
+    gap: 5px;
+}
 .music-actions i {
     margin-left: 10px;
     cursor: pointer;

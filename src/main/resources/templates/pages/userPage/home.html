@@ -36,8 +36,8 @@
 
       <!-- Recently played songs list -->
       <div
-        th:replace="components/listSong :: listOfSong(songNumber='1',
-        icon='plus',
+        th:replace="components/listSong :: listOfSong(songNumber='',
+        icon='plus', duration='4:30',
         onclickFunction='addToPlaylist()'
         )"
       ></div>
