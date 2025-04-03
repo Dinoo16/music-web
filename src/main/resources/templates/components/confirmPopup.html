@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popup Confirm</title>
+  </head>
+  <body>
+    <div
+      class="confirmPopup-container"
+      th:fragment="confirmPopup(acctionTitle,acctionText)"
+    >
+      <div class="confirmPopup-overlay">
+        <div class="confirmPopup-box">
+          <h2 class="confirmPopup-title" th:text="${acctionTitle}"></h2>
+          <p class="confirmPopup-text" th:text="${acctionText}"></p>
+          <div class="confirmPopup-buttons">
+            <button class="confirmPopup-cancel" onclick="cancel()">
+              Cancel
+            </button>
+            <button class="confirmPopup-confirm" onclick="confirmDelete()">
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -7,6 +7,9 @@
   </head>
   <body>
     <div th:fragment="content">
+      <div
+        th:replace="components/confirmPopup :: confirmPopup('Delete from your library?', 'This will delete My playlist #5 from your library.')"
+      ></div>
       <div th:replace="components/popupOverlay :: popupOverlay"></div>
 
       <!-- myplaylist detail backgroud -->
@@ -39,7 +42,6 @@
                 th:style="'width:' + ${width} + '; height:' + ${height} + '; right:' + ${right}"
               ></button>
             </div>
-            
           </div>
         </div>
       </div>

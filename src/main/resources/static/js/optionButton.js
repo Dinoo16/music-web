@@ -23,11 +23,18 @@ document.addEventListener("click", function () {
   });
 });
 
-
-
 // Delete playlist button function
 function deletePlaylist() {
-  alert("delete playlist");
+  document.querySelector(".confirmPopup-overlay").style.display = "block";
+}
+// Delete confirm
+function confirmDelete() {
+  document.querySelector(".confirmPopup-overlay").style.display = "none";
+  alert("Deleted");
+}
+// Cancel
+function cancel() {
+  document.querySelector(".confirmPopup-overlay").style.display = "none";
 }
 // Share playlist button function
 function sharePlaylist() {

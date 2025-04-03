@@ -7,14 +7,6 @@
   </head>
   <body>
     <div th:fragment="content">
-      <!-- Discover header -->
-      <div class="discover-navigation">
-        <a href="#" class="discover-nav-item active">All</a>
-        <a href="#" class="discover-nav-item">New Releases</a>
-        <a href="#" class="discover-nav-item">Recommended</a>
-        <a href="#" class="discover-nav-item">Mood</a>
-      </div>
-
       <!-- Discover weekly -->
       <div class="discover-weekly-wrapper">
         <div class="discover-weekly-featured">
@@ -38,84 +30,19 @@
       </div>
 
       <!-- New Releases -->
-
       <div class="discover-new-releases-header">
         <h2 class="discover-new-releases-title">New Releases</h2>
       </div>
-      <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
-      <div class="discover-new-releases-grid">
-        <!--New Releases items-->
-        <div class="discover-new-release-card">
-          <div class="discover-new-release-card-img">
-            <img src="/images/artist1.png" atl="discover-new-release image" />
-          </div>
-          <div class="discover-new-release-overlay">
-            <a href="/song/detail" class="discover-new-release-overlay-btn">
-              <div class="discover-new-release-play">
-                <button
-                  class="discover-new-release-play-btn"
-                  onclick="playSong(event)"
-                >
-                  <i
-                    class="fa-solid fa-play discover-new-release-play-btn-icon"
-                  ></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="discover-new-release-info">
-            <h3 class="discover-new-release-name">Title</h3>
-            <p class="discover-new-release-artist">Artist</p>
-            <div class="discover-new-release-meta">
-              <span class="discover-new-release-duration">3:20</span>
-              <div class="discover-new-release-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- list of songs -->
+      <div th:replace="/components/songCard :: songCard()"></div>
 
       <!-- Browse by Mood -->
 
       <div class="discover-new-releases-header">
         <h2 class="discover-new-releases-title">Browse by Mood</h2>
       </div>
-      <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
-      <div class="discover-new-releases-grid">
-        <!--Browse by Mood item-->
-        <div class="discover-new-release-card">
-          <div class="discover-new-release-card-img">
-            <img src="/images/artist1.png" atl="discover-new-release image" />
-          </div>
-          <div class="discover-new-release-overlay">
-            <a href="/song/detail" class="discover-new-release-overlay-btn">
-              <div class="discover-new-release-play">
-                <button
-                  class="discover-new-release-play-btn"
-                  onclick="playSong(event)"
-                >
-                  <i
-                    class="fa-solid fa-play discover-new-release-play-btn-icon"
-                  ></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="discover-new-release-info">
-            <h3 class="discover-new-release-name">Title</h3>
-            <p class="discover-new-release-artist">Artist</p>
-            <div class="discover-new-release-meta">
-              <span class="discover-new-release-duration">3:20</span>
-              <div class="discover-new-release-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- list of songs -->
+      <div th:replace="/components/songCard :: songCard()"></div>
     </div>
   </body>
 </html>
