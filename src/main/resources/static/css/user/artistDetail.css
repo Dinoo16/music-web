@@ -33,91 +33,16 @@
     padding-right: 14px;
 }
 
-.artist-navigation {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start; 
-    background-color: transparent;
-    padding: 24px 0 5px 0;
-    border-bottom: 2px solid #1F2937; /* Viền dưới */
-}
-
-.nav-item {
-    color: #9CA3AF;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 10px 40px 10px 20px;
-    transition: color 0.3s ease;
-}
-
-.nav-item:hover,
-.nav-item.active {
-    color: #fff; 
-    font-weight: bold;
-}
 
 .artist-detail-acions {
     display: flex;
     padding-top: 32px;
 }
 
-.artist-detail-play {
-    width: 130px;
-    height: 50px;
-    margin-right: 20px;
-    background-color: #9333EA;
-    border-radius: 9999px;
-    position: relative;
-    cursor: pointer;
-}
-.artist-detail-play:hover {
-    opacity: 0.8;
-}
-.artist-detail-play-btn {
-    height: 100%;
-    width: 100%;
+.artist-detail-button-custom .roundedButton {
     background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-.artist-detail-play-btn span {
-    color: #FFF;
-    font-size: 18px;
-    font-weight: 500;
-}
-.artist-detail-play-btn i {
-    font-size: 22px;
-    color: #FFF;
-}
-
-.artist-detail-follow {
-    width: 130px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 9999px;
     border: 1px solid #fff;
-    position: relative;
-    cursor: pointer;
-}
-.artist-detail-follow:hover {
-    opacity: 0.8;
-}
-.artist-detail-follow-btn {
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-.artist-detail-follow-btn span {
-    color: #FFF;
-    font-size: 18px;
-    font-weight: 500; 
+    margin-left: 24px;
 }
 
 
@@ -131,114 +56,3 @@
     font-weight: 600;
 }
 
-.artist-popular-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 50px;
-}
-
-.artist-popular-card {
-    height: 365px;
-    background: #1F2937;
-    border-radius: 10px;
-    position: relative;
-    overflow: hidden; 
-}
-
-.artist-popular-card:hover .artist-popular-overlay:hover {
-    background: rgba(0, 0, 0, 0.4); 
-}
-
-.artist-popular-card-img {
-    width: 100%;
-    height: 67%;
-    overflow: hidden; 
-    position: relative;
-}
-.artist-popular-card-img img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    transition: transform 0.3s ease-in-out;
-}
-
-.artist-popular-card:hover .artist-popular-card-img img {
-    transform: scale(1.2);
-    
-}
-
-.artist-popular-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 67%; 
-    /* background: rgba(0, 0, 0, 0.4);  */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.artist-popular-overlay-btn {
-    padding: 98px 98px;
-    display: none;
-}
-/* Show play button when hovering over image */
-.artist-popular-card-img:hover + .artist-popular-overlay .artist-popular-overlay-btn,
-.artist-popular-overlay:hover .artist-popular-overlay-btn {
-  display: block; 
-}
-
-.artist-popular-play {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #9333EA;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.artist-popular-play:hover {
-    background-color: #a84cff;
-}
-.artist-popular-play-btn {
-    background-color: transparent;
-    border-radius: 50%;
-    
-}
-.artist-popular-play-btn-icon {
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
-    padding: 13px 15px;
-
-}
-.artist-popular-play-btn button {
-    background-color: transparent;
-}
-.artist-popular-info {
-    padding: 6px 16px 6px 16px;
-    
-}
-
-.artist-popular-name {
-    color:#fff;
-    font-weight: 600;
-}
-
-.artist-popular-artist {
-    color: #9CA3AF;
-    font-size: 14px;
-}
-
-.artist-popular-meta {
-    padding-top: 16px;
-    display: flex;
-    justify-content: space-between;
-    color: #9CA3AF;
-}
-.artist-popular-duration {
-    font-size: 14px;
-}
-.artist-popular-actions i{
-    padding-left: 10px;
-}

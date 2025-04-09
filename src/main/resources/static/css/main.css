@@ -46,6 +46,23 @@ a {
     background-color: #111827;
     padding: 0 55px;
 }
+/* Hide default arrow in most browsers */
+select {
+    appearance: none;        /* Standard */
+    -webkit-appearance: none; /* Safari/Chrome */
+    -moz-appearance: none;    /* Firefox */
+    background: none;         /* Optional: remove background */
+    padding-right: 30px;      /* Leave space for custom icon if needed */
+    background-color: #374151; /* Your custom color */
+    color: white;             /* Text color */
+    border: none;
+  }
+  
+  /* Optional: hide default arrow in Edge */
+  select::-ms-expand {
+    display: none;
+  }
+  
 
 
 

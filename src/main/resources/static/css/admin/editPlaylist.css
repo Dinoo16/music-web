@@ -69,27 +69,6 @@
 
   }
   
-  .edit-playlist-add-btn {  
-    background-color: var(--primary);
-    color: white;
-    margin-bottom: 12px;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .edit-playlist-add-btn i {
-    padding: 12px;
-  }
-  
-  .edit-playlist-add-btn:hover {
-    opacity: 0.8;
-  }
-  
   /* Upload Box */
   .edit-playlist-upload {
     display: flex;

@@ -1,0 +1,107 @@
+.guestPopup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999999;
+    display: none;
+    overflow: hidden;
+}
+
+.guestPopup-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 64px;
+    border-radius: 10px;
+    width: 58%;
+    height: 428px;
+    display: flex;
+    transition: background 0.5s ease-in-out;
+}
+.guestPopup-image-section {
+    flex: 1;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+.guestPopup-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.guestPopup-signup-section {
+    flex: 1;
+    padding-left: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.guestPopup-signup-btn {
+    width: 150px;
+    height: 48px;
+    font-weight: 600;
+    background-color: var(--primary);
+    border-radius: 999px;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    opacity: 0.8;
+}
+
+.guestPopup-download-btn {
+    width: 160px;
+    height: 48px;
+    font-weight: 600;
+    background-color: transparent;
+    border: 1px solid #FFF;
+    border-radius: 999px;
+    text-align: center;
+    padding: 10px;
+    color: white;
+    opacity: 0.8;
+}
+.guestPopup-signup-btn:hover, .guestPopup-download-btn:hover{
+    opacity: 1;
+    transform: scale(1.04);
+}
+.guestPopup-signin {
+    color: #FFF;
+}
+.guestPopup-signin a {
+    color: #FFF;
+    font-weight: bold;
+}
+.guestPopup-signin a:hover {
+    text-decoration: underline;
+}
+.guestPopup-close {
+    position: absolute;
+    bottom: 13%;
+    right: 50%;
+}
+.guestPopup-close-btn {
+    background-color: transparent;
+    opacity: 0.8;
+    padding: 5px;
+    cursor: pointer;
+}
+.guestPopup-close-btn span {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+.guestPopup-close-btn:hover {
+    opacity: 1;
+}
+.guestPopup-close:hover {
+    transform: scale(1.04);
+}

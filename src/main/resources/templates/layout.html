@@ -19,6 +19,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
+
     <!-- main and component Css -->
     <link th:href="@{/css/main.css}" rel="stylesheet" />
     <link th:href="@{/css/components/header.css}" rel="stylesheet" />
@@ -35,6 +36,7 @@
     <link th:href="@{/css/components/playlistSidebar.css}" rel="stylesheet" />
     <link th:href="@{/css/components/tooltip.css}" rel="stylesheet" />
     <link th:href="@{/css/components/confirmPopup.css}" rel="stylesheet" />
+    <link th:href="@{/css/components/guestPopup.css}" rel="stylesheet" />
     <!-- User Css -->
     <link rel="stylesheet" th:href="@{/css/auth/signin.css}" />
     <link rel="stylesheet" th:href="@{/css/auth/signup.css}" />
@@ -54,6 +56,7 @@
     <link rel="stylesheet" th:href="@{/css/user/favorite.css}" />
     <link rel="stylesheet" th:href="@{/css/user/setting.css}" />
     <!-- Admin Css -->
+    <link rel="stylesheet" th:href="@{/css/admin/upload.css}" />
     <link rel="stylesheet" th:href="@{/css/admin/songlist.css}" />
     <link rel="stylesheet" th:href="@{/css/admin/editSonglist.css}" />
     <link rel="stylesheet" th:href="@{/css/admin/addSong.css}" />
@@ -69,23 +72,53 @@
     <script th:src="@{/js/optionButton.js}"></script>
     <script th:src="@{/js/popup.js}"></script>
     <script th:src="@{/js/musicPlayer.js}"></script>
+    <script th:src="@{/js/admin.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const img = document.getElementById("image-background");
+        const wrapper = document.getElementById("guestPopup-wrapper");
+        const colorThief = new ColorThief();
+
+        if (!img || !wrapper) return;
+
+        if (img.complete) {
+          applyColor();
+        } else {
+          img.addEventListener("load", applyColor);
+        }
+
+        function applyColor() {
+          const dominantColor = colorThief.getColor(img);
+          const rgb = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+          wrapper.style.background = `linear-gradient(to bottom, ${rgb}, #1F2937)`;
+        }
+      });
+    </script>
   </head>
   <body>
     <!-- Header -->
-    <div th:replace="components/header :: headerFragment"></div>
+    <div th:replace="~{components/header :: headerFragment}"></div>
 
     <div class="box">
       <!-- Sidebar -->
-      <div th:replace="components/sidebar :: sidebarFragment"></div>
+      <div th:replace="~{components/sidebar :: sidebarFragment}"></div>
 
       <!-- Children (dynamic content) -->
       <main class="main" th:classappend="${customMainClass}">
         <div th:insert="~{::content}"></div>
       </main>
-      <div th:replace="components/playlistSidebar :: playlistSidebar()"></div>
+      <div
+        th:replace="~{components/playlistSidebar :: playlistSidebar()}"
+      ></div>
     </div>
 
     <!-- Fixed Bottom Music player -->
-    <div th:replace="components/musicPlayer :: playerFragment"></div>
+    <div th:replace="~{components/musicPlayer :: playerFragment}"></div>
+
+    <!-- Guest popup display when user not loggin  -->
+    <div
+      th:replace="~{components/guestPopup :: guestPopup('/images/electronic.jpg')}"
+    ></div>
   </body>
 </html>

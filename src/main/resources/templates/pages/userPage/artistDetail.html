@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,67 +23,27 @@
           </div>
         </div>
       </div>
-      <!-- artist nav -->
-      <div class="artist-navigation">
-        <a href="#" class="nav-item active">Overview</a>
-        <a href="#" class="nav-item">Songs</a>
-        <a href="#" class="nav-item">Albums</a>
-        <a href="#" class="nav-item">Tours</a>
-      </div>
 
       <!-- artist actions -->
       <div class="artist-detail-acions">
         <!-- artist play button -->
-        <button class="artist-detail-play">
-          <div class="artist-detail-play-btn">
-            <i class="fa-solid fa-play"></i><span>Play</span>
-          </div>
-        </button>
-        <!-- artist follow button -->
-        <button class="artist-detail-follow">
-          <div class="artist-detail-follow-btn">
-            <span>Follow</span>
-          </div>
-        </button>
+        <!--ROUNDED BUTTON (PLAY)-->
+        <div
+          th:replace="~{components/roundedButton :: roundedButton('fa-solid fa-play', '22px', 'Play', '130px', '50px', null, 'playSong(event)')}"
+        ></div>
+        <!--ROUNDED BUTTON (Follow)-->
+        <div class="artist-detail-button-custom">
+          <div
+            th:replace="~{components/roundedButton :: roundedButton('', '', 'Follow', '130px', '50px', null, 'followArtist()')}"
+          ></div>
+        </div>
       </div>
 
       <!-- artist popular songs -->
       <div class="artist-popular-songs">
         <h2>Popular Songs</h2>
         <!--Song list grid-->
-        <div class="artist-popular-grid">
-          <!--Song item-->
-          <div class="artist-popular-card">
-            <div class="artist-popular-card-img">
-              <img src="/images/song_img1.png" atl="artist-popular image" />
-            </div>
-            <div class="artist-popular-overlay">
-              <a href="/song/detail" class="artist-popular-overlay-btn">
-                <div class="artist-popular-play">
-                  <button
-                    class="artist-popular-play-btn"
-                    onclick="playSong(event)"
-                  >
-                    <i
-                      class="fa-solid fa-play artist-popular-play-btn-icon"
-                    ></i>
-                  </button>
-                </div>
-              </a>
-            </div>
-            <div class="artist-popular-info">
-              <h3 class="artist-popular-name">Title</h3>
-              <p class="artist-popular-artist">Artist</p>
-              <div class="artist-popular-meta">
-                <span class="artist-popular-duration">3:20</span>
-                <div class="artist-popular-actions">
-                  <i class="fa-regular fa-heart"></i>
-                  <i class="fa-solid fa-plus"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div th:replace="~{components/songCard :: songCard()}"></div>
       </div>
 
       <!-- player -->

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +16,7 @@
       </div>
 
       <!-- LIST OF FEATURED SONGS -->
-      <div th:replace="/components/songCard :: songCard()"></div>
+      <div th:replace="~{components/songCard :: songCard()}"></div>
 
       <!-- Recommended playlist and view all -->
       <div class="home-header">
@@ -27,7 +27,7 @@
       </div>
 
       <!-- list of Recommended artist -->
-      <div th:replace="/components/artistCard :: artistCard()"></div>
+      <div th:replace="~{components/artistCard :: artistCard()}"></div>
 
       <!-- Recently played -->
       <div class="home-header-recently-played">
@@ -36,10 +36,10 @@
 
       <!-- Recently played songs list -->
       <div
-        th:replace="components/listSong :: listOfSong(songNumber='',
+        th:replace="~{components/listSong :: listOfSong(songNumber='',
         icon='plus', duration='4:30',
         onclickFunction='addToPlaylist()'
-        )"
+        )}"
       ></div>
     </div>
   </body>

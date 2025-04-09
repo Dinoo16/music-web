@@ -2,7 +2,11 @@
 function playSong(event) {
   event.preventDefault();
   event.stopPropagation();
-  alert("Playing song...");
+
+  //if user logged in then play music
+  //esle user not loggin then display guest pupup
+  openGuestPopup();
+  // alert("Playing song...");
 }
 
 // retrieve the function name dynamically
@@ -33,3 +37,33 @@ function togglePlayPause(button) {
 // Signin and dislay user sidebar with profile header
 
 // Signin and dislay admin sidebar
+
+//
+
+document.addEventListener("DOMContentLoaded", function () {
+  const selectBtn = document.querySelector(".select-btn");
+  const listItems = document.querySelectorAll(".list-items .item");
+  const btnText = document.querySelector(".btn-text");
+
+  if (!selectBtn || !btnText || listItems.length === 0) {
+    console.warn("Dropdown elements not found");
+    return;
+  }
+
+  selectBtn.addEventListener("click", () => {
+    selectBtn.classList.toggle("open");
+  });
+
+  listItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      item.classList.toggle("checked");
+
+      const checkedItems = document.querySelectorAll(".list-items .checked");
+      if (checkedItems.length > 0) {
+        btnText.innerText = `${checkedItems.length} Selected`;
+      } else {
+        btnText.innerText = "Select Genres";
+      }
+    });
+  });
+});

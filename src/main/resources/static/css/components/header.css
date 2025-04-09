@@ -59,9 +59,8 @@ input::placeholder {
 
 /* Disable when not signin */
 .header__profile {
-    /* display: none; */
+    display: none;
 }
-
 
 .header__action{
     background-color: transparent;
@@ -76,6 +75,55 @@ input::placeholder {
 .header__profile-btn, .header__login-btn {
     color: #FFF !important;
 }
+/* Tooltip display when use try to use a feature but not login*/
+.header__tooltip__container {
+    position: relative;
+    display: inline-block;
+}
+.header__tooltip-box {
+position: absolute;
+  top: 150%;
+  right: 0;
+  width: 260px;
+  background-color: var(--primary); 
+  color: white;
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 10;
+  font-size: 14px;
+  display: none;
+}
+.header__tooltip-box strong {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  
+  .header__tooltip-box p {
+    margin: 0;
+    font-size: 13px;
+  }
+  
+  .header__tooltip-close {
+    color: white;
+    position: absolute;
+    top: 5px;
+    right: 12px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .header__tooltip-arrow {
+    position: absolute;
+    top: -9px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid var(--primary);
+  }
+
 
 /* disable when not login */
 .header__logout {

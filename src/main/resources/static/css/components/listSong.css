@@ -93,10 +93,8 @@
     flex: 1 1 0%;
     margin-left: 15px;
     min-width: 0;
-    /* white-space: nowrap;  */
     overflow: hidden; 
     transition: none;
-    /* text-overflow: ellipsis; */
   }
   .listOfSong-info > div {
     white-space: nowrap;
@@ -119,6 +117,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .listOfSong-info-artist:hover {
+    text-decoration: underline;
+  }
+  
+  .listOfSong-song-name:hover {
+    color: var(--primary)
   }
  
   .listOfSong-duration {

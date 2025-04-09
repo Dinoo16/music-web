@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,9 +8,9 @@
   <body>
     <div th:fragment="content">
       <div
-        th:replace="components/confirmPopup :: confirmPopup('Delete from your library?', 'This will delete My playlist #5 from your library.')"
+        th:replace="~{components/confirmPopup :: confirmPopup('Delete from your library?', 'This will delete My playlist #5 from your library.')}"
       ></div>
-      <div th:replace="components/popupOverlay :: popupOverlay"></div>
+      <div th:replace="~{components/popupOverlay :: popupOverlay}"></div>
 
       <!-- myplaylist detail backgroud -->
       <div class="myplaylist-detail-background">
@@ -32,11 +32,11 @@
           <div class="myplaylist-detail-actions">
             <!--ROUNDED BUTTON (PLAY ALL)-->
             <div
-              th:replace="components/roundedButton :: roundedButton('fa-solid fa-play', '18px', 'Play All', '150px', '50px', null, 'playSong(event)')"
+              th:replace="~{components/roundedButton :: roundedButton('fa-solid fa-play', '18px', 'Play All', '150px', '50px', null, 'playSong(event)')}"
             ></div>
             <!--ICON BUTTON - OPTION BUTTON -->
             <div
-              th:replace="components/optionButton :: optionButton('22px', '50px', '50px', 'auto', '', 'toggleOptionMenu(event)')"
+              th:replace="~{components/optionButton :: optionButton('22px', '50px', '50px', 'auto', '', 'toggleOptionMenu(event)')}"
             >
               <button
                 th:style="'width:' + ${width} + '; height:' + ${height} + '; right:' + ${right}"
@@ -49,18 +49,18 @@
       <!-- myplaylist song list -->
       <h2 class="myplaylist-song-header">All songs</h2>
       <div
-        th:replace="components/listSong :: listOfSong('','minus','4:30', 'removeSong()')"
+        th:replace="~{components/listSong :: listOfSong('','minus','4:30', 'removeSong()')}"
       ></div>
 
       <!-- myplaylist RECOMMENDED song list -->
       <h2 class="myplaylist-song-header">Recommended songs</h2>
       <div
-        th:replace="components/listSong :: listOfSong('','plus','4:30', 'addSong()')"
+        th:replace="~{components/listSong :: listOfSong('','plus','4:30', 'addSong()')}"
       ></div>
 
       <!--Edit playlist Popup-->
       <div
-        th:replace="components/popup :: popup('Edit playlist', 'Enter playlist name', 'Modify description','saveEditPlaylist()')"
+        th:replace="~{components/popup :: popup('Edit playlist', 'Enter playlist name', 'Modify description','saveEditPlaylist()')}"
       ></div>
     </div>
   </body>

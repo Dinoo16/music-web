@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -29,36 +29,7 @@
       </div>
 
       <!-- list of favoritess -->
-      <div class="favorites-grid">
-        <!-- Dùng Thymeleaf để lặp qua danh sách bài hát -->
-
-        <!--Song item-->
-        <div class="favorites-card">
-          <div class="favorites-card-img">
-            <img src="/images/artist1.png" atl="favorites image" />
-          </div>
-          <div class="favorites-overlay">
-            <a href="/song/detail" class="favorites-overlay-btn">
-              <div class="favorites-play">
-                <button class="favorites-play-btn" onclick="playSong(event)">
-                  <i class="fa-solid fa-play favorites-play-btn-icon"></i>
-                </button>
-              </div>
-            </a>
-          </div>
-          <div class="favorites-info">
-            <h3 class="favorites-name">Title</h3>
-            <p class="favorites-artist">Artist</p>
-            <div class="favorites-meta">
-              <span class="favorites-duration">3:20</span>
-              <div class="favorites-actions">
-                <i class="fa-regular fa-heart"></i>
-                <i class="fa-solid fa-plus"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div th:replace="~{components/songCard :: songCard()}"></div>
     </div>
   </body>
 </html>

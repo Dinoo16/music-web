@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popup display when guest try to play music</title>
+  </head>
+  <body>
+    <div th:fragment="guestPopup(image)" class="guestPopup">
+      <div class="guestPopup-overlay">
+        <div class="guestPopup-wrapper" id="guestPopup-wrapper">
+          <div class="guestPopup-image-section">
+            <img
+              id="image-background"
+              class="guestPopup-image"
+              th:src="${image}"
+              alt="image backgroud"
+              crossorigin="anonymous"
+            />
+          </div>
+          <div class="guestPopup-signup-section">
+            <h1>Start listening with a free MUSIC account</h1>
+            <a href="/signup" class="guestPopup-signup-btn">Sign up free</a>
+            <a href="#" class="guestPopup-download-btn">Download app</a>
+            <p class="guestPopup-signin">
+              Already have an account?
+              <a href="/signin" class="guestPopup-singin">Sign in</a>
+            </p>
+          </div>
+        </div>
+        <div class="guestPopup-close">
+          <button class="guestPopup-close-btn" onclick="closeGuestPopup()">
+            <span>Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -20,4 +20,12 @@ function closePopup() {
   document.querySelector(".popup").style.display = "none";
 }
 
+//open guest popup
+function openGuestPopup() {
+  document.querySelector(".guestPopup-overlay").style.display = "block";
+}
 
+//close guest popup
+function closeGuestPopup() {
+  document.querySelector(".guestPopup-overlay").style.display = "none";
+}

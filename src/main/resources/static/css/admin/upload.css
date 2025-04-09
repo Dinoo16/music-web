@@ -1,0 +1,36 @@
+.upload-tabs {
+    display: flex;
+    gap: 32px;
+    border-bottom: 1px solid #2d253b; 
+    padding-top: 18px;
+  }
+  
+  .upload-tab {
+    color: #d1d5db;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 6px;
+    transition: color 0.3s ease;
+  }
+  
+  .upload-tab:hover {
+    color: #e5e7eb;
+  }
+  
+  .upload-tab-active {
+    color: white;
+  }
+  
+  .upload-tab-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+    border-radius: 2px;
+  }
+  

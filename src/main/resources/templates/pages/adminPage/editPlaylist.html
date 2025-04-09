@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,9 +22,6 @@
               <select class="edit-playlist-select">
                 <option value="abc">abc</option>
               </select>
-              <button class="edit-playlist-add-btn">
-                <i class="fa-solid fa-plus"></i>
-              </button>
             </div>
             <label class="edit-playlist-label">Artist</label>
             <input

@@ -73,6 +73,10 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    opacity: 0.8;
+}
+.play-pause-btn:hover {
+    opacity: 1;
 }
 
 .play-pause-btn i {
@@ -127,9 +131,13 @@
     width: 1px;
     background-color: #9CA3AF;
 }
+.music-player-playlist-btn:hover {
+    opacity: 1;
+}
 .music-player-playlist-btn {
     background-color: transparent;
     cursor: pointer;
+    opacity: 0.8;
 }
 .playlist-icon {
     width: 24px;

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="upload-tabs">
+        <div class="upload-tab upload-tab-active">Song</div>
+        <div class="upload-tab">Artist</div>
+        <div class="upload-tab">Album</div>
+        <div class="upload-tab">Playlist</div>
+      </div>
+      <!--Manage song-->
+      <div id="songlist">
+        <div th:replace="~{pages/adminPage/songlist :: songlist}"></div>
+      </div>
+
+      <!--Manage Artist-->
+      <div id="artistList" style="display: none">
+        <div th:replace="~{pages/adminPage/artistList :: artistList}"></div>
+      </div>
+
+      <!--Manage Album-->
+      <div id="albumList" style="display: none">
+        <div th:replace="~{pages/adminPage/albumList :: albumList}"></div>
+      </div>
+
+      <!--Manage Playlist-->
+      <div id="playlist" style="display: none">
+        <div th:replace="~{pages/adminPage/playlist :: playlist}"></div>
+      </div>
+    </div>
+  </body>
+</html>

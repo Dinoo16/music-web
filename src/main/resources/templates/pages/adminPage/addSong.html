@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,54 +10,75 @@
       <div class="add-song-wrapper">
         <div class="add-song-container">
           <h1>Add song</h1>
-          <div class="add-song-fields">
-            <label class="add-song-label">Song name</label>
-            <input
-              type="text"
-              class="add-song-input"
-              placeholder="Enter song name"
-            />
-            <label class="add-song-label">Album</label>
-            <div class="add-song-album">
-              <select class="add-song-select">
-                <option value="abc">abc</option>
-              </select>
-              <button class="add-song-add-btn">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
-            <label class="add-song-label">Genre</label>
-            <div class="add-song-album">
-              <select class="add-song-select">
-                <option value="abc">abc</option>
-              </select>
-              <button class="add-song-add-btn">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
-            <label class="add-song-label">Artist</label>
-            <input
-              type="text"
-              class="add-song-input"
-              placeholder="Enter artist name"
-            />
-            <div class="add-song-upload">
-              <label for="imageUpload" class="add-song-upload-box">
-                <span class="add-song-upload-icon">+</span>
-                <p class="add-song-upload-text">Insert picture</p>
-              </label>
+          <form method="post">
+            <div class="add-song-fields">
+              <!--Song name field-->
+              <label class="add-song-label">Song name</label>
               <input
-                type="file"
-                id="imageUpload"
-                class="add-song-upload-input"
-                accept="image/*"
+                type="text"
+                class="add-song-input"
+                placeholder="Enter song name"
               />
-            </div>
+              <!--Song file path field-->
+              <label class="add-song-label">File path</label>
+              <input
+                type="text"
+                class="add-song-input"
+                placeholder="Enter file path"
+              />
+              <!--Album field-->
+              <label class="add-song-label">Album</label>
+              <div class="add-song-album">
+                <select class="add-song-select">
+                  <option value="abc">abc</option>
+                </select>
+              </div>
 
-            <form action="">
-              <button class="add-song-upload-btn">Add Song</button>
-            </form>
-          </div>
+              <!--Genres (multi-select)-->
+              <label class="add-song-label">Genres</label>
+              <div class="add-song-genres">
+                <div class="select-btn">
+                  <span class="btn-text">Select Genres</span>
+                  <span class="arrow-dwn">
+                    <i class="fa-solid fa-chevron-down"></i>
+                  </span>
+                </div>
+                <ul class="list-items">
+                  <li class="item">
+                    <span class="checkbox">
+                      <i class="fa-solid fa-check check-icon"></i>
+                    </span>
+                    <span class="item-text">Hiphop</span>
+                  </li>
+                </ul>
+              </div>
+
+              <!--Artist field-->
+              <label class="add-song-label">Artist</label>
+              <div class="add-song-album">
+                <select class="add-song-select">
+                  <option value="abc">Artist1</option>
+                </select>
+              </div>
+              <!--Image upload field-->
+              <div class="add-song-upload">
+                <label for="imageUpload" class="add-song-upload-box">
+                  <span class="add-song-upload-icon">+</span>
+                  <p class="add-song-upload-text">Insert picture</p>
+                </label>
+                <input
+                  type="file"
+                  id="imageUpload"
+                  class="add-song-upload-input"
+                  accept="image/*"
+                />
+              </div>
+
+              <button type="submit" class="add-song-upload-btn">
+                Add Song
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

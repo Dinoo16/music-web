@@ -31,14 +31,27 @@
             </a>
           </div>
           <!-- Login button -->
-          <div class="header__login">
-            <a th:href="@{/signin}" class="header__action">
-              <i
-                class="fa-solid fa-arrow-right-to-bracket header__login-btn"
-              ></i>
-              Login
-            </a>
+          <div class="header__tooltip__container">
+            <div class="header__login">
+              <a th:href="@{/signin}" class="header__action">
+                <i
+                  class="fa-solid fa-arrow-right-to-bracket header__login-btn"
+                ></i>
+                Login
+              </a>
+            </div>
+            <div class="header__tooltip-box">
+              <strong>You’re logged out</strong>
+              <p>Please login to access all features.</p>
+              <span
+                class="header__tooltip-close"
+                onclick="this.parentElement.style.display='none'"
+                >&times;</span
+              >
+              <div class="header__tooltip-arrow"></div>
+            </div>
           </div>
+
           <!-- Logout button -->
           <div class="header__logout">
             <i class="fa-solid fa-arrow-right-to-bracket header__login-btn"></i>

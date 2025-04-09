@@ -69,26 +69,6 @@
 
   }
   
-  .edit-songlist-add-btn {  
-    background-color: var(--primary);
-    color: white;
-    margin-bottom: 12px;
-    width: 32px;
-    height: 32px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .edit-songlist-add-btn i {
-    padding: 12px;
-  }
-  
-  .edit-songlist-add-btn:hover {
-    opacity: 0.8;
-  }
   
   /* Upload Box */
   .edit-songlist-upload {
@@ -132,8 +112,9 @@
     cursor: pointer;
     text-align: center;
     width: 100%;
+    opacity: 0.8;
   }
   
   .edit-songlist-upload-btn:hover {
-    opacity: 0.8;
+    opacity: 1;
   }

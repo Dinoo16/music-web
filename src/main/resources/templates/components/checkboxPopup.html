@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Popup display when guest try to play music</title>
+  </head>
+  <body>
+    <div th:fragment="checkboxPopup(type, items)" class="checkboxPopup">
+      <!-- Hidden checkbox list -->
+      <div class="checkbox-overlay">
+        <div class="checkbox-group">
+          <!-- Title and close button -->
+          <div class="checkbox-header">
+            <h3 th:text="'Select ' + ${type}"></h3>
+            <span class="checkbox-close" onclick="closeCheckboxList()"
+              >&times;</span
+            >
+          </div>
+
+          <!-- List of checkboxes -->
+          <div class="checkbox-item" th:each="item : ${items}">
+            <input
+              type="checkbox"
+              th:id="${type} + '_' + ${item.id}"
+              th:name="${type + 's'}"
+              th:value="${item.id}"
+            />
+            <label
+              th:for="${type} + '_' + ${item.id}"
+              th:text="${item.name}"
+            ></label>
+          </div>
+
+          <!-- Submit -->
+          <div class="checkbox-submit-btn">
+            <button type="button" onclick="submitCheckboxes()">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trigger to open artist checkbox list -->
+      <label class="add-song-label" th:text="${type}"></label>
+      <div class="add-song-album" onclick="openCheckboxList()">
+        <div class="add-song-select">
+          <span th:text="'Select ' + ${type}"></span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

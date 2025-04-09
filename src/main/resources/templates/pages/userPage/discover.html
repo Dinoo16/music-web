@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,7 +24,7 @@
         <!-- CUSTOM ROUNDED BUTTON (Listen now) -->
         <div class="discoverCustomRoundedButton">
           <div
-            th:replace="components/roundedButton :: roundedButton('','', 'Listen now', '160px','50px', null, 'playSong(event)')"
+            th:replace="~{components/roundedButton :: roundedButton('','', 'Listen now', '160px','50px', null, 'playSong(event)')}"
           ></div>
         </div>
       </div>
@@ -34,7 +34,7 @@
         <h2 class="discover-new-releases-title">New Releases</h2>
       </div>
       <!-- list of songs -->
-      <div th:replace="/components/songCard :: songCard()"></div>
+      <div th:replace="~{components/songCard :: songCard()}"></div>
 
       <!-- Browse by Mood -->
 
@@ -42,7 +42,7 @@
         <h2 class="discover-new-releases-title">Browse by Mood</h2>
       </div>
       <!-- list of songs -->
-      <div th:replace="/components/songCard :: songCard()"></div>
+      <div th:replace="~{components/songCard :: songCard()}"></div>
     </div>
   </body>
 </html>

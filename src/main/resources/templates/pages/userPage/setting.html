@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,7 +25,7 @@
             <div class="setting-profile-change-avatar">
               <!--CUSTOM ROUNDED BUTTON (Change Profile Picture)-->
               <div
-                th:replace="components/roundedButton :: roundedButton('','', 'Change Profile Picture', '200px','', '10px','handleChangeProfilePicture()')"
+                th:replace="~{components/roundedButton :: roundedButton('','', 'Change Profile Picture', '200px','', '10px','handleChangeProfilePicture()')}"
               ></div>
             </div>
           </div>
@@ -71,7 +71,7 @@
               <!--CUSTOM ROUNDED BUTTON (Change Profile Picture)-->
               <div class="setting-profile-fields-btn-change">
                 <div
-                  th:replace="components/roundedButton :: roundedButton('','', 'Save changes', '100%','', '10px','handleSaveChangeProfile()')"
+                  th:replace="~{components/roundedButton :: roundedButton('','', 'Save changes', '100%','', '10px','handleSaveChangeProfile()')}"
                 ></div>
               </div>
             </form>

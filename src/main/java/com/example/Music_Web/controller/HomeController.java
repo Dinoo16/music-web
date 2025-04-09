@@ -91,6 +91,11 @@ public class HomeController {
         return "pages/userPage/setting";
     }
 
+    @GetMapping("/admin/upload")
+    public String getUpload() {
+        return "pages/adminPage/upload";
+    }
+
     @GetMapping("/admin/songlist")
     public String getSongList() {
         return "pages/adminPage/songList";

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   xmlns:th="http://www.thymeleaf.org"
-  th:replace="layout :: layout(customMainClass='song-detail-page')"
+  th:replace="~{layout :: layout(customMainClass='song-detail-page')}"
 >
   <head>
     <meta charset="UTF-8" />
@@ -39,7 +39,10 @@
                 <span class="song-detail-song-genres">Pop</span>
               </div>
               <div class="song-detail-meta2">
-                <i class="fa-regular fa-star"></i>
+                <div class="tooltip">
+                  <button><i class="fa-regular fa-star"></i></button>
+                  <span class="tooltip-text">Rate</span>
+                </div>
                 <h4 class="song-detail-meta2-rate">4.8 (1234 views)</h4>
                 <span class="dot">•</span>
                 <span class="song-detail-play-count">8.2M plays</span>
@@ -47,12 +50,19 @@
               <div class="song-detail-actions">
                 <!-- CUSTOM ROUNDED BUTTON (PLay now) -->
                 <div
-                  th:replace="components/roundedButton :: roundedButton('fa-solid fa-play','22px', 'Play now', '160px','50px', null, 'playSong(event)')"
+                  th:replace="~{components/roundedButton :: roundedButton('fa-solid fa-play','22px', 'Play now', '160px','50px', null, 'playSong(event)')}"
                 ></div>
                 <!-- heart button -->
-                <button class="song-detail-heart-btn">
-                  <i class="fa-regular fa-heart"></i>
-                </button>
+                <div class="tooltip">
+                  <button
+                    class="song-detail-heart-btn"
+                    onclick="addtoFavorite()"
+                  >
+                    <i class="fa-regular fa-heart"></i>
+                  </button>
+                  <span class="tooltip-text">Add to favorite</span>
+                </div>
+
                 <!-- share button -->
                 <button class="song-detail-share-btn">
                   <i class="fa-solid fa-arrow-up-from-bracket"></i>
@@ -105,22 +115,9 @@
         <div class="song-detail-related">
           <h2 class="song-detail-related-header">Related Songs</h2>
           <!-- song item (add song id)-->
-          <a href="/song/detail">
-            <div class="song-detail-related-item">
-              <img
-                src="/images/artist1.png"
-                alt="Save Your Tears"
-                class="song-detail-related-image"
-              />
-              <div class="song-detail-related-info">
-                <h3 class="song-detail-related-title">Save Your Tears</h3>
-                <p class="song-detail-related-artist">The Weeknd</p>
-              </div>
-              <span class="song-detail-related-duration">3:15</span>
-            </div>
-          </a>
-
-          
+          <div
+            th:replace="~{components/listSong :: listOfSongItem('', 'plus','', 'addSongToPlaylist()')}"
+          ></div>
         </div>
       </div>
     </div>

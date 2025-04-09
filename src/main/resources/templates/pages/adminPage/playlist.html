@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,46 +8,38 @@
   <body>
     <div th:fragment="content">
       <!--Songs list wrapper-->
-      <div class="playlist-wrapper">
-        <!--Songs list header-->
-        <div class="playlist-header">
-          <h1>All Playlists</h1>
-        </div>
-
+      <div th:fragment="playlist" class="playlist-wrapper">
         <!--Songs list item-->
-        <table class="playlist-table">
-          <thead class="playlist-table-title">
-            <tr>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Number of songs</th>
+        <div class="playlist-table">
+          <div class="playlist-table-header">
+            <div class="playlist-col playlist-index">#</div>
+            <div class="playlist-col playlist-title">Title</div>
+            <div class="playlist-col playlist-num">Number of Songs</div>
+            <div class="playlist-col playlist-actions">Actions</div>
+          </div>
 
-              <th>Option</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <img
-                  src="/images/song_img1.png"
-                  alt="Save Your Tears"
-                  class="playlist-image"
-                />
-              </td>
-              <td>Save Your Tears</td>
-              <td>10</td>
+          <!-- Row 1 -->
+          <div class="playlist-row">
+            <div class="playlist-col playlist-index">1</div>
+            <div class="playlist-col playlist-title">
+              <img src="/images/rock.jpg" class="playlist-cover" />
+              <div>
+                <div class="playlist-name">Chill Vibes</div>
+              </div>
+            </div>
+            <div class="playlist-col playlist-num">10</div>
+            <div class="playlist-col playlist-actions">
+              <!--ICON BUTTON - OPTION BUTTON -->
 
-              <td class="playlist-table-actions">
-                <a href="/admin/playlist/edit"
-                  ><button class="playlist-edit">Edit</button></a
-                >
-                <form action="">
-                  <button class="playlist-remove">Remove</button>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              <div class="tooltip">
+                <button onclick="deletePlaylist()">
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+                <span class="tooltip-text">Delete playlist</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>

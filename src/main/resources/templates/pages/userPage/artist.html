@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,7 +20,7 @@
       </div>
 
       <!-- list of artists -->
-      <div th:replace="components/artistCard :: artistCard()"></div>
+      <div th:replace="~{components/artistCard :: artistCard()}"></div>
     </div>
   </body>
 </html>
