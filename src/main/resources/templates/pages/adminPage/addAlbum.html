@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add album</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="add-album-wrapper">
+        <div class="add-album-container">
+          <h1>Add Album</h1>
+          <form method="post" th:action="@{/album/add}" th:object="${album}">
+            <div class="add-album-fields">
+              <!--album name field-->
+              <label class="add-album-label">Album name</label>
+              <input
+                type="text"
+                th:field="*{albumName}"
+                class="add-album-input"
+                placeholder="Enter album name"
+              />
+
+              <!--Image upload field-->
+              <!-- <div class="add-album-upload">
+                <label for="imageUpload" class="add-album-upload-box">
+                  <span class="add-album-upload-icon">+</span>
+                  <p class="add-album-upload-text">Insert picture</p>
+                </label>
+                <input
+                  type="file"
+                  id="imageUpload"
+                  class="add-album-upload-input"
+                  accept="image/*"
+                />
+              </div> -->
+              <label class="add-album-label">Image file path</label>
+              <input
+                type="text"
+                th:field="*{coverImage}"
+                class="add-album-input"
+                placeholder="Enter cover image path"
+              />
+
+              <button type="submit" class="add-album-upload-btn">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

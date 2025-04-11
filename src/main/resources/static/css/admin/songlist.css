@@ -70,7 +70,11 @@
   .songlist-plays {
     flex: 1;
   }
-  
+  .songlist-genre {
+    flex: 1;
+  }
+
+
   .songlist-album {
     flex: 1;
   }
@@ -98,11 +102,17 @@
   }
   
   .songlist-artists {
+    display: flex;
+    
     font-size: 13px;
     color: #9ca3af;
   }
-  
-
+  .songlist-artists-name:not(:last-child):after {
+    content: ", ";
+  }
+  .songlist-genre-name:not(:last-child):after {
+    content: ', ';
+  }
     /* Actions button */
   .songlist-actionsButton-btn {
     width: 100%;
@@ -132,7 +142,7 @@
     padding: 8px;
     min-width: 200px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    z-index: 999;
+    z-index: 99999999;
     right:0;
   }
   

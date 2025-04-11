@@ -60,35 +60,10 @@
       </div>
 
       <!-- album track list -->
-      <div class="album-detail-tracklist">
-        <!-- album track list title-->
-        <div class="album-detail-tracklist-header">
-          <div class="album-detail-tracklist-header-title">
-            <span>#</span>
-            <span>Title</span>
-          </div>
-          <span class="album-detail-tracklist-time"
-            ><i class="fa-regular fa-clock"></i
-          ></span>
-        </div>
-        <!-- album track list-->
-        <div class="album-detail-tracklist-item">
-          <span class="album-detail-track-number">1</span>
-          <div class="album-detail-track-info">
-            <span class="album-detail-track-title">Blinding Lights</span>
-            <span class="album-detail-track-plays">8.2M plays</span>
-          </div>
-          <span class="album-detail-track-duration">3:20</span>
-        </div>
-        <div class="album-detail-tracklist-item">
-          <span class="album-detail-track-number">1</span>
-          <div class="album-detail-track-info">
-            <span class="album-detail-track-title">Blinding Lights</span>
-            <span class="album-detail-track-plays">8.2M plays</span>
-          </div>
-          <span class="album-detail-track-duration">3:20</span>
-        </div>
-      </div>
+
+      <div
+        th:replace="~{components/listSong :: listOfSong('', 'plus','4:30', 'addSongToPlaylist()')}"
+      ></div>
     </div>
   </body>
 </html>

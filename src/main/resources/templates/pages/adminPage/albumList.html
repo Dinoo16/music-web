@@ -6,6 +6,63 @@
     <title>Albums Management</title>
   </head>
   <body>
-    <div th:fragment="albumList" class="songlist-wrapper"></div>
+    <div th:fragment="albumList" class="albumList-wrapper">
+      <!--Songs list header-->
+      <div class="albumList-header">
+        <div class="albumList-header-add-btn">
+          <a class="albumList-header-add-btn-link" href="/album/add"
+            ><i class="fa-solid fa-plus"></i
+          ></a>
+        </div>
+      </div>
+
+      <!--Songs list item-->
+      <div class="albumList-table">
+        <div class="albumList-table-header">
+          <div class="albumList-col albumList-index">#</div>
+          <div class="albumList-col albumList-title">Title</div>
+          <div class="albumList-col albumList-artist">Artist</div>
+          <div class="albumList-col albumList-num">Number of songs</div>
+          <div class="albumList-col albumList-actions">Actions</div>
+        </div>
+
+        <!-- Row 1 -->
+        <div class="albumList-row">
+          <div class="albumList-col albumList-index">1</div>
+          <div class="albumList-col albumList-title">
+            <img src="/images/rock.jpg" class="albumList-cover" />
+            <div>
+              <div class="albumList-name">AlbumName</div>
+            </div>
+          </div>
+          <div class="albumList-col albumList-artist">The Weeknd</div>
+          <div class="albumList-col albumList-num">10</div>
+          <div class="albumList-col albumList-actions">
+            <!--ICON BUTTON - OPTION BUTTON -->
+
+            <button
+              class="albumList-actionsButton-btn"
+              onclick="toggleActionMenu(event)"
+            >
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div
+              class="albumList-actions-menu actions-menu"
+              id="albumList-actions-menu"
+            >
+              <a href="/admin/album/edit" style="color: #fff">
+                <button onclick="closeActionMenu()">
+                  <i class="fa-solid fa-pen"></i>Edit Album
+                </button>
+              </a>
+              <button onclick="deleteAlbum();closeActionMenu()">
+                <i class="fa-solid fa-trash"></i>
+                Delete Album
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

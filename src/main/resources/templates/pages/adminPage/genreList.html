@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genre Management</title>
+  </head>
+  <body>
+    <div th:fragment="genreList" class="genreList-wrapper">
+      <!--Artists list header-->
+      <div class="genreList-header">
+        <div class="genreList-header-add-btn">
+          <a class="genreList-header-add-btn-link" href="/genre/add"
+            ><i class="fa-solid fa-plus"></i
+          ></a>
+        </div>
+      </div>
+
+      <!--Artists list item-->
+      <div class="genreList-table">
+        <div class="genreList-table-header">
+          <div class="genreList-col genreList-index">#</div>
+          <div class="genreList-col genreList-title">Title</div>
+          <div class="genreList-col genreList-num">Number of songs</div>
+          <div class="genreList-col genreList-actions">Actions</div>
+        </div>
+
+        <!-- Row 1 -->
+        <div class="genreList-row" th:each="genre, iterStat : ${genres}">
+          <div
+            class="genreList-col genreList-index"
+            th:text="${iterStat.count}"
+          ></div>
+          <div class="genreList-col genreList-title">
+            <img th:src="@{${genre.genreImage}}" class="genreList-cover" />
+            <div>
+              <div class="genreList-name" th:text="${genre.genreName}">
+                The Weeknd
+              </div>
+            </div>
+          </div>
+          <div class="genreList-col genreList-num">12</div>
+          <div class="genreList-col genreList-actions">
+            <!--ICON BUTTON - OPTION BUTTON -->
+            <button
+              class="genreList-actionsButton-btn"
+              onclick="toggleActionMenu(event)"
+            >
+              <i class="fa-solid fa-ellipsis-vertical"></i>
+            </button>
+            <div
+              class="genreList-actions-menu actions-menu"
+              id="genreList-actions-menu"
+            >
+              <a
+                th:href="@{'/genre/update/' + ${genre.genreID}}"
+                style="color: #fff"
+              >
+                <button onclick="closeActionMenu()">
+                  <i class="fa-solid fa-pen"></i>Edit Genre
+                </button>
+              </a>
+              <a th:href="@{'/genre/delete/' + ${genre.genreID}}">
+                <button onclick="closeActionMenu()">
+                  <i class="fa-solid fa-trash"></i>
+                  Delete Genre
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

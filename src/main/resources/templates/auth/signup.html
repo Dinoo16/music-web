@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="layout :: layout">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,55 +9,94 @@
     <div th:fragment="content">
       <div class="signup-wrapper">
         <div class="signup-container">
-          <!-- <div> -->
           <h2 class="signup-title">Create Account</h2>
-          <form action="#" method="POST">
+
+          <!-- Show global error (like "username/email exists") -->
+          <p
+            th:if="${error}"
+            th:text="${error}"
+            style="color: red; margin-top: 10px"
+          ></p>
+
+          <!-- Form -->
+          <form
+            th:action="@{/auth/signup}"
+            th:object="${user}"
+            method="post"
+            onsubmit="return validateSignUpForm()"
+          >
             <div class="form-group">
               <label for="username">Username</label>
               <input
-                type="username"
-                id="username "
+                type="text"
+                th:field="*{username}"
                 placeholder="Choose a username"
                 required
               />
+              <div
+                th:if="${#fields.hasErrors('username')}"
+                th:errors="*{username}"
+                style="color: red"
+              ></div>
             </div>
+
             <div class="form-group">
               <label for="email">Email</label>
               <input
                 type="email"
-                id="email"
+                th:field="*{email}"
                 placeholder="Your email address"
                 required
               />
+              <div
+                th:if="${#fields.hasErrors('email')}"
+                th:errors="*{email}"
+                style="color: red"
+              ></div>
             </div>
+
             <div class="form-group">
               <label for="password">Password</label>
               <input
                 type="password"
-                id="password"
+                th:field="*{password}"
                 placeholder="Your password"
                 required
               />
+              <div
+                th:if="${#fields.hasErrors('password')}"
+                th:errors="*{password}"
+                style="color: red"
+              ></div>
             </div>
+
             <div class="form-group">
-              <label for="password">Confirm Password</label>
+              <label for="confirmPassword">Confirm Password</label>
               <input
                 type="password"
-                id="password"
-                placeholder="Confirm password"
+                th:field="*{confirmPassword}"
+                placeholder="Confirm your password"
                 required
               />
+              <div
+                th:if="${#fields.hasErrors('confirmPassword')}"
+                th:errors="*{confirmPassword}"
+                style="color: red"
+              ></div>
             </div>
-            <!--ROUNDED BUTTON CUSTOM (Submit Sign Up)-->
+
+            <!-- Sign up button -->
             <div class="signup-btn-wrapper">
               <div
-                th:replace="~{components/roundedButton :: roundedButton('', '', 'Sign up', '100%', '', '6px', 'handleSignUp()')}"
+                th:replace="~{components/roundedButton :: roundedButton('', '', 'Sign up', '100%', '', '6px', 'handleSignup()')}"
               ></div>
             </div>
           </form>
+
+          <!-- Redirect to sign in -->
           <p class="login-text">
             Already have an account?
-            <a href="/signin" class="login-link">Sign in</a>
+            <a href="/auth/signin" class="login-link">Sign in</a>
           </p>
         </div>
       </div>

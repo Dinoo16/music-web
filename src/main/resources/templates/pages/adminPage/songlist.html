@@ -11,7 +11,7 @@
       <!--Songs list header-->
       <div class="songlist-header">
         <div class="songlist-header-add-btn">
-          <a class="songlist-header-add-btn-link" href="/admin/songlist/addsong"
+          <a class="songlist-header-add-btn-link" href="/song/add"
             ><i class="fa-solid fa-plus"></i
           ></a>
         </div>
@@ -21,45 +21,79 @@
       <div class="songlist-table">
         <div class="songlist-table-header">
           <div class="songlist-col songlist-index">#</div>
+
           <div class="songlist-col songlist-title">Title</div>
           <div class="songlist-col songlist-plays">Plays</div>
+          <div class="songlist-col songlist-genre">Genre</div>
           <div class="songlist-col songlist-album">Album</div>
           <div class="songlist-col songlist-actions">Actions</div>
         </div>
 
         <!-- Row 1 -->
-        <div class="songlist-row">
-          <div class="songlist-col songlist-index">1</div>
+        <div class="songlist-row" th:each="song, iterStat : ${songs}">
+          <div
+            class="songlist-col songlist-index"
+            th:text="${iterStat.count}"
+          ></div>
+
+          <!--Test play song-->
+          <audio controls>
+            <source th:src="@{${song.filePath}}" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+
           <div class="songlist-col songlist-title">
-            <img src="/images/rock.jpg" class="songlist-cover" />
+            <img th:src="@{${song.coverImage}}" class="songlist-cover" />
             <div>
-              <div class="songlist-name">Die With A Smile</div>
-              <div class="songlist-artists">Lady Gaga, Bruno Mars</div>
+              <div class="songlist-name" th:text="${song.title}"></div>
+              <div class="songlist-artists">
+                <span
+                  class="songlist-artists-name"
+                  th:each="artist : ${song.artistsOfSong}"
+                  th:text="${artist.artistName}"
+                ></span>
+              </div>
             </div>
           </div>
           <div class="songlist-col songlist-plays">1,000</div>
-          <div class="songlist-col songlist-album">MAYHEM</div>
+          <div class="songlist-col songlist-genre">
+            <span
+              class="songlist-genre-name"
+              th:each="genre : ${song.genresOfSong}"
+              th:text="${genre.genreName}"
+            ></span>
+          </div>
+          <div
+            class="songlist-col songlist-album"
+            th:text="${song.album.albumName}"
+          ></div>
           <div class="songlist-col songlist-actions">
             <!--ICON BUTTON - OPTION BUTTON -->
-
             <button
               class="songlist-actionsButton-btn"
               onclick="toggleActionMenu(event)"
             >
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
-            <div class="songlist-actions-menu" id="songlist-actions-menu">
-              <a href="/admin/songlist/edit" style="color: #fff">
-                <button><i class="fa-solid fa-pen"></i>Edit Song</button>
+            <div
+              class="songlist-actions-menu actions-menu"
+              id="songlist-actions-menu"
+            >
+              <a
+                th:href="@{'/song/update/' + ${song.songID}}"
+                style="color: #fff"
+              >
+                <button onclick="closeActionMenu()">
+                  <i class="fa-solid fa-pen"></i>Edit Song
+                </button>
               </a>
-              <button onclick="deleteSong()">
-                <i class="fa-solid fa-trash"></i>
-                Delete Song
-              </button>
+              <a th:href="@{'/song/delete/' + ${song.songID}}">
+                <button onclick="closeActionMenu()">
+                  <i class="fa-solid fa-trash"></i>
+                  Delete Song
+                </button>
+              </a>
             </div>
-
-            <!-- <i class="fa-solid fa-pen"></i>
-            <i class="fa-solid fa-trash"></i> -->
           </div>
         </div>
       </div>

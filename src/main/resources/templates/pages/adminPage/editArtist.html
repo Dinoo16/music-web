@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Artist</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="edit-artist-wrapper">
+        <div class="edit-artist-container">
+          <h1>Edit Artist</h1>
+          <form
+            method="post"
+            th:action="@{/artist/update/{id}(id=${artist.artistID})}"
+            th:object="${artist}"
+          >
+            <div class="edit-artist-fields">
+              <!--Artist name field-->
+              <label class="edit-artist-label">Artist name</label>
+              <input
+                type="text"
+                th:field="*{artistName}"
+                class="edit-artist-input"
+                placeholder="Enter artist name"
+              />
+              <!--Artist bio field-->
+              <label class="edit-artist-label">Bio</label>
+              <input
+                type="text"
+                th:field="*{bio}"
+                class="edit-artist-input"
+                placeholder="Enter background information"
+              />
+
+              <!--Image upload field-->
+              <label class="edit-artist-label">Image file path</label>
+              <input
+                type="text"
+                th:field="*{image}"
+                class="add-artist-input"
+                placeholder="Enter cover image path"
+              />
+              <button type="submit" class="edit-artist-upload-btn">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

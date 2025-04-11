@@ -17,8 +17,11 @@
                 <i class="fa-regular fa-user avatar-icon"></i>
               </div>
               <div class="setting-profile-namefields">
-                <h3 class="setting-profile-name">Nguyen Van A</h3>
-                <p class="setting-profile-username">abc@example.com</p>
+                <h3
+                  class="setting-profile-name"
+                  th:text="${user.username}"
+                ></h3>
+                <p class="setting-profile-username" th:text="${user.email}"></p>
               </div>
             </div>
 
@@ -36,9 +39,10 @@
                 <label for="username">Username</label>
                 <input
                   type="username"
-                  id="username "
+                  id="username"
+                  th:value="${user.username}"
                   placeholder="ABC"
-                  required
+                  readonly
                 />
               </div>
               <div class="setting-profile-fields-form-group">
@@ -46,8 +50,9 @@
                 <input
                   type="email"
                   id="email"
+                  th:value="${user.email}"
                   placeholder="abc@gmail.com"
-                  required
+                  readonly
                 />
               </div>
               <div class="setting-profile-fields-form-group">

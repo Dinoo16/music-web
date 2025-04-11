@@ -10,69 +10,125 @@
       <div class="add-song-wrapper">
         <div class="add-song-container">
           <h1>Add song</h1>
-          <form method="post">
+          <form
+            th:action="@{/song/add}"
+            th:object="${song}"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <div class="add-song-fields">
               <!--Song name field-->
               <label class="add-song-label">Song name</label>
               <input
                 type="text"
+                th:field="*{title}"
                 class="add-song-input"
                 placeholder="Enter song name"
               />
               <!--Song file path field-->
               <label class="add-song-label">File path</label>
               <input
-                type="text"
+                type="file"
+                name="audioFile"
+                accept="audio/mp3"
                 class="add-song-input"
                 placeholder="Enter file path"
               />
               <!--Album field-->
               <label class="add-song-label">Album</label>
               <div class="add-song-album">
-                <select class="add-song-select">
-                  <option value="abc">abc</option>
+                <select class="add-song-select" th:field="*{album}">
+                  <option
+                    th:each="album : ${albumList}"
+                    th:value="${album.albumID}"
+                    th:text="${album.albumName}"
+                  ></option>
                 </select>
               </div>
 
               <!--Genres (multi-select)-->
-              <label class="add-song-label">Genres</label>
-              <div class="add-song-genres">
-                <div class="select-btn">
-                  <span class="btn-text">Select Genres</span>
-                  <span class="arrow-dwn">
-                    <i class="fa-solid fa-chevron-down"></i>
-                  </span>
-                </div>
-                <ul class="list-items">
-                  <li class="item">
-                    <span class="checkbox">
-                      <i class="fa-solid fa-check check-icon"></i>
+              <div class="add-song-dropdown" data-type="genres">
+                <label class="add-song-label">Genres</label>
+                <div class="add-song-genres">
+                  <div class="select-btn">
+                    <span class="btn-text">Select Genres</span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
                     </span>
-                    <span class="item-text">Hiphop</span>
-                  </li>
-                </ul>
+                  </div>
+                  <ul class="list-items">
+                    <li
+                      th:attr="data-id=${genre.genreID}"
+                      class="item"
+                      th:each="genre : ${genres}"
+                    >
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span
+                        class="item-text"
+                        th:text="${genre.genreName}"
+                      ></span>
+                    </li>
+                  </ul>
+                </div>
               </div>
+              <input type="hidden" name="selectedGenres" id="selectedGenres" />
 
-              <!--Artist field-->
-              <label class="add-song-label">Artist</label>
-              <div class="add-song-album">
-                <select class="add-song-select">
-                  <option value="abc">Artist1</option>
-                </select>
+              <!--artists (multi-select)-->
+              <div class="add-song-dropdown" data-type="artists">
+                <label class="add-song-label">Artists</label>
+                <div class="add-song-artists">
+                  <div class="select-btn">
+                    <span class="btn-text">Select artists</span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </div>
+                  <ul class="list-items">
+                    <li
+                      th:attr="data-id=${artist.artistID}"
+                      class="item"
+                      th:each="artist : ${artists}"
+                    >
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span
+                        class="item-text"
+                        th:text="${artist.artistName}"
+                      ></span>
+                    </li>
+                  </ul>
+                </div>
               </div>
+              <input
+                type="hidden"
+                name="selectedArtists"
+                id="selectedArtists"
+              />
               <!--Image upload field-->
-              <div class="add-song-upload">
-                <label for="imageUpload" class="add-song-upload-box">
-                  <span class="add-song-upload-icon">+</span>
-                  <p class="add-song-upload-text">Insert picture</p>
-                </label>
-                <input
-                  type="file"
-                  id="imageUpload"
-                  class="add-song-upload-input"
-                  accept="image/*"
-                />
-              </div>
+              <!-- <div class="add-song-upload">
+                  <label for="imageUpload" class="add-song-upload-box">
+                    <span class="add-song-upload-icon">+</span>
+                    <p class="add-song-upload-text">Insert picture</p>
+                  </label>
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    class="add-song-upload-input"
+                    accept="image/*"
+                  />
+                </div> -->
+              <!--Image upload field-->
+              <label class="add-song-label">Image file path</label>
+              <input
+                type="file"
+                name="imageFile"
+                accept="image/*"
+                class="add-song-input"
+                placeholder="Enter cover image path"
+              />
 
               <button type="submit" class="add-song-upload-btn">
                 Add Song

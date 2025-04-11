@@ -3,50 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Songlist</title>
+    <title>Edit Song</title>
   </head>
   <body>
     <div th:fragment="content">
       <div class="edit-songlist-wrapper">
         <div class="edit-songlist-container">
-          <h1 class="edit-songlist-header">Edit Song</h1>
-          <div class="edit-songlist-fields">
-            <label class="edit-songlist-label">Song name</label>
-            <input
-              type="text"
-              class="edit-songlist-input"
-              placeholder="Enter song name"
-            />
-            <label class="edit-songlist-label">Album</label>
-            <div class="edit-songlist-album">
-              <select class="edit-songlist-select">
-                <option value="abc">abc</option>
-              </select>
-              
-            </div>
-            <label class="edit-songlist-label">Artist</label>
-            <input
-              type="text"
-              class="edit-songlist-input"
-              placeholder="Enter artist name"
-            />
-            <div class="edit-songlist-upload">
-              <label for="imageUpload" class="edit-songlist-upload-box">
-                <span class="edit-songlist-upload-icon">+</span>
-                <p class="edit-songlist-upload-text">Insert picture</p>
-              </label>
+          <h1>Edit song</h1>
+          <form
+            th:action="@{/song/update/{id}(id=${song.songID})}"
+            th:object="${song}"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="edit-songlist-fields">
+              <!--Song name field-->
+              <label class="edit-songlist-label">Song name</label>
               <input
-                type="file"
-                id="imageUpload"
-                class="edit-songlist-upload-input"
-                accept="image/*"
+                type="text"
+                th:field="*{title}"
+                class="edit-songlist-input"
+                placeholder="Enter song name"
               />
-            </div>
+              <!--Song file path field-->
+              <label class="edit-songlist-label">File path</label>
+              <input
+                type="text"
+                th:field="*{filePath}"
+                class="edit-songlist-input"
+                placeholder="Enter file path"
+              />
+              <!--Album field-->
+              <label class="edit-songlist-label">Album</label>
+              <div class="edit-songlist-album">
+                <select class="edit-songlist-select" th:field="*{album}">
+                  <option
+                    th:each="album : ${albumList}"
+                    th:value="${album.albumID}"
+                    th:text="${album.albumName}"
+                    th:selected="${album.albumID == song.album.albumID}"
+                  ></option>
+                </select>
+              </div>
 
-            <form action="">
-              <button class="edit-songlist-upload-btn">Save Song</button>
-            </form>
-          </div>
+              <!--Genres (multi-select)-->
+              <div class="edit-songlist-dropdown" data-type="genres">
+                <label class="edit-songlist-label">Genres</label>
+                <div class="edit-songlist-genres">
+                  <div class="select-btn">
+                    <span class="btn-text">Select Genres</span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </div>
+                  <ul class="list-items">
+                    <li
+                      th:attr="data-id=${genre.genreID}"
+                      class="item"
+                      th:each="genre : ${genres}"
+                      th:classappend="${selectedGenreIds.contains(genre.genreID)} ? 'checked' : ''"
+                    >
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span
+                        class="item-text"
+                        th:text="${genre.genreName}"
+                      ></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <input type="hidden" name="selectedGenres" id="selectedGenres" />
+
+              <!--artists (multi-select)-->
+              <div class="edit-songlist-dropdown" data-type="artists">
+                <label class="edit-songlist-label">Artists</label>
+                <div class="edit-songlist-artists">
+                  <div class="select-btn">
+                    <span class="btn-text">Select artists</span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </div>
+                  <ul class="list-items">
+                    <li
+                      th:attr="data-id=${artist.artistID}"
+                      class="item"
+                      th:each="artist : ${artists}"
+                      th:classappend="${selectedArtistIds.contains(artist.artistID)} ? 'checked' : ''"
+                    >
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span
+                        class="item-text"
+                        th:text="${artist.artistName}"
+                      ></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <input
+                type="hidden"
+                name="selectedArtists"
+                id="selectedArtists"
+              />
+
+              <label class="edit-songlist-label">Image file path</label>
+              <input
+                type="text"
+                th:field="*{coverImage}"
+                class="edit-songlist-input"
+                placeholder="Enter cover image path"
+              />
+
+              <button type="submit" class="edit-songlist-upload-btn">
+                Save
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

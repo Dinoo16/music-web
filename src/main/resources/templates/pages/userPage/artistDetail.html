@@ -45,7 +45,33 @@
         <!--Song list grid-->
         <div th:replace="~{components/songCard :: songCard()}"></div>
       </div>
+      <!-- artist album -->
+      <div class="artist-albums">
+        <h2>Albums</h2>
+        <!-- list of albums -->
+        <div class="albums-grid">
+          <!-- Dùng Thymeleaf để lặp qua danh sách albums -->
 
+          <div class="album-card">
+            <img src="/images/song_img1.png" atl="album image" />
+            <div class="album-overlay">
+              <a href="/album/detail">
+                <div class="album-detail">
+                  <span>View Album</span>
+                </div>
+              </a>
+            </div>
+            <div class="album-info">
+              <h3 class="album-name">After Hours</h3>
+              <p class="album-artist">The Weeknd</p>
+              <div class="album-meta">
+                <p class="album-year">2020</p>
+                <p class="album-song-count">14 songs</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- player -->
     </div>
   </body>

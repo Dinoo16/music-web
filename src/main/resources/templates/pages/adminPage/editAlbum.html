@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit album</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="edit-album-wrapper">
+        <div class="edit-album-container">
+          <h1>Edit Album</h1>
+          <form method="post">
+            <div class="edit-album-fields">
+              <!--album name field-->
+              <label class="edit-album-label">Album name</label>
+              <input
+                type="text"
+                class="edit-album-input"
+                placeholder="Enter album name"
+              />
+
+              <!--Image upload field-->
+              <div class="edit-album-upload">
+                <label for="imageUpload" class="edit-album-upload-box">
+                  <span class="edit-album-upload-icon">+</span>
+                  <p class="edit-album-upload-text">Insert picture</p>
+                </label>
+                <input
+                  type="file"
+                  id="imageUpload"
+                  class="edit-album-upload-input"
+                  accept="image/*"
+                />
+              </div>
+              <button type="submit" class="edit-album-upload-btn">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

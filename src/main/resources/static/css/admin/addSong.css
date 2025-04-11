@@ -17,11 +17,7 @@
   flex-direction: column;
   
 }
-.add-song-back-btn {
-  background-color: transparent;
-  width: 45px;
-  font-size: 24px;
-}
+
 .add-song-fields {
   min-height: 660px;
   width: 100%; 
@@ -76,39 +72,9 @@
 }
 
 
-/* Upload Box */
-.add-song-upload {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.add-song-upload-box {
-  width: 100%;
-  height: 220px;
-  background-color: rgba(217, 217, 217, 0.2);
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;    
-  color: #bbb;
-  margin: 32px 0;
-}
-
-.add-song-upload-icon {
-  font-size: 24px;
-}
-
-.add-song-upload-input {
-  display: none;
-}
-
-
 /* Upload Button */
 .add-song-upload-btn {
+  margin-top: 32px;
   background-color: var(--primary);
   color: white;
   border: none;
@@ -171,7 +137,7 @@
   background-color: #374151;
   display: none;
 }
-.select-btn.open ~ .list-items{
+.add-song-dropdown.open .list-items {
   display: block;
 }
 .list-items .item{

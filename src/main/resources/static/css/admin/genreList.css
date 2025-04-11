@@ -1,0 +1,156 @@
+
+.genreList-header {
+    padding: 22px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.genreList-header-add-btn {
+    width: 45px;
+    height: 45px;
+    background-color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+}   
+
+.genreList-header-add-btn-link i {
+    padding: 12px;
+}
+
+/* Song list items */
+.genreList-table {
+    width: 100%;
+    font-family: sans-serif;
+    color: white;
+  }
+  
+  .genreList-table-header {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #3a2b4f;
+    color: #cbd5e1;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  
+  .genreList-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: background-color 0.2s ease;
+  }
+  
+  .genreList-row:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  .genreList-col {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Column widths */
+  .genreList-index {
+    width: 40px;
+    justify-content: center;
+  }
+  
+  .genreList-title {
+    flex: 2;
+    gap: 12px;
+  }
+  
+  .genreList-plays {
+    flex: 1;
+  }
+  
+  .genreList-num {
+    flex: 1;
+  }
+  
+  .genreList-actions {
+    position: relative;
+    display: flex;
+    gap: 30px;
+    width: 60px;
+    justify-content: center;
+    
+  }
+  
+  /* Image */
+  .genreList-cover {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  /* Text inside title */
+  .genreList-name {
+    font-weight: 600;
+  }
+  
+  
+
+    /* Actions button */
+  .genreList-actionsButton-btn {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 3px;
+    opacity: 0.8;
+  }
+  .genreList-actionsButton-btn:hover {
+    opacity: 1;
+  }
+  .genreList-actionsButton-btn i {
+    font-size: 22px; /* Default Fontsize icon*/
+    color: #FFF;
+  }
+  .genreList-actions-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    background-color: #374151;
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    z-index: 9999999;
+    right:0;
+  }
+  
+  .genreList-actions-menu button {
+    width: 100%;
+    background: none;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    gap: 10px;
+  }
+  .genreList-actions-menu a {
+    padding-right: 55px;
+  }
+  .genreList-actions-menu i {
+    margin-right: 12px;
+  }
+  
+  .genreList-actions-menu button:hover {
+    background-color: #4B5563;
+
+  }

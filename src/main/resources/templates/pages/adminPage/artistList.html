@@ -6,55 +6,68 @@
     <title>Artists Management</title>
   </head>
   <body>
-    <div th:fragment="artistList" class="songlist-wrapper">
-      <!--Songs list header-->
-      <div class="songlist-header">
-        <div class="songlist-header-add-btn">
-          <a class="songlist-header-add-btn-link" href="/admin/songlist/addsong"
+    <div th:fragment="artistList" class="artistList-wrapper">
+      <!--Artists list header-->
+      <div class="artistList-header">
+        <div class="artistList-header-add-btn">
+          <a class="artistList-header-add-btn-link" href="/artist/add"
             ><i class="fa-solid fa-plus"></i
           ></a>
         </div>
       </div>
 
-      <!--Songs list item-->
-      <div class="songlist-table">
-        <div class="songlist-table-header">
-          <div class="songlist-col songlist-index">#</div>
-          <div class="songlist-col songlist-title">Title</div>
-          <div class="songlist-col songlist-plays">Plays</div>
-          <div class="songlist-col songlist-album">Album</div>
-          <div class="songlist-col songlist-actions">Actions</div>
+      <!--Artists list item-->
+      <div class="artistList-table">
+        <div class="artistList-table-header">
+          <div class="artistList-col artistList-index">#</div>
+          <div class="artistList-col artistList-title">Title</div>
+          <div class="artistList-col artistList-plays">Plays</div>
+          <div class="artistList-col artistList-num">Number of songs</div>
+          <div class="artistList-col artistList-actions">Actions</div>
         </div>
 
         <!-- Row 1 -->
-        <div class="songlist-row">
-          <div class="songlist-col songlist-index">1</div>
-          <div class="songlist-col songlist-title">
-            <img src="/images/rock.jpg" class="songlist-cover" />
+        <div class="artistList-row" th:each="artist, iterStat : ${artists}">
+          <div
+            class="artistList-col artistList-index"
+            th:text="${iterStat.count}"
+          ></div>
+          <div class="artistList-col artistList-title">
+            <img th:src="@{${artist.image}}" class="artistList-cover" />
             <div>
-              <div class="songlist-name">Die With A Smile</div>
-              <div class="songlist-artists">Lady Gaga, Bruno Mars</div>
+              <div class="artistList-name" th:text="${artist.artistName}">
+                The Weeknd
+              </div>
             </div>
           </div>
-          <div class="songlist-col songlist-plays">1,000</div>
-          <div class="songlist-col songlist-album">MAYHEM</div>
-          <div class="songlist-col songlist-actions">
+          <div class="artistList-col artistList-plays">1,000</div>
+          <div class="artistList-col artistList-num">12</div>
+          <div class="artistList-col artistList-actions">
             <!--ICON BUTTON - OPTION BUTTON -->
-
             <button
-              class="songlist-actionsButton-btn"
+              class="artistList-actionsButton-btn"
               onclick="toggleActionMenu(event)"
             >
               <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
-            <div class="songlist-actions-menu" id="songlist-actions-menu">
-              <a href="/admin/songlist/edit" style="color: #fff">
-                <button><i class="fa-solid fa-pen"></i>Edit Song</button>
+            <div
+              class="artistList-actions-menu actions-menu"
+              id="artistList-actions-menu"
+            >
+              <a
+                th:href="@{'/artist/update/' + ${artist.artistID}}"
+                style="color: #fff"
+              >
+                <button onclick="closeActionMenu()">
+                  <i class="fa-solid fa-pen"></i>Edit Artist
+                </button>
               </a>
-              <button onclick="deleteSong()">
-                <i class="fa-solid fa-trash"></i>
-                Delete Song
-              </button>
+              <a th:href="@{'/artist/delete/' + ${artist.artistID}}">
+                <button onclick="deleteArtist();closeActionMenu()">
+                  <i class="fa-solid fa-trash"></i>
+                  Delete Artist
+                </button>
+              </a>
             </div>
 
             <!-- <i class="fa-solid fa-pen"></i>

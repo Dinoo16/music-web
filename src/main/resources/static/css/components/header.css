@@ -57,11 +57,14 @@ input::placeholder {
 }
 
 
-/* Disable when not signin */
+/* Disable when not signin
 .header__profile {
     display: none;
 }
-
+*/
+.header__profile span {
+    color: #FFF;
+}
 .header__action{
     background-color: transparent;
     color: var(--white);
@@ -125,10 +128,11 @@ position: absolute;
   }
 
 
-/* disable when not login */
+/* disable when not login
 .header__logout {
     color: var(--white);
     font-size: 18px;
     cursor: pointer;
     display: none;
 }
+*/

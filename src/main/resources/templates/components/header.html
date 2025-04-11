@@ -21,41 +21,62 @@
             spellcheck="{false}"
           />
         </div>
-        <!-- Profile and login button -->
-        <div class="header__actions">
-          <!-- Profile display when user login -->
-          <div class="header__profile">
-            <a th:href="@{/setting}" class="header__action">
-              <i class="fa-regular fa-user header__profile-btn"></i>
-              Profile
-            </a>
-          </div>
-          <!-- Login button -->
-          <div class="header__tooltip__container">
-            <div class="header__login">
-              <a th:href="@{/signin}" class="header__action">
-                <i
-                  class="fa-solid fa-arrow-right-to-bracket header__login-btn"
-                ></i>
-                Login
+        <!-- Profile and logout: diplay if logged in -->
+        <div th:if="${#authorization.expression('isAuthenticated()')}">
+          <div class="header__actions">
+            <!-- Profile -->
+            <div class="header__profile">
+              <a th:href="@{/setting}" class="header__action">
+                <i class="fa-regular fa-user header__profile-btn"></i>
+                <span sec:authentication="name">Profile</span>
               </a>
             </div>
-            <div class="header__tooltip-box">
-              <strong>You’re logged out</strong>
-              <p>Please login to access all features.</p>
-              <span
-                class="header__tooltip-close"
-                onclick="this.parentElement.style.display='none'"
-                >&times;</span
+
+            <!-- Logout -->
+            <div class="header__logout">
+              <form
+                th:action="@{/auth/logout}"
+                method="post"
+                style="display: inline"
               >
-              <div class="header__tooltip-arrow"></div>
+                <button
+                  type="submit"
+                  class="header__action"
+                  style="background: none; border: none; cursor: pointer"
+                >
+                  <i
+                    class="fa-solid fa-arrow-right-to-bracket header__login-btn"
+                  ></i>
+                  Logout
+                </button>
+              </form>
             </div>
           </div>
+        </div>
 
-          <!-- Logout button -->
-          <div class="header__logout">
-            <i class="fa-solid fa-arrow-right-to-bracket header__login-btn"></i>
-            Logout
+        <!-- Login: display if not log in -->
+        <div th:if="${#authorization.expression('isAnonymous()')}">
+          <div class="header__actions">
+            <div class="header__tooltip__container">
+              <div class="header__login">
+                <a th:href="@{/auth/signin}" class="header__action">
+                  <i
+                    class="fa-solid fa-arrow-right-to-bracket header__login-btn"
+                  ></i>
+                  Login
+                </a>
+              </div>
+              <div class="header__tooltip-box">
+                <strong>You’re logged out</strong>
+                <p>Please login to access all features.</p>
+                <span
+                  class="header__tooltip-close"
+                  onclick="this.parentElement.style.display='none'"
+                  >&times;</span
+                >
+                <div class="header__tooltip-arrow"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

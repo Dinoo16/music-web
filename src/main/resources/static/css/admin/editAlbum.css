@@ -1,32 +1,32 @@
 
-.edit-playlist-wrapper {
+.edit-album-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 32px;
-}
-
-.edit-playlist-container {
+  }
+  
+  .edit-album-container {
     width: 60%;
-    min-height: 650px;
     padding: 20px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     
   }
-.edit-playlist-fields {
-    min-height: 660px;
+
+  .edit-album-fields {
+    min-height: 480px;
     width: 100%; 
     background-color: #1F2937; 
     padding: 24px;
     border-radius: 10px;
     margin-top:32px;
-}
+  }
   
   /* Labels */
-.edit-playlist-label {
+  .edit-album-label {
     display: block;
     color: #9CA3AF;
     font-size: 14px;
@@ -35,7 +35,7 @@
   }
   
   /* Input Fields */
-.edit-playlist-input {
+  .edit-album-input {
     background-color: #374151;
     padding: 10px;
     border-radius: 6px;
@@ -45,39 +45,20 @@
     margin-bottom: 12px;
   }
   
-  .edit-playlist-input::placeholder {
+  .edit-album-input::placeholder {
     color: #7a7f87;
   }
   
-  /* Album Section */
-  .edit-playlist-album {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    
-  }
-  
-  .edit-playlist-select {
-    background-color: #374151;
-    border: none;
-    padding: 10px;
-    border-radius: 6px;
-    color: white;
-    font-size: 14px;
-    flex-grow: 1;
-    margin-bottom: 12px;
-
-  }
   
   /* Upload Box */
-  .edit-playlist-upload {
+  .edit-album-upload {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
   }
   
-  .edit-playlist-upload-box {
+  .edit-album-upload-box {
     width: 100%;
     height: 220px;
     background-color: rgba(217, 217, 217, 0.2);
@@ -91,17 +72,17 @@
     margin: 32px 0;
   }
   
-  .edit-playlist-upload-icon {
+  .edit-album-upload-icon {
     font-size: 24px;
   }
   
-  .edit-playlist-upload-input {
+  .edit-album-upload-input {
     display: none;
   }
   
   
   /* Upload Button */
-  .edit-playlist-upload-btn {
+  .edit-album-upload-btn {
     background-color: var(--primary);
     color: white;
     border: none;
@@ -111,8 +92,9 @@
     cursor: pointer;
     text-align: center;
     width: 100%;
+    opacity: 0.8;
   }
   
-  .edit-playlist-upload-btn:hover {
-    opacity: 0.8;
+  .edit-album-upload-btn:hover {
+    opacity: 1;
   }

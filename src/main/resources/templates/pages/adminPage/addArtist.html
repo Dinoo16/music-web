@@ -6,6 +6,42 @@
     <title>Add Artist</title>
   </head>
   <body>
-    <div th:fragment="content"></div>
+    <div th:fragment="content">
+      <div class="add-artist-wrapper">
+        <div class="add-artist-container">
+          <h1>Add Artist</h1>
+          <form th:action="@{/artist/add}" th:object="${artist}" method="post">
+            <div class="add-artist-fields">
+              <!--Artist name field-->
+              <label class="add-artist-label">Artist name</label>
+              <input
+                type="text"
+                th:field="*{artistName}"
+                class="add-artist-input"
+                placeholder="Enter artist name"
+              />
+              <!--Artist bio field-->
+              <label class="add-artist-label">Bio</label>
+              <input
+                type="text"
+                th:field="*{bio}"
+                class="add-artist-input"
+                placeholder="Enter background information"
+              />
+              <!--Image upload field-->
+              <label class="add-artist-label">Image file path</label>
+              <input
+                type="text"
+                th:field="*{image}"
+                class="add-artist-input"
+                placeholder="Enter cover image path"
+              />
+
+              <button type="submit" class="add-artist-upload-btn">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

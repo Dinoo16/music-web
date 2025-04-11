@@ -50,7 +50,7 @@
 .artist-popular-songs {
     padding-top: 20px;
 }
-.artist-popular-songs h2 {
+.artist-popular-songs h2, .artist-albums h2 {
     padding: 18px 0;
     color: #fff;
     font-weight: 600;

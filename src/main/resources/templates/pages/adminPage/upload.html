@@ -8,24 +8,60 @@
   <body>
     <div th:fragment="content">
       <div class="upload-tabs">
-        <div class="upload-tab upload-tab-active">Song</div>
-        <div class="upload-tab">Artist</div>
-        <div class="upload-tab">Album</div>
-        <div class="upload-tab">Playlist</div>
+        <div
+          th:class="'upload-tab ' + (${activeTab} == 'song' ? 'upload-tab-active' : '')"
+          data-tab="song"
+        >
+          Song
+        </div>
+        <div
+          th:class="'upload-tab ' + (${activeTab} == 'artist' ? 'upload-tab-active' : '')"
+          data-tab="artist"
+        >
+          Artist
+        </div>
+        <div
+          th:class="'upload-tab ' + (${activeTab} == 'album' ? 'upload-tab-active' : '')"
+          data-tab="album"
+        >
+          Album
+        </div>
+        <div
+          th:class="'upload-tab ' + (${activeTab} == 'genre' ? 'upload-tab-active' : '')"
+          data-tab="genre"
+        >
+          Genre
+        </div>
+        <div
+          th:class="'upload-tab ' + (${activeTab} == 'playlist' ? 'upload-tab-active' : '')"
+          data-tab="playlist"
+        >
+          Playlist
+        </div>
       </div>
       <!--Manage song-->
-      <div id="songlist">
+      <div
+        id="songlist"
+        th:style="'display:' + (${activeTab} == 'song' ? 'block' : 'none')"
+      >
         <div th:replace="~{pages/adminPage/songlist :: songlist}"></div>
       </div>
 
       <!--Manage Artist-->
-      <div id="artistList" style="display: none">
+      <div
+        id="artistList"
+        th:style="'display:' + (${activeTab} == 'artist' ? 'block' : 'none')"
+      >
         <div th:replace="~{pages/adminPage/artistList :: artistList}"></div>
       </div>
 
       <!--Manage Album-->
       <div id="albumList" style="display: none">
         <div th:replace="~{pages/adminPage/albumList :: albumList}"></div>
+      </div>
+      <!--Manage Genre-->
+      <div id="genreList" style="display: none">
+        <div th:replace="~{pages/adminPage/genreList :: genreList}"></div>
       </div>
 
       <!--Manage Playlist-->
