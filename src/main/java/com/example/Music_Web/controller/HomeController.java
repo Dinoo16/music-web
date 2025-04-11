@@ -69,15 +69,15 @@ public class HomeController {
         return "pages/userPage/albumDetail";
     }
 
-    @GetMapping("/myplaylist")
-    public String getMyPlaylist() {
-        return "pages/userPage/myplaylist";
-    }
+    // @GetMapping("/myplaylist")
+    // public String getMyPlaylist() {
+    // return "pages/userPage/myplaylist";
+    // }
 
-    @GetMapping("/myplaylist/detail")
-    public String getMyPlaylistDetail() {
-        return "pages/userPage/myplaylistDetail";
-    }
+    // @GetMapping("/myplaylist/detail")
+    // public String getMyPlaylistDetail() {
+    //     return "pages/userPage/myplaylistDetail";
+    // }
 
     @GetMapping("/song/detail")
     public String getSongDetail() {

@@ -27,11 +27,11 @@ public class Playlist {
     private User user;
 
     // getters & setters
-    public Long getplaylistID() {
+    public Long getPlaylistID() {
         return playlistID;
     }
 
-    public void setplaylistID(Long playlistID) {
+    public void setPlaylistID(Long playlistID) {
         this.playlistID = playlistID;
     }
 

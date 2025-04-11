@@ -32,7 +32,7 @@ public class SecurityConfig {
                                                                 "/auth/**", "/css/**", "/js/**", "/images/**")
                                                 .permitAll()
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                                                .requestMatchers("/myplaylist/**", "/setting", "/favorite")
+                                                .requestMatchers("/playlist/**", "/setting", "/favorite")
                                                 .authenticated()
                                                 .anyRequest().authenticated())
                                 .formLogin(form -> form

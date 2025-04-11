@@ -9,14 +9,16 @@
     <!-- Định nghĩa fragment -->
 
     <div class="playlists-grid" th:fragment="playlistCard()">
-      <!-- Dùng Thymeleaf để lặp qua playlists -->
       <!--Playlist item-->
-      <div class="playlist-card">
+      <div class="playlist-card" th:each="playlist : ${playlists}">
         <div class="playlist-card-img">
           <img src="/images/playlist-bg.svg" atl="playlist image" />
         </div>
         <div class="playlist-overlay">
-          <a href="/myplaylist/detail" class="playlist-overlay-btn">
+          <a
+            th:href="@{'/playlist/detail/' + ${playlist.playlistID}}"
+            class="playlist-overlay-btn"
+          >
             <div class="playlist-play">
               <button class="playlist-play-btn" onclick="playSong(event)">
                 <i class="fa-solid fa-play playlist-play-btn-icon"></i>
@@ -25,10 +27,13 @@
           </a>
         </div>
         <div class="playlist-info">
-          <h3 class="playlist-name">Chill Vibes</h3>
+          <h3 class="playlist-name" th:text="${playlist.playlistName}"></h3>
           <p class="playlist-song-count">25 songs</p>
           <div class="playlist-meta">
-            <span class="playlist-createdby">Created by ABC</span>
+            <span
+              class="playlist-createdby"
+              th:text="'Created by ' + ${playlist.user.username}"
+            ></span>
           </div>
         </div>
       </div>

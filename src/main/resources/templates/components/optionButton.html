@@ -28,10 +28,11 @@
           id="optionMenu"
           th:style="'right:' + (${right} ?: 'auto')"
         >
-          <button onclick="editPlaylist()">
+          <button onclick="showEditPopup()">
             <i class="fa-solid fa-pen"></i>Edit playlist
           </button>
-          <button onclick="deletePlaylist()">
+
+          <button th:onclick="'deletePlaylist(' + ${playlist.playlistID} + ')'">
             <i class="fa-solid fa-trash"></i>
             Delete playlist
           </button>

@@ -21,7 +21,8 @@
       <div th:replace="~{components/playlistCard :: playlistCard()}"></div>
 
       <div
-        th:replace="~{components/popup :: popup('Create playlist', 'Enter playlist name', 'Add an optional description', 'saveCreatePlaylist()')}"
+        th:replace="~{components/popup :: popup('Create playlist', 'Enter playlist name', 'Add an optional description')}"
+        th:with="formAction=@{/playlist/add}, playlist=${null}"
       ></div>
     </div>
   </body>

@@ -24,14 +24,42 @@ document.addEventListener("click", function () {
 });
 
 // Delete playlist button function
-function deletePlaylist() {
+let playlistToDeleteId = null;
+
+function deletePlaylist(playlistId) {
+  playlistToDeleteId = playlistId;
+  // Show the confirmation popup
   document.querySelector(".confirmPopup-overlay").style.display = "block";
 }
-// Delete confirm
+
+// Confirm delete action
 function confirmDelete() {
-  document.querySelector(".confirmPopup-overlay").style.display = "none";
-  alert("Deleted");
+  if (playlistToDeleteId !== null) {
+    fetch(`/playlist/delete/${playlistToDeleteId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          // If successful, redirect to playlist list
+          window.location.href = "/playlist/list";
+        } else {
+          // Handle error
+          console.error("Delete failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      })
+      .finally(() => {
+        // Hide the popup regardless of success/failure
+        document.querySelector(".confirmPopup-overlay").style.display = "none";
+      });
+  }
 }
+
 // Cancel
 function cancel() {
   document.querySelector(".confirmPopup-overlay").style.display = "none";

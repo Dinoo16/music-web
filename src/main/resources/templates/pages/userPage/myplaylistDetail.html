@@ -16,18 +16,27 @@
       <div class="myplaylist-detail-background">
         <img
           class="myplaylist-detail-background-img"
-          src="/images/playlist_bg.png"
+          src="/images/playlist-bg.svg"
           alt="myplaylist backgroud"
         />
 
         <!-- myplaylist infor detail -->
         <div class="myplaylist-detail-infor">
-          <h1 class="myplaylist-detail-name">Chill Vibes</h1>
+          <h1 class="myplaylist-detail-name" th:text="${playlist.playlistName}">
+            Chill Vibes
+          </h1>
 
-          <h4 class="myplaylist-detail-infor-desc">
+          <h4
+            class="myplaylist-detail-infor-desc"
+            th:text="${playlist.playlistDes}"
+          >
             Perfect playlist for relaxing after a long day.
           </h4>
-          <span class="myplaylist-detail-infor-createdby">Created by ABC</span>
+          <span
+            class="myplaylist-detail-infor-createdby"
+            th:text="'Created by ' + ${playlist.user.username}"
+            >Created by ABC</span
+          >
           <span class="myplaylist-detail-infor-song-count">25 songs</span>
           <div class="myplaylist-detail-actions">
             <!--ROUNDED BUTTON (PLAY ALL)-->
@@ -60,7 +69,8 @@
 
       <!--Edit playlist Popup-->
       <div
-        th:replace="~{components/popup :: popup('Edit playlist', 'Enter playlist name', 'Modify description','saveEditPlaylist()')}"
+        th:replace="~{components/popup :: popup('Edit playlist', 'Enter playlist name', 'Modify description')}"
+        th:with="formAction=@{/playlist/update}, playlist=${playlist}"
       ></div>
     </div>
   </body>
