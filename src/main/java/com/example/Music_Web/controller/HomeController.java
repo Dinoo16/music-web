@@ -92,19 +92,19 @@ public class HomeController {
         return "pages/userPage/favorite";
     }
 
-    @GetMapping("/setting")
-    public String showSettingPage(Model model, Principal principal) {
-        String username = principal.getName();
-        User user = userRepository.findByUsername(username)
-                .orElse(null);
+    // @GetMapping("/setting")
+    // public String showSettingPage(Model model, Principal principal) {
+    // String username = principal.getName();
+    // User user = userRepository.findByUsername(username)
+    // .orElse(null);
 
-        if (user == null) {
-            return "redirect:/auth/signin?error=user-not-found";
-        }
+    // if (user == null) {
+    // return "redirect:/auth/signin?error=user-not-found";
+    // }
 
-        model.addAttribute("user", user);
-        return "pages/userPage/setting";
-    }
+    // model.addAttribute("user", user);
+    // return "pages/userPage/setting";
+    // }
 
     @GetMapping("/admin/album/add")
     public String addAlbum() {

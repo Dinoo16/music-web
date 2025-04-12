@@ -4,12 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Setting</title>
+    <style>
+      .alert-success {
+        color: #155724;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+      }
+
+      .alert-error {
+        color: #721c24;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+      }
+    </style>
   </head>
+
   <body>
     <div th:fragment="content">
       <div class="setting-wrapper">
         <div class="setting-container">
           <h1>Profile Settings</h1>
+
+          <!-- Thông báo thành công hoặc thất bại -->
+          <div
+            id="alertMessage"
+            class="alert-success"
+            style="display: none"
+            th:text="${message}"
+          ></div>
+          <div
+            id="alertError"
+            class="alert-error"
+            style="display: none"
+            th:text="${error}"
+          ></div>
+
           <!--Setting profile background-->
           <div class="setting-profile-background">
             <div class="setting-profile-info">
@@ -26,54 +61,61 @@
             </div>
 
             <div class="setting-profile-change-avatar">
-              <!--CUSTOM ROUNDED BUTTON (Change Profile Picture)-->
               <div
                 th:replace="~{components/roundedButton :: roundedButton('','', 'Change Profile Picture', '200px','', '10px','handleChangeProfilePicture()')}"
               ></div>
             </div>
           </div>
-          <!--Setting profile fields-->
+
+          <!-- Setting profile fields -->
           <div class="setting-profile-fields">
-            <form action="#" method="POST">
+            <form
+              action="/setting/changepassword"
+              method="post"
+              onsubmit="return validateForm()"
+            >
               <div class="setting-profile-fields-form-group">
                 <label for="username">Username</label>
                 <input
-                  type="username"
+                  type="text"
                   id="username"
                   th:value="${user.username}"
-                  placeholder="ABC"
                   readonly
                 />
               </div>
+
               <div class="setting-profile-fields-form-group">
                 <label for="email">Email</label>
                 <input
                   type="email"
                   id="email"
                   th:value="${user.email}"
-                  placeholder="abc@gmail.com"
                   readonly
                 />
               </div>
+
               <div class="setting-profile-fields-form-group">
-                <label for="password">Enter password</label>
+                <label for="newPassword">Enter password</label>
                 <input
                   type="password"
-                  id="password"
+                  id="newPassword"
+                  name="newPassword"
                   placeholder="Enter new password"
                   required
                 />
               </div>
+
               <div class="setting-profile-fields-form-group">
-                <label for="password">Confirm Password</label>
+                <label for="confirmPassword">Confirm Password</label>
                 <input
                   type="password"
-                  id="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   placeholder="Confirm password"
                   required
                 />
               </div>
-              <!--CUSTOM ROUNDED BUTTON (Change Profile Picture)-->
+
               <div class="setting-profile-fields-btn-change">
                 <div
                   th:replace="~{components/roundedButton :: roundedButton('','', 'Save changes', '100%','', '10px','handleSaveChangeProfile()')}"
@@ -84,5 +126,39 @@
         </div>
       </div>
     </div>
+
+    <!-- Script -->
+    <script>
+      function validateForm() {
+        var newPassword = document.getElementById("newPassword").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+
+        // Kiểm tra xem confirmPassword có trùng với newPassword không
+        if (newPassword !== confirmPassword) {
+          showAlert("Passwords do not match!", "error");
+          return false; // Ngừng việc gửi form nếu không khớp
+        }
+
+        // Nếu mật khẩu khớp, cho phép gửi form
+        showAlert("Password changed successfully!", "success");
+        return true; // Không cần alert ở đây, vì thông báo thành công sẽ đến từ server
+      }
+
+      // Hàm hiển thị thông báo
+      function showAlert(message, type) {
+        const alertMessage = document.getElementById("alertMessage");
+        const alertError = document.getElementById("alertError");
+
+        if (type === "error") {
+          alertError.innerText = message;
+          alertError.style.display = "block"; // Hiển thị thông báo lỗi
+          alertMessage.style.display = "none"; // Ẩn thông báo thành công
+        } else {
+          alertMessage.innerText = message;
+          alertMessage.style.display = "block"; // Hiển thị thông báo thành công
+          alertError.style.display = "none"; // Ẩn thông báo lỗi
+        }
+      }
+    </script>
   </body>
 </html>
