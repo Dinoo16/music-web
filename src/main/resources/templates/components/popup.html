@@ -25,7 +25,11 @@
             />
             <div class="popup-header">
               <h2 th:text="${title}"></h2>
-              <button onclick="closePopup()" class="popup-header-close-btn">
+              <button
+                type="button"
+                onclick="closePopup()"
+                class="popup-header-close-btn"
+              >
                 <i class="fa-solid fa-xmark"></i>
               </button>
             </div>
@@ -59,7 +63,7 @@
               </div>
             </div>
             <div class="popup-save">
-              <button type="submit" class="rounded-button">Save</button>
+              <button type="submit" class="popup-save-btn">Save</button>
             </div>
           </form>
         </div>

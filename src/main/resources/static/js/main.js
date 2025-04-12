@@ -1,13 +1,4 @@
-// Prevent onclick in <a> tag and playing song
-function playSong(event) {
-  event.preventDefault();
-  event.stopPropagation();
 
-  //if user logged in then play music
-  //esle user not loggin then display guest pupup
-  openGuestPopup();
-  // alert("Playing song...");
-}
 
 // retrieve the function name dynamically
 function handleClick(button) {

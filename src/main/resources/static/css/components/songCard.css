@@ -79,13 +79,14 @@
     color: white;
     cursor: pointer;
     padding: 13px 15px;
+    pointer-events: auto; 
 }
+
 .song-card-play-btn button {
     background-color: transparent;
 }
 .song-card-info {
     padding: 6px 16px 6px 16px;
-    
 }
 
 .song-card-name {

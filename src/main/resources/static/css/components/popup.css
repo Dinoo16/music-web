@@ -96,4 +96,17 @@
     justify-content: flex-end;
    
 }
+.popup-save-btn {
+    width: 140px;
+    height: 40px;
+    border-radius: 9999px;
+    background-color: var(--primary);
+    color: #FFF;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+.popup-save-btn:hover {
+    opacity: 1;
+}
 

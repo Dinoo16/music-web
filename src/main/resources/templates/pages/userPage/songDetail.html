@@ -23,20 +23,37 @@
           <div class="song-detail-background">
             <img
               class="song-detail-background-img"
-              src="/images/artist1.png"
+              th:src="@{${song.coverImage}}"
               alt="song backgroud"
             />
             <!-- song infor detail -->
             <div class="song-detail-infor">
-              <h1 class="song-detail-name">Blinding Lights</h1>
-              <p>The Weeknd</p>
+              <h1 class="song-detail-name" th:text="${song.title}">
+                Blinding Lights
+              </h1>
+              <p
+                th:each="artist, iter : ${song.artistsOfSong}"
+                th:text="${artist.artistName} + (${!iter.last} ? ', ' : '')"
+              >
+                The Weeknd
+              </p>
               <!-- song meta detail -->
               <div class="song-detail-meta">
-                <h4 class="song-detail-meta-album-name">Album: After Hours</h4>
+                <h4
+                  class="song-detail-meta-album-name"
+                  th:text="${song.album.albumName}"
+                >
+                  Album: After Hours
+                </h4>
                 <span class="dot">•</span>
                 <span class="song-detail-duration">3:20</span>
                 <span class="dot">•</span>
-                <span class="song-detail-song-genres">Pop</span>
+                <span
+                  class="song-detail-song-genres"
+                  th:each="genre, iter : ${song.genresOfSong}"
+                  th:text="${genre.genreName} + (${!iter.last} ? ', ' : '')"
+                  >Pop</span
+                >
               </div>
               <div class="song-detail-meta2">
                 <div class="tooltip">

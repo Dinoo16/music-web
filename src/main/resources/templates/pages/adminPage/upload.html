@@ -32,12 +32,6 @@
         >
           Genre
         </div>
-        <div
-          th:class="'upload-tab ' + (${activeTab} == 'playlist' ? 'upload-tab-active' : '')"
-          data-tab="playlist"
-        >
-          Playlist
-        </div>
       </div>
       <!--Manage song-->
       <div
@@ -62,11 +56,6 @@
       <!--Manage Genre-->
       <div id="genreList" style="display: none">
         <div th:replace="~{pages/adminPage/genreList :: genreList}"></div>
-      </div>
-
-      <!--Manage Playlist-->
-      <div id="playlist" style="display: none">
-        <div th:replace="~{pages/adminPage/playlist :: playlist}"></div>
       </div>
     </div>
   </body>

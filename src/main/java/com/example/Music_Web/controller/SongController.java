@@ -1,10 +1,12 @@
 package com.example.Music_Web.controller;
 
 import com.example.Music_Web.exception.AlbumNotFoundException;
+import com.example.Music_Web.exception.PlaylistNotFoundException;
 import com.example.Music_Web.exception.SongNotFoundException;
 import com.example.Music_Web.model.Album;
 import com.example.Music_Web.model.Artist;
 import com.example.Music_Web.model.Genre;
+import com.example.Music_Web.model.Playlist;
 import com.example.Music_Web.model.Song;
 import com.example.Music_Web.repository.AlbumRepository;
 import com.example.Music_Web.repository.ArtistRepository;
@@ -12,11 +14,18 @@ import com.example.Music_Web.repository.GenreRepository;
 import com.example.Music_Web.repository.SongRepository;
 import com.example.Music_Web.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +50,7 @@ public class SongController {
 	@Autowired
 	FileStorageService fileStorageService;
 
+	// For admin page (with all controls)
 	@GetMapping(value = "/list")
 	public String getAllSongs(Model model) {
 		List<Song> songs = songRepository.findAll();
@@ -57,6 +67,25 @@ public class SongController {
 
 		model.addAttribute("activeTab", "song");
 		return "pages/adminPage/upload";
+	}
+
+	// For user page (read-only view)
+	@GetMapping(value = "/user/list")
+	public String getAllSongsUser(Model model) {
+		List<Song> songs = songRepository.findAll();
+		model.addAttribute("songs", songs);
+		// genres for filtering
+		model.addAttribute("genres", genreRepository.findAll());
+		return "pages/userPage/song";
+	}
+
+	// Song detail for user page (read-only view)
+	@GetMapping("/detail/{id}")
+	public String getSongDetail(@PathVariable Long id, Model model) throws SongNotFoundException {
+		Song song = songRepository.findById(id)
+				.orElseThrow(() -> new SongNotFoundException("Invalid song ID: " + id));
+		model.addAttribute("song", song);
+		return "pages/userPage/songDetail";
 	}
 
 	@GetMapping("/update/{id}")
@@ -150,7 +179,24 @@ public class SongController {
 			@RequestParam("selectedGenres") String genreIds,
 			@RequestParam("selectedArtists") String artistIds,
 			@RequestParam("audioFile") MultipartFile audioFile,
-			@RequestParam("imageFile") MultipartFile imageFile) {
+			@RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+		// Validate audio file
+		if (audioFile.isEmpty()) {
+			throw new RuntimeException("Please select an audio file");
+		}
+
+		if (!audioFile.getContentType().startsWith("audio/")) {
+			throw new RuntimeException("Only audio files are allowed");
+		}
+
+		// Validate image file
+		if (imageFile.isEmpty()) {
+			throw new RuntimeException("Please select an image file");
+		}
+
+		if (!imageFile.getContentType().startsWith("image/")) {
+			throw new RuntimeException("Only image files are allowed for cover");
+		}
 
 		// 1. Upload file and save to /uploads/ or any custom path
 		String audioPath = fileStorageService.storeFile(audioFile);
@@ -197,6 +243,24 @@ public class SongController {
 				.orElseThrow(() -> new SongNotFoundException("Song not found"));
 		songRepository.delete(song);
 		return "redirect:/song/list";
+	}
+
+	@GetMapping("/uploads/{filename:.+}")
+	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+		try {
+			Path file = Paths.get("uploads").resolve(filename);
+			Resource resource = new UrlResource(file.toUri());
+
+			if (resource.exists() || resource.isReadable()) {
+				return ResponseEntity.ok()
+						.contentType(MediaType.parseMediaType("audio/mpeg"))
+						.body(resource);
+			} else {
+				throw new RuntimeException("Could not read file: " + filename);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException("Error: " + e.getMessage());
+		}
 	}
 
 }

@@ -6,26 +6,43 @@
     <title>Song card</title>
   </head>
   <body>
-    <!-- Định nghĩa fragment button -->
     <div th:fragment="songCard()">
       <div class="song-card-grid">
         <!--home list songs item-->
-        <div class="song-card">
+        <div class="song-card" th:each="song : ${songs}">
           <div class="song-card-img">
-            <img src="/images/artist1.png" atl="song image" />
+            <img th:src="@{${song.coverImage}}" atl="song image" />
           </div>
           <div class="song-card-overlay">
-            <a href="/song/detail" class="song-card-overlay-btn">
+            <a
+              th:href="@{'/song/detail/' + ${song.songID}}"
+              class="song-card-overlay-btn"
+            >
               <div class="song-card-play">
-                <button class="song-card-play-btn" onclick="playSong(event)">
+                <button
+                  class="song-card-play-btn"
+                  onclick="playSong(event, '${song.songID}')"
+                >
                   <i class="fa-solid fa-play song-card-play-btn-icon"></i>
                 </button>
               </div>
             </a>
           </div>
+
+          <!-- Hidden audio element -->
+          <audio id="audioPlayer_${song.songID}" style="display: none">
+            <source th:src="@{${song.filePath}}" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
           <div class="song-card-info">
-            <h3 class="song-card-name">Title</h3>
-            <p class="song-card-artist">Artist</p>
+            <h3 class="song-card-name" th:text="${song.title}">Title</h3>
+            <p
+              class="song-card-artist"
+              th:each="artist, iter : ${song.artistsOfSong}"
+              th:text="${artist.artistName} + (${!iter.last} ? ', ' : '')"
+            >
+              Artist
+            </p>
             <div class="song-card-meta">
               <span class="song-card-duration">3:20</span>
               <div class="song-card-actions">
