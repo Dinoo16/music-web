@@ -17,8 +17,12 @@
             <div class="user-detail-header">
               <div class="user-detail-avatar"></div>
               <div class="user-detail-info">
-                <h2 class="user-detail-name">justAGuy</h2>
-                <p class="user-detail-email">Something12@mail.com</p>
+                <h2 class="user-detail-name" th:text="${user.username}">
+                  justAGuy
+                </h2>
+                <p class="user-detail-email" th:text="${user.email}">
+                  Something12@mail.com
+                </p>
               </div>
             </div>
             <!--User Detail Fields-->
@@ -26,12 +30,12 @@
               <!--Name Fields-->
               <div class="user-detail-field">
                 <label class="user-detail-label">Name</label>
-                <h3>justAGuy</h3>
+                <h3 th:text="${user.username}">justAGuy</h3>
               </div>
               <!--Email Fields-->
               <div class="user-detail-field">
                 <label class="user-detail-label">Email</label>
-                <h3>Something12@mail.com</h3>
+                <h3 th:text="${user.email}">Something12@mail.com</h3>
               </div>
               <!--Song Fields-->
               <div class="user-detail-field">

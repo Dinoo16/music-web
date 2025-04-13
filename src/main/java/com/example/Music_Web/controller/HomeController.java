@@ -41,6 +41,7 @@ public class HomeController {
     // Songcard in home
     @GetMapping("/")
     public String showSongHomePage(Model model) {
+        model.addAttribute("artists", artistRepository.findAll());
         model.addAttribute("songs", songRepository.findAll());
         return "pages/userPage/home";
     }
@@ -54,13 +55,15 @@ public class HomeController {
 
     @GetMapping("/topchart")
     public String getTopchart(Model model) {
+        model.addAttribute("songs", songRepository.findAll());
         return "pages/userPage/topchart";
     }
 
-    @GetMapping("/genres")
-    public String getGenres(Model model) {
-        return "pages/userPage/genres";
-    }
+    // @GetMapping("/genres")
+    // public String getGenres(Model model) {
+    // model.addAttribute("songs", songRepository.findAll());
+    // return "pages/userPage/genres";
+    // }
 
     @GetMapping("/genres/detail")
     public String getGenresDetail(Model model) {
@@ -68,7 +71,8 @@ public class HomeController {
     }
 
     @GetMapping("/artist")
-    public String getArtist() {
+    public String getArtist(Model model) {
+        model.addAttribute("artists", artistRepository.findAll());
         return "pages/userPage/artist";
     }
 
@@ -92,20 +96,6 @@ public class HomeController {
         return "pages/userPage/favorite";
     }
 
-    // @GetMapping("/setting")
-    // public String showSettingPage(Model model, Principal principal) {
-    // String username = principal.getName();
-    // User user = userRepository.findByUsername(username)
-    // .orElse(null);
-
-    // if (user == null) {
-    // return "redirect:/auth/signin?error=user-not-found";
-    // }
-
-    // model.addAttribute("user", user);
-    // return "pages/userPage/setting";
-    // }
-
     @GetMapping("/admin/album/add")
     public String addAlbum() {
         return "pages/adminPage/addAlbum";
@@ -116,15 +106,15 @@ public class HomeController {
         return "pages/adminPage/editAlbum";
     }
 
-    @GetMapping("/admin/userlist")
-    public String getUserList() {
-        return "pages/adminPage/userList";
-    }
+    // @GetMapping("/admin/userlist")
+    // public String getUserList() {
+    // return "pages/adminPage/userList";
+    // }
 
-    @GetMapping("/admin/userlist/view")
-    public String getUserListDetail() {
-        return "pages/adminPage/userDetail";
-    }
+    // @GetMapping("/admin/userlist/view")
+    // public String getUserListDetail() {
+    // return "pages/adminPage/userDetail";
+    // }
 
     @GetMapping("/admin/static")
     public String getStatic() {

@@ -15,63 +15,16 @@
       <!-- Genres list -->
       <div class="genres">
         <div class="genres-grid">
-          <!-- Genres Pop item -->
-          <a href="/genres/detail" class="genres-link">
-            <div class="genres-item">
-              <div class="genres-img-wrapper">
-                <img src="/images/pop.jpg" alt="Pop" class="genres-img" />
-                <div class="genres-overlay">
-                  <button class="genres-play-btn" onclick="playSong(event)">
-                    <i class="fa-solid fa-play"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="genres-info">
-                <h3 class="genres-title">Pop</h3>
-                <p class="genres-songs">1.2M songs</p>
-              </div>
-            </div>
-          </a>
-          <!-- Genres Rock item -->
-          <a href="/genres/detail" class="genres-link">
-            <div class="genres-item">
-              <div class="genres-img-wrapper">
-                <img src="/images/rock.jpg" alt="Pop" class="genres-img" />
-                <div class="genres-overlay">
-                  <button class="genres-play-btn" onclick="playSong(event)">
-                    <i class="fa-solid fa-play"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="genres-info">
-                <h3 class="genres-title">Rock</h3>
-                <p class="genres-songs">1.2M songs</p>
-              </div>
-            </div>
-          </a>
-          <!-- Genres Hip Hop item -->
-          <a href="/genres/detail" class="genres-link">
-            <div class="genres-item">
-              <div class="genres-img-wrapper">
-                <img src="/images/hiphop.jpg" alt="Pop" class="genres-img" />
-                <div class="genres-overlay">
-                  <button class="genres-play-btn" onclick="playSong(event)">
-                    <i class="fa-solid fa-play"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="genres-info">
-                <h3 class="genres-title">Hip Hop</h3>
-                <p class="genres-songs">1.2M songs</p>
-              </div>
-            </div>
-          </a>
-          <!-- Genres Electronic item -->
-          <a href="/genres/detail" class="genres-link">
+          <!-- Genres item -->
+          <a
+            class="genres-link"
+            th:each="genre : ${genres}"
+            th:href="@{/genre/detail/{id}(id=${genre.genreID})}"
+          >
             <div class="genres-item">
               <div class="genres-img-wrapper">
                 <img
-                  src="/images/electronic.jpg"
+                  th:src="${genre.genreImage}"
                   alt="Pop"
                   class="genres-img"
                 />
@@ -82,75 +35,7 @@
                 </div>
               </div>
               <div class="genres-info">
-                <h3 class="genres-title">Electronic</h3>
-                <p class="genres-songs">1.2M songs</p>
-              </div>
-            </div>
-          </a>
-          <!-- Genres R&B item -->
-          <a href="/genres/detail" class="genres-link">
-            <div class="genres-item">
-              <div class="genres-img-wrapper">
-                <img src="/images/r&b.jpg" alt="Pop" class="genres-img" />
-                <div class="genres-overlay">
-                  <button class="genres-play-btn" onclick="playSong(event)">
-                    <i class="fa-solid fa-play"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="genres-info">
-                <h3 class="genres-title">R&B</h3>
-                <p class="genres-songs">1.2M songs</p>
-              </div>
-            </div>
-          </a>
-          <!-- Genres Jazz item -->
-          <a href="/genres/detail" class="genres-link">
-            <div class="genres-item">
-              <div class="genres-img-wrapper">
-                <img src="/images/jazz.jpg" alt="Pop" class="genres-img" />
-                <div class="genres-overlay">
-                  <button class="genres-play-btn" onclick="playSong(event)">
-                    <i class="fa-solid fa-play"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="genres-info">
-                <h3 class="genres-title">Jazz</h3>
-                <p class="genres-songs">1.2M songs</p>
-              </div>
-            </div>
-          </a>
-          <!-- Genres Classical item -->
-          <a href="/genres/detail" class="genres-link">
-            <div class="genres-item">
-              <div class="genres-img-wrapper">
-                <img src="/images/classical.jpg" alt="Pop" class="genres-img" />
-                <div class="genres-overlay">
-                  <button class="genres-play-btn" onclick="playSong(event)">
-                    <i class="fa-solid fa-play"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="genres-info">
-                <h3 class="genres-title">Classical</h3>
-                <p class="genres-songs">1.2M songs</p>
-              </div>
-            </div>
-          </a>
-          <!-- Genres Country item -->
-          <a href="/genres/detail" class="genres-link">
-            <div class="genres-item">
-              <div class="genres-img-wrapper">
-                <img src="/images/country.jpg" alt="Pop" class="genres-img" />
-                <div class="genres-overlay">
-                  <button class="genres-play-btn" onclick="playSong(event)">
-                    <i class="fa-solid fa-play"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="genres-info">
-                <h3 class="genres-title">Country</h3>
+                <h3 class="genres-title" th:text="${genre.genreName}">Pop</h3>
                 <p class="genres-songs">1.2M songs</p>
               </div>
             </div>

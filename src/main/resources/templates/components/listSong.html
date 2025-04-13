@@ -12,6 +12,7 @@
         <div
           class="listOfSong-item"
           th:fragment="listOfSongItem(songNumber,icon,duration,onclickFunction)"
+          th:each="song : ${songs}"
         >
           <span
             class="listOfSong-number"
@@ -20,7 +21,7 @@
           ></span>
           <div class="listOfSong-img-container">
             <img
-              src="/images/song_img1.png"
+              th:src="@{${song.coverImage}}"
               alt="Take My Breath"
               class="listOfSong-img"
             />
@@ -28,7 +29,12 @@
               <div class="listOfSong-play">
                 <button
                   class="listOfSong-play-pause-btn"
-                  onclick="togglePlayPause(this)"
+                  onclick="playSong(event, 
+                  '${song.songID}', 
+                  '${song.title}', 
+                  '${#strings.listJoin(song.artistsOfSong.![artistName], ', ')}', 
+                  '${song.coverImage}'
+                )"
                 >
                   <i class="fa-solid fa-pause listOfSong-pause-btn"></i>
                   <i class="fa-solid fa-play listOfSong-play-btn"></i>
@@ -36,11 +42,22 @@
               </div>
             </div>
           </div>
-          <a href="/song/detail" class="listOfSong-info">
+          <a
+            th:href="@{'/song/detail/' + ${song.songID}}"
+            class="listOfSong-info"
+          >
             <div>
-              <h3 class="listOfSong-song-name">Take My Breath Take My</h3>
+              <h3 class="listOfSong-song-name" th:text="${song.title}">
+                Take My Breath Take My
+              </h3>
               <!-- <a href="/artist/detail"> -->
-              <p class="listOfSong-info-artist">The Weeknd</p>
+              <p
+                class="listOfSong-info-artist"
+                th:each="artist, iter : ${song.artistsOfSong}"
+                th:text="${artist.artistName} + (${!iter.last} ? ', ' : '')"
+              >
+                The Weeknd
+              </p>
               <!-- </a> -->
             </div>
           </a>

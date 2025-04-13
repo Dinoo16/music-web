@@ -9,12 +9,15 @@
     <div class="artists-grid" th:fragment="artistCard()">
       <!-- Dùng Thymeleaf để lặp qua artists -->
       <!--artist item-->
-      <div class="artist-card">
+      <div class="artist-card" th:each="artist : ${artists}">
         <div class="artist-card-img">
-          <img src="/images/artist1.png" atl="artist image" />
+          <img th:src="${artist.image}" atl="artist image" />
         </div>
         <div class="artist-overlay">
-          <a href="/artist/detail" class="artist-overlay-btn">
+          <a
+            th:href="@{/artist/detail/{id}(id=${artist.artistID})}"
+            class="artist-overlay-btn"
+          >
             <div class="artist-play">
               <button class="artist-play-btn" onclick="playSong(event)">
                 <i class="fa-solid fa-play artist-play-btn-icon"></i>
@@ -23,7 +26,7 @@
           </a>
         </div>
         <div class="artist-info">
-          <h3 class="artist-name">The Weeknd</h3>
+          <h3 class="artist-name" th:text="${artist.artistName}">The Weeknd</h3>
           <p class="artist-song-count">25 songs</p>
           <div class="artist-meta">
             <span class="artist-listen-count">45.6M monthly listeners</span>

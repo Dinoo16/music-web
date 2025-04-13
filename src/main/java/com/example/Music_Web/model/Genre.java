@@ -17,13 +17,7 @@ public class Genre {
 
 	private String genreImage;
 
-	// ----------
 	// relationship
-	// @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
-	// CascadeType.MERGE })
-	// @JoinTable(name = "genre_song", joinColumns = @JoinColumn(name = "genre_id"),
-	// inverseJoinColumns = @JoinColumn(name = "song_id"))
-	// private List<Song> songsOfGenre = new ArrayList<>();
 
 	@ManyToMany(mappedBy = "genresOfSong")
 	private List<Song> songsOfGenre = new ArrayList<>();

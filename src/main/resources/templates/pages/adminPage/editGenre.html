@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout :: layout}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Genre</title>
+  </head>
+  <body>
+    <div th:fragment="content">
+      <div class="edit-genre-wrapper">
+        <div class="edit-genre-container">
+          <h1>Edit Genre</h1>
+          <form
+            th:action="@{/genre/update/{id}(id=${genre.genreID})}"
+            th:object="${genre}"
+            method="post"
+          >
+            <div class="edit-genre-fields">
+              <!--genre name field-->
+              <label class="edit-genre-label">Genre name</label>
+              <input
+                type="text"
+                th:field="*{genreName}"
+                class="edit-genre-input"
+                placeholder="Enter genre name"
+              />
+
+              <!--Image upload field-->
+              <label class="edit-genre-label">Image file path</label>
+              <input
+                type="text"
+                th:field="*{genreImage}"
+                class="edit-genre-input"
+                placeholder="Enter cover image path"
+              />
+
+              <button type="submit" class="edit-genre-upload-btn">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

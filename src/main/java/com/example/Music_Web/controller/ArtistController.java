@@ -1,6 +1,7 @@
 package com.example.Music_Web.controller;
 
 import com.example.Music_Web.exception.ArtistNotFoundException;
+import com.example.Music_Web.exception.GenreNotFoundException;
 import com.example.Music_Web.model.Album;
 import com.example.Music_Web.model.Artist;
 import com.example.Music_Web.model.Genre;
@@ -50,6 +51,27 @@ public class ArtistController {
 
 		model.addAttribute("activeTab", "artist");
 		return "pages/adminPage/upload";
+
+	}
+
+	// For user page (read-only view)
+	@GetMapping(value = "/user/list")
+	public String getAllArtistsUser(Model model) {
+		List<Artist> artists = artistRepository.findAll();
+		model.addAttribute("artists", artists);
+
+		return "pages/userPage/artist";
+	}
+
+	// Artist detail for user page (read-only view)
+	@GetMapping("/detail/{id}")
+	public String getArtistDetail(@PathVariable Long id, Model model) throws ArtistNotFoundException {
+		Artist artist = artistRepository.findById(id)
+				.orElseThrow(() -> new ArtistNotFoundException("Invalid genre ID: " + id));
+		model.addAttribute("artist", artist);
+		List<Song> songs = new ArrayList<>(artist.getSongsOfArtist());
+		model.addAttribute("songs", songs);
+		return "pages/userPage/artistDetail";
 	}
 
 	@GetMapping(value = "/update/{id}")
@@ -69,9 +91,18 @@ public class ArtistController {
 		return "pages/adminPage/editArtist";
 	}
 
-	@PostMapping(value = "/save")
-	public String saveUpdate(Artist artist) {
-		artistRepository.save(artist);
+	@PostMapping("/update/{id}")
+	public String updateArtist(@PathVariable Long id, @ModelAttribute Artist updatedArtist)
+			throws ArtistNotFoundException {
+		Artist existingArtist = artistRepository.findById(id)
+				.orElseThrow(() -> new ArtistNotFoundException("Artist not found"));
+
+		existingArtist.setArtistName(updatedArtist.getArtistName());
+		existingArtist.setImage(updatedArtist.getImage());
+		existingArtist.setSongsOfArtist(updatedArtist.getSongsOfArtist());
+		existingArtist.setAlbumsOfArtist(updatedArtist.getAlbumsOfArtist());
+
+		artistRepository.save(existingArtist);
 		return "redirect:/artist/list";
 	}
 

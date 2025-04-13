@@ -38,17 +38,16 @@ function closePlaylist() {
   isPlaylistOpen = false;
 }
 
-//Handle Play song button
 // Global variables
 let currentAudio = null;
 let currentPlayingId = null;
-
-function playSong(event, songId) {
+//handle playsong button sync with playsong in music player
+function playSong(event, songId, title, artists, coverImagePath) {
   event.preventDefault();
   event.stopPropagation();
 
   const audioElement = document.getElementById(`audioPlayer_${songId}`);
-  const clickedButton = event.currentTarget; // Get the actual button element
+  const clickedButton = event.currentTarget;
 
   // If clicking the same song's button
   if (currentPlayingId === songId) {
@@ -56,19 +55,20 @@ function playSong(event, songId) {
       audioElement.play();
       clickedButton.innerHTML =
         '<i class="fa-solid fa-pause song-card-play-btn-icon"></i>';
+      updateBottomPlayer(songId, title, artists, coverImagePath, true);
     } else {
       audioElement.pause();
       clickedButton.innerHTML =
         '<i class="fa-solid fa-play song-card-play-btn-icon"></i>';
+      updateBottomPlayPauseIcon(false);
     }
     return;
   }
 
   // Pause any currently playing audio
-  if (currentAudio) {
+  if (currentAudio && currentAudio !== audioElement) {
     currentAudio.pause();
-    // Reset previous button
-    const prevButton = document.querySelector(`[data-playing="true"]`);
+    const prevButton = document.querySelector('[data-playing="true"]');
     if (prevButton) {
       prevButton.innerHTML =
         '<i class="fa-solid fa-play song-card-play-btn-icon"></i>';
@@ -81,11 +81,13 @@ function playSong(event, songId) {
   currentPlayingId = songId;
   clickedButton.setAttribute("data-playing", "true");
   audioElement.currentTime = 0;
+
   audioElement
     .play()
     .then(() => {
       clickedButton.innerHTML =
         '<i class="fa-solid fa-pause song-card-play-btn-icon"></i>';
+      updateBottomPlayer(songId, title, artists, coverImagePath, true);
     })
     .catch((error) => {
       console.error("Playback failed:", error);
@@ -93,6 +95,7 @@ function playSong(event, songId) {
         '<i class="fa-solid fa-play song-card-play-btn-icon"></i>';
       clickedButton.removeAttribute("data-playing");
       currentPlayingId = null;
+      updateBottomPlayPauseIcon(false);
     });
 
   // When song ends
@@ -100,18 +103,51 @@ function playSong(event, songId) {
     clickedButton.innerHTML =
       '<i class="fa-solid fa-play song-card-play-btn-icon"></i>';
     clickedButton.removeAttribute("data-playing");
-    currentPlayingId = null;
+    updateBottomPlayPauseIcon(false);
     currentAudio = null;
+    currentPlayingId = null;
   };
 }
 
-// Prevent onclick in <a> tag and playing song
-// function playSong(event) {
-//   event.preventDefault();
-//   event.stopPropagation();
+// Update bottom music player
+function updateBottomPlayer(songId, title, artists, coverImagePath, isPlaying) {
+  document.querySelector(".music-title").textContent = title;
+  document.querySelector(".music-artist").textContent = artists;
+  document.querySelector(".music-cover").src = coverImagePath;
+  updateBottomPlayPauseIcon(isPlaying);
+}
 
-//   //if user logged in then play music
-//   //esle user not loggin then display guest pupup
-//   openGuestPopup();
-//   // alert("Playing song...");
-// }
+function updateBottomPlayPauseIcon(isPlaying) {
+  const icon = document.querySelector(".play-pause-btn i");
+  if (icon) {
+    icon.classList.remove("fa-play", "fa-pause");
+    icon.classList.add(isPlaying ? "fa-pause" : "fa-play");
+  }
+}
+
+// Handle bottom player play/pause
+function toggleBottomPlayer() {
+  if (!currentAudio) return;
+
+  if (currentAudio.paused) {
+    currentAudio.play();
+    updateBottomPlayPauseIcon(true);
+    updatePlayButtonInCard(currentSongId, true);
+  } else {
+    currentAudio.pause();
+    updateBottomPlayPauseIcon(false);
+    updatePlayButtonInCard(currentSongId, false);
+  }
+}
+
+function updatePlayButtonInCard(songId, isPlaying) {
+  const button = document.querySelector(
+    `.song-card-play-btn[onclick*="'${songId}'"] i`
+  );
+  if (button) {
+    button.classList.replace(
+      isPlaying ? "fa-play" : "fa-pause",
+      isPlaying ? "fa-pause" : "fa-play"
+    );
+  }
+}

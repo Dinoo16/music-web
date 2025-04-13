@@ -26,13 +26,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr th:each="user : ${users}">
               <td><div class="userlist-avatar"></div></td>
-              <td>justAGuy</td>
-              <td>Something12@mail.com</td>
+              <td th:text="${user.username}">justAGuy</td>
+              <td th:text="${user.email}">Something12@mail.com</td>
               <td>10</td>
               <td>
-                <a href="/admin/userlist/view"
+                <a th:href="@{/user/detail/{id}(id=${user.id})}"
                   ><button class="userlist-view-btn">View</button></a
                 >
               </td>

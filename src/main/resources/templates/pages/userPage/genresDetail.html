@@ -9,9 +9,9 @@
     <div th:fragment="content">
       <!-- genres-detail backgroud -->
       <div class="genres-detail-background">
-        <img src="/images/rock.jpg" alt="genres backgroud" />
+        <img th:src="${genre.genreImage}" alt="genres backgroud" />
         <div class="genres-detail-infor">
-          <h1 class="genres-detail-name">Pop</h1>
+          <h1 class="genres-detail-name" th:text="${genre.genreName}">Pop</h1>
           <p class="genres-detail-desc">
             Popular music with mass appeal, characterized by catchy melodies and
             contemporary production.
@@ -33,7 +33,7 @@
               <i class="fa-solid fa-play"></i><span>Play All</span>
             </div>
           </button>
-          <!-- genres follow button -->
+          <!-- genres button -->
           <button class="genres-detail-follow">
             <div class="genres-detail-follow-btn">
               <span>All Time</span>
@@ -57,39 +57,7 @@
       <div class="genres-detail-top-songs">
         <h2 class="genres-detail-header">Top Songs</h2>
         <!--Song list grid-->
-        <div class="genres-detail-top-grid">
-          <!--Song item-->
-          <div class="genres-detail-top-card">
-            <div class="genres-detail-top-card-img">
-              <img src="/images/song_img1.png" atl="genres-detail-top image" />
-            </div>
-            <div class="genres-detail-top-overlay">
-              <a href="/song/detail" class="genres-detail-top-overlay-btn">
-                <div class="genres-detail-top-play">
-                  <button
-                    class="genres-detail-top-play-btn"
-                    onclick="playSong(event)"
-                  >
-                    <i
-                      class="fa-solid fa-play genres-detail-top-play-btn-icon"
-                    ></i>
-                  </button>
-                </div>
-              </a>
-            </div>
-            <div class="genres-detail-top-info">
-              <h3 class="genres-detail-top-name">Title</h3>
-              <p class="genres-detail-top-genres-detail">Artist</p>
-              <div class="genres-detail-top-meta">
-                <span class="genres-detail-top-duration">3:20</span>
-                <div class="genres-detail-top-actions">
-                  <i class="fa-regular fa-heart"></i>
-                  <i class="fa-solid fa-plus"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div th:replace="~{components/songCard :: songCard()}"></div>
       </div>
 
       <!-- genres popular artist -->

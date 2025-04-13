@@ -1,5 +1,7 @@
 package com.example.Music_Web.controller;
 
+import com.example.Music_Web.exception.SongNotFoundException;
+import com.example.Music_Web.model.Song;
 import com.example.Music_Web.model.User;
 import com.example.Music_Web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import java.util.List;
 import java.security.Principal;
 
 @Controller
@@ -25,15 +27,48 @@ public class UserController {
     public String showSettingPage(Model model, Principal principal) {
         String username = principal.getName();
         User user = userRepository.findByUsername(username)
-                .orElse(null); // Nếu không tìm thấy người dùng, trả về null
+                .orElse(null);
 
         if (user == null) {
-            return "redirect:/auth/signin?error=user-not-found"; // Nếu không tìm thấy người dùng, chuyển hướng đến
-                                                                 // trang đăng nhập
+            return "redirect:/auth/signin?error=user-not-found";
+
         }
 
         model.addAttribute("user", user);
-        return "pages/userPage/setting"; // Trả về giao diện setting.html
+        return "pages/userPage/setting";
+    }
+
+    // Get all user list (admin mode)
+    @GetMapping("/admin/userlist")
+    public String showUserlistPage(Model model, Principal principal) {
+        String username = principal.getName();
+        User currentUser = userRepository.findByUsername(username).orElse(null);
+
+        if (currentUser == null) {
+            return "redirect:/auth/signin?error=user-not-found";
+        }
+
+        List<User> userOnlyList = userRepository.findByRoles("USER");
+        model.addAttribute("users", userOnlyList);
+
+        return "pages/adminPage/userList";
+    }
+
+    // Get user detail by admin
+    @GetMapping("/user/detail/{id}")
+    public String showUserDetail(@PathVariable Long id, Principal principal, Model model) {
+
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username)
+                .orElse(null);
+        if (user == null) {
+            return "redirect:/auth/signin?error=user-not-found";
+
+        }
+        User getUserById = userRepository.findById(id).orElse(null);
+
+        model.addAttribute("user", getUserById);
+        return "pages/adminPage/userDetail";
     }
 
     // Xử lý đổi mật khẩu

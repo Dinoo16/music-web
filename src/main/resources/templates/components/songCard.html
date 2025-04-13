@@ -11,7 +11,7 @@
         <!--home list songs item-->
         <div class="song-card" th:each="song : ${songs}">
           <div class="song-card-img">
-            <img th:src="@{${song.coverImage}}" atl="song image" />
+            <img th:src="@{${song.coverImage}}" alt="song image" />
           </div>
           <div class="song-card-overlay">
             <a
@@ -21,7 +21,12 @@
               <div class="song-card-play">
                 <button
                   class="song-card-play-btn"
-                  onclick="playSong(event, '${song.songID}')"
+                  onclick="playSong(event, 
+                  '${song.songID}', 
+                  '${song.title}', 
+                  '${#strings.listJoin(song.artistsOfSong.![artistName], ', ')}', 
+                  '${song.coverImage}'
+                )"
                 >
                   <i class="fa-solid fa-play song-card-play-btn-icon"></i>
                 </button>

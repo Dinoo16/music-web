@@ -9,9 +9,11 @@
     <div th:fragment="content">
       <!-- artist backgroud -->
       <div class="artist-detail-background">
-        <img src="/images/artist-background.jpg" alt="artist backgroud" />
+        <img th:src="${artist.image}" alt="artist backgroud" />
         <div class="artist-detail-infor">
-          <h1 class="artist-detail-name">Ed Sheeran</h1>
+          <h1 class="artist-detail-name" th:text="${artist.artistName}">
+            Ed Sheeran
+          </h1>
           <div class="listeners-followers">
             <div class="listener-count">
               <i class="fa-solid fa-user-group"></i>

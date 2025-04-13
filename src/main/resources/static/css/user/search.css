@@ -1,0 +1,21 @@
+.search-section-header {
+    padding: 32px 0 12px 0;
+    border-bottom: 1px solid #fff;
+    
+}
+
+.search-header {
+    color: white;
+}
+.search-header span {
+
+}
+
+.search-section-container {
+    margin-top: 32px;
+}
+.search-section-title h3 {
+    font-size: 20px;
+    color: white;
+    padding-bottom: 24px;
+}

@@ -12,14 +12,18 @@
           <h1 class="header__logo">MUSIC</h1>
         </a>
         <div class="header__search">
-          <button class="header__search-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-
-          <input
-            placeholder="Search for songs, artists, or albums..."
-            spellcheck="{false}"
-          />
+          <form th:action="@{/search}" method="get" class="header__search-form">
+            <input
+              type="text"
+              name="keyword"
+              placeholder="Search for songs, artists, or albums..."
+              spellcheck="false"
+              required
+            />
+            <button type="submit" class="header__search-btn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
         </div>
         <!-- Profile and logout: diplay if logged in -->
         <div th:if="${#authorization.expression('isAuthenticated()')}">

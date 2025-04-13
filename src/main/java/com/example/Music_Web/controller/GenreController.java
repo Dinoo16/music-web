@@ -1,6 +1,7 @@
 package com.example.Music_Web.controller;
 
 import com.example.Music_Web.exception.GenreNotFoundException;
+import com.example.Music_Web.exception.SongNotFoundException;
 import com.example.Music_Web.model.Album;
 import com.example.Music_Web.model.Artist;
 import com.example.Music_Web.model.Genre;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,6 +31,7 @@ public class GenreController {
 	@Autowired
 	AlbumRepository albumRepository;
 
+	// For admin page
 	@GetMapping("/list")
 	public String listGenres(Model model) {
 		List<Genre> genres = genreRepository.findAll();
@@ -45,6 +48,27 @@ public class GenreController {
 
 		model.addAttribute("activeTab", "genre");
 		return "pages/adminPage/upload";
+	}
+
+	// For user page (read-only view)
+	@GetMapping(value = "/user/list")
+	public String getAllGenresUser(Model model) {
+		List<Genre> genres = genreRepository.findAll();
+		model.addAttribute("genres", genres);
+		return "pages/userPage/genres";
+	}
+
+	// Genre detail for user page (read-only view)
+	@GetMapping("/detail/{id}")
+	public String getGenreDetail(@PathVariable Long id, Model model) throws GenreNotFoundException {
+		Genre genre = genreRepository.findById(id)
+				.orElseThrow(() -> new GenreNotFoundException("Invalid genre ID: " + id));
+		model.addAttribute("genre", genre);
+
+		List<Song> songs = new ArrayList<>(genre.getSongsOfGenre());
+		model.addAttribute("songs", songs);
+
+		return "pages/userPage/genresDetail";
 	}
 
 	@GetMapping("/add")
@@ -67,9 +91,15 @@ public class GenreController {
 		return "pages/adminPage/editGenre";
 	}
 
-	@PostMapping("/update")
-	public String updateGenre(@ModelAttribute Genre genre) {
-		genreRepository.save(genre);
+	@PostMapping("/update/{id}")
+	public String updateGenre(@PathVariable Long id, @ModelAttribute Genre updatedGenre) throws GenreNotFoundException {
+		Genre existingGenre = genreRepository.findById(id)
+				.orElseThrow(() -> new GenreNotFoundException("Genre not found"));
+
+		existingGenre.setGenreName(updatedGenre.getGenreName());
+		existingGenre.setGenreImage(updatedGenre.getGenreImage());
+
+		genreRepository.save(existingGenre);
 		return "redirect:/genre/list";
 	}
 
