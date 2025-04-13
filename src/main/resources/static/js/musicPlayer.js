@@ -1,5 +1,6 @@
 let isPlaylistOpen = false;
 
+//Handle open song queue list
 function openPlaylist() {
   const playlistSidebar = document.getElementById("playlistSidebar");
 
@@ -27,6 +28,7 @@ function openPlaylist() {
   }
 }
 
+//Handle close song queue list
 function closePlaylist() {
   const playlistSidebar = document.getElementById("playlistSidebar");
   playlistSidebar.style.transform = "translateX(100%)";
@@ -38,85 +40,113 @@ function closePlaylist() {
   isPlaylistOpen = false;
 }
 
-// Global variables
 let currentAudio = null;
 let currentPlayingId = null;
-//handle playsong button sync with playsong in music player
-function playSong(event, songId, title, artists, coverImagePath) {
+// Global player state
+let playerState = {
+  isPlaying: false,
+  currentSong: null,
+  queue: [],
+};
+// Handle play/pause when clicking song card play button
+function playSong(event, songId) {
   event.preventDefault();
   event.stopPropagation();
+
+  // Show bottom music player
+  const musicPlayer = document.getElementById("music-player");
+  musicPlayer.style.display = "flex";
 
   const audioElement = document.getElementById(`audioPlayer_${songId}`);
   const clickedButton = event.currentTarget;
 
-  // If clicking the same song's button
+  // Try to find parent containers of both styles
+  const songCard = clickedButton.closest(".song-card");
+  const listSong = clickedButton.closest(".listOfSong-item");
+
+  // Extract data from whichever exists
+  const songName = songCard
+    ? songCard.querySelector(".song-card-name").textContent
+    : listSong.querySelector(".listOfSong-song-name").textContent;
+
+  const artistName = songCard
+    ? songCard.querySelector(".song-card-artist").textContent
+    : listSong.querySelector(".listOfSong-info-artist").textContent;
+
+  const imagePath = songCard
+    ? songCard.querySelector("img").src
+    : listSong.querySelector("img").src;
+
+  // Update global player state
+  playerState.currentSong = {
+    id: songId,
+    name: songName,
+    artist: artistName,
+    image: imagePath,
+  };
+
+  // If same song is clicked again
   if (currentPlayingId === songId) {
     if (audioElement.paused) {
       audioElement.play();
-      clickedButton.innerHTML =
-        '<i class="fa-solid fa-pause song-card-play-btn-icon"></i>';
-      updateBottomPlayer(songId, title, artists, coverImagePath, true);
+      updateBottomPlayer(songName, artistName, imagePath, true);
+      updatePlayButtonInCard(songId, true);
+      updatePlayButtonInSonglist(songId, true);
     } else {
       audioElement.pause();
-      clickedButton.innerHTML =
-        '<i class="fa-solid fa-play song-card-play-btn-icon"></i>';
-      updateBottomPlayPauseIcon(false);
+      updateBottomPlayer(songName, artistName, imagePath, false);
+      updatePlayButtonInCard(songId, false);
+      updatePlayButtonInSonglist(songId, false);
     }
     return;
   }
 
-  // Pause any currently playing audio
+  // Pause any previously playing audio
   if (currentAudio && currentAudio !== audioElement) {
     currentAudio.pause();
-    const prevButton = document.querySelector('[data-playing="true"]');
-    if (prevButton) {
-      prevButton.innerHTML =
-        '<i class="fa-solid fa-play song-card-play-btn-icon"></i>';
-      prevButton.removeAttribute("data-playing");
-    }
+    updatePlayButtonInCard(currentPlayingId, false);
+    updatePlayButtonInSonglist(currentPlayingId, false);
   }
 
-  // Play the new audio
+  // Play new song
   currentAudio = audioElement;
   currentPlayingId = songId;
-  clickedButton.setAttribute("data-playing", "true");
   audioElement.currentTime = 0;
 
   audioElement
     .play()
     .then(() => {
-      clickedButton.innerHTML =
-        '<i class="fa-solid fa-pause song-card-play-btn-icon"></i>';
-      updateBottomPlayer(songId, title, artists, coverImagePath, true);
+      updateBottomPlayer(songName, artistName, imagePath, true);
+      updatePlayButtonInCard(songId, true);
+      updatePlayButtonInSonglist(songId, true);
     })
     .catch((error) => {
       console.error("Playback failed:", error);
-      clickedButton.innerHTML =
-        '<i class="fa-solid fa-play song-card-play-btn-icon"></i>';
-      clickedButton.removeAttribute("data-playing");
+      updateBottomPlayer(songName, artistName, imagePath, false);
+      updatePlayButtonInCard(songId, false);
+      updatePlayButtonInSonglist(songId, false);
       currentPlayingId = null;
-      updateBottomPlayPauseIcon(false);
     });
 
-  // When song ends
+  // Reset on song end
   audioElement.onended = () => {
-    clickedButton.innerHTML =
-      '<i class="fa-solid fa-play song-card-play-btn-icon"></i>';
-    clickedButton.removeAttribute("data-playing");
     updateBottomPlayPauseIcon(false);
+    updatePlayButtonInCard(songId, false);
+    updatePlayButtonInSonglist(songId, false);
     currentAudio = null;
     currentPlayingId = null;
   };
 }
 
-// Update bottom music player
-function updateBottomPlayer(songId, title, artists, coverImagePath, isPlaying) {
-  document.querySelector(".music-title").textContent = title;
-  document.querySelector(".music-artist").textContent = artists;
-  document.querySelector(".music-cover").src = coverImagePath;
+// Bottom player info update
+function updateBottomPlayer(songName, artistName, imagePath, isPlaying) {
+  document.getElementById("currentSongTitle").textContent = songName;
+  document.getElementById("currentSongArtist").textContent = artistName;
+  document.getElementById("currentSongCover").src = imagePath;
   updateBottomPlayPauseIcon(isPlaying);
 }
 
+// Update bottom player play/pause icon
 function updateBottomPlayPauseIcon(isPlaying) {
   const icon = document.querySelector(".play-pause-btn i");
   if (icon) {
@@ -125,29 +155,69 @@ function updateBottomPlayPauseIcon(isPlaying) {
   }
 }
 
-// Handle bottom player play/pause
+// Toggle bottom player play/pause
 function toggleBottomPlayer() {
   if (!currentAudio) return;
 
   if (currentAudio.paused) {
     currentAudio.play();
     updateBottomPlayPauseIcon(true);
-    updatePlayButtonInCard(currentSongId, true);
+    updatePlayButtonInCard(currentPlayingId, true);
   } else {
     currentAudio.pause();
     updateBottomPlayPauseIcon(false);
-    updatePlayButtonInCard(currentSongId, false);
+    updatePlayButtonInCard(currentPlayingId, false);
   }
 }
 
+// Update song card button icon
 function updatePlayButtonInCard(songId, isPlaying) {
-  const button = document.querySelector(
+  const buttonIcon = document.querySelector(
     `.song-card-play-btn[onclick*="'${songId}'"] i`
   );
-  if (button) {
-    button.classList.replace(
-      isPlaying ? "fa-play" : "fa-pause",
-      isPlaying ? "fa-pause" : "fa-play"
-    );
+  if (buttonIcon) {
+    buttonIcon.classList.remove("fa-play", "fa-pause");
+    buttonIcon.classList.add(isPlaying ? "fa-pause" : "fa-play");
   }
 }
+
+//Update list song button icon
+function updatePlayButtonInSonglist(songId, isPlaying) {
+  const buttonIcon = document.querySelector(
+    `.listOfSong-play-pause-btn[onclick*="'${songId}'"] i`
+  );
+  if (buttonIcon) {
+    buttonIcon.classList.remove("fa-play", "fa-pause");
+    buttonIcon.classList.add(isPlaying ? "fa-pause" : "fa-play");
+  }
+}
+
+// Initialize audio event listeners
+document.addEventListener("DOMContentLoaded", function () {
+  // Update progress bar as song plays
+  document.querySelectorAll("audio").forEach((audio) => {
+    audio.addEventListener("timeupdate", function () {
+      if (this.id === `audioPlayer_${playerState.currentSong?.id}`) {
+        const progress = (this.currentTime / this.duration) * 100;
+        document.querySelector(".seek-bar").value = progress;
+
+        // Update current time display
+        document.querySelector(".current-time").textContent = formatTime(
+          this.currentTime
+        );
+      }
+    });
+  });
+});
+
+function formatTime(seconds) {
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+}
+
+//Handle next song
+
+//Handle backward song
+
+//Handle click or drag on the duration bar

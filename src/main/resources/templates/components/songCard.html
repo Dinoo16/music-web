@@ -21,12 +21,7 @@
               <div class="song-card-play">
                 <button
                   class="song-card-play-btn"
-                  onclick="playSong(event, 
-                  '${song.songID}', 
-                  '${song.title}', 
-                  '${#strings.listJoin(song.artistsOfSong.![artistName], ', ')}', 
-                  '${song.coverImage}'
-                )"
+                  th:attr="onclick=|playSong(event, '${song.songID}')|"
                 >
                   <i class="fa-solid fa-play song-card-play-btn-icon"></i>
                 </button>
@@ -35,7 +30,7 @@
           </div>
 
           <!-- Hidden audio element -->
-          <audio id="audioPlayer_${song.songID}" style="display: none">
+          <audio th:id="'audioPlayer_' + ${song.songID}" style="display: none">
             <source th:src="@{${song.filePath}}" type="audio/mpeg" />
             Your browser does not support the audio element.
           </audio>

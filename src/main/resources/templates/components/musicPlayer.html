@@ -6,12 +6,17 @@
     <title>Fixed Bottom Music player</title>
   </head>
   <body>
-    <div class="music-player" th:fragment="playerFragment">
+    <div id="music-player" class="music-player" th:fragment="playerFragment">
       <div class="music-player-info">
-        <img src="/images/song_img1.png" alt="Song Cover" class="music-cover" />
+        <img
+          id="currentSongCover"
+          src="/images/song_img1.png"
+          alt="Song Cover"
+          class="music-cover"
+        />
         <div class="music-text">
-          <h4 class="music-title">Blinding Lights</h4>
-          <p class="music-artist">The Weeknd</p>
+          <h4 id="currentSongTitle" class="music-title">Blinding Lights</h4>
+          <p id="currentSongArtist" class="music-artist">The Weeknd</p>
         </div>
         <div class="music-actions">
           <div
@@ -38,7 +43,7 @@
         </div>
         <div class="progress-bar">
           <span class="current-time">1:12</span>
-          <input type="range" class="seek-bar" min="0" max="100" value="30" />
+          <input type="range" class="seek-bar" min="0" max="100" value="0" />
           <span class="total-duration">3:20</span>
         </div>
       </div>

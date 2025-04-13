@@ -29,18 +29,20 @@
               <div class="listOfSong-play">
                 <button
                   class="listOfSong-play-pause-btn"
-                  onclick="playSong(event, 
-                  '${song.songID}', 
-                  '${song.title}', 
-                  '${#strings.listJoin(song.artistsOfSong.![artistName], ', ')}', 
-                  '${song.coverImage}'
-                )"
+                  th:attr="onclick=|playSong(event, '${song.songID}')|"
                 >
-                  <i class="fa-solid fa-pause listOfSong-pause-btn"></i>
                   <i class="fa-solid fa-play listOfSong-play-btn"></i>
                 </button>
               </div>
             </div>
+            <!-- Hidden audio element -->
+            <audio
+              th:id="'audioPlayer_' + ${song.songID}"
+              style="display: none"
+            >
+              <source th:src="@{${song.filePath}}" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
           </div>
           <a
             th:href="@{'/song/detail/' + ${song.songID}}"

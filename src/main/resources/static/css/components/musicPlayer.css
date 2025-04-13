@@ -6,7 +6,7 @@
     height: 90px;
     background-color: #181818;
     border-top: 1px solid #1F2937;
-    display: flex;
+    display: none;
     padding: 0 55px;
     color: white;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
