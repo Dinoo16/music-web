@@ -54,8 +54,8 @@ function playSong(event, songId) {
   event.stopPropagation();
 
   // Show bottom music player
-  const musicPlayer = document.getElementById("music-player");
-  musicPlayer.style.display = "flex";
+  // const musicPlayer = document.getElementById("music-player");
+  // musicPlayer.style.display = "flex";
 
   const audioElement = document.getElementById(`audioPlayer_${songId}`);
   const clickedButton = event.currentTarget;
@@ -77,6 +77,15 @@ function playSong(event, songId) {
     ? songCard.querySelector("img").src
     : listSong.querySelector("img").src;
 
+  // Check if user is logged in
+  // Show guest popup instead of playing
+  if (!isLoggedIn) {
+    openGuestPopup();
+    updateImageGuestPopup(imagePath);
+    return; // Exit the function early
+  }
+  const musicPlayer = document.getElementById("music-player");
+  musicPlayer.style.display = "flex";
   // Update global player state
   playerState.currentSong = {
     id: songId,
@@ -144,6 +153,12 @@ function updateBottomPlayer(songName, artistName, imagePath, isPlaying) {
   document.getElementById("currentSongArtist").textContent = artistName;
   document.getElementById("currentSongCover").src = imagePath;
   updateBottomPlayPauseIcon(isPlaying);
+}
+function updateImageGuestPopup(imagePath) {
+  const img = document.getElementById("image-background");
+  if (img) {
+    img.src = imagePath;
+  }
 }
 
 // Update bottom player play/pause icon

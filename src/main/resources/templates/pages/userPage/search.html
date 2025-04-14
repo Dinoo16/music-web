@@ -19,7 +19,7 @@
           <div class="search-section-title">
             <h3>Songs</h3>
           </div>
-          <div th:if="${#lists.isEmpty(songs)}" class="no-result-message">
+          <!-- <div th:if="${#lists.isEmpty(songs)}" class="no-result-message">
             <p>
               No songs found for "<span
                 th:text="${keyword}"
@@ -27,7 +27,7 @@
               ></span
               >"
             </p>
-          </div>
+          </div> -->
           <div th:unless="${#lists.isEmpty(songs)}" class="result-container">
             <!-- list of songs -->
             <div th:replace="~{components/songCard :: songCard()}"></div>
@@ -38,7 +38,7 @@
           <div class="search-section-title">
             <h3>Albums</h3>
           </div>
-          <div th:if="${#lists.isEmpty(albums)}" class="no-result-message">
+          <!-- <div th:if="${#lists.isEmpty(albums)}" class="no-result-message">
             <p>
               No albums found for "<span
                 th:text="${keyword}"
@@ -46,7 +46,7 @@
               ></span
               >"
             </p>
-          </div>
+          </div> -->
           <div th:unless="${#lists.isEmpty(albums)}" class="result-container">
             <div th:each="album : ${albums}" class="result-item">
               <a
@@ -62,7 +62,7 @@
           <div class="search-section-title">
             <h3>Artists</h3>
           </div>
-          <div th:if="${#lists.isEmpty(artists)}" class="no-result-message">
+          <!-- <div th:if="${#lists.isEmpty(artists)}" class="no-result-message">
             <p>
               No artists found for "<span
                 th:text="${keyword}"
@@ -70,7 +70,7 @@
               ></span
               >"
             </p>
-          </div>
+          </div> -->
           <div th:unless="${#lists.isEmpty(artists)}" class="result-container">
             <div th:replace="~{components/artistCard :: artistCard()}"></div>
           </div>

@@ -130,5 +130,9 @@
     <div
       th:replace="~{components/guestPopup :: guestPopup('/images/electronic.jpg')}"
     ></div>
+
+    <script th:inline="javascript">
+      const isLoggedIn = /*[[${isReallyLoggedIn}]]*/ false;
+    </script>
   </body>
 </html>

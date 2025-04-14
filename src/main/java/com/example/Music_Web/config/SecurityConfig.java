@@ -29,7 +29,8 @@ public class SecurityConfig {
                                                 .requestMatchers(
                                                                 "/", "/discover", "/topchart", "/song/**", "/artist/**",
                                                                 "/album/**", "/genre/**",
-                                                                "/auth/**", "/css/**", "/js/**", "/images/**")
+                                                                "/auth/**", "/css/**", "/js/**", "/images/**",
+                                                                "/uploads/**")
                                                 .permitAll()
                                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                                 .requestMatchers("/playlist/**", "/setting", "/favorite")
@@ -44,6 +45,9 @@ public class SecurityConfig {
                                                 .permitAll())
                                 .logout(logout -> logout
                                                 .logoutUrl("/auth/logout")
+                                                .invalidateHttpSession(true)
+                                                .clearAuthentication(true)
+                                                .deleteCookies("JSESSIONID")
                                                 .logoutSuccessUrl("/auth/signin?logout=true")
                                                 .permitAll())
                                 .build();
