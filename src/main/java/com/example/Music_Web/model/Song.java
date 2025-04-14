@@ -23,13 +23,18 @@ public class Song {
 	@Column(length = 255)
 	private String coverImage;
 
-	@Column
+	@Column(updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date releaseDate;
 
 	@Column(nullable = false)
 	private int duration;
 
+	@PrePersist
+	protected void onCreate() {
+		this.releaseDate = new Date();
+	}
 	// ------------------
 	// relationship
 

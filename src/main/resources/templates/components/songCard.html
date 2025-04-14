@@ -35,14 +35,18 @@
             Your browser does not support the audio element.
           </audio>
           <div class="song-card-info">
-            <h3 class="song-card-name" th:text="${song.title}">Title</h3>
-            <p
-              class="song-card-artist"
-              th:each="artist, iter : ${song.artistsOfSong}"
-              th:text="${artist.artistName} + (${!iter.last} ? ', ' : '')"
-            >
-              Artist
-            </p>
+            <div class="song-card-name-artist">
+              <h3 class="song-card-name" th:text="${song.title}">Title</h3>
+              <div class="song-card-artist">
+                <p
+                  class="song-card-artist-name"
+                  th:each="artist, iter : ${song.artistsOfSong}"
+                  th:text="${artist.artistName} + (${!iter.last} ? ', ' : '')"
+                >
+                  Artist
+                </p>
+              </div>
+            </div>
             <div class="song-card-meta">
               <span class="song-card-duration">3:20</span>
               <div class="song-card-actions">

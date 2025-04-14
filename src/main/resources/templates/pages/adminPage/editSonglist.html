@@ -28,7 +28,9 @@
               <!--Song file path field-->
               <label class="edit-songlist-label">File path</label>
               <input
-                type="text"
+                type="file"
+                name="audioFile"
+                accept="audio/mp3"
                 th:field="*{filePath}"
                 class="edit-songlist-input"
                 placeholder="Enter file path"
@@ -112,7 +114,9 @@
 
               <label class="edit-songlist-label">Image file path</label>
               <input
-                type="text"
+                type="file"
+                name="imageFile"
+                accept="image/*"
                 th:field="*{coverImage}"
                 class="edit-songlist-input"
                 placeholder="Enter cover image path"

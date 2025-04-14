@@ -64,7 +64,10 @@
       <!-- myplaylist RECOMMENDED song list -->
       <h2 class="myplaylist-song-header">Recommended songs</h2>
       <div
-        th:replace="~{components/listSong :: listOfSong('','plus','4:30', 'addSong()')}"
+        th:replace="~{components/listSong :: listOfSong(songNumber='',
+        icon='plus', duration='4:30',
+        onclickFunction='addToPlaylist()'
+        )}"
       ></div>
 
       <!--Edit playlist Popup-->

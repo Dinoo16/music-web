@@ -122,7 +122,9 @@ public class SongController {
 			@PathVariable("id") Long id,
 			@ModelAttribute Song song,
 			@RequestParam("selectedGenres") String genreIds,
-			@RequestParam("selectedArtists") String artistIds) {
+			@RequestParam("selectedArtists") String artistIds,
+			@RequestParam(value = "audioFile", required = false) MultipartFile audioFile,
+			@RequestParam(value = "imageFile", required = false) MultipartFile imageFile) throws IOException {
 
 		// Convert comma-separated IDs to lists
 		List<Long> genreIdList = Arrays.stream(genreIds.split(","))
@@ -141,8 +143,32 @@ public class SongController {
 
 		// Update fields
 		existingSong.setTitle(song.getTitle());
-		existingSong.setFilePath(song.getFilePath());
-		existingSong.setCoverImage(song.getCoverImage());
+
+		// Validate audio file
+		if (audioFile.isEmpty()) {
+			throw new RuntimeException("Please select an audio file");
+		}
+
+		if (!audioFile.getContentType().startsWith("audio/")) {
+			throw new RuntimeException("Only audio files are allowed");
+		}
+
+		// Validate image file
+		if (imageFile.isEmpty()) {
+			throw new RuntimeException("Please select an image file");
+		}
+
+		if (!imageFile.getContentType().startsWith("image/")) {
+			throw new RuntimeException("Only image files are allowed for cover");
+		}
+
+		// 1. Upload file and save to /uploads/ or any custom path
+		String audioPath = fileStorageService.storeFile(audioFile);
+		String imagePath = fileStorageService.storeFile(imageFile);
+
+		// 2. Set path to song entity
+		existingSong.setFilePath(audioPath);
+		existingSong.setCoverImage(imagePath);
 
 		// Update relationships
 		Album album = albumRepository.findById(song.getAlbum().getAlbumID())

@@ -12,12 +12,13 @@
         <div
           class="listOfSong-item"
           th:fragment="listOfSongItem(songNumber,icon,duration,onclickFunction)"
-          th:each="song : ${songs}"
+          th:each="song, iterStat : ${songs}"
         >
           <span
             class="listOfSong-number"
             th:if="${songNumber != null and songNumber != ''}"
-            th:text="${songNumber}"
+            th:text="${iterStat.count}"
+            th:classappend="${iterStat.count == 1 ? 'top-1' : (iterStat.count == 2 ? 'top-2' : (iterStat.count == 3 ? 'top-3' : ''))}"
           ></span>
           <div class="listOfSong-img-container">
             <img

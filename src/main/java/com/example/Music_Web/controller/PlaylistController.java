@@ -46,32 +46,25 @@ public class PlaylistController {
     UserRepository userRepository;
 
     @GetMapping(value = "/list")
-    public String getAllAlbums(Model model) {
-        List<Playlist> playlists = playlistRepository.findAll();
-        model.addAttribute("playlists", playlists);
+    public String getAllUserPlaylists(Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        // Dữ liệu cho tab artist
-        List<Album> albums = albumRepository.findAll();
-        model.addAttribute("albums", albums);
-        // Dữ liệu cho tab artist
-        List<Artist> artists = artistRepository.findAll();
-        model.addAttribute("artists", artists);
-        // Dữ liệu cho tab song
-        List<Song> songs = songRepository.findAll();
-        model.addAttribute("songs", songs);
-        // Dữ liệu cho tab genre
-        List<Genre> genres = genreRepository.findAll();
-        model.addAttribute("genres", genres);
-        model.addAttribute("activeTab", "playlist");
+        // Get only this user's playlists
+        List<Playlist> playlists = playlistRepository.findByUser(user);
+        model.addAttribute("playlists", playlists);
 
         return "pages/userPage/myplaylist";
     }
 
     @GetMapping("/detail/{id}")
     public String getPlaylistDetail(@PathVariable Long id, Model model) throws PlaylistNotFoundException {
+
         Playlist playlist = playlistRepository.findById(id)
                 .orElseThrow(() -> new PlaylistNotFoundException("Invalid playlist ID: " + id));
         model.addAttribute("playlist", playlist);
+        model.addAttribute("songs", songRepository.findAll());
         return "pages/userPage/myplaylistDetail";
     }
 

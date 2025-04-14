@@ -86,23 +86,31 @@
     background-color: transparent;
 }
 .song-card-info {
+    height: 115px;
     padding: 6px 16px 6px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .song-card-name {
     color:#fff;
     font-weight: 600;
 }
-
 .song-card-artist {
+    display: flex;
+
+}
+.song-card-artist-name {
     color: #9CA3AF;
     font-size: 14px;
 }
 
 .song-card-meta {
-    padding-top: 16px;
+    bottom: 10px;
     display: flex;
     justify-content: space-between;
+    
     color: #9CA3AF;
 }
 .song-card-duration {
