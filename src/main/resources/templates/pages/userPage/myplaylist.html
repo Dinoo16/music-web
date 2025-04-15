@@ -18,7 +18,9 @@
       </div>
 
       <!-- list of myplaylists -->
-      <div th:replace="~{components/playlistCard :: playlistCard()}"></div>
+      <div
+        th:replace="~{components/playlistCard :: playlistCard(${userPlaylists})}"
+      ></div>
 
       <div
         th:replace="~{components/popup :: popup('Create playlist', 'Enter playlist name', 'Add an optional description')}"

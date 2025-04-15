@@ -20,6 +20,11 @@ public class User {
     private String email;
     private String avatar;
 
+    @ManyToMany
+    @JoinTable(name = "user_recently_played", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "song_id"))
+    @OrderColumn(name = "play_order")
+    private List<Song> recentlyPlayedSongs = new ArrayList<>();
+
     // relationship
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Playlist> playlists;
@@ -93,5 +98,13 @@ public class User {
 
     public void changePassword(String newPassword, PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(newPassword);
+    }
+
+    public List<Song> getRecentlyPlayedSongs() {
+        return recentlyPlayedSongs;
+    }
+
+    public void setRecentlyPlayedSongs(List<Song> recentlyPlayedSongs) {
+        this.recentlyPlayedSongs = recentlyPlayedSongs;
     }
 }

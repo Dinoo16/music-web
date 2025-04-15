@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.Collections;
 
 //User
 //1.	Create Playlist
@@ -46,15 +48,7 @@ public class PlaylistController {
     UserRepository userRepository;
 
     @GetMapping(value = "/list")
-    public String getAllUserPlaylists(Model model, Principal principal) {
-        String username = principal.getName();
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        // Get only this user's playlists
-        List<Playlist> playlists = playlistRepository.findByUser(user);
-        model.addAttribute("playlists", playlists);
-
+    public String getAllUserPlaylists(Model model) {
         return "pages/userPage/myplaylist";
     }
 
@@ -63,15 +57,17 @@ public class PlaylistController {
 
         Playlist playlist = playlistRepository.findById(id)
                 .orElseThrow(() -> new PlaylistNotFoundException("Invalid playlist ID: " + id));
+
+        // Get recommended songs (songs not in this playlist)
+        List<Song> allSongs = songRepository.findAll();
+        List<Song> recommendedSongs = allSongs.stream()
+                .filter(song -> !playlist.getSongs().contains(song))
+                .collect(Collectors.toList());
+
+        model.addAttribute("recommendedSongs", recommendedSongs);
         model.addAttribute("playlist", playlist);
         model.addAttribute("songs", songRepository.findAll());
         return "pages/userPage/myplaylistDetail";
-    }
-
-    @GetMapping("/add")
-    public String addPlaylist(Model model) {
-        model.addAttribute("playlist", new Playlist());
-        return "pages/adminPage/addPlaylist";
     }
 
     @PostMapping("/add")

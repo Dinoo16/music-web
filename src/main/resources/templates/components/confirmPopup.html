@@ -13,7 +13,7 @@
       <div class="confirmPopup-overlay">
         <div class="confirmPopup-box">
           <h2 class="confirmPopup-title" th:text="${acctionTitle}"></h2>
-          <p class="confirmPopup-text" th:text="${acctionText}"></p>
+          <p class="confirmPopup-text" th:utext="${acctionText}"></p>
           <div class="confirmPopup-buttons">
             <button class="confirmPopup-cancel" onclick="cancel()">
               Cancel

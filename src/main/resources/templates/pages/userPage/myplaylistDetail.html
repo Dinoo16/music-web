@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>my playlist detail</title>
   </head>
-  <body>
+  <body th:attr="data-playlist-id=${playlist.playlistID}">
     <div th:fragment="content">
       <div
-        th:replace="~{components/confirmPopup :: confirmPopup('Delete from your library?', 'This will delete My playlist #5 from your library.')}"
+        th:replace="~{components/confirmPopup :: confirmPopup(
+        'Delete from your library?', 
+        ${'This will delete <strong>' + playlist.playlistName + '</strong> from your library.'}
+      )}"
       ></div>
       <div th:replace="~{components/popupOverlay :: popupOverlay}"></div>
 
@@ -58,16 +61,25 @@
       <!-- myplaylist song list -->
       <h2 class="myplaylist-song-header">All songs</h2>
       <div
-        th:replace="~{components/listSong :: listOfSong('','minus','4:30', 'removeSong()')}"
+        th:replace="~{components/listSong :: listOfSong(songNumber='',
+        icon='minus',
+        duration='4:30', 
+        onclickFunction='removeSong()',
+        songs=${playlist.songs},
+        playlistId=${playlist.playlistID} )}"
       ></div>
 
       <!-- myplaylist RECOMMENDED song list -->
       <h2 class="myplaylist-song-header">Recommended songs</h2>
       <div
-        th:replace="~{components/listSong :: listOfSong(songNumber='',
-        icon='plus', duration='4:30',
-        onclickFunction='addToPlaylist()'
-        )}"
+        th:replace="~{components/listSong :: listOfSong(
+        songNumber='',
+        icon='plus',
+        duration='4:30', 
+        onclickFunction='addSong()',
+        songs=${recommendedSongs},
+        playlistId=${playlist.playlistID} 
+      )}"
       ></div>
 
       <!--Edit playlist Popup-->

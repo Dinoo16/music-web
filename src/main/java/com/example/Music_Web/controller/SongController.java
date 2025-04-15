@@ -8,6 +8,8 @@ import com.example.Music_Web.model.Artist;
 import com.example.Music_Web.model.Genre;
 import com.example.Music_Web.model.Playlist;
 import com.example.Music_Web.model.Song;
+import com.example.Music_Web.model.User;
+import com.example.Music_Web.repository.UserRepository;
 import com.example.Music_Web.repository.AlbumRepository;
 import com.example.Music_Web.repository.ArtistRepository;
 import com.example.Music_Web.repository.GenreRepository;
@@ -16,17 +18,20 @@ import com.example.Music_Web.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.data.domain.Sort;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,6 +44,8 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/song")
 public class SongController {
+	@Autowired
+	UserRepository userRepository;
 	@Autowired
 	SongRepository songRepository;
 	@Autowired
@@ -72,8 +79,8 @@ public class SongController {
 	// For user page (read-only view)
 	@GetMapping(value = "/user/list")
 	public String getAllSongsUser(Model model) {
-		List<Song> songs = songRepository.findAll();
-		model.addAttribute("songs", songs);
+		// List<Song> songs = songRepository.findAll();
+		// model.addAttribute("songs", songs);
 		// genres for filtering
 		model.addAttribute("genres", genreRepository.findAll());
 		return "pages/userPage/song";
@@ -287,6 +294,23 @@ public class SongController {
 		} catch (Exception e) {
 			throw new RuntimeException("Error: " + e.getMessage());
 		}
+	}
+
+	@PostMapping("/play/{id}")
+	public ResponseEntity<String> playSong(@PathVariable Long id) {
+		Song song = songRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Song not found"));
+
+		song.setPlays(song.getPlays() + 1);
+		songRepository.save(song);
+		return ResponseEntity.ok("Play count updated");
+	}
+
+	@GetMapping("/topchart")
+	public String getTopCharts(Model model) {
+		List<Song> songs = songRepository.findAll(Sort.by(Sort.Direction.DESC, "plays"));
+		model.addAttribute("songs", songs);
+		return "pages/userPage/topchart";
 	}
 
 }

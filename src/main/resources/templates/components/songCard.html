@@ -9,7 +9,7 @@
     <div th:fragment="songCard()">
       <div class="song-card-grid">
         <!--home list songs item-->
-        <div class="song-card" th:each="song : ${songs}">
+        <div class="song-card" th:each="song : ${globalSongs}">
           <div class="song-card-img">
             <img th:src="@{${song.coverImage}}" alt="song image" />
           </div>
@@ -54,9 +54,39 @@
                 <div
                   th:replace="~{/components/tooltip :: toolTip('Add to favorites', 'fa-regular fa-heart', 'addSongToFavorite()')}"
                 ></div>
-                <div
-                  th:replace="~{/components/tooltip :: toolTip('Add to playlist', 'fa-solid fa-plus', 'addSongToPlaylist()')}"
-                ></div>
+                <div>
+                  <div class="addToPlaylistCard-wrapper">
+                    <input
+                      type="text"
+                      class="addToPlaylistCard-search"
+                      placeholder="Tìm playlist"
+                    />
+
+                    <div
+                      class="addToPlaylistCard-create"
+                      onclick="showPopup()"
+                      id="addToPlaylistCard"
+                    >
+                      <button class="addToPlaylistCard-create-btn">
+                        <i class="fa-solid fa-plus"></i>
+                      </button>
+                      <span>Create new playlist</span>
+                    </div>
+
+                    <ul
+                      class="addToPlaylistCard-list"
+                      th:each="playlist : ${userPlaylists}"
+                    >
+                      <li class="addToPlaylistCard-item">
+                        <i class="fa-solid fa-list-ul"></i>
+                        <span th:text="${playlist.playlistName}"></span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div
+                    th:replace="~{components/tooltip :: toolTip('Add to playlist', 'fa-solid fa-plus', 'openCloseAddToSongCard()')}"
+                  ></div>
+                </div>
                 <!--ToolTip plus button (Add to playlist)-->
               </div>
             </div>

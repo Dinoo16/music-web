@@ -12,13 +12,12 @@
     justify-content: space-between;
     padding: 10px;
     border-radius: 8px;
-    transition: background 0.3s ease, transform 0.1s ease;
-    will-change: transform;
+    transition: background 0.3s ease;
+    transform: scale(1);
   }
 
   .listOfSong-item:hover {
     background-color: #111827;
-    transform: translateZ(0);
   }
 
   .listOfSong-number {
@@ -91,26 +90,26 @@
 .listOfSong-pause-btn {
   display: none;
 }
-
-
 .listOfSong-info-link {
   display: flex;
-  justify-content: flex-start;
+    align-items: center;
+    min-width: 0;
+    flex: 1;
 }
   
   .listOfSong-info {
-    /* flex-grow: 1; */
     flex: 1 1 0%;
     margin-left: 15px;
     min-width: 0;
     overflow: hidden; 
     transition: none;
+    text-overflow: ellipsis;
   }
-  .listOfSong-info > div {
+  /* .listOfSong-info > div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
+} */
   
   .listOfSong-info h3 {
     margin: 0;

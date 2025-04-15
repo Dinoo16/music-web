@@ -31,6 +31,8 @@ public class Song {
 	@Column(nullable = false)
 	private int duration;
 
+	private int plays;
+
 	@PrePersist
 	protected void onCreate() {
 		this.releaseDate = new Date();
@@ -54,7 +56,7 @@ public class Song {
 	// playlist
 	@ManyToMany
 	@JoinTable(name = "playlist_song", joinColumns = @JoinColumn(name = "song_id"), inverseJoinColumns = @JoinColumn(name = "playlist_id"))
-	private List<Playlist> playlistsOfSong = new ArrayList<>();
+	private List<Playlist> playlists = new ArrayList<>();
 
 	// getters & setters
 	public Long getSongID() {
@@ -129,11 +131,19 @@ public class Song {
 		this.album = album;
 	}
 
-	public List<Playlist> getPlaylistsOfSong() {
-		return playlistsOfSong;
+	public List<Playlist> getPlaylists() {
+		return playlists;
 	}
 
-	public void setPlaylistsOfSong(List<Playlist> playlistsOfSong) {
-		this.playlistsOfSong = playlistsOfSong;
+	public void setPlaylists(List<Playlist> playlists) {
+		this.playlists = playlists;
+	}
+
+	public int getPlays() {
+		return plays;
+	}
+
+	public void setPlays(int plays) {
+		this.plays = plays;
 	}
 }

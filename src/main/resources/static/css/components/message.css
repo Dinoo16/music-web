@@ -1,0 +1,29 @@
+.message-wrapper {
+    position: fixed;
+    padding: 12px;
+    bottom: 90px;   
+    left: 55px;    
+    z-index: 1000;
+    width: 360px;
+    border-radius: 10px;
+    background-color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    display: none;
+}
+.message-noti {
+    color: white;
+}
+.message-close-btn {
+    background-color: transparent;
+    padding: 4px;
+    font-size: 20px;
+}
+.message-close-btn i {
+    color: white;
+    opacity: 0.8;
+}
+.message-close-btn i:hover {
+    opacity: 1;
+}

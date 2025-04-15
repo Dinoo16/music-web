@@ -19,8 +19,8 @@ public class Playlist {
 
     // ----------
     // relationship
-    @ManyToMany(mappedBy = "playlistsOfSong")
-    private List<Song> songsOfPlaylist = new ArrayList<>();
+    @ManyToMany(mappedBy = "playlists")
+    private List<Song> songs = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -51,12 +51,22 @@ public class Playlist {
         this.playlistDes = playlistDes;
     }
 
-    public List<Song> getSongsOfPlaylist() {
-        return songsOfPlaylist;
+    public List<Song> getSongs() {
+        return songs;
     }
 
-    public void setSongsOfPlaylist(List<Song> songsOfPlaylist) {
-        this.songsOfPlaylist = songsOfPlaylist;
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
+
+    public void addSong(Song song) {
+        songs.add(song);
+        song.getPlaylists().add(this);
+    }
+
+    public void removeSong(Song song) {
+        songs.remove(song);
+        song.getPlaylists().remove(this);
     }
 
     public User getUser() {

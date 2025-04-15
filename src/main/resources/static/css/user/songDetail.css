@@ -1,6 +1,6 @@
 .song-detail-wrapper {
     display: flex;
-
+    justify-content: space-between;
 }
 .song-detail-page {
     background-color: #121212 !important; 
@@ -137,9 +137,9 @@
     color: #FFF;
 }
 
-
-.song-detail-related {
-    width: 100%;
+/* List of related song */
+.song-detail-related {   
+    width: 380px;
     height: 100%;
     padding-left: 24px;
     margin-top: 24px;
@@ -154,7 +154,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #121212; /* Màu nền tối */
+    background-color: #121212; 
     padding: 10px;
     border-radius: 8px;
     width: 400px;
@@ -173,7 +173,7 @@
   .song-detail-related-info {
     flex-grow: 1;
     margin-left: 10px;
-    color: #fff; /* Màu chữ trắng */
+    color: #fff; 
   }
   
   .song-detail-related-title {
@@ -183,7 +183,7 @@
   
   .song-detail-related-artist {
     font-size: 14px;
-    color: #b3b3b3; /* Màu xám nhẹ */
+    color: #b3b3b3; 
     margin: 0;
   }
   

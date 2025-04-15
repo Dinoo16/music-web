@@ -23,16 +23,19 @@
 }
 
 .confirmPopup-title {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: var(--white);
     margin-bottom: 10px;
 }
 
 .confirmPopup-text {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--white);
     margin-bottom: 20px;
+}
+.confirmPopup-text strong {
+    font-size: 18px;
 }
 
 .confirmPopup-buttons {

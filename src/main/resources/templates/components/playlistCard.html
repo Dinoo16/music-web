@@ -8,9 +8,9 @@
   <body>
     <!-- Định nghĩa fragment -->
 
-    <div class="playlists-grid" th:fragment="playlistCard()">
+    <div class="playlists-grid" th:fragment="playlistCard(playlists)">
       <!--Playlist item-->
-      <div class="playlist-card" th:each="playlist : ${playlists}">
+      <div class="playlist-card" th:each="playlist : ${userPlaylists}">
         <div class="playlist-card-img">
           <img src="/images/playlist-bg.svg" atl="playlist image" />
         </div>

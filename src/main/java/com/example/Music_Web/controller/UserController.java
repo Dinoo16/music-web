@@ -4,7 +4,9 @@ import com.example.Music_Web.exception.SongNotFoundException;
 import com.example.Music_Web.model.Song;
 import com.example.Music_Web.model.User;
 import com.example.Music_Web.repository.UserRepository;
+import com.example.Music_Web.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private SongRepository songRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -71,7 +75,7 @@ public class UserController {
         return "pages/adminPage/userDetail";
     }
 
-    // Xử lý đổi mật khẩu
+    // Change password
     @PostMapping("/setting/changepassword")
     public String changePassword(@RequestParam("newPassword") String newPassword,
             @RequestParam("confirmPassword") String confirmPassword,
@@ -101,5 +105,34 @@ public class UserController {
 
         redirectAttributes.addFlashAttribute("message", "Password changed successfully.");
         return "redirect:/setting"; // Sau khi đổi mật khẩu thành công, quay lại trang setting
+    }
+
+    // Get recently song played
+    @PostMapping("/recentlyplayed/{songId}")
+    public ResponseEntity<String> updateRecentlyPlayed(
+            @PathVariable Long songId,
+            Principal principal) {
+        User user = userRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Song song = songRepository.findById(songId)
+                .orElseThrow(() -> new RuntimeException("Song not found"));
+
+        List<Song> recentSongs = user.getRecentlyPlayedSongs();
+
+        // Remove if already exists to move it to top
+        recentSongs.remove(song);
+        recentSongs.add(0, song);
+
+        // Optional: limit size to 10
+        int MAX_RECENT = 10;
+        if (recentSongs.size() > MAX_RECENT) {
+            recentSongs = recentSongs.subList(0, MAX_RECENT);
+        }
+
+        user.setRecentlyPlayedSongs(recentSongs);
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Updated recently played songs");
     }
 }

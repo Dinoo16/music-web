@@ -1,5 +1,3 @@
-
-
 // retrieve the function name dynamically
 function handleClick(button) {
   let action = button.getAttribute("data-action");
@@ -109,4 +107,75 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-//
+// display not loggin
+function openCloseAddToSongCard() {
+  if (!isLoggedIn) {
+    const tooltipBox = document.getElementById("header__tooltip-box");
+    tooltipBox.style.display = "block";
+    return;
+  }
+
+  const addToPlaylistCard = document.querySelector(
+    ".addToPlaylistCard-wrapper"
+  );
+
+  if (!addToPlaylistCard) return;
+
+  const isVisible = addToPlaylistCard.style.display === "block";
+
+  addToPlaylistCard.style.display = isVisible ? "none" : "block";
+}
+
+// Add song from playlist function
+window.addSong = function (songId, playlistId) {
+  fetch(`/playlist/songs/add?playlistId=${playlistId}&songId=${songId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      // 'X-CSRF-TOKEN': document.querySelector('meta[name="_csrf"]').content
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        alert("Failed to add song");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Error adding song");
+    });
+};
+
+// Remove song from playlist function
+function removeSong(songId, playlistId) {
+  if (!playlistId) {
+    // Try to get playlistId from the body data attribute if not provided
+    playlistId = document.body.dataset.playlistId;
+  }
+
+  if (!playlistId) {
+    console.error("Playlist ID not found");
+    alert("Error: Could not determine which playlist to remove from");
+    return;
+  }
+
+  fetch(`/playlist/songs/${playlistId}/remove-song?songId=${songId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        alert("Failed to remove song from playlist");
+      }
+    })
+    .catch((error) => {
+      console.error("Error removing song:", error);
+      alert("Error removing song from playlist");
+    });
+}

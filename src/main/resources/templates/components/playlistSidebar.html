@@ -21,9 +21,62 @@
         <span>Now Playing</span>
         <!--List Song component-->
         <div class="playlistSidebar-now-playing-content">
-          <div
-            th:replace="~{components/listSong :: listOfSongItem('', 'plus','', 'addSongToPlaylist()')}"
-          ></div>
+          <div class="listOfSong-item">
+            <div class="listOfSong-img-container">
+              <img
+                id="currentSongCoverSidebar"
+                src=""
+                alt="Take My Breath"
+                class="listOfSong-img"
+              />
+              <div class="listOfSong-overlay">
+                <div class="listOfSong-play">
+                  <button
+                    class="listOfSong-play-pause-btn"
+                    data-song-id="sidebar"
+                    onclick="toggleBottomPlayer()"
+                  >
+                    <i class="fa-solid fa-play listOfSong-play-btn"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- Hidden audio element -->
+              <!-- <audio
+                th:id="'audioPlayer_' + ${song.songID}"
+                style="display: none"
+              >
+                <source th:src="@{${song.filePath}}" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio> -->
+            </div>
+            <a class="listOfSong-info">
+              <div>
+                <h3 class="listOfSong-song-name" id="currentSongTitleSidebar">
+                  Take My Breath Take My
+                </h3>
+                <!-- <a href="/artist/detail"> -->
+                <p class="listOfSong-info-artist" id="currentSongArtistSidebar">
+                  The Weeknd
+                </p>
+                <!-- </a> -->
+              </div>
+            </a>
+            <div class="listOfSong-actions">
+              <span class="listOfSong-duration">4:10</span>
+              <!--Add to favorite button-->
+              <div
+                th:replace="~{/components/tooltip :: toolTip('Add to favorites', 'fa-regular fa-heart', 'addSongToFavorite()')}"
+              ></div>
+              <!-- Dynamic Add/remove to playlist button-->
+              <!-- <div
+                th:replace="~{components/tooltip :: toolTip(
+              ${icon == 'minus' ? 'Remove from playlist' : 'Add to playlist'},
+              ${icon == 'minus' ? 'fa-solid fa-minus' : 'fa-solid fa-plus'},
+              ${icon == 'minus' ? 'removeSong(' + song.songID + ', ' + playlistId + ')' : 'addSong(' + song.songID + ', ' + playlistId + ')'}
+            )}"
+              ></div> -->
+            </div>
+          </div>
         </div>
       </div>
       <!--Next up-->

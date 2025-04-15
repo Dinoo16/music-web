@@ -6,13 +6,15 @@
     <title>List of songs</title>
   </head>
   <body>
-    <div th:fragment="listOfSong(songNumber,icon,duration,onclickFunction)">
+    <div
+      th:fragment="listOfSong(songNumber,icon,duration,onclickFunction, songs, playlistId)"
+    >
       <div class="listOfSong-list">
         <!-- myplaylist song list item -->
         <div
           class="listOfSong-item"
           th:fragment="listOfSongItem(songNumber,icon,duration,onclickFunction)"
-          th:each="song, iterStat : ${songs}"
+          th:each="song, iterStat : ${songs != null ? songs : globalSongs}"
         >
           <span
             class="listOfSong-number"
@@ -80,8 +82,8 @@
               th:replace="~{components/tooltip :: toolTip(
               ${icon == 'minus' ? 'Remove from playlist' : 'Add to playlist'},
               ${icon == 'minus' ? 'fa-solid fa-minus' : 'fa-solid fa-plus'},
-              ${onclickFunction}
-          )}"
+              ${icon == 'minus' ? 'removeSong(' + song.songID + ', ' + playlistId + ')' : 'addSong(' + song.songID + ', ' + playlistId + ')'}
+            )}"
             ></div>
           </div>
         </div>

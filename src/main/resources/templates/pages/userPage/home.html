@@ -36,10 +36,14 @@
 
       <!-- Recently played songs list -->
       <div
-        th:replace="~{components/listSong :: listOfSong(songNumber='',
-        icon='plus', duration='4:30',
-        onclickFunction='addToPlaylist()'
-        )}"
+        th:replace="~{components/listSong :: listOfSong(
+        songNumber='',
+        icon='plus',
+        duration='4:30', 
+        onclickFunction='addSong()',
+        songs=${recentlyPlayed},
+        playlistId=null
+      )}"
       ></div>
     </div>
   </body>
