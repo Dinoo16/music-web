@@ -108,6 +108,11 @@ public class GenreController {
 	public String addGenre(@ModelAttribute Genre genre, @RequestParam("imageFile") MultipartFile imageFile)
 			throws IOException {
 
+		// Validate genre name
+		if (genre.getGenreName() == null || genre.getGenreName().isEmpty()) {
+			throw new RuntimeException("Genre name is required");
+		}
+
 		// Validate image file
 		if (imageFile.isEmpty()) {
 			throw new RuntimeException("Please select an image file");
@@ -140,31 +145,33 @@ public class GenreController {
 			@RequestParam(value = "imageFile", required = false) MultipartFile imageFile)
 			throws IOException {
 
-		// get existing genre
+		// Get existing genre
 		Genre existingGenre = genreRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Genre not found"));
 
-		existingGenre.setGenreName(updatedGenre.getGenreName());
-		// Validate image file
-		if (imageFile.isEmpty()) {
-			throw new RuntimeException("Please select an image file");
+		// Update genre name
+		if (updatedGenre.getGenreName() != null && !updatedGenre.getGenreName().isEmpty()) {
+			existingGenre.setGenreName(updatedGenre.getGenreName());
 		}
 
-		if (!imageFile.getContentType().startsWith("image/")) {
-			throw new RuntimeException("Only image files are allowed for cover");
-		}
-
-		// 1. If there is an old image file, delete it
-		if (existingGenre.getGenreImage() != null) {
-			Path oldImageFilePath = Paths.get(existingGenre.getGenreImage());
-			if (Files.exists(oldImageFilePath)) {
-				Files.delete(oldImageFilePath);
+		// If no new image file is provided, keep the existing image
+		if (imageFile != null && !imageFile.isEmpty()) {
+			// 1. If there is an old image file, delete it
+			if (existingGenre.getGenreImage() != null) {
+				Path oldImageFilePath = Paths.get(existingGenre.getGenreImage());
+				if (Files.exists(oldImageFilePath)) {
+					Files.delete(oldImageFilePath);
+				}
 			}
+
+			// 2. Upload new image file and save to /uploads/ or any custom path
+			String imagePath = fileStorageService.storeFile(imageFile);
+
+			// 3. Set new paths to genre entity
+			existingGenre.setGenreImage(imagePath);
 		}
-		// 2. Upload new image file and save to /uploads/ or any custom path
-		String imagePath = fileStorageService.storeFile(imageFile);
-		// 3. Set new paths to genre entity
-		existingGenre.setGenreImage(imagePath);
+
+		// Save the updated genre
 		genreRepository.save(existingGenre);
 		return "redirect:/genre/list";
 	}

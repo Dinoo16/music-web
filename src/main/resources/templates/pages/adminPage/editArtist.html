@@ -14,6 +14,7 @@
             method="post"
             th:action="@{/artist/update/{id}(id=${artist.artistID})}"
             th:object="${artist}"
+            enctype="multipart/form-data"
           >
             <div class="edit-artist-fields">
               <!--Artist name field-->
@@ -36,11 +37,22 @@
               <!--Image upload field-->
               <label class="edit-artist-label">Image file path</label>
               <input
-                type="text"
-                th:field="*{image}"
-                class="add-artist-input"
+                type="file"
+                name="imageFile"
+                accept="image/*"
+                class="edit-artist-input"
                 placeholder="Enter cover image path"
               />
+              <div th:if="${artist.image != null}">
+                <p class="edit-songlist-currentfile">
+                  Current file:
+                  <a
+                    th:href="@{'/uploads/' + ${artist.image}}"
+                    th:text="${artist.image}"
+                    target="_blank"
+                  ></a>
+                </p>
+              </div>
               <button type="submit" class="edit-artist-upload-btn">Save</button>
             </div>
           </form>

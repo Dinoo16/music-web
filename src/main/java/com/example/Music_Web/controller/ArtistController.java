@@ -14,8 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.example.Music_Web.service.FileStorageService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +39,8 @@ public class ArtistController {
 	ArtistRepository artistRepository;
 	@Autowired
 	AlbumRepository albumRepository;
+	@Autowired
+	FileStorageService fileStorageService;
 
 	@GetMapping(value = "/list")
 	public String getAllArtists(Model model) {
@@ -107,15 +112,33 @@ public class ArtistController {
 	}
 
 	@PostMapping("/update/{id}")
-	public String updateArtist(@PathVariable Long id, @ModelAttribute Artist updatedArtist)
-			throws ArtistNotFoundException {
+	public String updateArtist(@PathVariable Long id,
+			@ModelAttribute Artist updatedArtist,
+			@RequestParam(value = "imageFile", required = false) MultipartFile imageFile)
+			throws IOException, ArtistNotFoundException {
+
 		Artist existingArtist = artistRepository.findById(id)
 				.orElseThrow(() -> new ArtistNotFoundException("Artist not found"));
 
+		// Update text fields
 		existingArtist.setArtistName(updatedArtist.getArtistName());
-		existingArtist.setImage(updatedArtist.getImage());
+		existingArtist.setBio(updatedArtist.getBio());
 		existingArtist.setSongsOfArtist(updatedArtist.getSongsOfArtist());
 		existingArtist.setAlbumsOfArtist(updatedArtist.getAlbumsOfArtist());
+
+		// Update image if new one is uploaded
+		if (imageFile != null && !imageFile.isEmpty()) {
+			if (!imageFile.getContentType().startsWith("image/")) {
+				throw new RuntimeException("Only image files are allowed.");
+			}
+
+			// Optional: Delete old image if needed
+			// Path oldPath = Paths.get(existingArtist.getImage());
+			// Files.deleteIfExists(oldPath);
+
+			String imagePath = fileStorageService.storeFile(imageFile);
+			existingArtist.setImage(imagePath);
+		}
 
 		artistRepository.save(existingArtist);
 		return "redirect:/artist/list";
@@ -123,6 +146,7 @@ public class ArtistController {
 
 	@GetMapping(value = "/add")
 	public String addArtist(Model model) {
+
 		Artist artist = new Artist();
 		List<Song> songs = songRepository.findAll();
 		List<Album> albums = albumRepository.findAll();
@@ -134,9 +158,26 @@ public class ArtistController {
 	}
 
 	@PostMapping(value = "/add")
-	public String addArtist(Artist artist, RedirectAttributes redirectAttributes) {
+	public String addArtist(@ModelAttribute Artist artist,
+			@RequestParam("imageFile") MultipartFile imageFile,
+			RedirectAttributes redirectAttributes) throws IOException {
+
+		// Validate image
+		if (imageFile.isEmpty()) {
+			throw new RuntimeException("Please select an image file.");
+		}
+
+		if (!imageFile.getContentType().startsWith("image/")) {
+			throw new RuntimeException("Only image files are allowed.");
+		}
+
+		// Save image
+		String imagePath = fileStorageService.storeFile(imageFile);
+		artist.setImage(imagePath);
+
 		artistRepository.save(artist);
-		redirectAttributes.addFlashAttribute("activeTab", "artist"); // sử dụng flash attribute nếu redirect
+		redirectAttributes.addFlashAttribute("activeTab", "artist");
+
 		return "redirect:/artist/list";
 	}
 

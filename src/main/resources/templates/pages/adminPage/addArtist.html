@@ -10,7 +10,12 @@
       <div class="add-artist-wrapper">
         <div class="add-artist-container">
           <h1>Add Artist</h1>
-          <form th:action="@{/artist/add}" th:object="${artist}" method="post">
+          <form
+            th:action="@{/artist/add}"
+            th:object="${artist}"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <div class="add-artist-fields">
               <!--Artist name field-->
               <label class="add-artist-label">Artist name</label>
@@ -28,11 +33,13 @@
                 class="add-artist-input"
                 placeholder="Enter background information"
               />
+
               <!--Image upload field-->
               <label class="add-artist-label">Image file path</label>
               <input
-                type="text"
-                th:field="*{image}"
+                type="file"
+                name="imageFile"
+                accept="image/*"
                 class="add-artist-input"
                 placeholder="Enter cover image path"
               />

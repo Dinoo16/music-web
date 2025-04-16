@@ -179,54 +179,61 @@ public class SongController {
 		Song existingSong = songRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid song Id:" + id));
 
-		// Update fields
+		// Update fields (like song title)
 		existingSong.setTitle(song.getTitle());
 
-		// Validate audio file
-		if (audioFile.isEmpty()) {
-			throw new RuntimeException("Please select an audio file");
-		}
-
-		if (!audioFile.getContentType().startsWith("audio/")) {
-			throw new RuntimeException("Only audio files are allowed");
-		}
-
-		// Validate image file
-		if (imageFile.isEmpty()) {
-			throw new RuntimeException("Please select an image file");
-		}
-
-		if (!imageFile.getContentType().startsWith("image/")) {
-			throw new RuntimeException("Only image files are allowed for cover");
-		}
-
-		// 1. If there is an old audio file, delete it
-		if (existingSong.getFilePath() != null) {
-			Path oldAudioFilePath = Paths.get(existingSong.getFilePath());
-			if (Files.exists(oldAudioFilePath)) {
-				Files.delete(oldAudioFilePath); // Delete old audio file
+		// Check if the audio file is provided (if not, keep the old file path)
+		if (audioFile != null && !audioFile.isEmpty()) {
+			// Validate audio file
+			if (!audioFile.getContentType().startsWith("audio/")) {
+				throw new RuntimeException("Only audio files are allowed");
 			}
-		}
 
-		// 2. If there is an old image file, delete it
-		if (existingSong.getCoverImage() != null) {
-			Path oldImageFilePath = Paths.get(existingSong.getCoverImage());
-			if (Files.exists(oldImageFilePath)) {
-				Files.delete(oldImageFilePath); // Delete old image file
+			// If there is an old audio file, delete it
+			if (existingSong.getFilePath() != null) {
+				Path oldAudioFilePath = Paths.get(existingSong.getFilePath());
+				if (Files.exists(oldAudioFilePath)) {
+					Files.delete(oldAudioFilePath); // Delete old audio file
+				}
 			}
+
+			// Upload new audio file
+			String audioPath = fileStorageService.storeFile(audioFile);
+			existingSong.setFilePath(audioPath);
 		}
 
-		// 3. Upload new audio file and save to /uploads/ or any custom path
-		String audioPath = fileStorageService.storeFile(audioFile);
-		String imagePath = fileStorageService.storeFile(imageFile);
+		// Check if the image file is provided (if not, keep the old image path)
+		if (imageFile != null && !imageFile.isEmpty()) {
+			// Validate image file
+			if (!imageFile.getContentType().startsWith("image/")) {
+				throw new RuntimeException("Only image files are allowed for cover");
+			}
 
-		// 4. Set new paths to song entity
-		existingSong.setFilePath(audioPath);
-		existingSong.setCoverImage(imagePath);
+			// If there is an old image file, delete it
+			if (existingSong.getCoverImage() != null) {
+				Path oldImageFilePath = Paths.get(existingSong.getCoverImage());
+				if (Files.exists(oldImageFilePath)) {
+					Files.delete(oldImageFilePath); // Delete old image file
+				}
+			}
 
-		// Update relationships
+			// Upload new image file
+			String imagePath = fileStorageService.storeFile(imageFile);
+			existingSong.setCoverImage(imagePath);
+		}
 
-		// Set album only if it's not null
+		// Update relationships only if new genres or artists are provided
+		if (!genreIdList.isEmpty()) {
+			List<Genre> genres = genreRepository.findAllById(genreIdList);
+			existingSong.setGenresOfSong(genres);
+		}
+
+		if (!artistIdList.isEmpty()) {
+			List<Artist> artists = artistRepository.findAllById(artistIdList);
+			existingSong.setArtistsOfSong(artists);
+		}
+
+		// Update album only if it's not null
 		if (song.getAlbum() != null && song.getAlbum().getAlbumID() != null) {
 			Album album = albumRepository.findById(song.getAlbum().getAlbumID())
 					.orElseThrow(() -> new IllegalArgumentException("Invalid album Id"));
@@ -236,13 +243,9 @@ public class SongController {
 			existingSong.setAlbum(null);
 		}
 
-		List<Genre> genres = genreRepository.findAllById(genreIdList);
-		existingSong.setGenresOfSong(genres);
-
-		List<Artist> artists = artistRepository.findAllById(artistIdList);
-		existingSong.setArtistsOfSong(artists);
-
+		// Save the updated song
 		songRepository.save(existingSong);
+
 		return "redirect:/song/list";
 	}
 
