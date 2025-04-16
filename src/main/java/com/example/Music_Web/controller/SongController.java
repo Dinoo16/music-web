@@ -36,6 +36,7 @@ import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -379,6 +380,7 @@ public class SongController {
 	public String getTopCharts(Model model) {
 		List<Song> songs = songRepository.findAll(Sort.by(Sort.Direction.DESC, "plays"));
 		model.addAttribute("songs", songs);
+
 		return "pages/userPage/topchart";
 	}
 

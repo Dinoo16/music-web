@@ -351,6 +351,145 @@ function formatTime(seconds) {
   return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
 }
 
+//fucntion play all song in a playlist
+
+function playAllSong() {
+  // Get all song items in the playlist section
+  const songItems = document.querySelectorAll(".listOfSong-item");
+
+  if (songItems.length === 0) {
+    alert("This playlist is currently empty. Add some songs to play!");
+    return;
+  }
+
+  // Extract song data from the elements
+  const songsData = Array.from(songItems)
+    .map((item) => {
+      const playButton = item.querySelector(".listOfSong-play-pause-btn");
+      if (!playButton) return null;
+
+      // Extract song ID
+      const onclick = playButton.getAttribute("onclick");
+      const match = onclick.match(/playSong\(event, '(\d+)'\)/);
+      if (!match) return null;
+
+      const songId = match[1];
+      const songName =
+        item.querySelector(".listOfSong-song-name")?.textContent || "Unknown";
+      const artistName =
+        item.querySelector(".listOfSong-info-artist")?.textContent || "Unknown";
+      const duration =
+        item.querySelector(".listOfSong-duration")?.textContent || "0:00";
+      const imagePath = item.querySelector(".listOfSong-img")?.src || "";
+      const audioElement = document.getElementById(`audioPlayer_${songId}`);
+
+      return {
+        id: songId,
+        name: songName,
+        artist: artistName,
+        duration: duration,
+        image: imagePath,
+        audioElement: audioElement,
+      };
+    })
+    .filter((song) => song && song.audioElement); // Filter out null entries and songs without audio element
+
+  if (songsData.length === 0) {
+    alert("Could not find any playable songs in this playlist.");
+    return;
+  }
+
+  // Store current playlist data globally
+  window.currentPlaylist = songsData;
+  window.currentPlaylistIndex = 0;
+  playerState.queue = songsData;
+
+  // Function to play a song by its data
+  const playSongByData = (songData) => {
+    // Check if user is logged in
+    if (!isLoggedIn) {
+      openGuestPopup();
+      updateImageGuestPopup(songData.image);
+      return;
+    }
+
+    // Show music player if hidden
+    const musicPlayer = document.getElementById("music-player");
+    if (musicPlayer && musicPlayer.style.display !== "flex") {
+      musicPlayer.style.display = "flex";
+    }
+
+    // Pause any previously playing audio
+    if (currentAudio && currentAudio !== songData.audioElement) {
+      currentAudio.pause();
+      updatePlayButtonStates(currentPlayingId, false);
+      hasPlayCountBeenUpdated = false;
+    }
+
+    // Update global player state
+    playerState.currentSong = {
+      id: songData.id,
+      name: songData.name,
+      artist: songData.artist,
+      image: songData.image,
+    };
+    currentAudio = songData.audioElement;
+    currentPlayingId = songData.id;
+    hasPlayCountBeenUpdated = false;
+
+    // Reset and play the new song
+    currentAudio.currentTime = 0;
+
+    // Update UI before playing
+    updateAllPlayerUI(
+      songData.name,
+      songData.artist,
+      songData.duration,
+      songData.image,
+      true
+    );
+
+    // Update play count and recently played
+    updatePlayCount(songData.id);
+    updateRecentlyPlayed(songData.id);
+
+    currentAudio
+      .play()
+      .then(() => {
+        // Update play button states
+        updatePlayButtonStates(songData.id, true);
+      })
+      .catch((error) => {
+        console.error("Playback failed:", error);
+        playNextSong();
+      });
+
+    // Set up ended event for this song
+    currentAudio.onended = () => {
+      playNextSong();
+    };
+  };
+
+  const playNextSong = () => {
+    window.currentPlaylistIndex++;
+    if (window.currentPlaylistIndex < window.currentPlaylist.length) {
+      playSongByData(window.currentPlaylist[window.currentPlaylistIndex]);
+    } else {
+      // Playlist ended - reset player state
+      resetPlayerState();
+      updateAllPlayerUI("", "", "0:00", "", false);
+    }
+  };
+
+  // Clear previous ended event listeners
+  document.querySelectorAll("audio").forEach((audio) => {
+    audio.onended = null;
+  });
+
+  // Play the first song
+  playSongByData(songsData[0]);
+}
+
 //Handle next song
 
 //Handle backward song

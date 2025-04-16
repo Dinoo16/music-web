@@ -30,7 +30,6 @@ public class SearchController {
     @Autowired
     private ArtistRepository artistRepository;
 
-    // Endpoint cho tìm kiếm
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search(@RequestParam("keyword") String keyword, Model model) {
         Set<Song> allSongs = new HashSet<>();

@@ -30,7 +30,9 @@
           </div> -->
           <div th:unless="${#lists.isEmpty(songs)}" class="result-container">
             <!-- list of songs -->
-            <div th:replace="~{components/songCard :: songCard()}"></div>
+            <div
+              th:replace="~{components/songCard :: songCard(songs=${songs})}"
+            ></div>
           </div>
         </div>
 

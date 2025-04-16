@@ -93,4 +93,17 @@ public class GlobalControllerAdvice {
         return artistSongCount;
     }
 
+    @ModelAttribute("top3ArtistsByPlays")
+    public List<Artist> getTop3ArtistsByPlays(
+            @ModelAttribute("globalArtistTotalPlays") Map<Long, Integer> artistTotalPlays) {
+
+        List<Artist> allArtists = artistRepository.findAll();
+
+        return allArtists.stream()
+                .sorted((a1, a2) -> artistTotalPlays.getOrDefault(a2.getArtistID(), 0)
+                        - artistTotalPlays.getOrDefault(a1.getArtistID(), 0))
+                .limit(3)
+                .toList();
+    }
+
 }
