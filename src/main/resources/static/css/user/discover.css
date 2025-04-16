@@ -28,6 +28,14 @@
     color: #FACC15;
     
 }
+.discover-new-releases-header {
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.discover-more a {
+    color: #C084FC;
+}
 .discover-weekly-icon {
     width: 24px;
     height: 24px;
@@ -44,7 +52,6 @@
 /* New Releases */
 .discover-new-releases-title {
     color:#fff;
-    padding-bottom: 24px;
 }
 
 

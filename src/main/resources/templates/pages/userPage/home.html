@@ -29,7 +29,9 @@
       </div>
 
       <!-- list of Recommended artist -->
-      <div th:replace="~{components/artistCard :: artistCard()}"></div>
+      <div
+        th:replace="~{components/artistCard :: artistCard(artists=${top4ArtistsBySongCount})}"
+      ></div>
 
       <!-- Recently played -->
       <div class="home-header-recently-played">

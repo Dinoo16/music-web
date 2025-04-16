@@ -27,16 +27,34 @@
         </div>
 
         <!-- Row 1 -->
-        <div class="albumList-row">
-          <div class="albumList-col albumList-index">1</div>
+        <div class="albumList-row" th:each="album, stat : ${albums}">
+          <div class="albumList-col albumList-index" th:text="${stat.count}">
+            1
+          </div>
           <div class="albumList-col albumList-title">
-            <img src="/images/rock.jpg" class="albumList-cover" />
+            <img
+              th:src="${album.coverImage != null ? album.coverImage : '/images/default-cover.jpg'}"
+              class="albumList-cover"
+            />
             <div>
-              <div class="albumList-name">AlbumName</div>
+              <div class="albumList-name" th:text="${album.albumName}">
+                AlbumName
+              </div>
             </div>
           </div>
-          <div class="albumList-col albumList-artist">The Weeknd</div>
-          <div class="albumList-col albumList-num">10</div>
+          <div
+            class="albumList-col albumList-artist"
+            th:each="artist : ${album.artistsOfAlbum}"
+            th:text="${artist.artistName}"
+          >
+            The Weeknd
+          </div>
+          <div
+            class="albumList-col albumList-num"
+            th:text="${globalSongsOfAlbum[album.albumID]}"
+          >
+            10
+          </div>
           <div class="albumList-col albumList-actions">
             <!--ICON BUTTON - OPTION BUTTON -->
 
@@ -50,15 +68,20 @@
               class="albumList-actions-menu actions-menu"
               id="albumList-actions-menu"
             >
-              <a href="/admin/album/edit" style="color: #fff">
+              <a
+                th:href="@{'/album/update/' + ${album.albumID}}"
+                style="color: #fff"
+              >
                 <button onclick="closeActionMenu()">
                   <i class="fa-solid fa-pen"></i>Edit Album
                 </button>
               </a>
-              <button onclick="deleteAlbum();closeActionMenu()">
-                <i class="fa-solid fa-trash"></i>
-                Delete Album
-              </button>
+              <a th:href="@{'/album/delete/' + ${album.albumID}}">
+                <button onclick="closeActionMenu()">
+                  <i class="fa-solid fa-trash"></i>
+                  Delete Album
+                </button>
+              </a>
             </div>
           </div>
         </div>

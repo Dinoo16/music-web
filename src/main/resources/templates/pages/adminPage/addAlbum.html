@@ -10,7 +10,12 @@
       <div class="add-album-wrapper">
         <div class="add-album-container">
           <h1>Add Album</h1>
-          <form method="post" th:action="@{/album/add}" th:object="${album}">
+          <form
+            method="post"
+            th:action="@{/album/add}"
+            th:object="${album}"
+            enctype="multipart/form-data"
+          >
             <div class="add-album-fields">
               <!--album name field-->
               <label class="add-album-label">Album name</label>
@@ -20,27 +25,39 @@
                 class="add-album-input"
                 placeholder="Enter album name"
               />
-
-              <!--Image upload field-->
-              <!-- <div class="add-album-upload">
-                <label for="imageUpload" class="add-album-upload-box">
-                  <span class="add-album-upload-icon">+</span>
-                  <p class="add-album-upload-text">Insert picture</p>
-                </label>
-                <input
-                  type="file"
-                  id="imageUpload"
-                  class="add-album-upload-input"
-                  accept="image/*"
-                />
-              </div> -->
               <label class="add-album-label">Image file path</label>
               <input
-                type="text"
-                th:field="*{coverImage}"
+                type="file"
+                name="imageFile"
                 class="add-album-input"
                 placeholder="Enter cover image path"
               />
+
+              <!--songs (multi-select)-->
+              <div class="add-song-dropdown" data-type="songs">
+                <label class="add-song-label">Songs</label>
+                <div class="add-song-songs">
+                  <div class="select-btn">
+                    <span class="btn-text">Select songs</span>
+                    <span class="arrow-dwn">
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </span>
+                  </div>
+                  <ul class="list-items">
+                    <li
+                      th:each="song : ${songs}"
+                      th:attr="data-id=${song.songID}"
+                      class="item"
+                    >
+                      <span class="checkbox">
+                        <i class="fa-solid fa-check check-icon"></i>
+                      </span>
+                      <span class="item-text" th:text="${song.title}"></span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <input type="hidden" name="selectedSongs" id="selectedSongs" />
 
               <button type="submit" class="add-album-upload-btn">Save</button>
             </div>

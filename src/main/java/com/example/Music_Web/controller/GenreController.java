@@ -23,8 +23,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/genre")
@@ -92,7 +94,13 @@ public class GenreController {
 				.orElseThrow(() -> new GenreNotFoundException("Invalid genre ID: " + id));
 		model.addAttribute("genre", genre);
 
-		List<Song> songsOfGenre = new ArrayList<>(genre.getSongsOfGenre());
+		List<Song> songsOfGenre = songRepository.findByGenresOfSong_GenreID(id);
+		Set<Artist> artistSet = new HashSet<>();
+		for (Song song : songsOfGenre) {
+			artistSet.addAll(song.getArtistsOfSong());
+		}
+		model.addAttribute("artistSet", artistSet);
+		
 		model.addAttribute("songsOfGenre", songsOfGenre);
 
 		return "pages/userPage/genresDetail";

@@ -1,7 +1,7 @@
 .artist-detail-background {
     margin-top: 24px;
     width: 100%;
-    height: 320px;
+    height: 450px;
     position: relative;
 }
 .artist-detail-background img {
@@ -20,10 +20,13 @@
 }
 .artist-detail-name {
     font-size: 38px;
+    color: #ffffff;
 }
 .listeners-followers {
     display: flex;
-
+}
+.listeners-followers span,.listeners-followers i {
+    color: white;
 }
 .listener-count,
 .follower-count {

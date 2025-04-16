@@ -24,7 +24,7 @@
         <!-- CUSTOM ROUNDED BUTTON (Listen now) -->
         <div class="discoverCustomRoundedButton">
           <div
-            th:replace="~{components/roundedButton :: roundedButton('','', 'Listen now', '160px','50px', null, 'playSong(event)')}"
+            th:replace="~{components/roundedButton :: roundedButton('','', 'Listen now', '160px','50px', null, 'playAllSong()')}"
           ></div>
         </div>
       </div>
@@ -32,16 +32,22 @@
       <!-- New Releases -->
       <div class="discover-new-releases-header">
         <h2 class="discover-new-releases-title">New Releases</h2>
+        <div class="discover-more">
+          <a href="/song/user/list">View All</a>
+        </div>
       </div>
       <!-- list of songs -->
       <div
-        th:replace="~{components/songCard :: songCard(songs=${globalSongs})}"
+        th:replace="~{components/songCard :: songCard(songs=${songsSortedByReleaseDate})}"
       ></div>
 
       <!-- Browse by Mood -->
 
       <div class="discover-new-releases-header">
         <h2 class="discover-new-releases-title">Browse by Mood</h2>
+        <div class="discover-more">
+          <a href="/song/user/list">View All</a>
+        </div>
       </div>
       <!-- list of songs -->
       <div

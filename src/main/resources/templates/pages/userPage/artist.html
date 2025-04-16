@@ -20,7 +20,9 @@
       </div>
 
       <!-- list of artists -->
-      <div th:replace="~{components/artistCard :: artistCard()}"></div>
+      <div
+        th:replace="~{components/artistCard :: artistCard(artists=${artists})}"
+      ></div>
     </div>
   </body>
 </html>

@@ -11,4 +11,8 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
     List<Song> findByGenresOfSong_GenreID(Long genreId);
 
+    List<Song> findTop4ByOrderByReleaseDateDesc();
+
+    List<Song> findByAlbumIsNull();
+
 }

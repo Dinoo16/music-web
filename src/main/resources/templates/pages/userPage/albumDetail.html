@@ -20,15 +20,17 @@
       <!-- album detail backgroud -->
       <div class="album-detail-background">
         <img
+          th:src="${album.coverImage}"
           class="album-detail-background-img"
-          src="/images/artist1.png"
           alt="album backgroud"
         />
 
         <!-- album infor detail -->
         <div class="album-detail-infor">
           <p>Album</p>
-          <h1 class="album-detail-name">After Hours</h1>
+          <h1 class="album-detail-name" th:text="${album.albumName}">
+            After Hours
+          </h1>
           <div class="album-detail-meta">
             <img
               class="album-detail-meta-bg"
@@ -62,7 +64,14 @@
       <!-- album track list -->
 
       <div
-        th:replace="~{components/listSong :: listOfSong('', 'plus','4:30', 'addSongToPlaylist()')}"
+        th:replace="~{components/listSong :: listOfSong(
+      songNumber='',
+      icon='plus',
+      duration='4:30', 
+      onclickFunction='addSong()',
+      songs=${globalSongsByAlbum[album.albumID]},
+      playlistId=null
+    )}"
       ></div>
     </div>
   </body>

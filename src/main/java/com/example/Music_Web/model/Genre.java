@@ -22,6 +22,8 @@ public class Genre {
 	@ManyToMany(mappedBy = "genresOfSong", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Song> songsOfGenre = new ArrayList<>();
 
+	
+
 	// getters & setters
 
 	public Long getGenreID() {

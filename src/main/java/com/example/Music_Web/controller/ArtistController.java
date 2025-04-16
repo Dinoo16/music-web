@@ -71,7 +71,7 @@ public class ArtistController {
 	public String getAllArtistsUser(Model model) {
 		List<Artist> artists = artistRepository.findAll();
 		model.addAttribute("artists", artists);
-
+		
 		return "pages/userPage/artist";
 	}
 

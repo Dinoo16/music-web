@@ -63,45 +63,47 @@ public class SongController {
 	FileStorageService fileStorageService;
 
 	// For admin page (with all controls)
-	@GetMapping(value = "/list")
-	public String getAllSongs(Model model) {
+	// @GetMapping(value = "/admin/list")
+	// public String getAllSongs(Model model) {
 
-		// Dữ liệu cho tab artist
-		List<Artist> artists = artistRepository.findAll();
-		model.addAttribute("artists", artists);
-		Map<Long, Integer> artistTotalPlays = new HashMap<>();
-		Map<Long, Integer> artistSongCount = new HashMap<>();
-		for (Artist artist : artists) {
-			List<Song> songsOfArtist = songRepository.findByArtistsOfSong_ArtistID(artist.getArtistID());
-			int totalPlays = 0;
-			for (Song song : songsOfArtist) {
-				totalPlays += song.getPlays();
-			}
-			artistTotalPlays.put(artist.getArtistID(), totalPlays);
-			artistSongCount.put(artist.getArtistID(), songsOfArtist.size());
-		}
-		model.addAttribute("artistTotalPlays", artistTotalPlays);
-		model.addAttribute("artistSongCount", artistSongCount);
+	// // Dữ liệu cho tab artist
+	// List<Artist> artists = artistRepository.findAll();
+	// model.addAttribute("artists", artists);
+	// Map<Long, Integer> artistTotalPlays = new HashMap<>();
+	// Map<Long, Integer> artistSongCount = new HashMap<>();
+	// for (Artist artist : artists) {
+	// List<Song> songsOfArtist =
+	// songRepository.findByArtistsOfSong_ArtistID(artist.getArtistID());
+	// int totalPlays = 0;
+	// for (Song song : songsOfArtist) {
+	// totalPlays += song.getPlays();
+	// }
+	// artistTotalPlays.put(artist.getArtistID(), totalPlays);
+	// artistSongCount.put(artist.getArtistID(), songsOfArtist.size());
+	// }
+	// model.addAttribute("artistTotalPlays", artistTotalPlays);
+	// model.addAttribute("artistSongCount", artistSongCount);
 
-		// Dữ liệu cho tab genre
-		List<Genre> genres = genreRepository.findAll();
-		model.addAttribute("genres", genres);
-		Map<Long, Integer> genreSongCount = new HashMap<>();
-		for (Genre genre : genres) {
-			List<Song> songsOfGenre = songRepository.findByGenresOfSong_GenreID(genre.getGenreID());
-			genreSongCount.put(genre.getGenreID(), songsOfGenre.size());
-		}
-		model.addAttribute("genreSongCount", genreSongCount);
-		// Dữ liệu cho tab album
-		List<Album> albums = albumRepository.findAll();
-		model.addAttribute("albums", albums);
+	// // Dữ liệu cho tab genre
+	// List<Genre> genres = genreRepository.findAll();
+	// model.addAttribute("genres", genres);
+	// Map<Long, Integer> genreSongCount = new HashMap<>();
+	// for (Genre genre : genres) {
+	// List<Song> songsOfGenre =
+	// songRepository.findByGenresOfSong_GenreID(genre.getGenreID());
+	// genreSongCount.put(genre.getGenreID(), songsOfGenre.size());
+	// }
+	// model.addAttribute("genreSongCount", genreSongCount);
+	// // Dữ liệu cho tab album
+	// List<Album> albums = albumRepository.findAll();
+	// model.addAttribute("albums", albums);
 
-		// Dữ liệu của tab song
-		List<Song> songs = songRepository.findAll();
-		model.addAttribute("songs", songs);
-		model.addAttribute("activeTab", "song");
-		return "pages/adminPage/upload";
-	}
+	// // Dữ liệu của tab song
+	// List<Song> songs = songRepository.findAll();
+	// model.addAttribute("songs", songs);
+	// model.addAttribute("activeTab", "song");
+	// return "pages/adminPage/upload";
+	// }
 
 	// For user page (read-only view)
 	@GetMapping(value = "/user/list")
@@ -289,7 +291,7 @@ public class SongController {
 			throw new RuntimeException("Only image files are allowed for cover");
 		}
 
-		// 1. Upload file and save to /uploads/ or any custom path
+		// 1. Upload file and save to /uploads/
 		String audioPath = fileStorageService.storeFile(audioFile);
 		String imagePath = fileStorageService.storeFile(imageFile);
 		// 2. Extract duration
@@ -383,5 +385,4 @@ public class SongController {
 
 		return "pages/userPage/topchart";
 	}
-
 }

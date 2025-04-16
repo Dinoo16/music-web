@@ -55,14 +55,23 @@
               <div class="song-card-actions">
                 <!--ToolTip heart button (Add to favorite)-->
                 <div
-                  th:replace="~{/components/tooltip :: toolTip('Add to favorites', 'fa-regular fa-heart', 'addSongToFavorite()')}"
-                ></div>
+                  class="tooltip favorite-icon"
+                  th:attr="data-song-id=${song.songID}"
+                >
+                  <button onclick="toggleFavorite(event, this)">
+                    <i
+                      class="fa-heart"
+                      th:classappend="${isFavorite != null && isFavorite.containsKey(song.songID) && isFavorite.get(song.songID)} ? 'fa-solid' : 'fa-regular'"
+                    ></i>
+                  </button>
+                  <span class="tooltip-text">Add to favorites</span>
+                </div>
                 <div>
                   <div class="addToPlaylistCard-wrapper">
                     <input
                       type="text"
                       class="addToPlaylistCard-search"
-                      placeholder="Tìm playlist"
+                      placeholder="Search playlist"
                     />
 
                     <div
@@ -77,6 +86,7 @@
                     </div>
 
                     <ul
+                      onclick="addSong()"
                       class="addToPlaylistCard-list"
                       th:each="playlist : ${userPlaylists}"
                     >

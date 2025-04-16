@@ -32,32 +32,29 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize with selected values - for both add and edit forms
   const selectedGenres = /*[[${selectedGenreIds}]]*/ [];
   const selectedArtists = /*[[${selectedArtistIds}]]*/ [];
+  const selectedSongs = /*[[${selectedSongIds}]]*/ [];
 
-  // Initialize genres
-  selectedGenres.forEach((id) => {
-    const item = document.querySelector(
-      `.edit-songlist-genres li[data-id="${id}"]`
-    );
-    if (item) {
-      item.classList.add("checked");
+  const initSelections = (type, selectedArray, className) => {
+    selectedArray.forEach((id) => {
+      const item = document.querySelector(`.${className} li[data-id="${id}"]`);
+      if (item) {
+        item.classList.add("checked");
+      }
+    });
+
+    const hiddenInput = document.getElementById(`selected${capitalize(type)}`);
+    if (hiddenInput) {
+      hiddenInput.value = selectedArray.join(",");
     }
-  });
+  };
 
-  // Initialize artists
-  selectedArtists.forEach((id) => {
-    const item = document.querySelector(
-      `.edit-songlist-artists li[data-id="${id}"]`
-    );
-    if (item) {
-      item.classList.add("checked");
-    }
-  });
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-  // Update the hidden inputs
-  document.getElementById("selectedGenres").value = selectedGenres.join(",");
-  document.getElementById("selectedArtists").value = selectedArtists.join(",");
+  initSelections("genres", selectedGenres, "edit-songlist-genres");
+  initSelections("artists", selectedArtists, "edit-songlist-artists");
+  initSelections("songs", selectedSongs, "add-song-songs");
 
-  // Initialize dropdown functionality for both add and edit forms
+  // Initialize dropdown functionality
   const dropdowns = document.querySelectorAll(
     ".add-song-dropdown, .edit-songlist-dropdown"
   );
@@ -66,11 +63,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectBtn = dropdown.querySelector(".select-btn");
     const listItems = dropdown.querySelectorAll(".list-items .item");
     const btnText = dropdown.querySelector(".btn-text");
-    const type = dropdown.dataset.type; // "genres" or "artists"
+    const type = dropdown.dataset.type;
 
-    const hiddenInput = document.getElementById(
-      type === "genres" ? "selectedGenres" : "selectedArtists"
-    );
+    const hiddenInput = document.getElementById(`selected${capitalize(type)}`);
 
     if (!selectBtn || !btnText || listItems.length === 0 || !hiddenInput)
       return;
@@ -127,7 +122,11 @@ function openCloseAddToSongCard() {
 }
 
 // Add song from playlist function
+// Add song from playlist function
 window.addSong = function (songId, playlistId) {
+  const message = document.querySelector(".message-wrapper");
+
+  // Gửi request thêm bài hát
   fetch(`/playlist/songs/add?playlistId=${playlistId}&songId=${songId}`, {
     method: "POST",
     headers: {
@@ -137,7 +136,7 @@ window.addSong = function (songId, playlistId) {
   })
     .then((response) => {
       if (response.ok) {
-        location.reload();
+        location.reload(); // reload sẽ làm mất luôn message, có thể bỏ nếu muốn giữ
       } else {
         alert("Failed to add song");
       }

@@ -6,7 +6,7 @@
     <title>Artist card</title>
   </head>
   <body>
-    <div class="artists-grid" th:fragment="artistCard()">
+    <div class="artists-grid" th:fragment="artistCard(artists)">
       <!-- Dùng Thymeleaf để lặp qua artists -->
       <!--artist item-->
       <div class="artist-card" th:each="artist : ${artists}">
@@ -19,7 +19,7 @@
             class="artist-overlay-btn"
           >
             <div class="artist-play">
-              <button class="artist-play-btn" onclick="playSong(event)">
+              <button class="artist-play-btn" onclick="playAllSong(event)">
                 <i class="fa-solid fa-play artist-play-btn-icon"></i>
               </button>
             </div>

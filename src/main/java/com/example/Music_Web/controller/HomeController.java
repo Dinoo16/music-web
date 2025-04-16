@@ -52,7 +52,7 @@ public class HomeController {
             List<Song> recentlyPlayed = user.getRecentlyPlayedSongs();
             model.addAttribute("recentlyPlayed", recentlyPlayed);
         } else {
-            model.addAttribute("recentlyPlayed", List.of()); 
+            model.addAttribute("recentlyPlayed", List.of());
         }
         return "pages/userPage/home";
     }
@@ -85,20 +85,15 @@ public class HomeController {
         return "pages/userPage/artistDetail";
     }
 
-    @GetMapping("/album")
-    public String getAlbum() {
-        return "pages/userPage/album";
-    }
-
     @GetMapping("/album/detail")
     public String getAlbumDetail() {
         return "pages/userPage/albumDetail";
     }
 
-    @GetMapping("/favorite")
-    public String getFavorite() {
-        return "pages/userPage/favorite";
-    }
+    // @GetMapping("/favorite")
+    // public String getFavorite() {
+    // return "pages/userPage/favorite";
+    // }
 
     @GetMapping("/admin/album/add")
     public String addAlbum() {

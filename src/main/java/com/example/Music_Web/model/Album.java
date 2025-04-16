@@ -3,6 +3,7 @@ package com.example.Music_Web.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,27 +23,23 @@ public class Album {
 	@Column(length = 255)
 	private String coverImage;
 
-
-	//transient
+	// transient
 	@Transient
 	private List<Long> songIds;
 
 	@Transient
 	private List<Long> artistIds;
 
-	//----------------
-	//relationship
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="album_artist",
-			joinColumns = @JoinColumn(name = "album_id"),
-			inverseJoinColumns = @JoinColumn(name = "artist_id"))
-	private List<Artist> artistsOfAlbum;
+	// ----------------
+	// relationship
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "album_artist", joinColumns = @JoinColumn(name = "album_id"), inverseJoinColumns = @JoinColumn(name = "artist_id"))
+	private List<Artist> artistsOfAlbum = new ArrayList<>();
 
-	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "album", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private List<Song> songsOfAlbum;
 
 	// getters & setters
-
 
 	public List<Long> getSongIds() {
 		return songIds;
@@ -80,7 +77,7 @@ public class Album {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(LocalDate  releaseDate) {
+	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 

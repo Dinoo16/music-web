@@ -29,7 +29,7 @@
       </div>
 
       <!-- list of favoritess -->
-      <div th:replace="~{components/songCard :: songCard()}"></div>
+      <div th:replace="~{components/songCard :: songCard(${songs})}"></div>
     </div>
   </body>
 </html>

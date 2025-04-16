@@ -351,9 +351,31 @@ function formatTime(seconds) {
   return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
 }
 
-//fucntion play all song in a playlist
+// Global variables for playlist control
+let isPlaylistPlaying = false;
+let playlistTimeout = null;
+let currentPlaylistPosition = 0; // Thêm biến để lưu vị trí hiện tại
 
-function playAllSong() {
+function playAllSong(event) {
+  // Prevent default behavior if event exists
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  const playAllButton = document.querySelector(".roundedButton");
+
+  // Nếu playlist đang phát, tạm dừng
+  if (isPlaylistPlaying) {
+    pausePlaylist();
+    return;
+  }
+
+  // Nếu đã tạm dừng trước đó, tiếp tục từ vị trí hiện tại
+  if (currentPlaylistPosition > 0) {
+    continuePlaylist();
+    return;
+  }
+
   // Get all song items in the playlist section
   const songItems = document.querySelectorAll(".listOfSong-item");
 
@@ -392,7 +414,7 @@ function playAllSong() {
         audioElement: audioElement,
       };
     })
-    .filter((song) => song && song.audioElement); // Filter out null entries and songs without audio element
+    .filter((song) => song && song.audioElement);
 
   if (songsData.length === 0) {
     alert("Could not find any playable songs in this playlist.");
@@ -403,91 +425,164 @@ function playAllSong() {
   window.currentPlaylist = songsData;
   window.currentPlaylistIndex = 0;
   playerState.queue = songsData;
+  isPlaylistPlaying = true;
 
-  // Function to play a song by its data
-  const playSongByData = (songData) => {
-    // Check if user is logged in
-    if (!isLoggedIn) {
-      openGuestPopup();
-      updateImageGuestPopup(songData.image);
-      return;
-    }
+  // Update play all button icon to pause
+  updatePlayAllButton(true);
 
-    // Show music player if hidden
-    const musicPlayer = document.getElementById("music-player");
-    if (musicPlayer && musicPlayer.style.display !== "flex") {
-      musicPlayer.style.display = "flex";
-    }
+  // Play the first song
+  playSongByData(songsData[0]);
+}
 
-    // Pause any previously playing audio
-    if (currentAudio && currentAudio !== songData.audioElement) {
-      currentAudio.pause();
-      updatePlayButtonStates(currentPlayingId, false);
-      hasPlayCountBeenUpdated = false;
-    }
+function continuePlaylist() {
+  if (
+    !window.currentPlaylist ||
+    window.currentPlaylistIndex >= window.currentPlaylist.length
+  ) {
+    return;
+  }
 
-    // Update global player state
-    playerState.currentSong = {
-      id: songData.id,
-      name: songData.name,
-      artist: songData.artist,
-      image: songData.image,
-    };
-    currentAudio = songData.audioElement;
-    currentPlayingId = songData.id;
-    hasPlayCountBeenUpdated = false;
+  isPlaylistPlaying = true;
+  updatePlayAllButton(true);
 
-    // Reset and play the new song
-    currentAudio.currentTime = 0;
-
-    // Update UI before playing
-    updateAllPlayerUI(
-      songData.name,
-      songData.artist,
-      songData.duration,
-      songData.image,
-      true
-    );
-
-    // Update play count and recently played
-    updatePlayCount(songData.id);
-    updateRecentlyPlayed(songData.id);
-
-    currentAudio
+  // Tiếp tục phát bài hát hiện tại
+  const currentSongData = window.currentPlaylist[window.currentPlaylistIndex];
+  if (currentSongData) {
+    currentSongData.audioElement
       .play()
       .then(() => {
-        // Update play button states
-        updatePlayButtonStates(songData.id, true);
+        updateAllPlayerUI(
+          currentSongData.name,
+          currentSongData.artist,
+          currentSongData.duration,
+          currentSongData.image,
+          true
+        );
+        updatePlayButtonStates(currentSongData.id, true);
       })
       .catch((error) => {
         console.error("Playback failed:", error);
         playNextSong();
       });
+  }
+}
 
-    // Set up ended event for this song
-    currentAudio.onended = () => {
-      playNextSong();
-    };
-  };
+function pausePlaylist() {
+  isPlaylistPlaying = false;
+  updatePlayAllButton(false);
 
-  const playNextSong = () => {
-    window.currentPlaylistIndex++;
-    if (window.currentPlaylistIndex < window.currentPlaylist.length) {
-      playSongByData(window.currentPlaylist[window.currentPlaylistIndex]);
-    } else {
-      // Playlist ended - reset player state
-      resetPlayerState();
-      updateAllPlayerUI("", "", "0:00", "", false);
+  // Pause current audio if playing
+  if (currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    updateAllPlayerUI(
+      playerState.currentSong?.name || "",
+      playerState.currentSong?.artist || "",
+      playerState.currentSong?.duration || "0:00",
+      playerState.currentSong?.image || "",
+      false
+    );
+    updatePlayButtonStates(currentPlayingId, false);
+  }
+}
+
+function updatePlayAllButton(isPlaying) {
+  const playAllButton = document.querySelector(".roundedButton");
+  if (playAllButton) {
+    const icon = playAllButton.querySelector("i");
+    if (icon) {
+      icon.classList.remove(isPlaying ? "fa-play" : "fa-pause");
+      icon.classList.add(isPlaying ? "fa-pause" : "fa-play");
     }
+    playAllButton.onclick = isPlaying ? pausePlaylist : playAllSong;
+  }
+}
+
+// Hàm playSongByData và playNextSong giữ nguyên như trước
+const playSongByData = (songData) => {
+  if (!isPlaylistPlaying) return;
+
+  // Check if user is logged in
+  if (!isLoggedIn) {
+    openGuestPopup();
+    updateImageGuestPopup(songData.image);
+    pausePlaylist();
+    return;
+  }
+
+  // Show music player if hidden
+  const musicPlayer = document.getElementById("music-player");
+  if (musicPlayer && musicPlayer.style.display !== "flex") {
+    musicPlayer.style.display = "flex";
+  }
+
+  // Pause any previously playing audio
+  if (currentAudio && currentAudio !== songData.audioElement) {
+    currentAudio.pause();
+    updatePlayButtonStates(currentPlayingId, false);
+    hasPlayCountBeenUpdated = false;
+  }
+
+  // Update global player state
+  playerState.currentSong = {
+    id: songData.id,
+    name: songData.name,
+    artist: songData.artist,
+    image: songData.image,
   };
+  currentAudio = songData.audioElement;
+  currentPlayingId = songData.id;
+  hasPlayCountBeenUpdated = false;
 
-  // Clear previous ended event listeners
-  document.querySelectorAll("audio").forEach((audio) => {
-    audio.onended = null;
-  });
+  // Reset and play the new song
+  currentAudio.currentTime = 0;
 
-  // Play the first song
-  playSongByData(songsData[0]);
+  // Update UI before playing
+  updateAllPlayerUI(
+    songData.name,
+    songData.artist,
+    songData.duration,
+    songData.image,
+    true
+  );
+
+  // Update play count and recently played
+  updatePlayCount(songData.id);
+  updateRecentlyPlayed(songData.id);
+
+  currentAudio
+    .play()
+    .then(() => {
+      updatePlayButtonStates(songData.id, true);
+    })
+    .catch((error) => {
+      console.error("Playback failed:", error);
+      playNextSong();
+    });
+
+  // Set up ended event for this song
+  currentAudio.onended = () => {
+    playNextSong();
+  };
+};
+
+const playNextSong = () => {
+  if (!isPlaylistPlaying) return;
+
+  window.currentPlaylistIndex++;
+  if (window.currentPlaylistIndex < window.currentPlaylist.length) {
+    playSongByData(window.currentPlaylist[window.currentPlaylistIndex]);
+  } else {
+    // Playlist ended
+    resetPlaylistState();
+  }
+};
+
+function resetPlaylistState() {
+  isPlaylistPlaying = false;
+  window.currentPlaylistIndex = 0;
+  updatePlayAllButton(false);
+  resetPlayerState();
+  updateAllPlayerUI("", "", "0:00", "", false);
 }
 
 //Handle next song
