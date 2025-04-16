@@ -11,7 +11,7 @@ public class Artist {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long artistID;
 
-	@Column(nullable = false, length =255)
+	@Column(nullable = false, length = 255)
 	private String artistName;
 
 	@Column(columnDefinition = "TEXT")
@@ -20,14 +20,13 @@ public class Artist {
 	@Column(length = 255)
 	private String image;
 
-	//-----------
-	//relationship
-	@ManyToMany(mappedBy = "artistsOfSong")
+	// -----------
+	// relationship
+	@ManyToMany(mappedBy = "artistsOfSong", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Song> songsOfArtist;
 
 	@ManyToMany(mappedBy = "artistsOfAlbum")
 	private List<Album> albumsOfArtist;
-
 
 	// getters & setters
 	public Long getArtistID() {

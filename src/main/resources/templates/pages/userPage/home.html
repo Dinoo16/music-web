@@ -16,7 +16,9 @@
       </div>
 
       <!-- LIST OF FEATURED SONGS -->
-      <div th:replace="~{components/songCard :: songCard()}"></div>
+      <div
+        th:replace="~{components/songCard :: songCard(songs=${globalSongs})}"
+      ></div>
 
       <!-- Recommended playlist and view all -->
       <div class="home-header">

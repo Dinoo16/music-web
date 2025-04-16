@@ -31,19 +31,31 @@
                 type="file"
                 name="audioFile"
                 accept="audio/mp3"
-                th:field="*{filePath}"
                 class="edit-songlist-input"
                 placeholder="Enter file path"
               />
+              <div th:if="${song.filePath != null}">
+                <p class="edit-songlist-currentfile">
+                  Current file:
+                  <a
+                    th:href="@{'/uploads/' + ${song.filePath}}"
+                    th:text="${song.filePath}"
+                    target="_blank"
+                  ></a>
+                </p>
+              </div>
               <!--Album field-->
               <label class="edit-songlist-label">Album</label>
               <div class="edit-songlist-album">
                 <select class="edit-songlist-select" th:field="*{album}">
+                  <option value="" th:selected="${selectedAlbumId == null}">
+                    No Album
+                  </option>
                   <option
                     th:each="album : ${albumList}"
                     th:value="${album.albumID}"
                     th:text="${album.albumName}"
-                    th:selected="${album.albumID == song.album.albumID}"
+                    th:selected="${selectedAlbumId != null and selectedAlbumId == album.albumID}"
                   ></option>
                 </select>
               </div>
@@ -117,10 +129,19 @@
                 type="file"
                 name="imageFile"
                 accept="image/*"
-                th:field="*{coverImage}"
                 class="edit-songlist-input"
                 placeholder="Enter cover image path"
               />
+              <div th:if="${song.coverImage != null}">
+                <p class="edit-songlist-currentfile">
+                  Current file:
+                  <a
+                    th:href="@{'/uploads/' + ${song.coverImage}}"
+                    th:text="${song.coverImage}"
+                    target="_blank"
+                  ></a>
+                </p>
+              </div>
 
               <button type="submit" class="edit-songlist-upload-btn">
                 Save

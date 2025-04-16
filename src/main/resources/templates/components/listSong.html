@@ -70,9 +70,8 @@
             <span
               class="listOfSong-duration"
               th:if="${duration != null and  duration != ''}"
-              th:text="${duration}"
-              >4:10</span
-            >
+              th:text="${song.formattedDuration}"
+            ></span>
             <!--Add to favorite button-->
             <div
               th:replace="~{/components/tooltip :: toolTip('Add to favorites', 'fa-regular fa-heart', 'addSongToFavorite()')}"

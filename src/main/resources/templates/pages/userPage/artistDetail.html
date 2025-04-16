@@ -44,8 +44,10 @@
       <!-- artist popular songs -->
       <div class="artist-popular-songs">
         <h2>Popular Songs</h2>
-        <!--Song list grid-->
-        <div th:replace="~{components/songCard :: songCard()}"></div>
+        <!--Song list of artist -->
+        <div
+          th:replace="~{components/songCard :: songCard(songs=${songsOfArtist})}"
+        ></div>
       </div>
       <!-- artist album -->
       <div class="artist-albums">

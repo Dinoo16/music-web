@@ -19,7 +19,7 @@ public class Genre {
 
 	// relationship
 
-	@ManyToMany(mappedBy = "genresOfSong")
+	@ManyToMany(mappedBy = "genresOfSong", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	private List<Song> songsOfGenre = new ArrayList<>();
 
 	// getters & setters

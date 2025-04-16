@@ -50,13 +50,17 @@ public class Song {
 	@JoinTable(name = "genre_song", joinColumns = @JoinColumn(name = "song_id"), inverseJoinColumns = @JoinColumn(name = "genre_id"))
 	private List<Genre> genresOfSong = new ArrayList<>();
 	// album
-	@ManyToOne
-	@JoinColumn(name = "album_id", nullable = false)
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "album_id", nullable = true)
 	private Album album;
 	// playlist
 	@ManyToMany
 	@JoinTable(name = "playlist_song", joinColumns = @JoinColumn(name = "song_id"), inverseJoinColumns = @JoinColumn(name = "playlist_id"))
 	private List<Playlist> playlists = new ArrayList<>();
+
+	// recently played song
+	@ManyToMany(mappedBy = "recentlyPlayedSongs")
+	private List<User> usersWhoPlayed = new ArrayList<>();
 
 	// getters & setters
 	public Long getSongID() {
@@ -145,5 +149,20 @@ public class Song {
 
 	public void setPlays(int plays) {
 		this.plays = plays;
+	}
+
+	public List<User> getUsersWhoPlayed() {
+		return usersWhoPlayed;
+	}
+
+	public void setUsersWhoPlayed(List<User> usersWhoPlayed) {
+		this.usersWhoPlayed = usersWhoPlayed;
+	}
+
+	@Transient
+	public String getFormattedDuration() {
+		int minutes = duration / 60;
+		int seconds = duration % 60;
+		return String.format("%02d:%02d", minutes, seconds);
 	}
 }

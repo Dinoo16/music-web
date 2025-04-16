@@ -27,9 +27,18 @@
         </div>
         <div class="artist-info">
           <h3 class="artist-name" th:text="${artist.artistName}">The Weeknd</h3>
-          <p class="artist-song-count">25 songs</p>
+          <p
+            class="artist-song-count"
+            th:text="${globalArtistSongCount[artist.artistID] + ' songs'}"
+          >
+            25 songs
+          </p>
           <div class="artist-meta">
-            <span class="artist-listen-count">45.6M monthly listeners</span>
+            <span
+              class="artist-listen-count"
+              th:text="${globalArtistTotalPlays[artist.artistID] + ' listeners'}"
+              >45.6M monthly listeners</span
+            >
           </div>
         </div>
       </div>

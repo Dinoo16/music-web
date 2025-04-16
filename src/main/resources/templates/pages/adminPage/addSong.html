@@ -38,6 +38,7 @@
               <label class="add-song-label">Album</label>
               <div class="add-song-album">
                 <select class="add-song-select" th:field="*{album}">
+                  <option value="">No Album</option>
                   <option
                     th:each="album : ${albumList}"
                     th:value="${album.albumID}"
@@ -107,20 +108,7 @@
                 name="selectedArtists"
                 id="selectedArtists"
               />
-              <!--Image upload field-->
-              <!-- <div class="add-song-upload">
-                  <label for="imageUpload" class="add-song-upload-box">
-                    <span class="add-song-upload-icon">+</span>
-                    <p class="add-song-upload-text">Insert picture</p>
-                  </label>
-                  <input
-                    type="file"
-                    id="imageUpload"
-                    class="add-song-upload-input"
-                    accept="image/*"
-                  />
-                </div> -->
-              <!--Image upload field-->
+
               <label class="add-song-label">Image file path</label>
               <input
                 type="file"

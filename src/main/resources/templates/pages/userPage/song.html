@@ -29,7 +29,9 @@
       </div>
 
       <!-- list of songs -->
-      <div th:replace="~{components/songCard :: songCard()}"></div>
+      <div
+        th:replace="~{components/songCard :: songCard(songs=${globalSongs})}"
+      ></div>
     </div>
   </body>
 </html>

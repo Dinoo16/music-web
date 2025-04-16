@@ -49,45 +49,78 @@ let playerState = {
   currentSong: null,
   queue: [],
 };
-// Handle play/pause when clicking song card play button
-function playSong(event, songId) {
-  event.preventDefault();
-  event.stopPropagation();
+/**
+ * Universal playSong function that handles both DOM-based and parameter-based calls
+ * @param {Event} event - The click event (optional)
+ * @param {string} songId - The ID of the song to play
+ * @param {string} [songName] - Name of the song (optional if called from song card/list)
+ * @param {string} [artistName] - Artist name (optional if called from song card/list)
+ * @param {string} [songDuration] - Duration of the song (optional)
+ * @param {string} [imagePath] - URL of the song cover image (optional if called from song card/list)
+ */
+function playSong(
+  event,
+  songId,
+  songName = null,
+  artistName = null,
+  songDuration = null,
+  imagePath = null
+) {
+  // Prevent default behavior if event exists
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
 
   const audioElement = document.getElementById(`audioPlayer_${songId}`);
-  const clickedButton = event.currentTarget;
+  if (!audioElement) {
+    console.error(`Audio element not found for song ID: ${songId}`);
+    return;
+  }
 
-  // Try to find parent containers of both styles
-  const songCard = clickedButton.closest(".song-card");
-  const listSong = clickedButton.closest(".listOfSong-item");
+  // If parameters not provided, try to extract from DOM
+  const clickedButton = event?.currentTarget;
+  if (clickedButton && (!songName || !artistName || !imagePath)) {
+    const songCard = clickedButton.closest(".song-card");
+    const listSong = clickedButton.closest(".listOfSong-item");
 
-  // Extract data from whichever exists
-  const songName = songCard
-    ? songCard.querySelector(".song-card-name").textContent
-    : listSong.querySelector(".listOfSong-song-name").textContent;
+    if (songCard || listSong) {
+      const container = songCard || listSong;
+      songName =
+        songName ||
+        container.querySelector(".song-card-name, .listOfSong-song-name")
+          ?.textContent;
+      artistName =
+        artistName ||
+        container.querySelector(".song-card-artist, .listOfSong-info-artist")
+          ?.textContent;
+      songDuration =
+        songDuration ||
+        container.querySelector(".song-card-duration, .listOfSong-duration")
+          ?.textContent;
+      imagePath = imagePath || container.querySelector("img")?.src;
+    }
+  }
 
-  const artistName = songCard
-    ? songCard.querySelector(".song-card-artist").textContent
-    : listSong.querySelector(".listOfSong-info-artist").textContent;
-
-  const songDuration = songCard
-    ? songCard.querySelector(".song-card-duration").textContent
-    : listSong.querySelector(".listOfSong-duration").textContent;
-
-  const imagePath = songCard
-    ? songCard.querySelector("img").src
-    : listSong.querySelector("img").src;
+  // Validate we have required data
+  if (!songName || !artistName || !imagePath) {
+    console.error("Missing required song information");
+    return;
+  }
 
   // Check if user is logged in
-  // Show guest popup instead of playing
   if (!isLoggedIn) {
     openGuestPopup();
     updateImageGuestPopup(imagePath);
-    return; // Exit the function early
+    return;
   }
 
+  // Show music player
   const musicPlayer = document.getElementById("music-player");
-  musicPlayer.style.display = "flex";
+  if (musicPlayer) {
+    musicPlayer.style.display = "flex";
+  }
+
   // Update global player state
   playerState.currentSong = {
     id: songId,
@@ -96,20 +129,24 @@ function playSong(event, songId) {
     image: imagePath,
   };
 
-  // If same song is clicked again
+  // If same song is clicked again - toggle play/pause
   if (currentPlayingId === songId) {
     if (audioElement.paused) {
-      audioElement.play();
-      updateBottomPlayer(songName, artistName, songDuration, imagePath, true);
-      updateSidebar(songName, artistName, songDuration, imagePath, true);
-      updatePlayButtonInCard(songId, true);
-      updatePlayButtonInSonglist(songId, true);
+      audioElement
+        .play()
+        .then(() => {
+          updateAllPlayerUI(
+            songName,
+            artistName,
+            songDuration,
+            imagePath,
+            true
+          );
+        })
+        .catch(handlePlaybackError);
     } else {
       audioElement.pause();
-      updateBottomPlayer(songName, artistName, songDuration, imagePath, false);
-      updateSidebar(songName, artistName, songDuration, imagePath, false);
-      updatePlayButtonInCard(songId, false);
-      updatePlayButtonInSonglist(songId, false);
+      updateAllPlayerUI(songName, artistName, songDuration, imagePath, false);
     }
     return;
   }
@@ -117,9 +154,7 @@ function playSong(event, songId) {
   // Pause any previously playing audio
   if (currentAudio && currentAudio !== audioElement) {
     currentAudio.pause();
-    updatePlayButtonInCard(currentPlayingId, false);
-    updatePlayButtonInSonglist(currentPlayingId, false);
-    // Reset play count tracking when switching songs
+    updatePlayButtonStates(currentPlayingId, false);
     hasPlayCountBeenUpdated = false;
   }
 
@@ -131,48 +166,71 @@ function playSong(event, songId) {
   audioElement
     .play()
     .then(() => {
-      updateBottomPlayer(songName, artistName, songDuration, imagePath, true);
-      updateSidebar(songName, artistName, songDuration, imagePath, true);
-      updatePlayButtonInCard(songId, true);
-      updatePlayButtonInSonglist(songId, true);
-      // Only send play count update if it hasn't been done yet for this song
-      if (!hasPlayCountBeenUpdated) {
-        fetch(`/song/play/${songId}`, {
-          method: "POST",
-        })
-          .then(() => {
-            hasPlayCountBeenUpdated = true;
-          })
-          .catch((err) => console.error("Failed to update play count:", err));
-      }
-      fetch(`/recentlyplayed/${songId}`, {
-        method: "POST",
-      })
-        .then(() => {
-          console.log("Recently played song updated.");
-        })
-        .catch((err) => {
-          console.error("Failed to update recently played songs:", err);
-        });
+      updateAllPlayerUI(songName, artistName, songDuration, imagePath, true);
+      updatePlayCount(songId);
+      updateRecentlyPlayed(songId);
     })
-    .catch((error) => {
-      console.error("Playback failed:", error);
-      updateBottomPlayer(songName, artistName, songDuration, imagePath, false);
-      updateSidebar(songName, artistName, songDuration, imagePath, false);
-      updatePlayButtonInCard(songId, false);
-      updatePlayButtonInSonglist(songId, false);
-      currentPlayingId = null;
-    });
+    .catch(handlePlaybackError);
 
-  // Reset on song end
+  // Handle song end
   audioElement.onended = () => {
-    updateBottomPlayPauseIcon(false);
-    updatePlayButtonInCard(songId, false);
-    updatePlayButtonInSonglist(songId, false);
-    currentAudio = null;
-    currentPlayingId = null;
-    hasPlayCountBeenUpdated = false;
+    resetPlayerState();
   };
+}
+
+// Helper Functions
+
+function updateAllPlayerUI(
+  songName,
+  artistName,
+  duration,
+  imagePath,
+  isPlaying
+) {
+  updateBottomPlayer(songName, artistName, duration, imagePath, isPlaying);
+  updateSidebar(songName, artistName, duration, imagePath, isPlaying);
+  updatePlayButtonStates(currentPlayingId, isPlaying);
+}
+
+function updatePlayButtonStates(songId, isPlaying) {
+  updatePlayButtonInCard(songId, isPlaying);
+  updatePlayButtonInSonglist(songId, isPlaying);
+}
+
+function updatePlayCount(songId) {
+  if (!hasPlayCountBeenUpdated) {
+    fetch(`/song/play/${songId}`, { method: "POST" })
+      .then(() => (hasPlayCountBeenUpdated = true))
+      .catch((err) => console.error("Play count update failed:", err));
+  }
+}
+
+function updateRecentlyPlayed(songId) {
+  fetch(`/recentlyplayed/${songId}`, { method: "POST" }).catch((err) =>
+    console.error("Recently played update failed:", err)
+  );
+}
+
+function handlePlaybackError(error) {
+  console.error("Playback failed:", error);
+  if (playerState.currentSong) {
+    updateAllPlayerUI(
+      playerState.currentSong.name,
+      playerState.currentSong.artist,
+      null,
+      playerState.currentSong.image,
+      false
+    );
+  }
+  currentPlayingId = null;
+}
+
+function resetPlayerState() {
+  updateBottomPlayPauseIcon(false);
+  updatePlayButtonStates(currentPlayingId, false);
+  currentAudio = null;
+  currentPlayingId = null;
+  hasPlayCountBeenUpdated = false;
 }
 
 // Bottom player info update

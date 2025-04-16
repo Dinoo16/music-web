@@ -57,7 +57,9 @@
       <div class="genres-detail-top-songs">
         <h2 class="genres-detail-header">Top Songs</h2>
         <!--Song list grid-->
-        <div th:replace="~{components/songCard :: songCard()}"></div>
+        <div
+          th:replace="~{components/songCard :: songCard(songs=${songsOfGenre})}"
+        ></div>
       </div>
 
       <!-- genres popular artist -->

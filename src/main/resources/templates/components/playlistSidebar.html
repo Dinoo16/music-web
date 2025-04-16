@@ -62,7 +62,9 @@
               </div>
             </a>
             <div class="listOfSong-actions">
-              <span class="listOfSong-duration">4:10</span>
+              <span class="listOfSong-duration" id="currentSongDurationSidebar"
+                >4:10</span
+              >
               <!--Add to favorite button-->
               <div
                 th:replace="~{/components/tooltip :: toolTip('Add to favorites', 'fa-regular fa-heart', 'addSongToFavorite()')}"

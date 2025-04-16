@@ -36,12 +36,6 @@
             th:text="${iterStat.count}"
           ></div>
 
-          <!--Test play song-->
-          <audio controls>
-            <source th:src="@{${song.filePath}}" type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
-
           <div class="songlist-col songlist-title">
             <img th:src="@{${song.coverImage}}" class="songlist-cover" />
             <div>
@@ -55,7 +49,9 @@
               </div>
             </div>
           </div>
-          <div class="songlist-col songlist-plays">1,000</div>
+          <div class="songlist-col songlist-plays" th:text="${song.plays}">
+            1,000
+          </div>
           <div class="songlist-col songlist-genre">
             <span
               class="songlist-genre-name"
@@ -65,7 +61,7 @@
           </div>
           <div
             class="songlist-col songlist-album"
-            th:text="${song.album.albumName}"
+            th:text="${song.album != null ? song.album.albumName : ''}"
           ></div>
           <div class="songlist-col songlist-actions">
             <!--ICON BUTTON - OPTION BUTTON -->

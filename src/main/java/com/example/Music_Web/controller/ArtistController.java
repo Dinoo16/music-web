@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //1.	Create Artist
 //2.	Get All Artists
@@ -37,17 +39,22 @@ public class ArtistController {
 
 	@GetMapping(value = "/list")
 	public String getAllArtists(Model model) {
-		List<Artist> artists = artistRepository.findAll();
-		model.addAttribute("artists", artists);
+
 		// Dữ liệu cho tab song
 		List<Song> songs = songRepository.findAll();
 		model.addAttribute("songs", songs);
 		// Dữ liệu cho tab genre
 		List<Genre> genres = genreRepository.findAll();
 		model.addAttribute("genres", genres);
+
 		// Dữ liệu cho tab album
 		List<Album> albums = albumRepository.findAll();
 		model.addAttribute("albums", albums);
+
+		// Dữ liệu của tab artist
+		List<Artist> artists = artistRepository.findAll();
+		model.addAttribute("artists", artists);
+		// Sum of plays and songs for each artist
 
 		model.addAttribute("activeTab", "artist");
 		return "pages/adminPage/upload";
@@ -69,8 +76,16 @@ public class ArtistController {
 		Artist artist = artistRepository.findById(id)
 				.orElseThrow(() -> new ArtistNotFoundException("Invalid genre ID: " + id));
 		model.addAttribute("artist", artist);
-		List<Song> songs = new ArrayList<>(artist.getSongsOfArtist());
-		model.addAttribute("songs", songs);
+
+		// Get all songs by this artist
+		List<Song> songsOfArtist = songRepository.findByArtistsOfSong_ArtistID(id);
+		// Sum of song plays
+		int totalPlays = 0;
+		for (Song song : songsOfArtist) {
+			totalPlays += song.getPlays();
+		}
+		model.addAttribute("totalPlays", totalPlays);
+		model.addAttribute("songsOfArtist", songsOfArtist);
 		return "pages/userPage/artistDetail";
 	}
 
@@ -129,6 +144,7 @@ public class ArtistController {
 	public String deleteArtist(@PathVariable(value = "id") Long id) throws ArtistNotFoundException {
 		Artist artist = artistRepository.findById(id)
 				.orElseThrow(() -> new ArtistNotFoundException("Artist not found"));
+
 		artistRepository.delete(artist);
 		return "redirect:/artist/list";
 	}

@@ -14,6 +14,7 @@
             th:action="@{/genre/update/{id}(id=${genre.genreID})}"
             th:object="${genre}"
             method="post"
+            enctype="multipart/form-data"
           >
             <div class="edit-genre-fields">
               <!--genre name field-->
@@ -28,11 +29,22 @@
               <!--Image upload field-->
               <label class="edit-genre-label">Image file path</label>
               <input
-                type="text"
-                th:field="*{genreImage}"
+                type="file"
+                name="imageFile"
+                accept="image/*"
                 class="edit-genre-input"
                 placeholder="Enter cover image path"
               />
+              <div th:if="${genre.genreImage != null}">
+                <p class="edit-songlist-currentfile">
+                  Current file:
+                  <a
+                    th:href="@{'/uploads/' + ${genre.genreImage}}"
+                    th:text="${genre.genreImage}"
+                    target="_blank"
+                  ></a>
+                </p>
+              </div>
 
               <button type="submit" class="edit-genre-upload-btn">Save</button>
             </div>

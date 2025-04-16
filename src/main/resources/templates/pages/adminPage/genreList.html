@@ -39,7 +39,12 @@
               </div>
             </div>
           </div>
-          <div class="genreList-col genreList-num">12</div>
+          <div
+            class="genreList-col genreList-num"
+            th:text="${globalSongsOfGenre[genre.genreID]}"
+          >
+            12
+          </div>
           <div class="genreList-col genreList-actions">
             <!--ICON BUTTON - OPTION BUTTON -->
             <button

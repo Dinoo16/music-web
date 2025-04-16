@@ -15,6 +15,7 @@ import com.example.Music_Web.repository.ArtistRepository;
 import com.example.Music_Web.repository.GenreRepository;
 import com.example.Music_Web.repository.SongRepository;
 import com.example.Music_Web.service.FileStorageService;
+import org.apache.commons.lang3.time.DurationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -29,11 +30,14 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.data.domain.Sort;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 //1.	Create Song (Upload)
@@ -60,18 +64,40 @@ public class SongController {
 	// For admin page (with all controls)
 	@GetMapping(value = "/list")
 	public String getAllSongs(Model model) {
-		List<Song> songs = songRepository.findAll();
-		model.addAttribute("songs", songs);
+
 		// Dữ liệu cho tab artist
 		List<Artist> artists = artistRepository.findAll();
 		model.addAttribute("artists", artists);
+		Map<Long, Integer> artistTotalPlays = new HashMap<>();
+		Map<Long, Integer> artistSongCount = new HashMap<>();
+		for (Artist artist : artists) {
+			List<Song> songsOfArtist = songRepository.findByArtistsOfSong_ArtistID(artist.getArtistID());
+			int totalPlays = 0;
+			for (Song song : songsOfArtist) {
+				totalPlays += song.getPlays();
+			}
+			artistTotalPlays.put(artist.getArtistID(), totalPlays);
+			artistSongCount.put(artist.getArtistID(), songsOfArtist.size());
+		}
+		model.addAttribute("artistTotalPlays", artistTotalPlays);
+		model.addAttribute("artistSongCount", artistSongCount);
+
 		// Dữ liệu cho tab genre
 		List<Genre> genres = genreRepository.findAll();
 		model.addAttribute("genres", genres);
+		Map<Long, Integer> genreSongCount = new HashMap<>();
+		for (Genre genre : genres) {
+			List<Song> songsOfGenre = songRepository.findByGenresOfSong_GenreID(genre.getGenreID());
+			genreSongCount.put(genre.getGenreID(), songsOfGenre.size());
+		}
+		model.addAttribute("genreSongCount", genreSongCount);
 		// Dữ liệu cho tab album
 		List<Album> albums = albumRepository.findAll();
 		model.addAttribute("albums", albums);
 
+		// Dữ liệu của tab song
+		List<Song> songs = songRepository.findAll();
+		model.addAttribute("songs", songs);
 		model.addAttribute("activeTab", "song");
 		return "pages/adminPage/upload";
 	}
@@ -79,9 +105,11 @@ public class SongController {
 	// For user page (read-only view)
 	@GetMapping(value = "/user/list")
 	public String getAllSongsUser(Model model) {
-		// List<Song> songs = songRepository.findAll();
+		List<Song> songs = songRepository.findAll();
 		// model.addAttribute("songs", songs);
 		// genres for filtering
+
+		model.addAttribute("songs", songs);
 		model.addAttribute("genres", genreRepository.findAll());
 		return "pages/userPage/song";
 	}
@@ -114,13 +142,16 @@ public class SongController {
 				.map(Artist::getArtistID)
 				.collect(Collectors.toList());
 
+		// Add default album if album is null
+		Long selectedAlbumId = (song.getAlbum() != null) ? song.getAlbum().getAlbumID() : null;
+
 		model.addAttribute("song", song);
 		model.addAttribute("albumList", albumList);
 		model.addAttribute("genres", genres);
 		model.addAttribute("artists", artists);
 		model.addAttribute("selectedGenreIds", selectedGenreIds);
 		model.addAttribute("selectedArtistIds", selectedArtistIds);
-
+		model.addAttribute("selectedAlbumId", selectedAlbumId);
 		return "pages/adminPage/editSonglist";
 	}
 
@@ -169,18 +200,41 @@ public class SongController {
 			throw new RuntimeException("Only image files are allowed for cover");
 		}
 
-		// 1. Upload file and save to /uploads/ or any custom path
+		// 1. If there is an old audio file, delete it
+		if (existingSong.getFilePath() != null) {
+			Path oldAudioFilePath = Paths.get(existingSong.getFilePath());
+			if (Files.exists(oldAudioFilePath)) {
+				Files.delete(oldAudioFilePath); // Delete old audio file
+			}
+		}
+
+		// 2. If there is an old image file, delete it
+		if (existingSong.getCoverImage() != null) {
+			Path oldImageFilePath = Paths.get(existingSong.getCoverImage());
+			if (Files.exists(oldImageFilePath)) {
+				Files.delete(oldImageFilePath); // Delete old image file
+			}
+		}
+
+		// 3. Upload new audio file and save to /uploads/ or any custom path
 		String audioPath = fileStorageService.storeFile(audioFile);
 		String imagePath = fileStorageService.storeFile(imageFile);
 
-		// 2. Set path to song entity
+		// 4. Set new paths to song entity
 		existingSong.setFilePath(audioPath);
 		existingSong.setCoverImage(imagePath);
 
 		// Update relationships
-		Album album = albumRepository.findById(song.getAlbum().getAlbumID())
-				.orElseThrow(() -> new IllegalArgumentException("Invalid album Id"));
-		existingSong.setAlbum(album);
+
+		// Set album only if it's not null
+		if (song.getAlbum() != null && song.getAlbum().getAlbumID() != null) {
+			Album album = albumRepository.findById(song.getAlbum().getAlbumID())
+					.orElseThrow(() -> new IllegalArgumentException("Invalid album Id"));
+			existingSong.setAlbum(album);
+		} else {
+			// No album selected, so keep it as null
+			existingSong.setAlbum(null);
+		}
 
 		List<Genre> genres = genreRepository.findAllById(genreIdList);
 		existingSong.setGenresOfSong(genres);
@@ -234,8 +288,16 @@ public class SongController {
 		// 1. Upload file and save to /uploads/ or any custom path
 		String audioPath = fileStorageService.storeFile(audioFile);
 		String imagePath = fileStorageService.storeFile(imageFile);
+		// 2. Extract duration
+		try {
+			int duration = fileStorageService.getDurationFromFile(audioFile);
+			song.setDuration(duration);
+		} catch (Exception e) {
+			e.printStackTrace();
+			song.setDuration(0);
+		}
 
-		// 2. Set path to song entity
+		// 3. Set path to song entity
 		song.setFilePath(audioPath);
 		song.setCoverImage(imagePath);
 
@@ -274,6 +336,10 @@ public class SongController {
 	public String deleteSong(@PathVariable(value = "id") Long id) throws SongNotFoundException {
 		Song song = songRepository.findById(id)
 				.orElseThrow(() -> new SongNotFoundException("Song not found"));
+		for (User user : song.getUsersWhoPlayed()) {
+			user.getRecentlyPlayedSongs().remove(song);
+		}
+		song.getUsersWhoPlayed().clear();
 		songRepository.delete(song);
 		return "redirect:/song/list";
 	}

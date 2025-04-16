@@ -36,7 +36,12 @@
               </div>
               <div class="genres-info">
                 <h3 class="genres-title" th:text="${genre.genreName}">Pop</h3>
-                <p class="genres-songs">1.2M songs</p>
+                <p
+                  class="genres-songs"
+                  th:text="${globalSongsOfGenre[genre.genreID] + ' songs'}"
+                >
+                  1.2M songs
+                </p>
               </div>
             </div>
           </a>

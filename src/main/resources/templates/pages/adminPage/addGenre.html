@@ -10,7 +10,12 @@
       <div class="add-genre-wrapper">
         <div class="add-genre-container">
           <h1>Add Genre</h1>
-          <form th:action="@{/genre/add}" th:object="${genre}" method="post">
+          <form
+            th:action="@{/genre/add}"
+            th:object="${genre}"
+            method="post"
+            enctype="multipart/form-data"
+          >
             <div class="add-genre-fields">
               <!--genre name field-->
               <label class="add-genre-label">Genre name</label>
@@ -24,8 +29,9 @@
               <!--Image upload field-->
               <label class="add-genre-label">Image file path</label>
               <input
-                type="text"
-                th:field="*{genreImage}"
+                type="file"
+                name="imageFile"
+                accept="image/*"
                 class="add-genre-input"
                 placeholder="Enter cover image path"
               />

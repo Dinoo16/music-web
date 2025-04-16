@@ -6,10 +6,10 @@
     <title>Song card</title>
   </head>
   <body>
-    <div th:fragment="songCard()">
+    <div th:fragment="songCard(songs)">
       <div class="song-card-grid">
         <!--home list songs item-->
-        <div class="song-card" th:each="song : ${globalSongs}">
+        <div class="song-card" th:each="song : ${songs}">
           <div class="song-card-img">
             <img th:src="@{${song.coverImage}}" alt="song image" />
           </div>
@@ -48,7 +48,10 @@
               </div>
             </div>
             <div class="song-card-meta">
-              <span class="song-card-duration">3:20</span>
+              <span
+                class="song-card-duration"
+                th:text="${song.formattedDuration}"
+              ></span>
               <div class="song-card-actions">
                 <!--ToolTip heart button (Add to favorite)-->
                 <div

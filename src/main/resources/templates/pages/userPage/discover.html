@@ -34,7 +34,9 @@
         <h2 class="discover-new-releases-title">New Releases</h2>
       </div>
       <!-- list of songs -->
-      <div th:replace="~{components/songCard :: songCard()}"></div>
+      <div
+        th:replace="~{components/songCard :: songCard(songs=${globalSongs})}"
+      ></div>
 
       <!-- Browse by Mood -->
 
@@ -42,7 +44,9 @@
         <h2 class="discover-new-releases-title">Browse by Mood</h2>
       </div>
       <!-- list of songs -->
-      <div th:replace="~{components/songCard :: songCard()}"></div>
+      <div
+        th:replace="~{components/songCard :: songCard(songs=${globalSongs})}"
+      ></div>
     </div>
   </body>
 </html>

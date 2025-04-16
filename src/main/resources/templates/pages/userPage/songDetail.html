@@ -46,7 +46,10 @@
                   Album: After Hours
                 </h4>
                 <span class="dot">•</span>
-                <span class="song-detail-duration">3:20</span>
+                <span
+                  class="song-detail-duration"
+                  th:text="${song.formattedDuration}"
+                ></span>
                 <span class="dot">•</span>
                 <span
                   class="song-detail-song-genres"
@@ -62,12 +65,24 @@
                 </div>
                 <h4 class="song-detail-meta2-rate">4.8 (1234 views)</h4>
                 <span class="dot">•</span>
-                <span class="song-detail-play-count">8.2M plays</span>
+                <span
+                  class="song-detail-play-count"
+                  th:text="${song.plays} + ' plays'"
+                  >8.2M plays</span
+                >
               </div>
               <div class="song-detail-actions">
                 <!-- CUSTOM ROUNDED BUTTON (PLay now) -->
                 <div
-                  th:replace="~{components/roundedButton :: roundedButton('fa-solid fa-play','22px', 'Play now', '160px','50px', null, 'playSong(event)')}"
+                  th:replace="~{components/roundedButton :: roundedButton(
+                  'fa-solid fa-play',
+                  '22px', 
+                  'Play now', 
+                  '160px',
+                  '50px', 
+                  null, 
+                  'playSong(event, ' + ${song.songID} + ', \'' + ${song.title} + '\', \'' + ${song.artistsOfSong[0].artistName} + '\', \'' + ${song.formattedDuration} + '\', \'' + ${song.coverImage} + '\')'
+                )}"
                 ></div>
                 <!-- heart button -->
                 <div class="tooltip">
@@ -133,7 +148,7 @@
           <h2 class="song-detail-related-header">Related Songs</h2>
           <!-- song item (add song id)-->
           <div
-            th:replace="~{components/listSong :: listOfSongItem('', 'plus','', 'addSongToPlaylist()')}"
+            th:replace="~{components/listSong :: listOfSongItem('', 'plus','00', 'addSongToPlaylist()')}"
           ></div>
         </div>
       </div>

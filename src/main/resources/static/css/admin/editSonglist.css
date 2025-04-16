@@ -112,3 +112,8 @@
 .add-song-dropdown.open .list-items {
   display: block;
 }
+
+.edit-songlist-currentfile {
+  color:white;
+  
+}
