@@ -11,7 +11,7 @@
       <!--Songs list header-->
       <div class="songlist-header">
         <div class="songlist-header-add-btn">
-          <a class="songlist-header-add-btn-link" href="/song/add"
+          <a class="songlist-header-add-btn-link" href="/admin/song/add"
             ><i class="fa-solid fa-plus"></i
           ></a>
         </div>
@@ -76,14 +76,14 @@
               id="songlist-actions-menu"
             >
               <a
-                th:href="@{'/song/update/' + ${song.songID}}"
+                th:href="@{'/admin/song/update/' + ${song.songID}}"
                 style="color: #fff"
               >
                 <button onclick="closeActionMenu()">
                   <i class="fa-solid fa-pen"></i>Edit Song
                 </button>
               </a>
-              <a th:href="@{'/song/delete/' + ${song.songID}}">
+              <a th:href="@{'/admin/song/delete/' + ${song.songID}}">
                 <button onclick="closeActionMenu()">
                   <i class="fa-solid fa-trash"></i>
                   Delete Song

@@ -12,7 +12,7 @@
           <h1>Edit Artist</h1>
           <form
             method="post"
-            th:action="@{/artist/update/{id}(id=${artist.artistID})}"
+            th:action="@{/admin/artist/update/{id}(id=${artist.artistID})}"
             th:object="${artist}"
             enctype="multipart/form-data"
           >

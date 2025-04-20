@@ -1,5 +1,6 @@
 package com.example.Music_Web.controller;
 
+import com.example.Music_Web.exception.AlbumNotFoundException;
 import com.example.Music_Web.exception.ArtistNotFoundException;
 import com.example.Music_Web.exception.GenreNotFoundException;
 import com.example.Music_Web.model.Album;
@@ -21,15 +22,17 @@ import com.example.Music_Web.service.FileStorageService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 //1.	Create Artist
 //2.	Get All Artists
 //4.	Update Artist
 //5.	Delete Artist
 @Controller
-@RequestMapping(value = "/artist")
 public class ArtistController {
 	@Autowired
 	SongRepository songRepository;
@@ -42,7 +45,8 @@ public class ArtistController {
 	@Autowired
 	FileStorageService fileStorageService;
 
-	@GetMapping(value = "/list")
+	// for admin
+	@GetMapping(value = "/admin/artist/list")
 	public String getAllArtists(Model model) {
 
 		// Dữ liệu cho tab song
@@ -54,6 +58,26 @@ public class ArtistController {
 
 		// Dữ liệu cho tab album
 		List<Album> albums = albumRepository.findAll();
+		Map<Long, String> albumArtistNames = new HashMap<>();
+		for (Album album : albums) {
+			// Get all artists for this album (both direct album artists and song artists)
+			Set<String> artistNames = new LinkedHashSet<>();
+
+			// Add direct album artists
+			album.getArtistsOfAlbum().stream()
+					.map(Artist::getArtistName)
+					.forEach(artistNames::add);
+
+			// Add artists from songs in the album
+			album.getSongsOfAlbum().stream()
+					.flatMap(song -> song.getArtistsOfSong().stream())
+					.map(Artist::getArtistName)
+					.forEach(artistNames::add);
+
+			// Join all artist names with commas
+			albumArtistNames.put(album.getAlbumID(), String.join(", ", artistNames));
+		}
+		model.addAttribute("albumArtistNames", albumArtistNames);
 		model.addAttribute("albums", albums);
 
 		// Dữ liệu của tab artist
@@ -67,34 +91,70 @@ public class ArtistController {
 	}
 
 	// For user page (read-only view)
-	@GetMapping(value = "/user/list")
+	@GetMapping(value = "/artist/list")
 	public String getAllArtistsUser(Model model) {
 		List<Artist> artists = artistRepository.findAll();
 		model.addAttribute("artists", artists);
-		
+
 		return "pages/userPage/artist";
 	}
 
 	// Artist detail for user page (read-only view)
-	@GetMapping("/detail/{id}")
+	@GetMapping("/artist/detail/{id}")
 	public String getArtistDetail(@PathVariable Long id, Model model) throws ArtistNotFoundException {
 		Artist artist = artistRepository.findById(id)
-				.orElseThrow(() -> new ArtistNotFoundException("Invalid genre ID: " + id));
-		model.addAttribute("artist", artist);
+				.orElseThrow(() -> new ArtistNotFoundException("Invalid artist ID: " + id));
+
+		// Get direct albums (where artist is in artistsOfAlbum)
+		List<Album> directAlbums = albumRepository.findByArtistsOfAlbum_ArtistID(id);
+
+		// Get albums through songs (where artist has songs in album)
+		List<Album> albumsThroughSongs = albumRepository.findDistinctBySongsOfAlbum_ArtistsOfSong_ArtistID(id);
+
+		// Combine and deduplicate albums
+		Set<Album> allAlbums = new LinkedHashSet<>();
+		allAlbums.addAll(directAlbums);
+		allAlbums.addAll(albumsThroughSongs);
+
+		// Create a map of album ID to artist names for display
+		Map<Long, String> albumArtists = new HashMap<>();
+		for (Album album : allAlbums) {
+			// Get all artists associated with this album (both direct and through songs)
+			Set<Artist> artistsForAlbum = new LinkedHashSet<>();
+			artistsForAlbum.addAll(album.getArtistsOfAlbum());
+
+			// Add artists from songs in the album
+			if (album.getSongsOfAlbum() != null) {
+				album.getSongsOfAlbum().stream()
+						.flatMap(song -> song.getArtistsOfSong().stream())
+						.forEach(artistsForAlbum::add);
+			}
+
+			// Convert to comma-separated string
+			String artistNames = artistsForAlbum.stream()
+					.map(Artist::getArtistName)
+					.collect(Collectors.joining(", "));
+
+			albumArtists.put(album.getAlbumID(), artistNames);
+		}
 
 		// Get all songs by this artist
 		List<Song> songsOfArtist = songRepository.findByArtistsOfSong_ArtistID(id);
+
 		// Sum of song plays
-		int totalPlays = 0;
-		for (Song song : songsOfArtist) {
-			totalPlays += song.getPlays();
-		}
+		int totalPlays = songsOfArtist.stream().mapToInt(Song::getPlays).sum();
+
+		model.addAttribute("artist", artist);
+		model.addAttribute("albumArtists", albumArtists);
 		model.addAttribute("totalPlays", totalPlays);
 		model.addAttribute("songsOfArtist", songsOfArtist);
+		model.addAttribute("albums", new ArrayList<>(allAlbums));
+
 		return "pages/userPage/artistDetail";
 	}
 
-	@GetMapping(value = "/update/{id}")
+	// for admin
+	@GetMapping(value = "/admin/artist/update/{id}")
 	public String updateArtist(
 			@PathVariable(value = "id") Long id, Model model) throws ArtistNotFoundException {
 		Artist artist = artistRepository.findById(id)
@@ -111,7 +171,7 @@ public class ArtistController {
 		return "pages/adminPage/editArtist";
 	}
 
-	@PostMapping("/update/{id}")
+	@PostMapping("/admin/artist/update/{id}")
 	public String updateArtist(@PathVariable Long id,
 			@ModelAttribute Artist updatedArtist,
 			@RequestParam(value = "imageFile", required = false) MultipartFile imageFile)
@@ -141,10 +201,10 @@ public class ArtistController {
 		}
 
 		artistRepository.save(existingArtist);
-		return "redirect:/artist/list";
+		return "redirect:/admin/artist/list";
 	}
 
-	@GetMapping(value = "/add")
+	@GetMapping(value = "/admin/artist/add")
 	public String addArtist(Model model) {
 
 		Artist artist = new Artist();
@@ -157,7 +217,7 @@ public class ArtistController {
 		return "pages/adminPage/addArtist";
 	}
 
-	@PostMapping(value = "/add")
+	@PostMapping(value = "/admin/artist/add")
 	public String addArtist(@ModelAttribute Artist artist,
 			@RequestParam("imageFile") MultipartFile imageFile,
 			RedirectAttributes redirectAttributes) throws IOException {
@@ -178,15 +238,34 @@ public class ArtistController {
 		artistRepository.save(artist);
 		redirectAttributes.addFlashAttribute("activeTab", "artist");
 
-		return "redirect:/artist/list";
+		return "redirect:/admin/artist/list";
 	}
 
-	@GetMapping(value = "/delete/{id}")
+	@GetMapping(value = "/admin/artist/delete/{id}")
 	public String deleteArtist(@PathVariable(value = "id") Long id) throws ArtistNotFoundException {
 		Artist artist = artistRepository.findById(id)
 				.orElseThrow(() -> new ArtistNotFoundException("Artist not found"));
 
+		// 1. Remove artist from all songs
+		for (Song song : artist.getSongsOfArtist()) {
+			song.getArtistsOfSong().remove(artist);
+			songRepository.save(song);
+		}
+
+		// 2. Remove artist from all albums
+		for (Album album : artist.getAlbumsOfArtist()) {
+			album.getArtistsOfAlbum().remove(artist);
+			albumRepository.save(album);
+		}
+
+		// 3. Clear collections to avoid Hibernate issues
+		artist.getSongsOfArtist().clear();
+		artist.getAlbumsOfArtist().clear();
+		artistRepository.save(artist);
+
+		// 4. Finally delete the artist
 		artistRepository.delete(artist);
-		return "redirect:/artist/list";
+
+		return "redirect:/admin/artist/list";
 	}
 }

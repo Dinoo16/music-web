@@ -14,6 +14,7 @@ import com.example.Music_Web.repository.AlbumRepository;
 import com.example.Music_Web.repository.ArtistRepository;
 import com.example.Music_Web.repository.GenreRepository;
 import com.example.Music_Web.repository.SongRepository;
+import com.example.Music_Web.repository.PlaylistRepository;
 import com.example.Music_Web.service.FileStorageService;
 import org.apache.commons.lang3.time.DurationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,21 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 //1.	Create Song (Upload)
@@ -47,7 +52,6 @@ import java.util.stream.Collectors;
 //7.	Delete Song
 
 @Controller
-@RequestMapping("/song")
 public class SongController {
 	@Autowired
 	UserRepository userRepository;
@@ -60,53 +64,73 @@ public class SongController {
 	@Autowired
 	AlbumRepository albumRepository;
 	@Autowired
+	PlaylistRepository playlistRepository;
+	@Autowired
 	FileStorageService fileStorageService;
 
 	// For admin page (with all controls)
-	// @GetMapping(value = "/admin/list")
-	// public String getAllSongs(Model model) {
+	@GetMapping(value = "/admin/song/list")
+	public String getAllSongs(Model model) {
 
-	// // Dữ liệu cho tab artist
-	// List<Artist> artists = artistRepository.findAll();
-	// model.addAttribute("artists", artists);
-	// Map<Long, Integer> artistTotalPlays = new HashMap<>();
-	// Map<Long, Integer> artistSongCount = new HashMap<>();
-	// for (Artist artist : artists) {
-	// List<Song> songsOfArtist =
-	// songRepository.findByArtistsOfSong_ArtistID(artist.getArtistID());
-	// int totalPlays = 0;
-	// for (Song song : songsOfArtist) {
-	// totalPlays += song.getPlays();
-	// }
-	// artistTotalPlays.put(artist.getArtistID(), totalPlays);
-	// artistSongCount.put(artist.getArtistID(), songsOfArtist.size());
-	// }
-	// model.addAttribute("artistTotalPlays", artistTotalPlays);
-	// model.addAttribute("artistSongCount", artistSongCount);
+		// Dữ liệu cho tab artist
+		List<Artist> artists = artistRepository.findAll();
+		model.addAttribute("artists", artists);
+		Map<Long, Integer> artistTotalPlays = new HashMap<>();
+		Map<Long, Integer> artistSongCount = new HashMap<>();
+		for (Artist artist : artists) {
+			List<Song> songsOfArtist = songRepository.findByArtistsOfSong_ArtistID(artist.getArtistID());
+			int totalPlays = 0;
+			for (Song song : songsOfArtist) {
+				totalPlays += song.getPlays();
+			}
+			artistTotalPlays.put(artist.getArtistID(), totalPlays);
+			artistSongCount.put(artist.getArtistID(), songsOfArtist.size());
+		}
+		model.addAttribute("artistTotalPlays", artistTotalPlays);
+		model.addAttribute("artistSongCount", artistSongCount);
 
-	// // Dữ liệu cho tab genre
-	// List<Genre> genres = genreRepository.findAll();
-	// model.addAttribute("genres", genres);
-	// Map<Long, Integer> genreSongCount = new HashMap<>();
-	// for (Genre genre : genres) {
-	// List<Song> songsOfGenre =
-	// songRepository.findByGenresOfSong_GenreID(genre.getGenreID());
-	// genreSongCount.put(genre.getGenreID(), songsOfGenre.size());
-	// }
-	// model.addAttribute("genreSongCount", genreSongCount);
-	// // Dữ liệu cho tab album
-	// List<Album> albums = albumRepository.findAll();
-	// model.addAttribute("albums", albums);
+		// Dữ liệu cho tab genre
+		List<Genre> genres = genreRepository.findAll();
+		model.addAttribute("genres", genres);
+		Map<Long, Integer> genreSongCount = new HashMap<>();
+		for (Genre genre : genres) {
+			List<Song> songsOfGenre = songRepository.findByGenresOfSong_GenreID(genre.getGenreID());
+			genreSongCount.put(genre.getGenreID(), songsOfGenre.size());
+		}
+		model.addAttribute("genreSongCount", genreSongCount);
+		// Dữ liệu cho tab album
+		List<Album> albums = albumRepository.findAll();
+		Map<Long, String> albumArtistNames = new HashMap<>();
+		for (Album album : albums) {
+			// Get all artists for this album (both direct album artists and song artists)
+			Set<String> artistNames = new LinkedHashSet<>();
 
-	// // Dữ liệu của tab song
-	// List<Song> songs = songRepository.findAll();
-	// model.addAttribute("songs", songs);
-	// model.addAttribute("activeTab", "song");
-	// return "pages/adminPage/upload";
-	// }
+			// Add direct album artists
+			album.getArtistsOfAlbum().stream()
+					.map(Artist::getArtistName)
+					.forEach(artistNames::add);
+
+			// Add artists from songs in the album
+			album.getSongsOfAlbum().stream()
+					.flatMap(song -> song.getArtistsOfSong().stream())
+					.map(Artist::getArtistName)
+					.forEach(artistNames::add);
+
+			// Join all artist names with commas
+			albumArtistNames.put(album.getAlbumID(), String.join(", ", artistNames));
+		}
+		model.addAttribute("albumArtistNames", albumArtistNames);
+		model.addAttribute("albums", albums);
+
+		// Dữ liệu của tab song
+		List<Song> songs = songRepository.findAll();
+		model.addAttribute("songs", songs);
+		model.addAttribute("activeTab", "song");
+		return "pages/adminPage/upload";
+	}
 
 	// For user page (read-only view)
-	@GetMapping(value = "/user/list")
+	@GetMapping(value = "/song/list")
 	public String getAllSongsUser(Model model) {
 		List<Song> songs = songRepository.findAll();
 		// model.addAttribute("songs", songs);
@@ -118,7 +142,7 @@ public class SongController {
 	}
 
 	// Song detail for user page (read-only view)
-	@GetMapping("/detail/{id}")
+	@GetMapping("/song/detail/{id}")
 	public String getSongDetail(@PathVariable Long id, Model model) throws SongNotFoundException {
 		Song song = songRepository.findById(id)
 				.orElseThrow(() -> new SongNotFoundException("Invalid song ID: " + id));
@@ -126,7 +150,7 @@ public class SongController {
 		return "pages/userPage/songDetail";
 	}
 
-	@GetMapping("/update/{id}")
+	@GetMapping("/admin/song/update/{id}")
 	public String getUpdateForm(@PathVariable("id") Long id, Model model) {
 		Song song = songRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid song Id:" + id));
@@ -158,7 +182,7 @@ public class SongController {
 		return "pages/adminPage/editSonglist";
 	}
 
-	@PostMapping("/update/{id}")
+	@PostMapping("/admin/song/update/{id}")
 	public String saveUpdate(
 			@PathVariable("id") Long id,
 			@ModelAttribute Song song,
@@ -249,10 +273,10 @@ public class SongController {
 		// Save the updated song
 		songRepository.save(existingSong);
 
-		return "redirect:/song/list";
+		return "redirect:/admin/song/list";
 	}
 
-	@GetMapping(value = "/add")
+	@GetMapping(value = "/admin/song/add")
 	public String addSong(Model model) {
 		Song song = new Song();
 		List<Artist> artists = artistRepository.findAll();
@@ -266,7 +290,7 @@ public class SongController {
 		return "pages/adminPage/addSong";
 	}
 
-	@PostMapping("/add")
+	@PostMapping("/admin/song/add")
 	public String saveSong(
 			@ModelAttribute("song") Song song,
 			@RequestParam("selectedGenres") String genreIds,
@@ -335,22 +359,53 @@ public class SongController {
 			genreRepository.save(genre);
 		}
 
-		return "redirect:/song/list";
+		return "redirect:/admin/song/list";
 	}
 
-	@GetMapping(value = "/delete/{id}")
+	@Transactional
+	@GetMapping(value = "/admin/song/delete/{id}")
 	public String deleteSong(@PathVariable(value = "id") Long id) throws SongNotFoundException {
 		Song song = songRepository.findById(id)
 				.orElseThrow(() -> new SongNotFoundException("Song not found"));
-		for (User user : song.getUsersWhoPlayed()) {
-			user.getRecentlyPlayedSongs().remove(song);
+
+		// 1. Remove song from users' recently played
+		if (song.getUsersWhoPlayed() != null) {
+			for (User user : new ArrayList<>(song.getUsersWhoPlayed())) {
+				user.getRecentlyPlayedSongs().remove(song);
+				userRepository.save(user); // Save each updated user
+			}
 		}
-		song.getUsersWhoPlayed().clear();
+
+		// 2. Remove song from playlists
+		if (song.getPlaylists() != null) {
+			for (Playlist playlist : new ArrayList<>(song.getPlaylists())) {
+				playlist.getSongs().remove(song);
+				playlistRepository.save(playlist);
+			}
+		}
+
+		// 3. Remove song from album (if it belongs to one)
+		if (song.getAlbum() != null) {
+			Album album = song.getAlbum();
+			album.getSongsOfAlbum().remove(song);
+			albumRepository.save(album);
+		}
+
+		// 4. Remove song from artists
+		if (song.getArtistsOfSong() != null) {
+			for (Artist artist : new ArrayList<>(song.getArtistsOfSong())) {
+				artist.getSongsOfArtist().remove(song);
+				artistRepository.save(artist);
+			}
+		}
+
+		// 5. Finally delete the song
 		songRepository.delete(song);
-		return "redirect:/song/list";
+
+		return "redirect:/admin/song/list";
 	}
 
-	@GetMapping("/uploads/{filename:.+}")
+	@GetMapping("/admin/song/uploads/{filename:.+}")
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 		try {
 			Path file = Paths.get("uploads").resolve(filename);
@@ -368,16 +423,7 @@ public class SongController {
 		}
 	}
 
-	@PostMapping("/play/{id}")
-	public ResponseEntity<String> playSong(@PathVariable Long id) {
-		Song song = songRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Song not found"));
-
-		song.setPlays(song.getPlays() + 1);
-		songRepository.save(song);
-		return ResponseEntity.ok("Play count updated");
-	}
-
+	// user topchart
 	@GetMapping("/topchart")
 	public String getTopCharts(Model model) {
 		List<Song> songs = songRepository.findAll(Sort.by(Sort.Direction.DESC, "plays"));
@@ -385,4 +431,5 @@ public class SongController {
 
 		return "pages/userPage/topchart";
 	}
+
 }

@@ -56,21 +56,33 @@
         <div class="albums-grid">
           <!-- Dùng Thymeleaf để lặp qua danh sách albums -->
 
-          <div class="album-card">
-            <img src="/images/song_img1.png" atl="album image" />
+          <div class="album-card" th:each="album : ${albums}">
+            <img th:src="${album.coverImage}" atl="album image" />
             <div class="album-overlay">
-              <a href="/album/detail">
+              <a th:href="@{/album/detail/{id}(id=${album.albumID})}">
                 <div class="album-detail">
                   <span>View Album</span>
                 </div>
               </a>
             </div>
             <div class="album-info">
-              <h3 class="album-name">After Hours</h3>
-              <p class="album-artist">The Weeknd</p>
+              <h3 class="album-name" th:text="${album.albumName}">
+                After Hours
+              </h3>
+              <p
+                class="album-artist"
+                th:text="${albumArtists.get(album.albumID)}"
+              >
+                The Weeknd
+              </p>
               <div class="album-meta">
-                <p class="album-year">2020</p>
-                <p class="album-song-count">14 songs</p>
+                <p class="album-year">2025</p>
+                <p
+                  class="album-song-count"
+                  th:text="${album.songsOfAlbum.size()} + ' songs'"
+                >
+                  14 songs
+                </p>
               </div>
             </div>
           </div>

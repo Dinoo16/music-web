@@ -74,7 +74,9 @@
             </p>
           </div> -->
           <div th:unless="${#lists.isEmpty(artists)}" class="result-container">
-            <div th:replace="~{components/artistCard :: artistCard()}"></div>
+            <div
+              th:replace="~{components/artistCard :: artistCard(artists=${artists})}"
+            ></div>
           </div>
         </div>
       </div>

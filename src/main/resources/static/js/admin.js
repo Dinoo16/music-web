@@ -49,11 +49,11 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const paths = [
-    "/song/list",
-    "/artist/list",
-    "/album/list",
-    "/genre/list",
-    "/playlist/list",
+    "/admin/song/list",
+    "/admin/artist/list",
+    "/admin/album/list",
+    "/admin/genre/list",
+    "/admin/playlist/list",
   ];
 
   // Get active tab from server-rendered HTML

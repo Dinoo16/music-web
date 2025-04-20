@@ -10,7 +10,7 @@
       <!--Artists list header-->
       <div class="artistList-header">
         <div class="artistList-header-add-btn">
-          <a class="artistList-header-add-btn-link" href="/artist/add"
+          <a class="artistList-header-add-btn-link" href="/admin/artist/add"
             ><i class="fa-solid fa-plus"></i
           ></a>
         </div>
@@ -65,14 +65,14 @@
               id="artistList-actions-menu"
             >
               <a
-                th:href="@{'/artist/update/' + ${artist.artistID}}"
+                th:href="@{'/admin/artist/update/' + ${artist.artistID}}"
                 style="color: #fff"
               >
                 <button onclick="closeActionMenu()">
                   <i class="fa-solid fa-pen"></i>Edit Artist
                 </button>
               </a>
-              <a th:href="@{'/artist/delete/' + ${artist.artistID}}">
+              <a th:href="@{'/admin/artist/delete/' + ${artist.artistID}}">
                 <button onclick="deleteArtist();closeActionMenu()">
                   <i class="fa-solid fa-trash"></i>
                   Delete Artist

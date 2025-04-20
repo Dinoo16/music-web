@@ -2,7 +2,11 @@
 function toggleFavorite(event, button) {
   event.preventDefault();
   event.stopPropagation();
-
+  if (!isLoggedIn) {
+    const tooltipBox = document.getElementById("header__tooltip-box");
+    tooltipBox.style.display = "block";
+    return;
+  }
   const songID = button.closest(".favorite-icon").getAttribute("data-song-id");
   const heartIcon = button.querySelector("i");
   const message = document.querySelector(".message-wrapper");

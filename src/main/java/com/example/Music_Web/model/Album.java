@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "albums")
@@ -103,5 +104,26 @@ public class Album {
 
 	public void setSongsOfAlbum(List<Song> songsOfAlbum) {
 		this.songsOfAlbum = songsOfAlbum;
+	}
+
+	public void addSong(Song song) {
+		songsOfAlbum.add(song);
+		song.setAlbum(this);
+	}
+
+	public void removeSong(Song song) {
+		songsOfAlbum.remove(song);
+		song.setAlbum(null);
+	}
+
+	@Transient
+	public List<Artist> getAllArtistsFromSongs() {
+		if (songsOfAlbum == null) {
+			return new ArrayList<>();
+		}
+		return songsOfAlbum.stream()
+				.flatMap(song -> song.getArtistsOfSong().stream())
+				.distinct()
+				.collect(Collectors.toList());
 	}
 }

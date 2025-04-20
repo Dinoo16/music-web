@@ -10,7 +10,7 @@
       <!--Artists list header-->
       <div class="genreList-header">
         <div class="genreList-header-add-btn">
-          <a class="genreList-header-add-btn-link" href="/genre/add"
+          <a class="genreList-header-add-btn-link" href="/admin/genre/add"
             ><i class="fa-solid fa-plus"></i
           ></a>
         </div>
@@ -58,14 +58,14 @@
               id="genreList-actions-menu"
             >
               <a
-                th:href="@{'/genre/update/' + ${genre.genreID}}"
+                th:href="@{'/admin/genre/update/' + ${genre.genreID}}"
                 style="color: #fff"
               >
                 <button onclick="closeActionMenu()">
                   <i class="fa-solid fa-pen"></i>Edit Genre
                 </button>
               </a>
-              <a th:href="@{'/genre/delete/' + ${genre.genreID}}">
+              <a th:href="@{'/admin/genre/delete/' + ${genre.genreID}}">
                 <button onclick="closeActionMenu()">
                   <i class="fa-solid fa-trash"></i>
                   Delete Genre

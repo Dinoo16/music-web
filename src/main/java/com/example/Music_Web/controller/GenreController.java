@@ -24,12 +24,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/genre")
 public class GenreController {
 
 	@Autowired
@@ -44,7 +44,7 @@ public class GenreController {
 	FileStorageService fileStorageService;
 
 	// For admin page
-	@GetMapping("/list")
+	@GetMapping("/admin/genre/list")
 	public String listGenres(Model model) {
 
 		// Dữ liệu cho tab aritst
@@ -70,6 +70,26 @@ public class GenreController {
 
 		// Dữ liệu cho tab album
 		List<Album> albums = albumRepository.findAll();
+		Map<Long, String> albumArtistNames = new HashMap<>();
+		for (Album album : albums) {
+			// Get all artists for this album (both direct album artists and song artists)
+			Set<String> artistNames = new LinkedHashSet<>();
+
+			// Add direct album artists
+			album.getArtistsOfAlbum().stream()
+					.map(Artist::getArtistName)
+					.forEach(artistNames::add);
+
+			// Add artists from songs in the album
+			album.getSongsOfAlbum().stream()
+					.flatMap(song -> song.getArtistsOfSong().stream())
+					.map(Artist::getArtistName)
+					.forEach(artistNames::add);
+
+			// Join all artist names with commas
+			albumArtistNames.put(album.getAlbumID(), String.join(", ", artistNames));
+		}
+		model.addAttribute("albumArtistNames", albumArtistNames);
 		model.addAttribute("albums", albums);
 
 		// Dữ liệu của tab genre
@@ -80,7 +100,7 @@ public class GenreController {
 	}
 
 	// For user page (read-only view)
-	@GetMapping(value = "/user/list")
+	@GetMapping(value = "/genre/list")
 	public String getAllGenresUser(Model model) {
 		List<Genre> genres = genreRepository.findAll();
 		model.addAttribute("genres", genres);
@@ -88,7 +108,7 @@ public class GenreController {
 	}
 
 	// Genre detail for user page (read-only view)
-	@GetMapping("/detail/{id}")
+	@GetMapping("/genre/detail/{id}")
 	public String getGenreDetail(@PathVariable Long id, Model model) throws GenreNotFoundException {
 		Genre genre = genreRepository.findById(id)
 				.orElseThrow(() -> new GenreNotFoundException("Invalid genre ID: " + id));
@@ -100,19 +120,19 @@ public class GenreController {
 			artistSet.addAll(song.getArtistsOfSong());
 		}
 		model.addAttribute("artistSet", artistSet);
-		
+
 		model.addAttribute("songsOfGenre", songsOfGenre);
 
 		return "pages/userPage/genresDetail";
 	}
 
-	@GetMapping("/add")
+	@GetMapping("/admin/genre/add")
 	public String addGenre(Model model) {
 		model.addAttribute("genre", new Genre());
 		return "pages/adminPage/addGenre";
 	}
 
-	@PostMapping("/add")
+	@PostMapping("/admin/genre/add")
 	public String addGenre(@ModelAttribute Genre genre, @RequestParam("imageFile") MultipartFile imageFile)
 			throws IOException {
 
@@ -134,10 +154,10 @@ public class GenreController {
 
 		genre.setGenreImage(imagePath);
 		genreRepository.save(genre);
-		return "redirect:/genre/list";
+		return "redirect:/admin/genre/list";
 	}
 
-	@GetMapping("/update/{id}")
+	@GetMapping("/admin/genre/update/{id}")
 	public String updateGenre(@PathVariable Long id, Model model)
 			throws IOException {
 
@@ -148,7 +168,7 @@ public class GenreController {
 		return "pages/adminPage/editGenre";
 	}
 
-	@PostMapping("/update/{id}")
+	@PostMapping("/admin/genre/update/{id}")
 	public String updateGenre(@PathVariable Long id, @ModelAttribute Genre updatedGenre,
 			@RequestParam(value = "imageFile", required = false) MultipartFile imageFile)
 			throws IOException {
@@ -181,10 +201,10 @@ public class GenreController {
 
 		// Save the updated genre
 		genreRepository.save(existingGenre);
-		return "redirect:/genre/list";
+		return "redirect:/admin/genre/list";
 	}
 
-	@GetMapping("/delete/{id}")
+	@GetMapping("/admin/genre/delete/{id}")
 	public String deleteGenre(@PathVariable Long id) throws GenreNotFoundException {
 		Genre genre = genreRepository.findById(id).orElseThrow(() -> new GenreNotFoundException("Genre not found"));
 
@@ -193,6 +213,6 @@ public class GenreController {
 		}
 		genre.getSongsOfGenre().clear();
 		genreRepository.delete(genre);
-		return "redirect:/genre/list";
+		return "redirect:/admin/genre/list";
 	}
 }

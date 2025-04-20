@@ -11,7 +11,7 @@
         <div class="edit-songlist-container">
           <h1>Edit song</h1>
           <form
-            th:action="@{/song/update/{id}(id=${song.songID})}"
+            th:action="@{/admin/song/update/{id}(id=${song.songID})}"
             th:object="${song}"
             method="post"
             enctype="multipart/form-data"

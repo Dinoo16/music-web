@@ -63,58 +63,6 @@ public class HomeController {
         return "pages/userPage/discover";
     }
 
-    // @GetMapping("/topchart")
-    // public String getTopchart(Model model) {
-    // model.addAttribute("songs", songRepository.findAll());
-    // return "pages/userPage/topchart";
-    // }
-
-    @GetMapping("/genres/detail")
-    public String getGenresDetail(Model model) {
-        return "pages/userPage/genresDetail";
-    }
-
-    @GetMapping("/artist")
-    public String getArtist(Model model) {
-        model.addAttribute("artists", artistRepository.findAll());
-        return "pages/userPage/artist";
-    }
-
-    @GetMapping("/artist/detail")
-    public String getArtistDetail() {
-        return "pages/userPage/artistDetail";
-    }
-
-    @GetMapping("/album/detail")
-    public String getAlbumDetail() {
-        return "pages/userPage/albumDetail";
-    }
-
-    // @GetMapping("/favorite")
-    // public String getFavorite() {
-    // return "pages/userPage/favorite";
-    // }
-
-    @GetMapping("/admin/album/add")
-    public String addAlbum() {
-        return "pages/adminPage/addAlbum";
-    }
-
-    @GetMapping("/admin/album/edit")
-    public String editAlbum() {
-        return "pages/adminPage/editAlbum";
-    }
-
-    // @GetMapping("/admin/userlist")
-    // public String getUserList() {
-    // return "pages/adminPage/userList";
-    // }
-
-    // @GetMapping("/admin/userlist/view")
-    // public String getUserListDetail() {
-    // return "pages/adminPage/userDetail";
-    // }
-
     @GetMapping("/admin/static")
     public String getStatic() {
         return "pages/adminPage/static";

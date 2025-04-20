@@ -11,7 +11,7 @@
         <div class="edit-genre-container">
           <h1>Edit Genre</h1>
           <form
-            th:action="@{/genre/update/{id}(id=${genre.genreID})}"
+            th:action="@{/admin/genre/update/{id}(id=${genre.genreID})}"
             th:object="${genre}"
             method="post"
             enctype="multipart/form-data"

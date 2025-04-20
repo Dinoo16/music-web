@@ -6,6 +6,7 @@ import com.example.Music_Web.model.User;
 import com.example.Music_Web.repository.UserRepository;
 import com.example.Music_Web.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -59,7 +60,7 @@ public class UserController {
     }
 
     // Get user detail by admin
-    @GetMapping("/user/detail/{id}")
+    @GetMapping("/admin/user/detail/{id}")
     public String showUserDetail(@PathVariable Long id, Principal principal, Model model) {
 
         String username = principal.getName();
@@ -135,4 +136,15 @@ public class UserController {
 
         return ResponseEntity.ok("Updated recently played songs");
     }
+
+    @PostMapping("/play/{id}")
+    public ResponseEntity<String> playSong(@PathVariable Long id) {
+        Song song = songRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Song not found"));
+
+        song.setPlays(song.getPlays() + 1);
+        songRepository.save(song);
+        return ResponseEntity.ok("Play count updated");
+    }
+
 }

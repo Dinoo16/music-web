@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -30,7 +32,6 @@ import java.util.stream.Collectors;
 //6.	Delete Album
 
 @Controller
-@RequestMapping(value = "/album")
 public class AlbumController {
 	@Autowired
 	SongRepository songRepository;
@@ -43,17 +44,32 @@ public class AlbumController {
 	@Autowired
 	FileStorageService fileStorageService;
 
-	@GetMapping(value = "/list")
-	public String getAllAlbums(Model model) {
+	@GetMapping(value = "/admin/album/list")
+	public String getAllAlbums(Model model) throws AlbumNotFoundException {
+
 		List<Album> albums = albumRepository.findAll();
-		// Create a map of album ID to artist names
-		Map<Long, String> albumArtists = new HashMap<>();
+		// Create a map of album ID to artist names for ALL albums
+		Map<Long, String> albumArtistNames = new HashMap<>();
+
 		for (Album album : albums) {
-			String artistNames = album.getArtistsOfAlbum().stream()
+			// Get all artists for this album (both direct album artists and song artists)
+			Set<String> artistNames = new LinkedHashSet<>();
+
+			// Add direct album artists
+			album.getArtistsOfAlbum().stream()
 					.map(Artist::getArtistName)
-					.collect(Collectors.joining(", "));
-			albumArtists.put(album.getAlbumID(), artistNames);
+					.forEach(artistNames::add);
+
+			// Add artists from songs in the album
+			album.getSongsOfAlbum().stream()
+					.flatMap(song -> song.getArtistsOfSong().stream())
+					.map(Artist::getArtistName)
+					.forEach(artistNames::add);
+
+			// Join all artist names with commas
+			albumArtistNames.put(album.getAlbumID(), String.join(", ", artistNames));
 		}
+
 		// Dữ liệu của tab artist
 		List<Artist> artists = artistRepository.findAll();
 		model.addAttribute("artists", artists);
@@ -65,15 +81,17 @@ public class AlbumController {
 		List<Genre> genres = genreRepository.findAll();
 		model.addAttribute("genres", genres);
 
-		// Dữ liệu cho tab album
-		model.addAttribute("albumArtists", albumArtists);
+		// Dữ liệu cho tab album			
+		model.addAttribute("albumArtistNames", albumArtistNames);
 		model.addAttribute("albums", albums);
 		model.addAttribute("activeTab", "album");
+		
 		return "pages/adminPage/upload";
 	}
 
 	// For user page (read-only view)
-	@GetMapping(value = "/user/list")
+	@GetMapping(value = "/album/list")
+
 	public String getAllAlbumsUser(Model model) {
 		List<Album> albums = albumRepository.findAll();
 		// Build map of album ID -> artist name(s)
@@ -89,23 +107,36 @@ public class AlbumController {
 		return "pages/userPage/album";
 	}
 
-	@GetMapping("/detail/{id}")
+	@GetMapping("/album/detail/{id}")
 	public String getAlbumDetail(@PathVariable("id") Long id, Model model) throws AlbumNotFoundException {
 		Album album = albumRepository.findById(id)
 				.orElseThrow(() -> new AlbumNotFoundException("Album not found"));
 
-		String artistNames = album.getArtistsOfAlbum().stream()
+		// Combine and deduplicate artists
+		Set<Artist> allArtists = new LinkedHashSet<>();
+
+		// Add album artists
+		allArtists.addAll(album.getArtistsOfAlbum());
+
+		// Add song artists
+		album.getSongsOfAlbum().stream()
+				.flatMap(song -> song.getArtistsOfSong().stream())
+				.forEach(allArtists::add);
+
+		// Get artist names as string
+		String combinedArtistNames = allArtists.stream()
 				.map(Artist::getArtistName)
 				.collect(Collectors.joining(", "));
 
+		model.addAttribute("allArtists", new ArrayList<>(allArtists));
+		model.addAttribute("combinedArtistNames", combinedArtistNames);
 		model.addAttribute("album", album);
-		model.addAttribute("artistNames", artistNames);
 		model.addAttribute("songs", album.getSongsOfAlbum());
 
 		return "pages/userPage/albumDetail";
 	}
 
-	@GetMapping(value = "/update/{id}")
+	@GetMapping(value = "/admin/album/update/{id}")
 	public String updateAlbum(
 			@PathVariable(value = "id") Long id, Model model) throws AlbumNotFoundException {
 		Album album = albumRepository.findById(id)
@@ -119,11 +150,11 @@ public class AlbumController {
 		model.addAttribute("songs", songs);
 		model.addAttribute("artists", artists);
 		model.addAttribute("album", album);
-		return "albumUpdate";
+		return "pages/adminPage/editAlbum";
 	}
 
 	// ---------------------------------
-	@PostMapping("/update")
+	@PostMapping("/admin/album/update")
 	public String UpdatedAlbum(Album album) {
 		// Convert songIds and artistIds back to full objects
 		List<Song> selectedSongs = songRepository.findAllById(album.getSongIds());
@@ -137,10 +168,10 @@ public class AlbumController {
 		album.setArtistsOfAlbum(selectedArtists);
 
 		albumRepository.save(album);
-		return "redirect:/album/list";
+		return "redirect:/admin/album/list";
 	}
 
-	@GetMapping(value = "/add")
+	@GetMapping(value = "/admin/album/add")
 	public String addAlbum(Model model) {
 		Album album = new Album();
 		// Lọc ra các bài hát chưa có album
@@ -153,7 +184,7 @@ public class AlbumController {
 		return "pages/adminPage/addAlbum";
 	}
 
-	@PostMapping(value = "/add")
+	@PostMapping(value = "/admin/album/add")
 	public String addAlbum(
 			@ModelAttribute("album") Album album,
 			@RequestParam("selectedSongs") String songIds,
@@ -191,10 +222,10 @@ public class AlbumController {
 		// Save songs after setting album
 		songRepository.saveAll(selectedSongs);
 
-		return "redirect:/album/list";
+		return "redirect:/admin/album/list";
 	}
 
-	@GetMapping(value = "/delete/{id}")
+	@GetMapping(value = "/admin/album/delete/{id}")
 	public String deleteAlbum(@PathVariable(value = "id") Long id) throws AlbumNotFoundException {
 		Album album = albumRepository.findById(id)
 				.orElseThrow(() -> new AlbumNotFoundException("Album not found"));
@@ -207,7 +238,7 @@ public class AlbumController {
 		// Sau đó, xóa album
 		albumRepository.delete(album);
 
-		return "redirect:/album/list";
+		return "redirect:/admin/album/list";
 	}
 	//
 }

@@ -30,8 +30,13 @@
               The Weeknd
             </p>
             <div class="album-meta">
-              <p class="album-year">2020</p>
-              <p class="album-song-count">14 songs</p>
+              <p class="album-year">2025</p>
+              <p
+                class="album-song-count"
+                th:text="${album.songsOfAlbum.size()} + ' songs'"
+              >
+                14 songs
+              </p>
             </div>
           </div>
         </div>

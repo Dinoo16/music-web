@@ -10,7 +10,7 @@
       <!--Songs list header-->
       <div class="albumList-header">
         <div class="albumList-header-add-btn">
-          <a class="albumList-header-add-btn-link" href="/album/add"
+          <a class="albumList-header-add-btn-link" href="/admin/album/add"
             ><i class="fa-solid fa-plus"></i
           ></a>
         </div>
@@ -44,8 +44,7 @@
           </div>
           <div
             class="albumList-col albumList-artist"
-            th:each="artist : ${album.artistsOfAlbum}"
-            th:text="${artist.artistName}"
+            th:text="${albumArtistNames.get(album.albumID)}"
           >
             The Weeknd
           </div>
@@ -69,14 +68,14 @@
               id="albumList-actions-menu"
             >
               <a
-                th:href="@{'/album/update/' + ${album.albumID}}"
+                th:href="@{'/admin/album/update/' + ${album.albumID}}"
                 style="color: #fff"
               >
                 <button onclick="closeActionMenu()">
                   <i class="fa-solid fa-pen"></i>Edit Album
                 </button>
               </a>
-              <a th:href="@{'/album/delete/' + ${album.albumID}}">
+              <a th:href="@{'/admin/album/delete/' + ${album.albumID}}">
                 <button onclick="closeActionMenu()">
                   <i class="fa-solid fa-trash"></i>
                   Delete Album

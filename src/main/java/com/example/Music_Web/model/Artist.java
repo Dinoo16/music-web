@@ -23,10 +23,14 @@ public class Artist {
 
 	// -----------
 	// relationship
-	@ManyToMany(mappedBy = "artistsOfSong", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(mappedBy = "artistsOfSong", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	private List<Song> songsOfArtist;
 
-	@ManyToMany(mappedBy = "artistsOfAlbum")
+	@ManyToMany(mappedBy = "artistsOfAlbum", cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE,
+			CascadeType.REMOVE
+	})
 	private List<Album> albumsOfArtist = new ArrayList<>();
 
 	// getters & setters

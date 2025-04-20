@@ -10,7 +10,12 @@
       <div class="edit-album-wrapper">
         <div class="edit-album-container">
           <h1>Edit Album</h1>
-          <form method="post" enctype="multipart/form-data">
+          <form
+            method="post"
+            th:action="@{/admin/album/update/{id}(id=${album.albumID})}"
+            th:object="${album}"
+            enctype="multipart/form-data"
+          >
             <div class="edit-album-fields">
               <!--album name field-->
               <label class="edit-album-label">Album name</label>

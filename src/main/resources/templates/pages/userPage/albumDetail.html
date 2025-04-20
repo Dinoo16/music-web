@@ -34,14 +34,19 @@
           <div class="album-detail-meta">
             <img
               class="album-detail-meta-bg"
-              src="/images/artist1.png"
+              th:each="artist : ${allArtists}"
+              th:src="${artist.image != null} ? ${artist.image} : '/images/default-artist.png'"
               alt="album backgroud"
             />
-            <h4>The Weeknd</h4>
+            <h4 th:text="${combinedArtistNames}">The Weeknd</h4>
             <span class="dot">•</span>
-            <span class="album-detail-year">2020</span>
+            <span class="album-detail-year">2025</span>
             <span class="dot">•</span>
-            <span class="album-detail-song-count">1 song</span>
+            <span
+              class="album-detail-song-count"
+              th:text="${album.songsOfAlbum.size()} + ' songs'"
+              >number of songs</span
+            >
           </div>
           <div class="album-detail-actions">
             <!-- play button -->
@@ -65,13 +70,13 @@
 
       <div
         th:replace="~{components/listSong :: listOfSong(
-      songNumber='',
-      icon='plus',
-      duration='4:30', 
-      onclickFunction='addSong()',
-      songs=${globalSongsByAlbum[album.albumID]},
-      playlistId=null
-    )}"
+        songNumber='',
+        icon='plus',
+        duration='4:30', 
+        onclickFunction='addSong()',
+        songs=${globalSongsByAlbum[album.albumID]},
+        playlistId=null
+      )}"
       ></div>
     </div>
   </body>

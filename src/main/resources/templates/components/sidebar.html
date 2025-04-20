@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sidebar</title>
+    <th:block xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    </th:block>
   </head>
   <body>
     <div id="sidebar" class="sidebar" th:fragment="sidebarFragment">
@@ -27,7 +29,7 @@
 
         <!-- Top Charts -->
         <div class="sidebar__box">
-          <a href="/song/topchart" class="sidebar__link">
+          <a href="/topchart" class="sidebar__link">
             <i class="fa-solid fa-chart-line text-lg"></i>
             <span>Top Charts</span>
           </a>
@@ -38,7 +40,7 @@
 
         <!-- Songs -->
         <div class="sidebar__box">
-          <a href="/song/user/list" class="sidebar__link">
+          <a href="/song/list" class="sidebar__link">
             <i class="fa-solid fa-music text-lg"></i>
             <span>Songs</span>
           </a>
@@ -46,7 +48,7 @@
 
         <!-- Artists -->
         <div class="sidebar__box">
-          <a href="/artist" class="sidebar__link">
+          <a href="/artist/list" class="sidebar__link">
             <i class="fa-solid fa-user text-lg"></i>
             <span>Artists</span>
           </a>
@@ -54,7 +56,7 @@
 
         <!-- Albums -->
         <div class="sidebar__box">
-          <a href="/album/user/list" class="sidebar__link">
+          <a href="/album/list" class="sidebar__link">
             <i class="fa-solid fa-image text-lg"></i>
             <span>Albums</span>
           </a>
@@ -62,7 +64,7 @@
 
         <!-- Genres -->
         <div class="sidebar__box">
-          <a href="/genre/user/list" class="sidebar__link">
+          <a href="/genre/list" class="sidebar__link">
             <i class="fa-solid fa-layer-group text-lg"></i>
             <span>Genres</span>
           </a>
@@ -94,12 +96,12 @@
           </div>
         </div>
 
-        <div class="sidebar__admin_mode">
+        <div class="sidebar__admin_mode" sec:authorize="hasRole('ROLE_ADMIN')">
           <!-- Divider -->
           <p class="sidebar__divider">Admin mode</p>
           <!-- Upload -->
           <div class="sidebar__box">
-            <a href="/admin/list" class="sidebar__link">
+            <a href="/admin/song/list" class="sidebar__link">
               <i class="fa-solid fa-cloud-arrow-up"></i>
               <span>Upload</span>
             </a>
